@@ -1,16 +1,16 @@
-Guillaume Foret <giom at matrix.org>
+Guillaume Foret <giom at bigstarmessenger.com>
  * Core developer
  
-Emmanuel Rohee <manu at matrix.org>
+Emmanuel Rohee <manu at bigstarmessenger.com>
  * Core developer
  
-Yannick Le Collen <yannick at matrix.org>
+Yannick Le Collen <yannick at bigstarmessenger.com>
  * Core developer
  
-Dave Baker <dave at matrix.org>
+Dave Baker <dave at bigstarmessenger.com>
  * General doc & housekeeping
 
-Matthew Hodgson <matthew at matrix.org>
+Matthew Hodgson <matthew at bigstarmessenger.com>
  * General doc & housekeeping
  * Fix Emoji keyboard crash.
  * RoomParticipantsViewController: search bar refactoring

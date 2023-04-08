@@ -59,10 +59,10 @@ struct AuthenticationState {
         /// The response returned when querying the homeserver for registration flows.
         var registrationFlow: RegistrationResult?
         
-        /// Whether or not the homeserver is for matrix.org.
+        /// Whether or not the homeserver is for bigstarmessenger.com.
         var isMatrixDotOrg: Bool {
             guard let url = URL(string: address) else { return false }
-            return url.host == "matrix.org" || url.host == "matrix-client.matrix.org"
+            return url.host == "bigstarmessenger.com" || url.host == "matrix-client.bigstarmessenger.com"
         }
         
         /// The homeserver mapped into view data that is ready for display.

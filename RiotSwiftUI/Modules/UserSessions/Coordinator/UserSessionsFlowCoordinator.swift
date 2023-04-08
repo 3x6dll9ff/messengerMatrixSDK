@@ -22,6 +22,7 @@ struct UserSessionsFlowCoordinatorParameters {
     let router: NavigationRouterType
 }
 
+@available(iOS 15.0, *)
 final class UserSessionsFlowCoordinator: NSObject, Coordinator, Presentable {
     private let parameters: UserSessionsFlowCoordinatorParameters
     private let allSessionsService: UserSessionsOverviewService
@@ -391,6 +392,7 @@ final class UserSessionsFlowCoordinator: NSObject, Coordinator, Presentable {
 
 // MARK: SignOutFlowPresenter
 
+@available(iOS 15.0, *)
 extension UserSessionsFlowCoordinator: SignOutFlowPresenterDelegate {
     func signOutFlowPresenterDidStartLoading(_ presenter: SignOutFlowPresenter) {
         startLoading()
@@ -407,6 +409,7 @@ extension UserSessionsFlowCoordinator: SignOutFlowPresenterDelegate {
 
 // MARK: CrossSigningSetupCoordinatorDelegate
 
+@available(iOS 15.0, *)
 extension UserSessionsFlowCoordinator: CrossSigningSetupCoordinatorDelegate {
     func crossSigningSetupCoordinatorDidComplete(_ coordinator: CrossSigningSetupCoordinatorType) {
         // The service is listening for changes so there's nothing to do here.
@@ -425,6 +428,7 @@ extension UserSessionsFlowCoordinator: CrossSigningSetupCoordinatorDelegate {
 
 // MARK: UserVerificationCoordinatorDelegate
 
+@available(iOS 15.0, *)
 extension UserSessionsFlowCoordinator: UserVerificationCoordinatorDelegate {
     func userVerificationCoordinatorDidComplete(_ coordinator: UserVerificationCoordinatorType) {
         // The service is listening for changes so there's nothing to do here.
@@ -434,6 +438,7 @@ extension UserSessionsFlowCoordinator: UserVerificationCoordinatorDelegate {
 
 // MARK: UIAdaptivePresentationControllerDelegate
 
+@available(iOS 15.0, *)
 extension UserSessionsFlowCoordinator: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         guard let coordinator = childCoordinators.last else {

@@ -6,31 +6,31 @@
         {
           "id": "oidc-github",
           "name": "GitHub",
-          "icon": "mxc://matrix.org/sVesTtrFDTpXRbYfpahuJsKP",
+          "icon": "mxc://bigstarmessenger.com/sVesTtrFDTpXRbYfpahuJsKP",
           "brand": "github"
         },
         {
           "id": "oidc-google",
           "name": "Google",
-          "icon": "mxc://matrix.org/ZlnaaZNPxtUuQemvgQzlOlkz",
+          "icon": "mxc://bigstarmessenger.com/ZlnaaZNPxtUuQemvgQzlOlkz",
           "brand": "google"
         },
         {
           "id": "oidc-gitlab",
           "name": "GitLab",
-          "icon": "mxc://matrix.org/MCVOEmFgVieKFshPxmnejWOq",
+          "icon": "mxc://bigstarmessenger.com/MCVOEmFgVieKFshPxmnejWOq",
           "brand": "gitlab"
         },
         {
           "id": "oidc-facebook",
           "name": "Facebook",
-          "icon": "mxc://matrix.org/nsyeLIgzxazZmJadflMAsAWG",
+          "icon": "mxc://bigstarmessenger.com/nsyeLIgzxazZmJadflMAsAWG",
           "brand": "facebook"
         },
         {
           "id": "oidc-apple",
           "name": "Apple",
-          "icon": "mxc://matrix.org/QQKNSOdLiMHtJhzeAObmkFiU",
+          "icon": "mxc://bigstarmessenger.com/QQKNSOdLiMHtJhzeAObmkFiU",
           "brand": "apple"
         }
       ]

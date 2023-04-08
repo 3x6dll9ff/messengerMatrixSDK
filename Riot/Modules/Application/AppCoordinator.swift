@@ -31,6 +31,7 @@ import FLEX
 /// This class should avoid to contain too many data management code not related to screen navigation logic. For example
 /// `MXSession` or push notification management should be handled in dedicated classes and report only navigation
 /// changes to the AppCoordinator.
+@available(iOS 15.0, *)
 final class AppCoordinator: NSObject, AppCoordinatorType {
     
     // MARK: - Constants
@@ -307,6 +308,7 @@ final class AppCoordinator: NSObject, AppCoordinatorType {
 }
 
 // MARK: - LegacyAppDelegateDelegate
+@available(iOS 15.0, *)
 extension AppCoordinator: LegacyAppDelegateDelegate {
             
     func legacyAppDelegate(_ legacyAppDelegate: LegacyAppDelegate!, wantsToPopToHomeViewControllerAnimated animated: Bool, completion: (() -> Void)!) {
@@ -343,6 +345,7 @@ extension AppCoordinator: LegacyAppDelegateDelegate {
 }
 
 // MARK: - SplitViewCoordinatorDelegate
+@available(iOS 15.0, *)
 extension AppCoordinator: SplitViewCoordinatorDelegate {
     func splitViewCoordinatorDidCompleteAuthentication(_ coordinator: SplitViewCoordinatorType) {
         self.legacyAppDelegate.authenticationDidComplete()
@@ -350,6 +353,7 @@ extension AppCoordinator: SplitViewCoordinatorDelegate {
 }
 
 // MARK: - SideMenuCoordinatorDelegate
+@available(iOS 15.0, *)
 extension AppCoordinator: SideMenuCoordinatorDelegate {
     func sideMenuCoordinator(_ coordinator: SideMenuCoordinatorType, didTapMenuItem menuItem: SideMenuItem, fromSourceView sourceView: UIView) {
     }
@@ -358,6 +362,7 @@ extension AppCoordinator: SideMenuCoordinatorDelegate {
 // MARK: - AppNavigator
 
 // swiftlint:disable private_over_fileprivate
+@available(iOS 15.0, *)
 fileprivate class AppNavigator: AppNavigatorProtocol {
 // swiftlint:enable private_over_fileprivate
     

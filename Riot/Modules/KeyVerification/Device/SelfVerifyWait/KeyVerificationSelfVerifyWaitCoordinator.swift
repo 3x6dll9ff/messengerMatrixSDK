@@ -19,6 +19,7 @@
 import Foundation
 import UIKit
 
+@available(iOS 15.0, *)
 final class KeyVerificationSelfVerifyWaitCoordinator: KeyVerificationSelfVerifyWaitCoordinatorType {
     
     // MARK: - Properties
@@ -59,6 +60,7 @@ final class KeyVerificationSelfVerifyWaitCoordinator: KeyVerificationSelfVerifyW
 }
 
 // MARK: - KeyVerificationSelfVerifyWaitViewModelCoordinatorDelegate
+@available(iOS 15.0, *)
 extension KeyVerificationSelfVerifyWaitCoordinator: KeyVerificationSelfVerifyWaitViewModelCoordinatorDelegate {
     
     func keyVerificationSelfVerifyWaitViewModel(_ viewModel: KeyVerificationSelfVerifyWaitViewModelType, didAcceptKeyVerificationRequest keyVerificationRequest: MXKeyVerificationRequest) {

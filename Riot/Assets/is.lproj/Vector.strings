@@ -279,7 +279,7 @@
 "active_call_details" = "Virkt símtal (%@)";
 "auth_send_reset_email" = "Senda endurstillingarpóst";
 "auth_return_to_login" = "Fara aftur í innskráningargluggann";
-"auth_home_server_placeholder" = "URL-slóð (t.d. https://matrix.org)";
+"auth_home_server_placeholder" = "URL-slóð (t.d. https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL-slóð (t.d. https://vector.im)";
 "auth_invalid_email" = "Þetta lítur ekki út eins og gilt tölvupóstfang";
 "auth_invalid_phone" = "Þetta lítur ekki út eins og gilt símanúmer";
@@ -465,7 +465,7 @@
 "group_participants_invite_prompt_msg" = "Ertu viss um að þú viljir bjóða %@ í þennan hóp?";
 "group_participants_invite_malformed_id_title" = "Villa við boð";
 "group_participants_invite_malformed_id" = "Rangt formað auðkenni. Ætti að vera Matrix-auðkenni á borð við'@sérheiti:lén'";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu breytingar á aðild";
 "event_formatter_widget_added" = "%@ viðmótshluta bætt við af %@";
@@ -776,7 +776,7 @@
 "login_password_placeholder" = "Lykilorð";
 "login_identity_server_title" = "Slóð á auðkennisþjón:";
 "login_home_server_title" = "Slóð á heimaþjón:";
-"login_server_url_placeholder" = "URL-slóð (t.d. https://matrix.org)";
+"login_server_url_placeholder" = "URL-slóð (t.d. https://bigstarmessenger.com)";
 
 // Login Screen
 "login_create_account" = "Búa til notandaaðgang:";
@@ -1510,7 +1510,7 @@
 "submit_code" = "Senda inn kóða";
 "login_use_fallback" = "Nota varasíðu";
 "login_display_name_placeholder" = "Birtingarnafn (t.d. Jón Sigurðsson)";
-"login_user_id_placeholder" = "Matrix-auðkenni (t.d. @jon:matrix.org eða jon)";
+"login_user_id_placeholder" = "Matrix-auðkenni (t.d. @jon:bigstarmessenger.com eða jon)";
 "poll_timeline_vote_not_registered_subtitle" = "Því miður, atkvæðið þitt var ekki skráð Prófaðu aftur";
 "version_check_modal_action_title_deprecated" = "Sjáðu hvernig";
 "space_participants_action_ban" = "Banna á þessu svæði";
@@ -2058,7 +2058,7 @@
 
 "share_invite_link_action" = "Deila boðstengli";
 "create_room_processing" = "Bý til spjallrás";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_section_footer_type_restricted" = "Hver sem er á svæðinu getur fundið og tekið þátt.";
 "create_room_section_footer_type_private" = "Aðeins fólk sem hefur verið boðið getur fundið og tekið þátt.";
 "create_room_type_restricted" = "Meðlimir svæðis";

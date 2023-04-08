@@ -50,8 +50,8 @@
 "auth_phone_placeholder" = "Número de teléfono";
 "auth_repeat_password_placeholder" = "Repite la contraseña";
 "auth_repeat_new_password_placeholder" = "Confirma la nueva contraseña de tu cuenta de Matrix";
-"auth_home_server_placeholder" = "URL (ej.: https://matrix.org)";
-"auth_identity_server_placeholder" = "URL (ej.: https://matrix.org)";
+"auth_home_server_placeholder" = "URL (ej.: https://bigstarmessenger.com)";
+"auth_identity_server_placeholder" = "URL (ej.: https://bigstarmessenger.com)";
 "auth_invalid_login_param" = "Nombre de usuario y/o contraseña incorrectos";
 "auth_invalid_user_name" = "Los nombres de usuario solo pueden contener letras, números, puntos, guiones y guiones bajos";
 "auth_invalid_password" = "Contraseña demasiado corta (mínimo 6)";
@@ -461,7 +461,7 @@
 "directory_server_all_rooms" = "Todas las salas en el servidor %@";
 "directory_server_all_native_rooms" = "Todas las salas nativas de Matrix";
 "directory_server_type_homeserver" = "Escribe un servidor doméstico desde donde listar las salas públicas";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu cambios de membresía";
 "event_formatter_widget_added" = "componente %@ añadido por %@";
@@ -652,12 +652,12 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "Crear cuenta:";
-"login_server_url_placeholder" = "URL (p.ej. https://matrix.org)";
+"login_server_url_placeholder" = "URL (p.ej. https://bigstarmessenger.com)";
 "login_home_server_title" = "Servidor Local:";
 "login_home_server_info" = "Tu servidor local almacena todas tus conversaciones y los datos de tu cuenta";
 "login_identity_server_title" = "URL de servidor de identidad:";
-"login_identity_server_info" = "Matrix proporciona servidores de identidades para rastrear qué correos electrónicos, etc. pertenecen a qué IDs de Matrix. Actualmente solo existe https://matrix.org.";
-"login_user_id_placeholder" = "ID de Matrix (p.ej. @juan:matrix.org o juan)";
+"login_identity_server_info" = "Matrix proporciona servidores de identidades para rastrear qué correos electrónicos, etc. pertenecen a qué IDs de Matrix. Actualmente solo existe https://bigstarmessenger.com.";
+"login_user_id_placeholder" = "ID de Matrix (p.ej. @juan:bigstarmessenger.com o juan)";
 "login_password_placeholder" = "Contraseña";
 "login_optional_field" = "opcional";
 "login_display_name_placeholder" = "Nombre público (p.ej. Juan Pérez)";
@@ -958,7 +958,7 @@
 "login_error_must_start_http" = "La URL debe comenzar con http[s]://";
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "Me gustaría chatear contigo vía Matrix. Por favor, visita la página http://matrix.org para obtener más información.";
+"invitation_message" = "Me gustaría chatear contigo vía Matrix. Por favor, visita la página http://bigstarmessenger.com para obtener más información.";
 // Settings screen 
 "settings_title_config" = "Ajustes";
 "settings_title_notifications" = "Notificaciones";
@@ -1109,7 +1109,7 @@
 "joined" = "Se unió";
 "enable" = "Activar";
 "space_home_show_all_rooms" = "Mostrar todas las salas";
-"store_full_description" = "Element es un nuevo tipo de aplicación de mensajería y colaboración que:\n\n1. Te pone al mando, para que puedas proteger tu privacidad\n2. Te permite comunicarte con cualquiera en la red Matrix, y hasta fuera de ella, integrándose con aplicaciones como Slack\n3. Te protege delos anuncios, minería de datos, puertas traseras y «jardines vallados»\n4. Protege tus mensajes gracias al cifrado de extremo a extremo, con firma cruzada para verificar a otras personas\n\nElement es una aplicación de mensajería y colaboración completamente distinta al resto, porque es descentralizada y de código abierto.\n\nCon Element, puedes usar tu propio servidor (o elegir un alojamiento), de manera que disfrutes de privacidad, los datos y conservaciones sean realmente tu propiedad y bajo tu control. Te da acceso a una red abierta, para que puedas hablar incluso con gente que no use Element. Y es muy seguro.\n\nElement puede hacer todo esto porque por debajo funciona gracias a Matrix: el estándar para comunicaciones abiertas y descentralizadas.\n\nElement te pone al mando, permitiéndote elegir quién aloja tus conversaciones. Desde la aplicación de Element puedes elegir entre varias opciones dónde alojar:\n\n1. Registra una cuenta gratis en el servidor público matrix.org\n2. Usa tu propio servidor para registrar tu cuenta\n3. Simplemente suscríbete a la plataforma de Element Matrix Services para crear una cuenta en un servidor personalizado\n\n¿Por qué elegir Element?\n\nTUS DATOS, TU PROPIEDAD: Decide dónde guardar tus datos y mensajes. Son tuyos, y tú los controlas, en lugar de que una MEGAEMPRESA que los exprime o da acceso a terceros.\n\nMENSAJERÍA Y COLABORACIÓN ABIERTAS: Puedes hablar con el resto de personas en la red Matrix, usen Element o cualquier otra aplicación de Matrix. Incluso si usan otro sistema de mensajería como Slack, IRC o XMPP.\n\nSUPERSEGURO: Cifrado de extremo a extremo real (solo quienes participen en la conversación pueden descifrar los mensajes), y firma cruzada para verificar los dispositivos de los participantes en la conversación.\n\nCOMUNICACIÓN COMPLETA: Texto, llamadas de voz y vídeo, comparte archivos, comparte tu pantalla y un montón de integraciones, bots y accesorios. Crea salas, comunidades, mantén el contacto y lleva las cosas a cabo. \n\nESTÉS DONDE ESTÉS: Mantén el contacto estés dond estés gracias a que los mensajes y el historial se sincroniza entre todos tus dispositivos y hasta la web https://element.io/app.";
+"store_full_description" = "Element es un nuevo tipo de aplicación de mensajería y colaboración que:\n\n1. Te pone al mando, para que puedas proteger tu privacidad\n2. Te permite comunicarte con cualquiera en la red Matrix, y hasta fuera de ella, integrándose con aplicaciones como Slack\n3. Te protege delos anuncios, minería de datos, puertas traseras y «jardines vallados»\n4. Protege tus mensajes gracias al cifrado de extremo a extremo, con firma cruzada para verificar a otras personas\n\nElement es una aplicación de mensajería y colaboración completamente distinta al resto, porque es descentralizada y de código abierto.\n\nCon Element, puedes usar tu propio servidor (o elegir un alojamiento), de manera que disfrutes de privacidad, los datos y conservaciones sean realmente tu propiedad y bajo tu control. Te da acceso a una red abierta, para que puedas hablar incluso con gente que no use Element. Y es muy seguro.\n\nElement puede hacer todo esto porque por debajo funciona gracias a Matrix: el estándar para comunicaciones abiertas y descentralizadas.\n\nElement te pone al mando, permitiéndote elegir quién aloja tus conversaciones. Desde la aplicación de Element puedes elegir entre varias opciones dónde alojar:\n\n1. Registra una cuenta gratis en el servidor público bigstarmessenger.com\n2. Usa tu propio servidor para registrar tu cuenta\n3. Simplemente suscríbete a la plataforma de Element Matrix Services para crear una cuenta en un servidor personalizado\n\n¿Por qué elegir Element?\n\nTUS DATOS, TU PROPIEDAD: Decide dónde guardar tus datos y mensajes. Son tuyos, y tú los controlas, en lugar de que una MEGAEMPRESA que los exprime o da acceso a terceros.\n\nMENSAJERÍA Y COLABORACIÓN ABIERTAS: Puedes hablar con el resto de personas en la red Matrix, usen Element o cualquier otra aplicación de Matrix. Incluso si usan otro sistema de mensajería como Slack, IRC o XMPP.\n\nSUPERSEGURO: Cifrado de extremo a extremo real (solo quienes participen en la conversación pueden descifrar los mensajes), y firma cruzada para verificar los dispositivos de los participantes en la conversación.\n\nCOMUNICACIÓN COMPLETA: Texto, llamadas de voz y vídeo, comparte archivos, comparte tu pantalla y un montón de integraciones, bots y accesorios. Crea salas, comunidades, mantén el contacto y lleva las cosas a cabo. \n\nESTÉS DONDE ESTÉS: Mantén el contacto estés dond estés gracias a que los mensajes y el historial se sincroniza entre todos tus dispositivos y hasta la web https://element.io/app.";
 "secrets_setup_recovery_passphrase_additional_information" = "No uses la contraseña de tu cuenta de Matrix.";
 
 // Success from passphrase
@@ -1905,7 +1905,7 @@
 // MARK: - Room Info
 
 "room_info_list_one_member" = "1 miembro";
-"create_room_placeholder_address" = "#saladepruebas:matrix.org";
+"create_room_placeholder_address" = "#saladepruebas:bigstarmessenger.com";
 "create_room_section_header_address" = "DIRECCIÓN";
 "create_room_show_in_directory" = "Incluir en la lista pública de salas";
 "create_room_section_footer_type" = "La gente solo puede unirse a una sala privada si les invitas.";

@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 @objc
 protocol CallPresenterDelegate: AnyObject {
     //  Call screens

@@ -19,6 +19,7 @@ import UIKit
 /// The number of milliseconds in one second.
 private let MSEC_PER_SEC: TimeInterval = 1000
 
+@available(iOS 15.0, *)
 @objcMembers
 class RoomGroupCallStatusCell: RoomCallBaseCell {
     

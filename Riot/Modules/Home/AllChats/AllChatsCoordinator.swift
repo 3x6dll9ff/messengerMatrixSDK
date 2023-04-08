@@ -29,6 +29,7 @@ class AllChatsCoordinatorParameters {
     }
 }
 
+@available(iOS 15.0, *)
 class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
     
     // MARK: Properties
@@ -347,9 +348,9 @@ class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
             })
         }
 
-        subMenuActions.append(UIAction(title: VectorL10n.sideMenuActionFeedback, image: UIImage(systemName: "questionmark.circle")) { [weak self] action in
-            self?.showBugReport()
-        })
+//        subMenuActions.append(UIAction(title: VectorL10n.sideMenuActionFeedback, image: UIImage(systemName: "questionmark.circle")) { [weak self] action in
+//            self?.showBugReport()
+//        })
         
         actions.append(UIMenu(title: "", options: .displayInline, children: subMenuActions))
         actions.append(UIMenu(title: "", options: .displayInline, children: [
@@ -648,6 +649,7 @@ class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
     }
 }
 
+@available(iOS 15.0, *)
 extension AllChatsCoordinator: SignOutFlowPresenterDelegate {
     func signOutFlowPresenterDidStartLoading(_ presenter: SignOutFlowPresenter) {
         allChatsViewController.view.isUserInteractionEnabled = false
@@ -664,6 +666,7 @@ extension AllChatsCoordinator: SignOutFlowPresenterDelegate {
     }
 }
 
+@available(iOS 15.0, *)
 // MARK: - AllChatsViewControllerDelegate
 extension AllChatsCoordinator: AllChatsViewControllerDelegate {
     func allChatsViewControllerDidCompleteAuthentication(_ allChatsViewController: AllChatsViewController) {
@@ -684,6 +687,7 @@ extension AllChatsCoordinator: AllChatsViewControllerDelegate {
 }
 
 // MARK: - RoomCoordinatorDelegate
+@available(iOS 15.0, *)
 extension AllChatsCoordinator: RoomCoordinatorDelegate {
     func roomCoordinatorDidDismissInteractively(_ coordinator: RoomCoordinatorProtocol) {
         self.remove(childCoordinator: coordinator)

@@ -83,7 +83,7 @@ public class MockRecentsListService: NSObject, RecentsListServiceProtocol {
     public static func generate(withNumberOfRooms numberOfRooms: Int) -> MockRecentsListService {
         var rooms: [MockRoomSummary] = []
         for i in 0..<numberOfRooms {
-            let room = MockRoomSummary(withRoomId: "!room_\(i+1):matrix.org")
+            let room = MockRoomSummary(withRoomId: "!room_\(i+1):bigstarmessenger.com")
             if i % 2 == 0 {
                 room.dataTypes = .direct
             } else if i % 3 == 0 {

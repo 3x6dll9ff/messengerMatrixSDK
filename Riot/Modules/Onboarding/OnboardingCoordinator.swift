@@ -30,6 +30,7 @@ struct OnboardingCoordinatorParameters {
     }
 }
 
+@available(iOS 15.0, *)
 @objcMembers
 /// A coordinator to manage the full onboarding flow with pre-auth screens, authentication and setup screens once signed in.
 final class OnboardingCoordinator: NSObject, OnboardingCoordinatorProtocol {
@@ -160,7 +161,7 @@ final class OnboardingCoordinator: NSObject, OnboardingCoordinatorProtocol {
         
         switch result {
         case .register:
-            showUseCaseSelectionScreen()
+            beginAuthentication(with: .registration, onStart: coordinator.stop)
         case .login:
             if BuildSettings.onboardingEnableNewAuthenticationFlow {
                 beginAuthentication(with: .login, onStart: coordinator.stop)
@@ -570,7 +571,7 @@ final class OnboardingCoordinator: NSObject, OnboardingCoordinatorProtocol {
         
         completion?()
         
-        // Reset the authentication service back to using matrix.org
+        // Reset the authentication service back to using bigstarmessenger.com
         authenticationService.reset(useDefaultServer: true)
     }
     

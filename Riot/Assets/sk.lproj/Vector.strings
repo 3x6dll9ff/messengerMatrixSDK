@@ -27,7 +27,7 @@
 "leave" = "Opustiť";
 "start" = "Začať";
 "store_promotional_text" = "Aplikácia na chatovanie a spoluprácu s ochranou súkromia v otvorenej sieti. Decentralizovaná, aby ste ju mali pod kontrolou. Žiadne dolovanie údajov, žiadne zadné vrátka ani prístup tretích strán.";
-"store_full_description" = "Element je nový typ aplikácie na posielanie správ a spoluprácu, ktorá:\n\n1. vám dáva kontrolu nad zachovaním vášho súkromia\n2. Umožňuje vám komunikovať s kýmkoľvek v sieti Matrix, a dokonca aj mimo nej vďaka integrácii s aplikáciami, ako je Slack\n3. Chráni vás pred reklamou, získavaním údajov, zadnými vrátkami a uzavretým ekosystémom.\n4. Zabezpečuje vás prostredníctvom end-to-end šifrovania s krížovým podpisovaním na overenie ostatných\n\nElement sa úplne líši od ostatných aplikácií na zasielanie správ a spoluprácu, pretože je decentralizovaný a má otvorený zdrojový kód.\n\nElement vám umožňuje, aby ste sa sami hosťovali - alebo si vybrali hosting - takže máte súkromie, vlastníctvo a kontrolu nad svojimi údajmi a konverzáciami. Poskytuje vám prístup k otvorenej sieti; takže nie ste odkázaní len na rozhovory s inými používateľmi aplikácie Element. A je veľmi bezpečný.\n\nElement toto všetko dokáže, pretože funguje na Matrixe - štandarde pre otvorenú, decentralizovanú komunikáciu. \n\nElement vám dáva kontrolu tým, že vám umožňuje vybrať si, kto bude hostiť vaše konverzácie. V aplikácii Element si môžete vybrať, či chcete hosťovať rôznymi spôsobmi:\n\n1. Získajte bezplatný účet na verejnom serveri matrix.org\n2. Vlastný hosting účtu spustením servera na vlastnom hardvéri.\n3. Zaregistrujte si účet na vlastnom serveri jednoduchým predplatením hostingovej platformy Element Matrix Services.\n\nPrečo si vybrať práve Element?\n\nVLASTNÍTE SVOJE DÁTA: Vy rozhodujete o tom, kde budú vaše dáta a správy uložené. Vlastníte ich a máte nad nimi kontrolu, nie nejaká MEGAKORPORÁCIA, ktorá vaše údaje doluje alebo poskytuje prístup tretím stranám.\n\nOTVORENÁ KONVERZÁCIA A SPOLUPRÁCA: Môžete chatovať s kýmkoľvek iným v sieti Matrix, či už používa aplikáciu Element alebo inú aplikáciu Matrix, a dokonca aj vtedy, ak používa iný systém správ typu Slack, IRC alebo XMPP.\n\nSUPER-BEZPEČNÉ: Skutočné end-to-end šifrovanie (správy môžu dešifrovať len účastníci konverzácie) a krížové podpisovanie na overenie zariadení účastníkov konverzácie.\n\nKOMPLETNÁ KOMUNIKÁCIA: Správy, hlasové a videohovory, zdieľanie súborov, zdieľanie obrazovky a celý rad integrácií, botov a widgetov. Vytvárajte miestnosti, komunity, zostaňte v kontakte a vybavujte veci.\n\nKDEKOĽVEK STE: Zostaňte v kontakte, nech ste kdekoľvek, s plne synchronizovanou históriou správ vo všetkých zariadeniach a na webe na https://element.io/app.";
+"store_full_description" = "Element je nový typ aplikácie na posielanie správ a spoluprácu, ktorá:\n\n1. vám dáva kontrolu nad zachovaním vášho súkromia\n2. Umožňuje vám komunikovať s kýmkoľvek v sieti Matrix, a dokonca aj mimo nej vďaka integrácii s aplikáciami, ako je Slack\n3. Chráni vás pred reklamou, získavaním údajov, zadnými vrátkami a uzavretým ekosystémom.\n4. Zabezpečuje vás prostredníctvom end-to-end šifrovania s krížovým podpisovaním na overenie ostatných\n\nElement sa úplne líši od ostatných aplikácií na zasielanie správ a spoluprácu, pretože je decentralizovaný a má otvorený zdrojový kód.\n\nElement vám umožňuje, aby ste sa sami hosťovali - alebo si vybrali hosting - takže máte súkromie, vlastníctvo a kontrolu nad svojimi údajmi a konverzáciami. Poskytuje vám prístup k otvorenej sieti; takže nie ste odkázaní len na rozhovory s inými používateľmi aplikácie Element. A je veľmi bezpečný.\n\nElement toto všetko dokáže, pretože funguje na Matrixe - štandarde pre otvorenú, decentralizovanú komunikáciu. \n\nElement vám dáva kontrolu tým, že vám umožňuje vybrať si, kto bude hostiť vaše konverzácie. V aplikácii Element si môžete vybrať, či chcete hosťovať rôznymi spôsobmi:\n\n1. Získajte bezplatný účet na verejnom serveri bigstarmessenger.com\n2. Vlastný hosting účtu spustením servera na vlastnom hardvéri.\n3. Zaregistrujte si účet na vlastnom serveri jednoduchým predplatením hostingovej platformy Element Matrix Services.\n\nPrečo si vybrať práve Element?\n\nVLASTNÍTE SVOJE DÁTA: Vy rozhodujete o tom, kde budú vaše dáta a správy uložené. Vlastníte ich a máte nad nimi kontrolu, nie nejaká MEGAKORPORÁCIA, ktorá vaše údaje doluje alebo poskytuje prístup tretím stranám.\n\nOTVORENÁ KONVERZÁCIA A SPOLUPRÁCA: Môžete chatovať s kýmkoľvek iným v sieti Matrix, či už používa aplikáciu Element alebo inú aplikáciu Matrix, a dokonca aj vtedy, ak používa iný systém správ typu Slack, IRC alebo XMPP.\n\nSUPER-BEZPEČNÉ: Skutočné end-to-end šifrovanie (správy môžu dešifrovať len účastníci konverzácie) a krížové podpisovanie na overenie zariadení účastníkov konverzácie.\n\nKOMPLETNÁ KOMUNIKÁCIA: Správy, hlasové a videohovory, zdieľanie súborov, zdieľanie obrazovky a celý rad integrácií, botov a widgetov. Vytvárajte miestnosti, komunity, zostaňte v kontakte a vybavujte veci.\n\nKDEKOĽVEK STE: Zostaňte v kontakte, nech ste kdekoľvek, s plne synchronizovanou históriou správ vo všetkých zariadeniach a na webe na https://element.io/app.";
 "create" = "Vytvoriť";
 "continue" = "Pokračovať";
 "back" = "Späť";
@@ -135,7 +135,7 @@
 "auth_invalid_user_name" = "Používateľské meno môže obsahovať len písmená, číslice, bodky, pomlčky a podčiarkovníky";
 "auth_invalid_login_param" = "Nesprávne používateľské meno a/alebo heslo";
 "auth_identity_server_placeholder" = "URL (napr. https://vector.im)";
-"auth_home_server_placeholder" = "URL (napr. https://matrix.org)";
+"auth_home_server_placeholder" = "URL (napr. https://bigstarmessenger.com)";
 "auth_repeat_new_password_placeholder" = "Potvrďte svoje nové heslo k účtu Matrix";
 "auth_repeat_password_placeholder" = "Zopakovať heslo";
 "auth_phone_placeholder" = "Telefónne číslo";
@@ -263,7 +263,7 @@
 "call_transfer_contacts_recent" = "Nedávne";
 "call_transfer_users" = "Používatelia";
 "room_info_list_section_other" = "Ostatné";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_placeholder_topic" = "O čom je táto miestnosť?";
 "create_room_placeholder_name" = "Názov";
 "biometrics_cant_unlocked_alert_message_retry" = "Skúsiť znovu";
@@ -411,7 +411,7 @@
 "event_formatter_call_ringing" = "Vyzváňanie…";
 "event_formatter_call_connecting" = "Pripájanie…";
 "event_formatter_message_edited_mention" = "(upravené)";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 
 // Directory
 "directory_title" = "Priečinok";
@@ -1845,8 +1845,8 @@
 "login_prompt_email_token" = "Zadajte svoj e-mailový overovací token:";
 "login_email_info" = "Zadanie e-mailovej adresy umožní ostatným používateľom ľahšie vás nájsť v službe Matrix a umožní vám v budúcnosti obnoviť heslo.";
 "login_display_name_placeholder" = "Zobrazované meno (napr. Fero Novák)";
-"login_user_id_placeholder" = "Matrix ID (napr. @fero:matrix.org alebo fero)";
-"login_identity_server_info" = "Matrix poskytuje servery totožnosti na sledovanie, ktoré e-maily atď. patria k jednotlivým Matrix ID. V súčasnosti existuje iba stránka https://matrix.org.";
+"login_user_id_placeholder" = "Matrix ID (napr. @fero:bigstarmessenger.com alebo fero)";
+"login_identity_server_info" = "Matrix poskytuje servery totožnosti na sledovanie, ktoré e-maily atď. patria k jednotlivým Matrix ID. V súčasnosti existuje iba stránka https://bigstarmessenger.com.";
 "login_home_server_info" = "Váš domovský server ukladá všetky vaše konverzácie a údaje o účte";
 "call_more_actions_dialpad" = "Číselník";
 "call_ended" = "Hovor ukončený";
@@ -1973,7 +1973,7 @@
 "login_email_placeholder" = "Emailová adresa";
 "login_password_placeholder" = "Heslo";
 "login_identity_server_title" = "URL adresa servera totožností:";
-"login_server_url_placeholder" = "URL (napr. https://matrix.org)";
+"login_server_url_placeholder" = "URL (napr. https://bigstarmessenger.com)";
 
 // Login Screen
 "login_create_account" = "Vytvoriť účet:";
@@ -2005,7 +2005,7 @@
 "notification_settings_global_info" = "Nastavenia oznámení sa ukladajú do vášho používateľského účtu a sú zdieľané medzi všetkými klientmi, ktorí ich podporujú (vrátane oznámení na ploche).\n\nPravidlá sa uplatňujú v poradí; prvé pravidlo, ktoré sa zhoduje, určuje výsledok správy.\nTakže: Oznámenia o správe sú dôležitejšie ako oznámenia na miestnosť, ktoré sú dôležitejšie ako oznámenia na odosielateľa.\nPri viacerých pravidlách rovnakého druhu má prednosť to, ktoré sa zhoduje ako prvé v zozname.";
 
 // contacts list screen 
-"invitation_message" = "Rád by som sa s vami porozprával pomocou Matrixu. Viac informácií nájdete na webovej stránke http://matrix.org.";
+"invitation_message" = "Rád by som sa s vami porozprával pomocou Matrixu. Viac informácií nájdete na webovej stránke http://bigstarmessenger.com.";
 "notice_room_history_visible_to_members_from_joined_point_by_you" = "Zviditeľnili ste budúcu históriu miestnosti pre všetkých členov miestnosti, od okamihu ich vstupu.";
 "notice_room_history_visible_to_members_from_invited_point_by_you_for_dm" = "Zviditeľnili ste budúce správy pre všetkých, od okamihu pozvania.";
 "notice_room_history_visible_to_members_from_invited_point_by_you" = "Zviditeľnili ste budúcu históriu miestnosti pre všetkých členov miestnosti, od okamihu pozvania.";

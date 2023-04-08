@@ -137,7 +137,7 @@
 - (void)testRenderHTMLStringWithLink
 {
     // Given an HTML string with a link inside of it.
-    NSString *html = @"This text contains a <a href=\"https://www.matrix.org/\">link</a>.";
+    NSString *html = @"This text contains a <a href=\"https://www.bigstarmessenger.com/\">link</a>.";
     
     // When rendering this string as an attributed string.
     NSAttributedString *attributedString = [eventFormatter renderHTMLString:html
@@ -157,7 +157,7 @@
         if ([value isKindOfClass:NSURL.class])
         {
             NSURL *url = (NSURL *)value;
-            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.matrix.org/"], @"href links should be included in the text.");
+            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.bigstarmessenger.com/"], @"href links should be included in the text.");
             didFindLink = YES;
         }
     }];
@@ -168,8 +168,8 @@
 - (void)testRenderHTMLStringWithLinkInHeader
 {
     // Given HTML strings with links contained within h1/h2 tags.
-    NSString *h1HTML = @"<h1><a href=\"https://www.matrix.org/\">Matrix.org</a></h1>";
-    NSString *h3HTML = @"<h3><a href=\"https://www.matrix.org/\">Matrix.org</a></h3>";
+    NSString *h1HTML = @"<h1><a href=\"https://www.bigstarmessenger.com/\">bigstarmessenger.com</a></h1>";
+    NSString *h3HTML = @"<h3><a href=\"https://www.bigstarmessenger.com/\">bigstarmessenger.com</a></h3>";
     
     // When rendering these strings as attributed strings.
     NSAttributedString *h1AttributedString = [eventFormatter
@@ -184,8 +184,8 @@
                                               andLatestRoomState:nil];
     
     // Then the attributed string should contain all of the text,
-    XCTAssertEqualObjects(h1AttributedString.string, @"Matrix.org", @"The text from an H1 tag should be preserved when removing formatting.");
-    XCTAssertEqualObjects(h3AttributedString.string, @"Matrix.org", @"The text from an H3 tag should not change.");
+    XCTAssertEqualObjects(h1AttributedString.string, @"bigstarmessenger.com", @"The text from an H1 tag should be preserved when removing formatting.");
+    XCTAssertEqualObjects(h3AttributedString.string, @"bigstarmessenger.com", @"The text from an H3 tag should not change.");
     
     // and be formatted as a header with the link added as an attachment.
     __block BOOL didFindH1Link = NO;
@@ -203,7 +203,7 @@
         
         if (url)
         {
-            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.matrix.org/"], @"href links should be included in the text.");
+            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.bigstarmessenger.com/"], @"href links should be included in the text.");
             didFindH1Link = YES;
         }
     }];
@@ -222,7 +222,7 @@
         
         if (url)
         {
-            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.matrix.org/"], @"href links should be included in the text.");
+            XCTAssertEqualObjects(url, [NSURL URLWithString:@"https://www.bigstarmessenger.com/"], @"href links should be included in the text.");
             didFindH3Link = YES;
         }
     }];
@@ -234,7 +234,7 @@
 - (void)testRenderHTMLStringWithIFrame
 {
     // Given an HTML string containing an unsupported iframe.
-    NSString *html = @"<iframe src=\"https://www.matrix.org/\"></iframe>";
+    NSString *html = @"<iframe src=\"https://www.bigstarmessenger.com/\"></iframe>";
     
     // When rendering this string as an attributed string.
     NSAttributedString *attributedString = [eventFormatter renderHTMLString:html
@@ -250,7 +250,7 @@
 - (void)testRenderHTMLStringWithMXReply
 {
     // Given an HTML string representing a matrix reply.
-    NSString *html = @"<mx-reply><blockquote><a href=\"https://matrix.to/#/someroom/someevent\">In reply to</a> <a href=\"https://matrix.to/#/@alice:matrix.org\">@alice:matrix.org</a><br>Original message.</blockquote></mx-reply>This is a reply.";
+    NSString *html = @"<mx-reply><blockquote><a href=\"https://matrix.to/#/someroom/someevent\">In reply to</a> <a href=\"https://matrix.to/#/@alice:bigstarmessenger.com\">@alice:bigstarmessenger.com</a><br>Original message.</blockquote></mx-reply>This is a reply.";
     
     // When rendering this string as an attributed string.
     NSAttributedString *attributedString = [eventFormatter renderHTMLString:html
@@ -260,7 +260,7 @@
     
     // Then the attributed string should contain all of the text,
     NSString *plainString = [attributedString.string stringByReplacingOccurrencesOfString:@"\U00002028" withString:@"\n"];
-    XCTAssertEqualObjects(plainString, @"In reply to @alice:matrix.org\nOriginal message.\nThis is a reply.",
+    XCTAssertEqualObjects(plainString, @"In reply to @alice:bigstarmessenger.com\nOriginal message.\nThis is a reply.",
                           @"The reply string should include who the original message was from, what they said, and the reply itself.");
     
     // and format the author and original message inside of a quotation block.
@@ -289,7 +289,7 @@
 - (void)testRenderHTMLStringWithMXReplyQuotingInvalidMessage
 {
     // Given an HTML string representing a matrix reply where the original message has invalid HTML.
-    NSString *html = @"<mx-reply><blockquote><a href=\"https://matrix.to/#/someroom/someevent\">In reply to</a> <a href=\"https://matrix.to/#/@alice:matrix.org\">@alice:matrix.org</a><br><h1>Heading with <badtag>invalid</badtag> content</h1></blockquote></mx-reply>This is a reply.";
+    NSString *html = @"<mx-reply><blockquote><a href=\"https://matrix.to/#/someroom/someevent\">In reply to</a> <a href=\"https://matrix.to/#/@alice:bigstarmessenger.com\">@alice:bigstarmessenger.com</a><br><h1>Heading with <badtag>invalid</badtag> content</h1></blockquote></mx-reply>This is a reply.";
     
     // When rendering this string as an attributed string.
     NSAttributedString *attributedString = [eventFormatter renderHTMLString:html
@@ -299,7 +299,7 @@
     
     // Then the attributed string should contain all of the text,
     NSString *plainString = [attributedString.string stringByReplacingOccurrencesOfString:@"\U00002028" withString:@"\n"];
-    XCTAssertEqualObjects(plainString, @"In reply to @alice:matrix.org\nHeading with invalid content\nThis is a reply.",
+    XCTAssertEqualObjects(plainString, @"In reply to @alice:bigstarmessenger.com\nHeading with invalid content\nThis is a reply.",
                           @"The reply string should include who the original message was from, what they said, and the reply itself.");
     
     // and format the author and original message inside of a quotation block. This check
@@ -334,7 +334,7 @@
     MXWeakify(self);
     
     // Given an HTML string that contains an image tag inline.
-    NSURL *imageURL = [NSURL URLWithString:@"https://matrix.org/images/matrix-logo.svg"];
+    NSURL *imageURL = [NSURL URLWithString:@"https://bigstarmessenger.com/images/matrix-logo.svg"];
     NSString *html = [NSString stringWithFormat:@"Look at this logo: <img src=\"%@\"> Very nice.", imageURL.absoluteString];
     
     // When rendering this string as an attributed string using an appropriate image handler block.
@@ -387,10 +387,10 @@
 
 - (void)testRoomAliasLink
 {
-    NSString *s = @"Matrix HQ room is at #matrix:matrix.org.";
+    NSString *s = @"Matrix HQ room is at #matrix:bigstarmessenger.com.";
     NSAttributedString *as = [eventFormatter renderString:s forEvent:anEvent];
 
-    NSRange linkRange = [s rangeOfString:@"#matrix:matrix.org"];
+    NSRange linkRange = [s rangeOfString:@"#matrix:bigstarmessenger.com"];
 
     __block NSUInteger ranges = 0;
     __block BOOL linkCreated = NO;
@@ -411,7 +411,7 @@
 
 - (void)testLinkWithRoomAliasLink
 {
-    NSString *s = @"Matrix HQ room is at https://matrix.to/#/room/#matrix:matrix.org.";
+    NSString *s = @"Matrix HQ room is at https://matrix.to/#/room/#matrix:bigstarmessenger.com.";
     NSAttributedString *as = [eventFormatter renderString:s forEvent:anEvent];
 
     __block BOOL hasLink = false;
@@ -429,34 +429,34 @@
 #pragma mark - Event sender/target info
 
 - (void)testUserDisplayNameFromEventContent {
-    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:matrix.org\",\"content\":{\"displayname\":\"bob\",\"membership\":\"invite\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:matrix.org\",\"room_id\":\"!foofoofoofoofoofoo:matrix.org\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
+    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:bigstarmessenger.com\",\"content\":{\"displayname\":\"bob\",\"membership\":\"invite\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:bigstarmessenger.com\",\"room_id\":\"!foofoofoofoofoofoo:bigstarmessenger.com\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
     XCTAssertEqualObjects([eventFormatter userDisplayNameFromContentInEvent:event withMembershipFilter:nil], @"bob");
     XCTAssertEqualObjects([eventFormatter userDisplayNameFromContentInEvent:event withMembershipFilter:@"invite"], @"bob");
     XCTAssertEqualObjects([eventFormatter userDisplayNameFromContentInEvent:event withMembershipFilter:@"join"], nil);
 }
 
 - (void)testUserDisplayNameFromNonMembershipEventContent {
-    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:matrix.org\",\"content\":{\"ciphertext\":\"foo\",\"sender_key\":\"bar\",\"device_id\":\"foobar\",\"algorithm\":\"m.megolm.v1.aes-sha2\"}},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:matrix.org\",\"room_id\":\"!foofoofoofoofoofoo:matrix.org\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.encrypted\",\"unsigned\":{}}"];
+    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:bigstarmessenger.com\",\"content\":{\"ciphertext\":\"foo\",\"sender_key\":\"bar\",\"device_id\":\"foobar\",\"algorithm\":\"m.megolm.v1.aes-sha2\"}},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:bigstarmessenger.com\",\"room_id\":\"!foofoofoofoofoofoo:bigstarmessenger.com\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.encrypted\",\"unsigned\":{}}"];
     XCTAssertEqualObjects([eventFormatter userDisplayNameFromContentInEvent:event withMembershipFilter:nil], nil);
     XCTAssertEqualObjects([eventFormatter userDisplayNameFromContentInEvent:event withMembershipFilter:@"join"], nil);
 }
 
 - (void)testUserAvatarUrlFromEventContent {
-    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:matrix.org\",\"content\":{\"displayname\":\"bob\",\"avatar_url\":\"mxc://foo.bar\",\"membership\":\"join\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:matrix.org\",\"room_id\":\"!foofoofoofoofoofoo:matrix.org\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
+    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:bigstarmessenger.com\",\"content\":{\"displayname\":\"bob\",\"avatar_url\":\"mxc://foo.bar\",\"membership\":\"join\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:bigstarmessenger.com\",\"room_id\":\"!foofoofoofoofoofoo:bigstarmessenger.com\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:nil], @"mxc://foo.bar");
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:@"invite"], nil);
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:@"join"], @"mxc://foo.bar");
 }
 
 - (void)testUserAvatarUrlFromEventWithNonMXCAvatarUrlContent {
-    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:matrix.org\",\"content\":{\"displayname\":\"bob\",\"avatar_url\":\"http://foo.bar\",\"membership\":\"join\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:matrix.org\",\"room_id\":\"!foofoofoofoofoofoo:matrix.org\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
+    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:bigstarmessenger.com\",\"content\":{\"displayname\":\"bob\",\"avatar_url\":\"http://foo.bar\",\"membership\":\"join\"},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:bigstarmessenger.com\",\"room_id\":\"!foofoofoofoofoofoo:bigstarmessenger.com\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.member\",\"unsigned\":{}}"];
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:nil], nil);
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:@"invite"], nil);
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:@"join"], nil);
 }
 
 - (void)testUserAvatarUrlFromNonMembershipEventContent {
-    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:matrix.org\",\"content\":{\"ciphertext\":\"foo\",\"sender_key\":\"bar\",\"device_id\":\"foobar\",\"algorithm\":\"m.megolm.v1.aes-sha2\"}},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:matrix.org\",\"room_id\":\"!foofoofoofoofoofoo:matrix.org\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.encrypted\",\"unsigned\":{}}"];
+    MXEvent *event = [self eventFromJSON:@"{\"sender\":\"@alice:bigstarmessenger.com\",\"content\":{\"ciphertext\":\"foo\",\"sender_key\":\"bar\",\"device_id\":\"foobar\",\"algorithm\":\"m.megolm.v1.aes-sha2\"}},\"origin_server_ts\":1616488993287,\"state_key\":\"@bob:bigstarmessenger.com\",\"room_id\":\"!foofoofoofoofoofoo:bigstarmessenger.com\",\"event_id\":\"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do\",\"type\":\"m.room.encrypted\",\"unsigned\":{}}"];
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:nil], nil);
     XCTAssertEqualObjects([eventFormatter userAvatarUrlFromContentInEvent:event withMembershipFilter:@"join"], nil);
 }

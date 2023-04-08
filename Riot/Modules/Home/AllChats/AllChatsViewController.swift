@@ -15,10 +15,23 @@
 //
 
 // swiftlint:disable file_length
+// swiftlint:disable all
+
 
 import UIKit
+import ImageSlideshow
+import Alamofire
+import Foundation
 import Reusable
+import SwiftUI
 
+
+struct AdSlide {
+    let clientAd: ClientAds
+    let image: ImageSource
+}
+
+@available(iOS 15.0, *)
 protocol AllChatsViewControllerDelegate: AnyObject {
     func allChatsViewControllerDidCompleteAuthentication(_ allChatsViewController: AllChatsViewController)
     func allChatsViewController(_ allChatsViewController: AllChatsViewController, didSelectRoomWithParameters roomNavigationParameters: RoomNavigationParameters, completion: @escaping () -> Void)
@@ -26,7 +39,8 @@ protocol AllChatsViewControllerDelegate: AnyObject {
     func allChatsViewController(_ allChatsViewController: AllChatsViewController, didSelectContact contact: MXKContact, with presentationParameters: ScreenPresentationParameters)
 }
 
-class AllChatsViewController: HomeViewController {
+@available(iOS 15.0, *)
+class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGestureRecognizerDelegate {
     // MARK: - Class methods
     
     static override func nib() -> UINib! {
@@ -40,6 +54,19 @@ class AllChatsViewController: HomeViewController {
         }
         return viewController
     }
+    
+    
+    
+    @IBOutlet weak var slideshow: ImageSlideshow!
+   
+    @IBAction func show(_ sender: Any) {
+        didTapAd()
+    }
+    
+    var ads = [AdSlide]()
+    var clientAds: [ClientAds] = []
+    var cityUuid: String = ""
+    var tapGestureRecognizer: UITapGestureRecognizer!
     
     // MARK: - Properties
     
@@ -86,7 +113,7 @@ class AllChatsViewController: HomeViewController {
     
     private func setToolbarHidden(_ isHidden: Bool, animated: Bool) {
         UIView.animate(withDuration: animated ? 0.3 : 0) {
-            self.isToolbarHidden = isHidden
+            self.isToolbarHidden = false
         }
 
     }
@@ -127,7 +154,16 @@ class AllChatsViewController: HomeViewController {
         
         toolbarHeight = toolbar.frame.height
         emptyViewBottomAnchor = toolbar.topAnchor
+        
+        
+        slideshow.isUserInteractionEnabled = true
 
+        slideshow.slideshowInterval = 5.0
+        slideshow.contentScaleMode = UIViewContentMode.scaleAspectFill
+        slideshow.activityIndicator = DefaultActivityIndicator()
+        slideshow.delegate = self
+        
+        
         updateUI()
         
         navigationItem.largeTitleDisplayMode = .automatic
@@ -143,7 +179,7 @@ class AllChatsViewController: HomeViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        fetchAds()
         self.toolbar.tintColor = theme.colors.accent
         if self.navigationItem.searchController == nil {
             self.navigationItem.searchController = searchController
@@ -279,6 +315,87 @@ class AllChatsViewController: HomeViewController {
             RecentsDataSourceSectionType.breadcrumbs.rawValue
         ]
     }
+    
+    private func fetchImages(){
+        
+        for clientAd in self.clientAds {
+            AF.request("\(baseURL)/files/\(clientAd.thumbnailUuid)").responseImage { response in
+                let ad = AdSlide (
+                    clientAd: clientAd,
+                    image:ImageSource(image: response.value!)
+                )
+                self.ads.append(ad)
+                self.slideshow.setImageInputs(self.ads.map { $0.image })
+            }
+        }
+    }
+    
+    private func getStoredCityUuid() -> String?{
+        return UserDefaults.standard.string(forKey: "cityUuid")
+      
+    }
+    
+    private func staticCityUuid() {
+        return UserDefaults.standard.set("2c53b916-234d-4b24-9271-70e30dbdfca7", forKey: "cityUuid")
+    }
+    
+    private func fetchAds(){
+        staticCityUuid()
+        
+        let cityUuid = getStoredCityUuid()
+       
+        print("привет как дела \(cityUuid)")
+        
+        
+        if cityUuid != nil {
+            let parameters: Parameters = [
+                "cityUuid": cityUuid!
+            ]
+
+            AF.request("\(baseURL)/ads/client", parameters: parameters).responseDecodable(of: [ClientAds].self) { response in
+                if (response.value != nil) {
+                    print(response.value!)
+                    self.clientAds = response.value!
+                    self.fetchImages()
+                }
+            }
+            
+            
+        }
+    }
+    
+    func sendAdClickRequest(adUuid: String){
+        Task {
+            print("adUuid: \(adUuid)")
+            let clickedAd = try await AF.request(
+                "\(baseURL)/ads/\(adUuid)/click",
+                method: .patch
+            ).serializingDecodable(AdvertiserAds.self).value
+            print("clickedAd: \(clickedAd.showsNumber)")
+            print("clickedAd: \(clickedAd.clicksNumber)")
+        }
+    }
+    
+    @objc func didTapAd(){
+        let clientAd = self.ads[slideshow.currentPage].clientAd
+            
+        if #available(iOS 15.0, *) {
+            let adSheetView = AdSheetView(
+                clientAd: clientAd
+            )
+            
+            let adSheetViewController = UIHostingController(rootView: adSheetView)
+            
+            if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
+                    presentationController.detents = [.medium(), .large()]
+                }
+                
+            present(adSheetViewController, animated: true)
+        } else {
+            // Fallback on earlier versions
+        }
+            
+        }
     
     override func startActivityIndicator() {
         super.startActivityIndicator()
@@ -673,12 +790,14 @@ class AllChatsViewController: HomeViewController {
     }
     
 }
+@available(iOS 15.0, *)
 
 private extension AllChatsViewController {
     enum Constants {
         static let spacesButtonMaxCount: UInt = 999
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - SpaceSelectorBottomSheetCoordinatorBridgePresenterDelegate
 extension AllChatsViewController: SpaceSelectorBottomSheetCoordinatorBridgePresenterDelegate {
@@ -715,6 +834,7 @@ extension AllChatsViewController: SpaceSelectorBottomSheetCoordinatorBridgePrese
 }
 
 // MARK: - UISearchResultsUpdating
+@available(iOS 15.0, *)
 extension AllChatsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
@@ -727,6 +847,7 @@ extension AllChatsViewController: UISearchResultsUpdating {
 }
 
 // MARK: - UISearchControllerDelegate
+@available(iOS 15.0, *)
 extension AllChatsViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
         // Fix for https://github.com/vector-im/element-ios/issues/6680
@@ -735,6 +856,7 @@ extension AllChatsViewController: UISearchControllerDelegate {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+@available(iOS 15.0, *)
 extension AllChatsViewController: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
@@ -747,6 +869,7 @@ extension AllChatsViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 // MARK: - AllChatsEditActionProviderDelegate
+@available(iOS 15.0, *)
 extension AllChatsViewController: AllChatsEditActionProviderDelegate {
     
     func allChatsEditActionProvider(_ actionProvider: AllChatsEditActionProvider, didSelect option: AllChatsEditActionProviderOption) {
@@ -764,6 +887,7 @@ extension AllChatsViewController: AllChatsEditActionProviderDelegate {
     
 }
 
+@available(iOS 15.0, *)
 // MARK: - AllChatsSpaceActionProviderDelegate
 extension AllChatsViewController: AllChatsSpaceActionProviderDelegate {
     func allChatsSpaceActionProvider(_ actionProvider: AllChatsSpaceActionProvider, didSelect option: AllChatsSpaceActionProviderOption) {
@@ -781,6 +905,8 @@ extension AllChatsViewController: AllChatsSpaceActionProviderDelegate {
 }
 
 // MARK: - ContactsPickerCoordinatorDelegate
+@available(iOS 15.0, *)
+
 extension AllChatsViewController: ContactsPickerCoordinatorDelegate {
     
     func contactsPickerCoordinatorDidStartLoading(_ coordinator: ContactsPickerCoordinatorProtocol) {
@@ -792,21 +918,22 @@ extension AllChatsViewController: ContactsPickerCoordinatorDelegate {
     func contactsPickerCoordinatorDidClose(_ coordinator: ContactsPickerCoordinatorProtocol) {
         remove(childCoordinator: coordinator)
     }
-    
+
 }
 
 // MARK: - SpaceMembersCoordinatorDelegate
+@available(iOS 15.0, *)
 extension AllChatsViewController: SpaceMembersCoordinatorDelegate {
     
     func spaceMembersCoordinatorDidCancel(_ coordinator: SpaceMembersCoordinatorType) {
         coordinator.toPresentable().dismiss(animated: true) {
             self.remove(childCoordinator: coordinator)
         }
-    }
-    
+    }    
 }
 
 // MARK: - BannerPresentationProtocol
+@available(iOS 15.0, *)
 extension AllChatsViewController: BannerPresentationProtocol {
     func presentBannerView(_ bannerView: UIView, animated: Bool) {
         self.bannerView = bannerView
@@ -819,6 +946,7 @@ extension AllChatsViewController: BannerPresentationProtocol {
 
 // TODO: The `MasterTabBarViewController` is called from the entire app through the `LegacyAppDelegate`. this part of the code should be moved into `AppCoordinator`
 // MARK: - SplitViewMasterViewControllerProtocol
+@available(iOS 15.0, *)
 extension AllChatsViewController: SplitViewMasterViewControllerProtocol {
 
     /// Release the current selected item (if any).

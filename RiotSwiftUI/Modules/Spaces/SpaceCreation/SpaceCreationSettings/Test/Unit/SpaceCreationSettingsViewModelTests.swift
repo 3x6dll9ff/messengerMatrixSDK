@@ -50,14 +50,14 @@ class SpaceCreationSettingsViewModelTests: XCTestCase {
     }
 
     func testAddressAlready() throws {
-        service.simulateUpdate(addressValidationStatus: .alreadyExists("#fake:matrix.org"))
+        service.simulateUpdate(addressValidationStatus: .alreadyExists("#fake:bigstarmessenger.com"))
         XCTAssertEqual(context.viewState.isAddressValid, false)
-        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressAlreadyExists("#fake:matrix.org"))
+        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressAlreadyExists("#fake:bigstarmessenger.com"))
     }
     
     func testInvalidAddress() throws {
-        service.simulateUpdate(addressValidationStatus: .invalidCharacters("#fake:matrix.org"))
+        service.simulateUpdate(addressValidationStatus: .invalidCharacters("#fake:bigstarmessenger.com"))
         XCTAssertEqual(context.viewState.isAddressValid, false)
-        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressInvalidCharacters("#fake:matrix.org"))
+        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressInvalidCharacters("#fake:bigstarmessenger.com"))
     }
 }

@@ -103,7 +103,7 @@
     
     [self registerRoomCreationCellsForTableView:tableView];
         
-    [self registerCallCellsForTableView:tableView];
+//    [self registerCallCellsForTableView:tableView];
         
     [self registerVoiceMessageCellsForTableView:tableView];
     
@@ -240,11 +240,11 @@
     [tableView registerClass:RoomCreationWithPaginationCollapsedBubbleCell.class forCellReuseIdentifier:RoomCreationWithPaginationCollapsedBubbleCell.defaultReuseIdentifier];
 }
 
-- (void)registerCallCellsForTableView:(UITableView*)tableView
-{
-    [tableView registerClass:RoomDirectCallStatusCell.class forCellReuseIdentifier:RoomDirectCallStatusCell.defaultReuseIdentifier];
-    [tableView registerClass:RoomGroupCallStatusCell.class forCellReuseIdentifier:RoomGroupCallStatusCell.defaultReuseIdentifier];
-}
+//- (void)registerCallCellsForTableView:(UITableView*)tableView
+//{
+//    [tableView registerClass:RoomDirectCallStatusCell.class forCellReuseIdentifier:RoomDirectCallStatusCell.defaultReuseIdentifier];
+//    [tableView registerClass:RoomGroupCallStatusCell.class forCellReuseIdentifier:RoomGroupCallStatusCell.defaultReuseIdentifier];
+//}
 
 - (void)registerVoiceMessageCellsForTableView:(UITableView*)tableView
 {
@@ -334,8 +334,8 @@
     NSDictionary *roomCreationCellsMapping = [self roomCreationCellsMapping];
     [cellClasses addEntriesFromDictionary:roomCreationCellsMapping];
     
-    NSDictionary *callCellsMapping = [self callCellsMapping];
-    [cellClasses addEntriesFromDictionary:callCellsMapping];
+//    NSDictionary *callCellsMapping = [self callCellsMapping];
+//    [cellClasses addEntriesFromDictionary:callCellsMapping];
 
     NSDictionary *voiceMessageCellsMapping = [self voiceMessageCellsMapping];
     [cellClasses addEntriesFromDictionary:voiceMessageCellsMapping];
@@ -524,13 +524,13 @@
     };
 }
 
-- (NSDictionary<NSNumber*, Class>*)callCellsMapping
-{
-    return @{
-        @(RoomTimelineCellIdentifierDirectCallStatus) : RoomDirectCallStatusCell.class,
-        @(RoomTimelineCellIdentifierGroupCallStatus) : RoomGroupCallStatusCell.class,
-    };
-}
+//- (NSDictionary<NSNumber*, Class>*)callCellsMapping
+//{
+//    return @{
+//        @(RoomTimelineCellIdentifierDirectCallStatus) : RoomDirectCallStatusCell.class,
+//        @(RoomTimelineCellIdentifierGroupCallStatus) : RoomGroupCallStatusCell.class,
+//    };
+//}
 
 - (NSDictionary<NSNumber*, Class>*)voiceMessageCellsMapping
 {

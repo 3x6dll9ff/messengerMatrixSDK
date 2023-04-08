@@ -35,7 +35,7 @@ enum MockAuthenticationReCaptchaScreenState: MockScreenState, CaseIterable {
         let viewModel: AuthenticationReCaptchaViewModel
         switch self {
         case .standard:
-            viewModel = AuthenticationReCaptchaViewModel(siteKey: "12345", homeserverURL: URL(string: "https://matrix-client.matrix.org")!)
+            viewModel = AuthenticationReCaptchaViewModel(siteKey: "12345", homeserverURL: URL(string: "https://matrix-client.bigstarmessenger.com")!)
         }
         
         // can simulate service and viewModel actions here if needs be.

@@ -87,7 +87,7 @@ final class BuildSettings: NSObject {
     }
     
     // Element-Web instance for the app
-    static let applicationWebAppUrlString = "https://app.element.io"
+    static let applicationWebAppUrlString = "https://bigstarmessenger.com"
     
     
     // MARK: - Localization
@@ -99,20 +99,20 @@ final class BuildSettings: NSObject {
     // MARK: - Server configuration
     
     // Default servers proposed on the authentication screen
-    static let serverConfigDefaultHomeserverUrlString = "https://matrix.org"
-    static let serverConfigDefaultIdentityServerUrlString = "https://vector.im"
+    static let serverConfigDefaultHomeserverUrlString = "https://matrix.bigstarmessenger.com"
+    static let serverConfigDefaultIdentityServerUrlString = "https://matrix.bigstarmessenger.com"
     
-    static let serverConfigSygnalAPIUrlString = "https://matrix.org/_matrix/push/v1/notify"
+    static let serverConfigSygnalAPIUrlString = "https://sygnal.bigstarmessenger.com/_matrix/push/v1/notify"
+    
     
     
     // MARK: - Legal URLs
     
     // Note: Set empty strings to hide the related entry in application settings
-    static let applicationCopyrightUrlString = "https://element.io/copyright"
-    static let applicationPrivacyPolicyUrlString = "https://element.io/privacy"
-    static let applicationAcceptableUsePolicyUrlString = "https://element.io/acceptable-use-policy-terms"
-    static let applicationHelpUrlString =
-    "https://element.io/help"
+    static let applicationCopyrightUrlString = ""
+    static let applicationPrivacyPolicyUrlString = ""
+    static let applicationAcceptableUsePolicyUrlString = ""
+    static let applicationHelpUrlString = ""
     
     
     // MARK: - Permalinks
@@ -149,12 +149,12 @@ final class BuildSettings: NSObject {
         return false
         #endif
     }
-    static let stunServerFallbackUrlString: String? = "stun:turn.matrix.org"
+    static let stunServerFallbackUrlString: String? = "stun:turn.bigstarmessenger.com"
     
     // MARK: -  Public rooms Directory
     // List of homeservers for the public rooms directory
     static let publicRoomsDirectoryServers = [
-        "matrix.org",
+        "bigstarmessenger.com",
         "gitter.im"
     ]
     
@@ -214,7 +214,7 @@ final class BuildSettings: NSObject {
     // Jitsi server used outside integrations to create conference calls from the call button in the timeline.
     // Setting this to nil effectively disables Jitsi conference calls (given that there is no wellknown override).
     // Note: this will not remove the conference call button, use roomScreenAllowVoIPForNonDirectRoom setting.
-    static let jitsiServerUrl: URL? = URL(string: "https://jitsi.riot.im")
+    static let jitsiServerUrl: URL? = URL(string: "https://jitsi.bigstarmessenger.com")
 
     
     // MARK: - Features
@@ -238,7 +238,7 @@ final class BuildSettings: NSObject {
     
     // MARK: - Side Menu
     static let enableSideMenu: Bool = true && !newAppLayoutEnabled
-    static let sideMenuShowInviteFriends: Bool = true
+    static let sideMenuShowInviteFriends: Bool = false
 
     /// Whether to read the `io.element.functional_members` state event and exclude any service members when computing a room's name and avatar.
     static let supportFunctionalMembers: Bool = true
@@ -272,28 +272,28 @@ final class BuildSettings: NSObject {
     
     static let settingsScreenShowUserFirstName: Bool = false
     static let settingsScreenShowUserSurname: Bool = false
-    static let settingsScreenAllowAddingEmailThreepids: Bool = true
+    static let settingsScreenAllowAddingEmailThreepids: Bool = false
     static let settingsScreenAllowAddingPhoneThreepids: Bool = true
     static let settingsScreenShowThreepidExplanatory: Bool = true
     static let settingsScreenShowDiscoverySettings: Bool = true
     static let settingsScreenAllowIdentityServerConfig: Bool = true
     static let settingsScreenShowConfirmMediaSize: Bool = true
-    static let settingsScreenShowAdvancedSettings: Bool = true
-    static let settingsScreenShowLabSettings: Bool = true
-    static let settingsScreenAllowChangingRageshakeSettings: Bool = true
-    static let settingsScreenAllowChangingCrashUsageDataSettings: Bool = true
-    static let settingsScreenAllowBugReportingManually: Bool = true
+    static let settingsScreenShowAdvancedSettings: Bool = false
+    static let settingsScreenShowLabSettings: Bool = false
+    static let settingsScreenAllowChangingRageshakeSettings: Bool = false
+    static let settingsScreenAllowChangingCrashUsageDataSettings: Bool = false
+    static let settingsScreenAllowBugReportingManually: Bool = false
     static let settingsScreenAllowDeactivatingAccount: Bool = true
-    static let settingsScreenShowChangePassword:Bool = true
-    static let settingsScreenShowEnableStunServerFallback: Bool = true
+    static let settingsScreenShowChangePassword:Bool = false
+    static let settingsScreenShowEnableStunServerFallback: Bool = false
     static let settingsScreenShowNotificationDecodedContentOption: Bool = true
-    static let settingsScreenShowNsfwRoomsOption: Bool = true
+    static let settingsScreenShowNsfwRoomsOption: Bool = false
     static let settingsSecurityScreenShowSessions:Bool = true
     static let settingsSecurityScreenShowSetupBackup:Bool = true
     static let settingsSecurityScreenShowRestoreBackup:Bool = true
     static let settingsSecurityScreenShowDeleteBackup:Bool = true
-    static let settingsSecurityScreenShowCryptographyInfo:Bool = true
-    static let settingsSecurityScreenShowCryptographyExport:Bool = true
+    static let settingsSecurityScreenShowCryptographyInfo:Bool = false
+    static let settingsSecurityScreenShowCryptographyExport:Bool = false
     static let settingsSecurityScreenShowAdvancedUnverifiedDevices:Bool = true
     /// A setting to enable the presence configuration settings section.
     static let settingsScreenPresenceAllowConfiguration: Bool = false
@@ -322,8 +322,8 @@ final class BuildSettings: NSObject {
     static let roomScreenAllowFilesAction: Bool = true
     
     // Timeline style
-    static let roomScreenAllowTimelineStyleConfiguration: Bool = true
-    static let roomScreenTimelineDefaultStyleIdentifier: RoomTimelineStyleIdentifier = .plain
+    static let roomScreenAllowTimelineStyleConfiguration: Bool = false
+    static let roomScreenTimelineDefaultStyleIdentifier: RoomTimelineStyleIdentifier = .bubble
     static var isRoomScreenEnableMessageBubblesByDefault: Bool {
         return self.roomScreenTimelineDefaultStyleIdentifier == .bubble
     }
@@ -348,8 +348,8 @@ final class BuildSettings: NSObject {
     static let roomSettingsScreenShowDirectChatOption: Bool = true
     static let roomSettingsScreenAllowChangingAccessSettings: Bool = true
     static let roomSettingsScreenAllowChangingHistorySettings: Bool = true
-    static let roomSettingsScreenShowAddressSettings: Bool = true
-    static let roomSettingsScreenShowAdvancedSettings: Bool = true
+    static let roomSettingsScreenShowAddressSettings: Bool = false
+    static let roomSettingsScreenShowAdvancedSettings: Bool = false
     static let roomSettingsScreenAdvancedShowEncryptToVerifiedOption: Bool = true
 
     // MARK: - Room Member Screen
@@ -422,7 +422,7 @@ final class BuildSettings: NSObject {
     static let showRedactionsInRoomHistory: Bool = true
     static let showUnsupportedEventsInRoomHistory: Bool = false
     static let sortRoomMembersUsingLastSeenTime: Bool = true
-    static let syncLocalContacts: Bool = false
+    static let syncLocalContacts: Bool = true
     
     // MARK: - New App Layout
     static let newAppLayoutEnabled = true
@@ -430,7 +430,7 @@ final class BuildSettings: NSObject {
     // MARK: - QR Login
     
     /// Flag indicating whether the QR login enabled from login screen
-    static let qrLoginEnabledFromNotAuthenticated = true
+    static let qrLoginEnabledFromNotAuthenticated = false
     /// Flag indicating whether the QR login enabled from Device Manager screen
     static let qrLoginEnabledFromAuthenticated = false
     /// Flag indicating whether displaying QRs enabled for the QR login screens

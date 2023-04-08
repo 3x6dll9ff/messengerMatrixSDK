@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 class VoiceBroadcastRecorderPlainCell: SizableBaseRoomCell, RoomCellReactionsDisplayable, RoomCellReadMarkerDisplayable {
     
     private var voiceBroadcastView: UIView?
@@ -70,4 +71,5 @@ class VoiceBroadcastRecorderPlainCell: SizableBaseRoomCell, RoomCellReactionsDis
     }
 }
 
+@available(iOS 15.0, *)
 extension VoiceBroadcastRecorderPlainCell: RoomCellThreadSummaryDisplayable {}

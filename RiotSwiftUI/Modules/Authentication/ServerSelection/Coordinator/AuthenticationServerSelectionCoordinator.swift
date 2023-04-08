@@ -17,6 +17,7 @@
 import CommonKit
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AuthenticationServerSelectionCoordinatorParameters {
     let authenticationService: AuthenticationService
     /// Whether the server selection is for the login flow or registration flow.
@@ -30,6 +31,7 @@ enum AuthenticationServerSelectionCoordinatorResult {
     case dismiss
 }
 
+@available(iOS 15.0, *)
 final class AuthenticationServerSelectionCoordinator: Coordinator, Presentable {
     // MARK: - Properties
     

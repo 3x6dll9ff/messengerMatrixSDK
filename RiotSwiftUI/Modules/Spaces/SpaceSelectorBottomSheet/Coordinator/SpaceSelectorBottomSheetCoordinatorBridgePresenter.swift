@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 @objc protocol SpaceSelectorBottomSheetCoordinatorBridgePresenterDelegate {
     func spaceSelectorBottomSheetCoordinatorBridgePresenterDidCancel(_ coordinatorBridgePresenter: SpaceSelectorBottomSheetCoordinatorBridgePresenter)
     func spaceSelectorBottomSheetCoordinatorBridgePresenterDidSelectHome(_ coordinatorBridgePresenter: SpaceSelectorBottomSheetCoordinatorBridgePresenter)
@@ -27,6 +28,7 @@ import Foundation
 /// This bridge is used while waiting for global usage of coordinator pattern.
 /// It breaks the Coordinator abstraction and it has been introduced for Objective-C compatibility (mainly for integration in legacy view controllers).
 /// Each bridge should be removed once the underlying Coordinator has been integrated by another Coordinator.
+@available(iOS 15.0, *)
 @objcMembers
 final class SpaceSelectorBottomSheetCoordinatorBridgePresenter: NSObject {
     // MARK: - Properties

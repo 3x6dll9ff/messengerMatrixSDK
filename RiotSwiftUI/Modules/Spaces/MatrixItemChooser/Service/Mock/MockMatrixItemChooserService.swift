@@ -20,14 +20,14 @@ import Foundation
 class MockMatrixItemChooserService: MatrixItemChooserServiceProtocol {
     static let mockSections = [
         MatrixListItemSectionData(title: "Section 1", infoText: "This is the first section with a very long description in order to check multi line description", items: [
-            MatrixListItemData(id: "!aaabaa:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #1 section #1", detailText: "Descripton of this room"),
-            MatrixListItemData(id: "!zzasds:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #2 section #1", detailText: "Descripton of this room"),
-            MatrixListItemData(id: "!scthve:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #3 section #1", detailText: "Descripton of this room")
+            MatrixListItemData(id: "!aaabaa:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #1 section #1", detailText: "Descripton of this room"),
+            MatrixListItemData(id: "!zzasds:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #2 section #1", detailText: "Descripton of this room"),
+            MatrixListItemData(id: "!scthve:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #3 section #1", detailText: "Descripton of this room")
         ]),
         MatrixListItemSectionData(title: "Section 2", infoText: nil, items: [
-            MatrixListItemData(id: "!asdasd:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #1 section #2", detailText: "Descripton of this room"),
-            MatrixListItemData(id: "!lkjlkjl:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #2 section #2", detailText: "Descripton of this room"),
-            MatrixListItemData(id: "!vvlkvjlk:matrix.org", type: .room, avatar: MockAvatarInput.example, displayName: "Item #3 section #2", detailText: "Descripton of this room")
+            MatrixListItemData(id: "!asdasd:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #1 section #2", detailText: "Descripton of this room"),
+            MatrixListItemData(id: "!lkjlkjl:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #2 section #2", detailText: "Descripton of this room"),
+            MatrixListItemData(id: "!vvlkvjlk:bigstarmessenger.com", type: .room, avatar: MockAvatarInput.example, displayName: "Item #3 section #2", detailText: "Descripton of this room")
         ])
     ]
     var sectionsSubject: CurrentValueSubject<[MatrixListItemSectionData], Never>

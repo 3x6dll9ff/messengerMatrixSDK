@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 class VoiceBroadcastRecorderOutgoingWithPaginationTitleBubbleCell: VoiceBroadcastRecorderOutgoingWithoutSenderInfoBubbleCell {
     
     override func setupViews() {

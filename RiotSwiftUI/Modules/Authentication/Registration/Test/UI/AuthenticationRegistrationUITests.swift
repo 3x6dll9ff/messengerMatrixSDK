@@ -21,7 +21,7 @@ class AuthenticationRegistrationUITests: MockScreenTestCase {
     func testMatrixDotOrg() {
         app.goToScreenWithIdentifier(MockAuthenticationRegistrationScreenState.matrixDotOrg.title)
         
-        let state = "matrix.org"
+        let state = "bigstarmessenger.com"
         validateRegistrationFormIsVisible(for: state)
         validateSSOButtonsAreShown(for: state)
         validateFallbackButtonIsHidden(for: state)

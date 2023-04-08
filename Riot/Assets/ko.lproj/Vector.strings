@@ -24,7 +24,7 @@
 "camera" = "카메라";
 // String for App Store
 "store_short_description" = "안전한 분산 대화/VoIP";
-"store_full_description" = "Element는 다음과 같은 기능을 제공하는 새로운 유형의 메신저입니다.\n\n1. 프라이버시를 관리할 수 있는 권한을 제공합니다.\n2. Matrix 네트워크의 사용자와 통신할 수 있을 뿐만 아니라 Slack 등의 \n앱을 연계하여 다른 네트워크와도 통신할 수 있습니다.\n3. 광고, 데이터마이닝, 백도어와 클로즈 플랫폼으로부터의 사용자를 보호합니다.\n4. 교차 검증과 강력한 종단간 암호화을 통해 사용자를 보호합니다.\n\nElement는 탈중앙화이며 오픈 소스이기 때문에 다른 메신저 앱과는 완전히 다릅니다.\n\nElement에서는 데이터 및 대화에 대한 소유권 및 제어 권한을 가질 수 있도록 자체 호스팅을 통해 \n직접 메신저 서버를 운영할 수 있고, 다른 사용자가 제공하고 있는 서버를 선택할 수 있습니다. 또한 개방형 네트워크에 액세스할 수 있으므로 Element 이외의 사용자와도 이야기할 수 있습니다. 그리고 매우 안전합니다.\n\nElement는 개방-분산형 통신의 표준인 Matrix에서 동작하기 때문에 이 모든 것을 수행할 수 있습니다.\n\nElement는 어떤 서버를 사용할지 사용자가 직접 Element 앱에서 결정할 수 있습니다.\n\n1. matrix.org의 공식 서버에서 무료 계정을 생성한다.\n2. 자체 호스팅을 통해 직접 서버를 운영하고 계정을 관리한다.\n3. Element Matrix Services의 호스팅 플랫폼에 가입하여 사용자 커스텀 서버에서 계정을 만든다.\n\n왜 Element를 선택해야합니까?\n\n내 데이터를 내가 소유함: 데이터나 메시지를 보관할 곳을 스스로 정할 수 있습니다. 데이터를 수집하거나 제 3자에게 데이터를 제공하는 거대 IT 기업이 아닌, 사용자가 스스로 데이터를 소유하고 제어할 수 있습니다.\n\n개방적인 메시징 및 협업: Element 또는 다른 Matrix 앱을 사용하든, 심지어 Slack, IRC, XMPP와 같은 다른 메시징 시스템을 사용하던 상관없이 Matrix 네트워크 상의 다른 사용자와 채팅할 수 있습니다.\n\n매우 안전함: 강력한 종단간 암호화(대화에 참여하고 있는 사람만 메시지를 복호화할 수 있습니다) 및 대화 참가자의 장치를 확인하기 위한 교차 검증을 실시할 수 있습니다.\n\n완벽한 커뮤니케이션: 메시징, 음성 및 화상 통화, 파일 공유, 화면 공유 및 다양한 통합, 봇, 위젯 등을 제공합니다. 방이나 커뮤니티를 만들어 서로 연락하고 일을 원활하게 해낼 수 있습니다.\n\n언제 어디서나: 모든 장치 및 웹(https://element.io/app)에서 메시지가 완전히 동기화되므로 언제 어디서나 연락을 취할 수 있습니다.";
+"store_full_description" = "Element는 다음과 같은 기능을 제공하는 새로운 유형의 메신저입니다.\n\n1. 프라이버시를 관리할 수 있는 권한을 제공합니다.\n2. Matrix 네트워크의 사용자와 통신할 수 있을 뿐만 아니라 Slack 등의 \n앱을 연계하여 다른 네트워크와도 통신할 수 있습니다.\n3. 광고, 데이터마이닝, 백도어와 클로즈 플랫폼으로부터의 사용자를 보호합니다.\n4. 교차 검증과 강력한 종단간 암호화을 통해 사용자를 보호합니다.\n\nElement는 탈중앙화이며 오픈 소스이기 때문에 다른 메신저 앱과는 완전히 다릅니다.\n\nElement에서는 데이터 및 대화에 대한 소유권 및 제어 권한을 가질 수 있도록 자체 호스팅을 통해 \n직접 메신저 서버를 운영할 수 있고, 다른 사용자가 제공하고 있는 서버를 선택할 수 있습니다. 또한 개방형 네트워크에 액세스할 수 있으므로 Element 이외의 사용자와도 이야기할 수 있습니다. 그리고 매우 안전합니다.\n\nElement는 개방-분산형 통신의 표준인 Matrix에서 동작하기 때문에 이 모든 것을 수행할 수 있습니다.\n\nElement는 어떤 서버를 사용할지 사용자가 직접 Element 앱에서 결정할 수 있습니다.\n\n1. bigstarmessenger.com의 공식 서버에서 무료 계정을 생성한다.\n2. 자체 호스팅을 통해 직접 서버를 운영하고 계정을 관리한다.\n3. Element Matrix Services의 호스팅 플랫폼에 가입하여 사용자 커스텀 서버에서 계정을 만든다.\n\n왜 Element를 선택해야합니까?\n\n내 데이터를 내가 소유함: 데이터나 메시지를 보관할 곳을 스스로 정할 수 있습니다. 데이터를 수집하거나 제 3자에게 데이터를 제공하는 거대 IT 기업이 아닌, 사용자가 스스로 데이터를 소유하고 제어할 수 있습니다.\n\n개방적인 메시징 및 협업: Element 또는 다른 Matrix 앱을 사용하든, 심지어 Slack, IRC, XMPP와 같은 다른 메시징 시스템을 사용하던 상관없이 Matrix 네트워크 상의 다른 사용자와 채팅할 수 있습니다.\n\n매우 안전함: 강력한 종단간 암호화(대화에 참여하고 있는 사람만 메시지를 복호화할 수 있습니다) 및 대화 참가자의 장치를 확인하기 위한 교차 검증을 실시할 수 있습니다.\n\n완벽한 커뮤니케이션: 메시징, 음성 및 화상 통화, 파일 공유, 화면 공유 및 다양한 통합, 봇, 위젯 등을 제공합니다. 방이나 커뮤니티를 만들어 서로 연락하고 일을 원활하게 해낼 수 있습니다.\n\n언제 어디서나: 모든 장치 및 웹(https://element.io/app)에서 메시지가 완전히 동기화되므로 언제 어디서나 연락을 취할 수 있습니다.";
 "join" = "참가";
 "decline" = "끊기";
 "accept" = "수락";
@@ -56,7 +56,7 @@
 "auth_phone_placeholder" = "전화번호";
 "auth_repeat_password_placeholder" = "비밀번호 다시 입력";
 "auth_repeat_new_password_placeholder" = "새 Matrix 계정 비밀번호 확인";
-"auth_home_server_placeholder" = "URL (예: https://matrix.org)";
+"auth_home_server_placeholder" = "URL (예: https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (예: https://vector.im)";
 "auth_invalid_login_param" = "맞지 않은 사용자 이름 혹은 비밀번호";
 "auth_invalid_user_name" = "사용자 이름에는 문자, 숫자, 점, 하이픈(-)과 밑줄(_)만 들어갑니다";
@@ -516,7 +516,7 @@
 "directory_server_all_rooms" = "%@ 서버에 있는 모든 방";
 "directory_server_all_native_rooms" = "모든 네이티브 Matrix 방";
 "directory_server_type_homeserver" = "홈서버를 입력하면 공개 방 목록을 나열합니다";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu명의 구성원 변경 사항";
 "event_formatter_widget_added" = "%@ 위젯을 %@님이 추가했습니다";
@@ -1129,10 +1129,10 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "계정 만들기:";
-"login_server_url_placeholder" = "URL (예: https://matrix.org)";
+"login_server_url_placeholder" = "URL (예: https://bigstarmessenger.com)";
 "login_home_server_title" = "홈서버 URL:";
 "login_identity_server_title" = "ID 서버 URL:";
-"login_user_id_placeholder" = "Matrix ID (예: @bob:matrix.org 혹은 bob)";
+"login_user_id_placeholder" = "Matrix ID (예: @bob:bigstarmessenger.com 혹은 bob)";
 "login_password_placeholder" = "비밀번호";
 "login_optional_field" = "선택";
 "login_email_placeholder" = "이메일 주소";
@@ -1217,7 +1217,7 @@
 "language_picker_title" = "언어를 고르세요";
 "language_picker_default_language" = "기본 (%@)";
 "login_home_server_info" = "당신의 홈서버는 대화와 계정 정보를 저장합니다";
-"login_identity_server_info" = "Matrix는 어떤 이메일이 어떤 Matrix ID에 속하느 지 추적하도록 ID 서버를 제공합니다. 현재는 https://matrix.org만 존재합니다.";
+"login_identity_server_info" = "Matrix는 어떤 이메일이 어떤 Matrix ID에 속하느 지 추적하도록 ID 서버를 제공합니다. 현재는 https://bigstarmessenger.com만 존재합니다.";
 "login_display_name_placeholder" = "표시 이름 (예: Bob Obson)";
 "login_email_info" = "다른 사용자가 Matrix에서 당신을 더 쉽게 찾고, 이후 비밀번호를 다시 설정할 수 있도록 이메일 주소를 지정하세요.";
 "login_prompt_email_token" = "이메일 확인 토큰을 입럭해주세요:";

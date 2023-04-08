@@ -385,7 +385,7 @@
 "directory_server_all_rooms" = "Alle kamers op server %@";
 "directory_server_all_native_rooms" = "Alle lokale Matrix-kamers";
 "directory_server_type_homeserver" = "Voer een server in om de publieke kamers ervan weer te geven";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Others
 "or" = "of";
 "you" = "Jij";
@@ -432,7 +432,7 @@
 // Events formatter
 "event_formatter_member_updates" = "%tu lidmaatschapsaanpassingen";
 "bug_report_send" = "Versturen";
-"auth_home_server_placeholder" = "URL (bv. https://matrix.org)";
+"auth_home_server_placeholder" = "URL (bv. https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (bv. https://vector.im)";
 "room_ongoing_conference_call_with_close" = "Er is een vergadergesprek gaande. Neem deel met %@ of %@. %@ het.";
 "room_ongoing_conference_call_close" = "Sluiten";
@@ -561,7 +561,7 @@
 "room_message_reply_to_short_placeholder" = "Stuur een antwoord…";
 // String for App Store
 "store_short_description" = "Veilig en gedecentraliseerd chatten en bellen";
-"store_full_description" = "Element is een nieuw type messenger en samenwerkings app die:\n\n1. Jou de controle geeft om je privacy te behouden\n2. Jou laat communiceren met iedereen in het Matrix-netwerk, en zelfs daarbuiten door integratie met apps zoals Slack\n3. Jou beschermt tegen reclame, datamining, achterdeurtjes en ommuurde netwerken\n4. Jou beveiligt door eind-tot-eind versleuteling, met kruislings ondertekenen om anderen te verifiëren\n\nElement is compleet anders dan andere messengers en samenwerkings-apps, omdat het gedecentraliseerd en open source is.\n\nMet Element kan je zelf hosten - of een host kiezen - zodat je privacy, eigendom en controle hebt over je gegevens en gesprekken. Het geeft je toegang tot een open netwerk; je zit dus niet vast aan het praten met alleen andere Element-personen. En het is zeer veilig.\n\nElement is hiertoe in staat omdat het werkt op basis van Matrix - de standaard voor open, gedecentraliseerde communicatie. \n\nElement geeft je de controle door je te laten kiezen wie jouw gesprekken host. Vanuit de Element app kan je kiezen om op verschillende manieren te hosten:\n\n1. Neem een gratis account op de publieke server matrix.org\n2. Host het zelf, jouw account door draait op je eigen server\n3. Laat ons het hosten, meld je aan voor een account op een aangepaste server bij het Element Matrix Services hosting platform\n\nWaarom kies je voor Element?\n\nEIGENAAR VAN JE GEGEVENS: Jij bepaalt waar je gegevens en berichten worden bewaard. Jij bent de eigenaar en hebt de controle, niet een of andere MEGACORP die je gegevens mijnt of toegang geeft aan derden.\n\nOPEN MESSAGING EN SAMENWERKING: Jij kunt met iedereen in het Matrix-netwerk chatten, of ze nu Element of een andere Matrix-app gebruiken, en zelfs als ze een ander messaging-systeem gebruiken zoals Slack, IRC of XMPP.\n\nSUPER-VEILIG: Echte eind-tot-eind versleuteling (alleen degenen in de conversatie kunnen berichten ontsleutelen), en kruislings ondertekenen om de apparaten van gespreksdeelnemers te verifiëren.\n\nCOMPLETE COMMUNICATIE: Berichten, spraak- en videogesprekken, bestandsdeling, schermdeling en een heleboel integraties, bots en widgets. Bouw kamers, Spaces, blijf in contact en krijg het gedaan.\n\nOVERAL WAAR U BENT: Blijf in contact waar je ook bent met volledig gesynchroniseerde berichtgeschiedenis op al je apparaten en op het web op https://element.io/app.";
+"store_full_description" = "Element is een nieuw type messenger en samenwerkings app die:\n\n1. Jou de controle geeft om je privacy te behouden\n2. Jou laat communiceren met iedereen in het Matrix-netwerk, en zelfs daarbuiten door integratie met apps zoals Slack\n3. Jou beschermt tegen reclame, datamining, achterdeurtjes en ommuurde netwerken\n4. Jou beveiligt door eind-tot-eind versleuteling, met kruislings ondertekenen om anderen te verifiëren\n\nElement is compleet anders dan andere messengers en samenwerkings-apps, omdat het gedecentraliseerd en open source is.\n\nMet Element kan je zelf hosten - of een host kiezen - zodat je privacy, eigendom en controle hebt over je gegevens en gesprekken. Het geeft je toegang tot een open netwerk; je zit dus niet vast aan het praten met alleen andere Element-personen. En het is zeer veilig.\n\nElement is hiertoe in staat omdat het werkt op basis van Matrix - de standaard voor open, gedecentraliseerde communicatie. \n\nElement geeft je de controle door je te laten kiezen wie jouw gesprekken host. Vanuit de Element app kan je kiezen om op verschillende manieren te hosten:\n\n1. Neem een gratis account op de publieke server bigstarmessenger.com\n2. Host het zelf, jouw account door draait op je eigen server\n3. Laat ons het hosten, meld je aan voor een account op een aangepaste server bij het Element Matrix Services hosting platform\n\nWaarom kies je voor Element?\n\nEIGENAAR VAN JE GEGEVENS: Jij bepaalt waar je gegevens en berichten worden bewaard. Jij bent de eigenaar en hebt de controle, niet een of andere MEGACORP die je gegevens mijnt of toegang geeft aan derden.\n\nOPEN MESSAGING EN SAMENWERKING: Jij kunt met iedereen in het Matrix-netwerk chatten, of ze nu Element of een andere Matrix-app gebruiken, en zelfs als ze een ander messaging-systeem gebruiken zoals Slack, IRC of XMPP.\n\nSUPER-VEILIG: Echte eind-tot-eind versleuteling (alleen degenen in de conversatie kunnen berichten ontsleutelen), en kruislings ondertekenen om de apparaten van gespreksdeelnemers te verifiëren.\n\nCOMPLETE COMMUNICATIE: Berichten, spraak- en videogesprekken, bestandsdeling, schermdeling en een heleboel integraties, bots en widgets. Bouw kamers, Spaces, blijf in contact en krijg het gedaan.\n\nOVERAL WAAR U BENT: Blijf in contact waar je ook bent met volledig gesynchroniseerde berichtgeschiedenis op al je apparaten en op het web op https://element.io/app.";
 "auth_login_single_sign_on" = "Aanmelden met enkele aanmelding";
 "auth_accept_policies" = "Lees het beleid van deze homeserver en kies om te aanvaarden:";
 "auth_autodiscover_invalid_response" = "Ongeldig server-ontdekkings-antwoord";
@@ -922,7 +922,7 @@
 
 "room_info_list_one_member" = "1 persoon";
 "room_info_list_several_members" = "%@ personen";
-"create_room_placeholder_address" = "#testkamer:matrix.org";
+"create_room_placeholder_address" = "#testkamer:bigstarmessenger.com";
 "create_room_section_header_address" = "ADRES";
 "create_room_show_in_directory" = "Kamer weergeven in gids";
 "create_room_section_footer_type" = "Personen kunnen alleen met een uitnodiging deelnemen aan een privékamer.";
@@ -1777,12 +1777,12 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "Account aanmaken:";
-"login_server_url_placeholder" = "URL (bv. https://matrix.org)";
+"login_server_url_placeholder" = "URL (bv. https://bigstarmessenger.com)";
 "login_home_server_title" = "Server-URL:";
 "login_home_server_info" = "Je server slaat al je gespreks- en accountgegevens op";
 "login_identity_server_title" = "Identiteitsserver-URL:";
-"login_identity_server_info" = "Matrix verstrekt identiteitsservers om te achterhalen welke e-mailadressen enz. bij welke Matrix-ID’s horen. Tot nu toe bestaat alleen https://matrix.org.";
-"login_user_id_placeholder" = "Matrix-ID (bv. @jan:matrix.org of jan)";
+"login_identity_server_info" = "Matrix verstrekt identiteitsservers om te achterhalen welke e-mailadressen enz. bij welke Matrix-ID’s horen. Tot nu toe bestaat alleen https://bigstarmessenger.com.";
+"login_user_id_placeholder" = "Matrix-ID (bv. @jan:bigstarmessenger.com of jan)";
 "login_password_placeholder" = "Wachtwoord";
 "login_optional_field" = "optioneel";
 "login_display_name_placeholder" = "Weergavenaam (bv. Jan Janssens)";
@@ -2099,7 +2099,7 @@
 
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "Ik wil graag praten via Matrix. Bezoek de website https://matrix.org voor meer informatie.";
+"invitation_message" = "Ik wil graag praten via Matrix. Bezoek de website https://bigstarmessenger.com voor meer informatie.";
 // Settings screen 
 "settings_title_config" = "Configuratie";
 "settings_title_notifications" = "Meldingen";

@@ -214,6 +214,8 @@ final class SideMenuCoordinator: NSObject, SideMenuCoordinatorType {
         self.sideMenuNavigationViewController.present(safariViewController, animated: true, completion: nil)
     }
     
+
+    
     private func showExploreRooms(spaceId: String, session: MXSession) {
         let exploreRoomCoordinator = ExploreRoomCoordinator(session: session, spaceId: spaceId)
         exploreRoomCoordinator.delegate = self
@@ -437,6 +439,7 @@ extension SideMenuCoordinator: SpaceListCoordinatorDelegate {
 }
 
 // MARK: - SpaceMenuPresenterDelegate
+@available(iOS 15.0, *)
 extension SideMenuCoordinator: SpaceMenuPresenterDelegate {
     func spaceMenuPresenter(_ presenter: SpaceMenuPresenter, didCompleteWith action: SpaceMenuPresenter.Actions, forSpaceWithId spaceId: String, with session: MXSession) {
         presenter.dismiss(animated: false) {

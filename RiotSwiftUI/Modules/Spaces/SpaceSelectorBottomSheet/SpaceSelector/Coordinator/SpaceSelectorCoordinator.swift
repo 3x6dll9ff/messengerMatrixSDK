@@ -37,6 +37,7 @@ struct SpaceSelectorCoordinatorParameters {
     }
 }
 
+@available(iOS 15.0, *)
 final class SpaceSelectorCoordinator: Coordinator, Presentable {
     // MARK: - Properties
     

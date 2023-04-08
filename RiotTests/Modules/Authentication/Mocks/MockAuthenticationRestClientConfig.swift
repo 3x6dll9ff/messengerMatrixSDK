@@ -19,8 +19,8 @@ import Foundation
 /// Represents a homeserver configuration used for the mock authentication client.
 extension MockAuthenticationRestClient {
     enum Config: String {
-        /// A homeserver that mimics matrix.org with both passwords and SSO.
-        /// Create the client using https://matrix.org for this configuration.
+        /// A homeserver that mimics bigstarmessenger.com with both passwords and SSO.
+        /// Create the client using https://bigstarmessenger.com for this configuration.
         case matrix
         
         /// A homeserver that supports login and registration using a password.
@@ -43,7 +43,7 @@ extension MockAuthenticationRestClient {
         
         init(url: URL) {
             switch url.absoluteString {
-            case "https://matrix.org", "https://matrix-client.matrix.org":
+            case "https://bigstarmessenger.com", "https://matrix-client.bigstarmessenger.com":
                 self = .matrix
             case "https://example.com", "https://matrix.example.com":
                 self = .basic
@@ -60,7 +60,7 @@ extension MockAuthenticationRestClient {
         var baseURL: String {
             switch self {
             case .matrix:
-                return "matrix.org"
+                return "bigstarmessenger.com"
             case .basic:
                 return "example.com"
             case .loginOnly:

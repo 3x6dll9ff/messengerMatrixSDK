@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 class VoiceBroadcastRecorderOutgoingWithoutSenderInfoBubbleCell: VoiceBroadcastRecorderBubbleCell, BubbleOutgoingRoomCellProtocol {
         
     override func setupViews() {

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KS5-Uc-kth">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KS5-Uc-kth">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,26 +11,26 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="KS5-Uc-kth" customClass="KeyVerificationSelfVerifyStartViewController" customModule="Riot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aCd-C7-Sog">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcA-LK-bqZ">
-                                <rect key="frame" x="0.0" y="254" width="375" height="179"/>
+                                <rect key="frame" x="0.0" y="218" width="600" height="164.33333333333337"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For extra security, verify @user:matrix.org by checking a one-time code on both your devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ii0-Vq-vuo">
-                                        <rect key="frame" x="20" y="10" width="335" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For extra security, verify @user:bigstarmessenger.com by checking a one-time code on both your devices." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ii0-Vq-vuo">
+                                        <rect key="frame" x="20" y="10" width="560" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for User…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxw-wa-UO3">
-                                        <rect key="frame" x="20" y="78" width="335" height="20.5"/>
+                                        <rect key="frame" x="20" y="77.666666666666686" width="560" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UA-CN-Osv">
-                                        <rect key="frame" x="20" y="66" width="335" height="44"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UA-CN-Osv">
+                                        <rect key="frame" x="20" y="66" width="560" height="44"/>
                                         <accessibility key="accessibilityConfiguration" identifier="AuthenticationVCLoginButton"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3X9-cq-oMn"/>
@@ -51,7 +47,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To be secure, do this in person or use another way to communicate." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u5-8O-e7v">
-                                        <rect key="frame" x="20" y="130" width="335" height="29"/>
+                                        <rect key="frame" x="20" y="130" width="560" height="14.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -78,13 +74,13 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="dcL-J3-zWj"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="RcA-LK-bqZ" firstAttribute="leading" secondItem="dcL-J3-zWj" secondAttribute="leading" id="6ju-83-vBd"/>
                             <constraint firstItem="RcA-LK-bqZ" firstAttribute="centerY" secondItem="dcL-J3-zWj" secondAttribute="centerY" id="PQc-Oc-xHj"/>
                             <constraint firstItem="RcA-LK-bqZ" firstAttribute="trailing" secondItem="dcL-J3-zWj" secondAttribute="trailing" id="Y9k-wq-avP"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="dcL-J3-zWj"/>
                     </view>
                     <connections>
                         <outlet property="additionalInformationLabel" destination="9u5-8O-e7v" id="yOX-2s-CJA"/>

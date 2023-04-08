@@ -19,9 +19,9 @@ import Foundation
 
 class MockTemplateRoomListService: TemplateRoomListServiceProtocol {
     static let mockRooms = [
-        TemplateRoomListRoom(id: "!aaabaa:matrix.org", avatar: MockAvatarInput.example, displayName: "Matrix Discussion"),
-        TemplateRoomListRoom(id: "!zzasds:matrix.org", avatar: MockAvatarInput.example, displayName: "Element Mobile"),
-        TemplateRoomListRoom(id: "!scthve:matrix.org", avatar: MockAvatarInput.example, displayName: "Alice Personal")
+        TemplateRoomListRoom(id: "!aaabaa:bigstarmessenger.com", avatar: MockAvatarInput.example, displayName: "Matrix Discussion"),
+        TemplateRoomListRoom(id: "!zzasds:bigstarmessenger.com", avatar: MockAvatarInput.example, displayName: "Element Mobile"),
+        TemplateRoomListRoom(id: "!scthve:bigstarmessenger.com", avatar: MockAvatarInput.example, displayName: "Alice Personal")
     ]
     var roomsSubject: CurrentValueSubject<[TemplateRoomListRoom], Never>
 

@@ -19,7 +19,7 @@ import XCTest
 @testable import Element
 
 class RegistrationTests: XCTestCase {
-    /// Makes an authentication session that mimics the matrix.org flow.
+    /// Makes an authentication session that mimics the bigstarmessenger.com flow.
     func makeSession() -> MXAuthenticationSession {
         let flow = MXLoginFlow()
         flow.stages = [kMXLoginFlowTypeRecaptcha, kMXLoginFlowTypeTerms, kMXLoginFlowTypeEmailIdentity]

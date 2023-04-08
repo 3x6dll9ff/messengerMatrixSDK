@@ -29,7 +29,6 @@ final class LaunchLoadingView: UIView, NibLoadable, Themable {
     
     // MARK: - Properties
     
-    @IBOutlet private weak var animationView: ElementView!
     @IBOutlet private weak var progressContainer: UIStackView!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var statusLabel: UILabel!
@@ -52,9 +51,7 @@ final class LaunchLoadingView: UIView, NibLoadable, Themable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let animationTimeline = Timeline_1(view: self.animationView, duration: LaunchAnimation.duration, repeatCount: LaunchAnimation.repeatCount)
-        animationTimeline.play()
-        self.animationTimeline = animationTimeline
+     
         
         progressContainer.isHidden = true
     }
@@ -63,7 +60,6 @@ final class LaunchLoadingView: UIView, NibLoadable, Themable {
     
     func update(theme: Theme) {
         self.backgroundColor = theme.backgroundColor
-        self.animationView.backgroundColor = theme.backgroundColor
     }
 }
 

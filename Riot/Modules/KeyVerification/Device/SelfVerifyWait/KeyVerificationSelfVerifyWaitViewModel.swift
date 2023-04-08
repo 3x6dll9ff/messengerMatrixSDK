@@ -18,6 +18,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 final class KeyVerificationSelfVerifyWaitViewModel: KeyVerificationSelfVerifyWaitViewModelType {
     
     // MARK: - Properties

@@ -17,6 +17,7 @@
 import CommonKit
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AuthenticationSoftLogoutCoordinatorParameters {
     let navigationRouter: NavigationRouterType
     let authenticationService: AuthenticationService
@@ -49,6 +50,7 @@ enum AuthenticationSoftLogoutCoordinatorResult: CustomStringConvertible {
     }
 }
 
+@available(iOS 15.0, *)
 final class AuthenticationSoftLogoutCoordinator: Coordinator, Presentable {
     // MARK: - Properties
     

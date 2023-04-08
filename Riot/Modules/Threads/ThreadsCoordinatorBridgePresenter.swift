@@ -18,6 +18,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 @objc protocol ThreadsCoordinatorBridgePresenterDelegate {
     func threadsCoordinatorBridgePresenterDelegateDidComplete(_ coordinatorBridgePresenter: ThreadsCoordinatorBridgePresenter)
     func threadsCoordinatorBridgePresenterDelegateDidSelect(_ coordinatorBridgePresenter: ThreadsCoordinatorBridgePresenter,
@@ -30,6 +31,7 @@ import Foundation
 /// This bridge is used while waiting for global usage of coordinator pattern.
 /// **WARNING**: This class breaks the Coordinator abstraction and it has been introduced for **Objective-C compatibility only** (mainly for integration in legacy view controllers). Each bridge should be removed
 /// once the underlying Coordinator has been integrated by another Coordinator.
+@available(iOS 15.0, *)
 @objcMembers
 final class ThreadsCoordinatorBridgePresenter: NSObject {
     
@@ -139,6 +141,7 @@ final class ThreadsCoordinatorBridgePresenter: NSObject {
 }
 
 // MARK: - ThreadsCoordinatorDelegate
+@available(iOS 15.0, *)
 extension ThreadsCoordinatorBridgePresenter: ThreadsCoordinatorDelegate {
     
     func threadsCoordinatorDidComplete(_ coordinator: ThreadsCoordinatorProtocol) {

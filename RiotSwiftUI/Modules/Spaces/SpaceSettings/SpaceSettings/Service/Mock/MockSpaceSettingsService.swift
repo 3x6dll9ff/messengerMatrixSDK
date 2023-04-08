@@ -27,7 +27,7 @@ class MockSpaceSettingsService: SpaceSettingsServiceProtocol {
     private(set) var showPostProcessAlert: CurrentValueSubject<Bool, Never>
     private(set) var addressValidationSubject: CurrentValueSubject<SpaceCreationSettingsAddressValidationStatus, Never>
 
-    init(spaceId: String = "!\(UUID().uuidString):matrix.org",
+    init(spaceId: String = "!\(UUID().uuidString):bigstarmessenger.com",
          roomProperties: SpaceSettingsRoomProperties? = nil,
          displayName: String? = nil,
          isLoading: Bool = false,

@@ -32,6 +32,7 @@ class SplitViewCoordinatorParameters {
     }
 }
 
+@available(iOS 15.0, *)
 final class SplitViewCoordinator: NSObject, SplitViewCoordinatorType {
     
     // MARK: - Constants
@@ -289,6 +290,7 @@ final class SplitViewCoordinator: NSObject, SplitViewCoordinatorType {
 }
 
 // MARK: - UISplitViewControllerDelegate
+@available(iOS 15.0, *)
 extension SplitViewCoordinator: UISplitViewControllerDelegate {
     
     /// Provide the new secondary view controller for the split view interface.
@@ -347,6 +349,7 @@ extension SplitViewCoordinator: UISplitViewControllerDelegate {
 }
 
 // MARK: - TabBarCoordinatorDelegate
+@available(iOS 15.0, *)
 extension SplitViewCoordinator: SplitViewMasterCoordinatorDelegate {
     func splitViewMasterCoordinatorDidCompleteAuthentication(_ coordinator: SplitViewMasterCoordinatorProtocol) {
         self.delegate?.splitViewCoordinatorDidCompleteAuthentication(self)
@@ -354,6 +357,7 @@ extension SplitViewCoordinator: SplitViewMasterCoordinatorDelegate {
 }
 
 // MARK: - SplitViewMasterPresentableDelegate
+@available(iOS 15.0, *)
 extension SplitViewCoordinator: SplitViewMasterPresentableDelegate {
     var detailModules: [Presentable] {
         return self.detailNavigationRouter?.modules ?? []

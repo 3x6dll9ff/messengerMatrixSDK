@@ -18,7 +18,7 @@ import Combine
 import Foundation
 
 class MockRoomUpgradeService: RoomUpgradeServiceProtocol {
-    var currentRoomId = "!sfdlksjdflkfjds:matrix.org"
+    var currentRoomId = "!sfdlksjdflkfjds:bigstarmessenger.com"
     
     var errorSubject: CurrentValueSubject<Error?, Never>
     var upgradingSubject: CurrentValueSubject<Bool, Never>

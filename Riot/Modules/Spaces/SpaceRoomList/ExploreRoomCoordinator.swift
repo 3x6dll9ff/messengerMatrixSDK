@@ -368,6 +368,7 @@ extension ExploreRoomCoordinator: UIAdaptivePresentationControllerDelegate {
 }
 
 // MARK: - RoomViewControllerDelegate
+@available(iOS 15.0, *)
 extension ExploreRoomCoordinator: RoomViewControllerDelegate {
     func roomViewControllerShowRoomDetails(_ roomViewController: RoomViewController) {
         // TODO:

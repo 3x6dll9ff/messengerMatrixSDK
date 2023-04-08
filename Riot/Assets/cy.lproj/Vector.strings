@@ -1,6 +1,6 @@
 // String for App Store
 "store_short_description" = "Sgwrs/VoIP datgonoledig a diogel";
-"store_full_description" = "Cyfathrebu, eich ffordd eich hyn.\n\nAp sgwrsio, o dan eich rheolaeth ac yn hollol hyblyg. Mae Element yn gadael ichi gyfathrebu'r ffordd rydych chi ei eisiau. Wedi'i wneud ar gyfer [matrix] - y safon ar gyfer cyfathrebu agored, datganoledig.\n\nSicrhewch gyfrif matrix.org am ddim, mynnwch eich gweinydd eich hun yn https://ems.element.io, neu defnyddiwch weinydd Matrix arall.\n\nPam dewis Element?\n\nCYFATHREBU LLAWN: Adeiladwch ystafelloedd o amgylch eich timau, eich ffrindiau, eich cymuned - sut bynnag yr ydych chi'n hoffi! Sgwrsiwch, rhannwch ffeiliau, ychwanegwch teclynnau a gwnewch galwadau llais a fideo - i gyd yn rhad ac am ddim.\n\nINTEGREIDDIAU GRYMUS: Defnyddiwch Element gyda'r offer rydych chi'n eu hadnabod ac yn eu caru. Gyda Element gallwch hyd yn oed sgwrsio â defnyddwyr a grwpiau ar apiau sgwrsio eraill.\n\nPREIFAT A DIOGEL: Cadwch eich sgyrsiau yn gyfrinachol. Mae amgryptio o'r dechrau i'r diwedd o'r radd flaenaf yn sicrhau bod cyfathrebu preifat yn aros yn breifat.\n\nAGORED, NID YN GAËDIG: Ffynhonnell agor, ac wedi'i adeiladu ar Matrix. ––Byddwch yn berchen ar eich data eich hun trwy gynnal eich gweinydd eich hun, neu ddewis un rydych chi'n ymddiried ynddo.\n\nBOB MAN YDYCH CHI: Cadwch mewn cysylltiad ble bynnag yr ydych â hanes negeseuon wedi'i gydamseru'n llawn ar draws eich holl ddyfeisiau ac ar-lein yn https://app.element.io.";
+"store_full_description" = "Cyfathrebu, eich ffordd eich hyn.\n\nAp sgwrsio, o dan eich rheolaeth ac yn hollol hyblyg. Mae Element yn gadael ichi gyfathrebu'r ffordd rydych chi ei eisiau. Wedi'i wneud ar gyfer [matrix] - y safon ar gyfer cyfathrebu agored, datganoledig.\n\nSicrhewch gyfrif bigstarmessenger.com am ddim, mynnwch eich gweinydd eich hun yn https://ems.element.io, neu defnyddiwch weinydd Matrix arall.\n\nPam dewis Element?\n\nCYFATHREBU LLAWN: Adeiladwch ystafelloedd o amgylch eich timau, eich ffrindiau, eich cymuned - sut bynnag yr ydych chi'n hoffi! Sgwrsiwch, rhannwch ffeiliau, ychwanegwch teclynnau a gwnewch galwadau llais a fideo - i gyd yn rhad ac am ddim.\n\nINTEGREIDDIAU GRYMUS: Defnyddiwch Element gyda'r offer rydych chi'n eu hadnabod ac yn eu caru. Gyda Element gallwch hyd yn oed sgwrsio â defnyddwyr a grwpiau ar apiau sgwrsio eraill.\n\nPREIFAT A DIOGEL: Cadwch eich sgyrsiau yn gyfrinachol. Mae amgryptio o'r dechrau i'r diwedd o'r radd flaenaf yn sicrhau bod cyfathrebu preifat yn aros yn breifat.\n\nAGORED, NID YN GAËDIG: Ffynhonnell agor, ac wedi'i adeiladu ar Matrix. ––Byddwch yn berchen ar eich data eich hun trwy gynnal eich gweinydd eich hun, neu ddewis un rydych chi'n ymddiried ynddo.\n\nBOB MAN YDYCH CHI: Cadwch mewn cysylltiad ble bynnag yr ydych â hanes negeseuon wedi'i gydamseru'n llawn ar draws eich holl ddyfeisiau ac ar-lein yn https://app.element.io.";
 // Titles
 "title_home" = "Hafan";
 "title_favourites" = "Ffefrynnau";
@@ -56,7 +56,7 @@
 "auth_phone_placeholder" = "Rhif ffôn";
 "auth_repeat_password_placeholder" = "Cyfrinair eto";
 "auth_repeat_new_password_placeholder" = "Cadarnhewch eich cyfrinair";
-"auth_home_server_placeholder" = "URL (e.e. https://matrix.org)";
+"auth_home_server_placeholder" = "URL (e.e. https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (e.e. https://vector.im)";
 "auth_invalid_login_param" = "Enw defnyddiwr a/neu cyfrinair anghywir";
 "auth_invalid_user_name" = "Gall enwau defnyddwyr ond cynnwys llythrennau, rhifau, atalnodau-llawn, cysylltnodau a thanlinellau";
@@ -582,7 +582,7 @@
 "directory_server_all_rooms" = "Pob ystafell ar weinydd %@";
 "directory_server_all_native_rooms" = "Pob ystafell Matrix frodorol";
 "directory_server_type_homeserver" = "Teipiwch hafanweinydd i restru ystafelloedd cyhoeddus o";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu newidiadau aelodaeth";
 "event_formatter_widget_added" = "Ychwanegwyd teclyn %@ gan %@";
@@ -1011,12 +1011,12 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "Creu cyfrif:";
-"login_server_url_placeholder" = "URL (e.e. https://matrix.org)";
+"login_server_url_placeholder" = "URL (e.e. https://bigstarmessenger.com)";
 "login_home_server_title" = "URL Hafanweinydd:";
 "login_home_server_info" = "Mae'ch hafanweinydd yn cadw'ch holl sgyrsiau a gwybodaeth cyfrif";
 "login_identity_server_title" = "URL Gweinydd Adnabod:";
-"login_identity_server_info" = "Mae Matrix yn darparu gweinyddwyr adnabod i olrhain pa e-byst ac ati sy'n perthyn i IDau Matrix. Dim ond https://matrix.org sy'n bodoli ar hyn o bryd.";
-"login_user_id_placeholder" = "ID Matrix (e.g. @bob:matrix.org neu bob)";
+"login_identity_server_info" = "Mae Matrix yn darparu gweinyddwyr adnabod i olrhain pa e-byst ac ati sy'n perthyn i IDau Matrix. Dim ond https://bigstarmessenger.com sy'n bodoli ar hyn o bryd.";
+"login_user_id_placeholder" = "ID Matrix (e.g. @bob:bigstarmessenger.com neu bob)";
 "login_password_placeholder" = "Cyfrinair";
 "login_optional_field" = "dewisol";
 "login_display_name_placeholder" = "Enw arddangos (e.e. Jac y Jwc)";
@@ -1323,7 +1323,7 @@
 "login_error_must_start_http" = "Rhaid i URL ddechrau â http[s]://";
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "Hoffwn sgwrsio â chi gyda Matrix. Os gwelwch yn dda, ewch i'r wefan https://matrix.org i gael mwy o wybodaeth.";
+"invitation_message" = "Hoffwn sgwrsio â chi gyda Matrix. Os gwelwch yn dda, ewch i'r wefan https://bigstarmessenger.com i gael mwy o wybodaeth.";
 // Settings screen 
 "settings_title_config" = "Gosodiadau";
 "settings_title_notifications" = "Hysbysebiadau";

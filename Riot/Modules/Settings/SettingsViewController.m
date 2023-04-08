@@ -507,35 +507,35 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         [tmpSections addObject:sectionIntegrations];
     }
     
-    Section *sectionUserInterface = [Section sectionWithTag:SECTION_TAG_USER_INTERFACE];
-    sectionUserInterface.headerTitle = [VectorL10n settingsUserInterface];
-    
-    [sectionUserInterface addRowWithTag:USER_INTERFACE_LANGUAGE_INDEX];
-    [sectionUserInterface addRowWithTag:USER_INTERFACE_THEME_INDEX];
-        
-    [tmpSections addObject:sectionUserInterface];
-
-    Section *sectionTimeline = [Section sectionWithTag:SECTION_TAG_TIMELINE];
-    sectionTimeline.headerTitle = VectorL10n.settingsTimeline;
-
-    if (BuildSettings.roomScreenAllowTimelineStyleConfiguration)
-    {
-        [sectionTimeline addRowWithTag:TIMELINE_STYLE_INDEX];
-    }
-    [sectionTimeline addRowWithTag:TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX];
-    [sectionTimeline addRowWithTag:TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX];
-
-    [tmpSections addObject:sectionTimeline];
-    
-    if(BuildSettings.settingsScreenPresenceAllowConfiguration)
-    {
-        Section *sectionPresence = [Section sectionWithTag:SECTION_TAG_PRESENCE];
-        [sectionPresence addRowWithTag:PRESENCE_OFFLINE_MODE];
-        sectionPresence.headerTitle = VectorL10n.settingsPresence;
-        sectionPresence.footerTitle = VectorL10n.settingsPresenceOfflineModeDescription;
-
-        [tmpSections addObject:sectionPresence];
-    }
+//    Section *sectionUserInterface = [Section sectionWithTag:SECTION_TAG_USER_INTERFACE];
+//    sectionUserInterface.headerTitle = [VectorL10n settingsUserInterface];
+//    
+//    [sectionUserInterface addRowWithTag:USER_INTERFACE_LANGUAGE_INDEX];
+//    [sectionUserInterface addRowWithTag:USER_INTERFACE_THEME_INDEX];
+//        
+//    [tmpSections addObject:sectionUserInterface];
+//
+//    Section *sectionTimeline = [Section sectionWithTag:SECTION_TAG_TIMELINE];
+//    sectionTimeline.headerTitle = VectorL10n.settingsTimeline;
+//
+//    if (BuildSettings.roomScreenAllowTimelineStyleConfiguration)
+//    {
+//        [sectionTimeline addRowWithTag:TIMELINE_STYLE_INDEX];
+//    }
+//    [sectionTimeline addRowWithTag:TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX];
+//    [sectionTimeline addRowWithTag:TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX];
+//
+//    [tmpSections addObject:sectionTimeline];
+//    
+//    if(BuildSettings.settingsScreenPresenceAllowConfiguration)
+//    {
+//        Section *sectionPresence = [Section sectionWithTag:SECTION_TAG_PRESENCE];
+//        [sectionPresence addRowWithTag:PRESENCE_OFFLINE_MODE];
+//        sectionPresence.headerTitle = VectorL10n.settingsPresence;
+//        sectionPresence.footerTitle = VectorL10n.settingsPresenceOfflineModeDescription;
+//
+//        [tmpSections addObject:sectionPresence];
+//    }
     
     Section *sectionAdvanced = [Section sectionWithTag:SECTION_TAG_ADVANCED];
     sectionAdvanced.headerTitle = [VectorL10n settingsAdvanced];
@@ -575,8 +575,8 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     {
         [sectionAbout addRowWithTag:ABOUT_PRIVACY_INDEX];
     }
-    [sectionAbout addRowWithTag:ABOUT_THIRD_PARTY_INDEX];
-    sectionAbout.headerTitle = VectorL10n.settingsAbout;
+//    [sectionAbout addRowWithTag:ABOUT_THIRD_PARTY_INDEX];
+//    sectionAbout.headerTitle = VectorL10n.settingsAbout;
 
     if (BuildSettings.settingsScreenShowAdvancedSettings)
     {        
@@ -2132,20 +2132,20 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
             [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
         }
     }
-    else if (section == SECTION_TAG_CALLS)
-    {
-        if (row == CALLS_ENABLE_STUN_SERVER_FALLBACK_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsCallsStunServerFallbackButton];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.allowStunServerFallback;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleStunServerFallback:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-    }
+//    else if (section == SECTION_TAG_CALLS)
+//    {
+//        if (row == CALLS_ENABLE_STUN_SERVER_FALLBACK_INDEX)
+//        {
+//            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+//            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsCallsStunServerFallbackButton];
+//            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.allowStunServerFallback;
+//            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+//            labelAndSwitchCell.mxkSwitch.enabled = YES;
+//            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleStunServerFallback:) forControlEvents:UIControlEventTouchUpInside];
+//
+//            cell = labelAndSwitchCell;
+//        }
+//    }
     else if (section == SECTION_TAG_DISCOVERY)
     {
         cell = [self.settingsDiscoveryTableViewSection cellForRowAtRow:row];
@@ -2259,19 +2259,19 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         {
             cell = [self buildMessageBubblesCellForTableView:tableView atIndexPath:indexPath];
         }
-        else if (row == TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsUiShowRedactionsInRoomHistory;
-
-            labelAndSwitchCell.mxkSwitch.on = [MXKAppSettings standardAppSettings].showRedactionsInRoomHistory;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowRedacted:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
+//        else if (row == TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX)
+//        {
+//            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+//
+//            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsUiShowRedactionsInRoomHistory;
+//
+//            labelAndSwitchCell.mxkSwitch.on = [MXKAppSettings standardAppSettings].showRedactionsInRoomHistory;
+//            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+//            labelAndSwitchCell.mxkSwitch.enabled = YES;
+//            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowRedacted:) forControlEvents:UIControlEventTouchUpInside];
+//
+//            cell = labelAndSwitchCell;
+//        }
         else if (row == TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX)
         {
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
@@ -2495,16 +2495,16 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
             
             cell = privacyPolicyCell;
         }
-        else if (row == ABOUT_THIRD_PARTY_INDEX)
-        {
-            MXKTableViewCell *thirdPartyCell = [self getDefaultTableViewCell:tableView];
-            
-            thirdPartyCell.textLabel.text = [VectorL10n settingsThirdPartyNotices];
-            
-            [thirdPartyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-            
-            cell = thirdPartyCell;
-        }
+//        else if (row == ABOUT_THIRD_PARTY_INDEX)
+//        {
+//            MXKTableViewCell *thirdPartyCell = [self getDefaultTableViewCell:tableView];
+//            
+//            thirdPartyCell.textLabel.text = [VectorL10n settingsThirdPartyNotices];
+//            
+//            [thirdPartyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
+//            
+//            cell = thirdPartyCell;
+//        }
     }
     else if (section == SECTION_TAG_LABS)
     {

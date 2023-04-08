@@ -36,13 +36,11 @@ enum OnboardingSplashScreenViewModelResult {
 // MARK: View
 
 struct OnboardingSplashScreenViewState: BindableState, CustomDebugStringConvertible {
+    
     /// The colours of the background gradient shown behind the 4 pages.
     private let gradientColors = [
-        Color(red: 0.95, green: 0.98, blue: 0.96),
-        Color(red: 0.89, green: 0.96, blue: 0.97),
-        Color(red: 0.95, green: 0.89, blue: 0.97),
-        Color(red: 0.81, green: 0.95, blue: 0.91),
-        Color(red: 0.95, green: 0.98, blue: 0.96)
+        Color(red: 230, green: 230, blue: 250),
+        Color(red: 238, green: 130, blue: 238)
     ]
     
     /// An array containing all content of the carousel pages
@@ -63,10 +61,10 @@ struct OnboardingSplashScreenViewState: BindableState, CustomDebugStringConverti
     
     init() {
         // The pun doesn't translate, so we only use it for English.
-        let locale = Locale.current
-        let page4Title = locale.identifier.hasPrefix("en") ? "Cut the slack from teams." : VectorL10n.onboardingSplashPage4TitleNoPun
         
-        content = [
+        
+        
+        self.content = [
             OnboardingSplashScreenPageContent(title: VectorL10n.onboardingSplashPage1Title,
                                               message: VectorL10n.onboardingSplashPage1Message,
                                               image: Asset.Images.onboardingSplashScreenPage1,
@@ -79,12 +77,12 @@ struct OnboardingSplashScreenViewState: BindableState, CustomDebugStringConverti
                                               message: VectorL10n.onboardingSplashPage3Message,
                                               image: Asset.Images.onboardingSplashScreenPage3,
                                               darkImage: Asset.Images.onboardingSplashScreenPage3Dark),
-            OnboardingSplashScreenPageContent(title: page4Title,
+            OnboardingSplashScreenPageContent(title: VectorL10n.onboardingSplashPage4TitleNoPun,
                                               message: VectorL10n.onboardingSplashPage4Message,
                                               image: Asset.Images.onboardingSplashScreenPage4,
                                               darkImage: Asset.Images.onboardingSplashScreenPage4Dark)
         ]
-        bindings = OnboardingSplashScreenBindings()
+        self.bindings = OnboardingSplashScreenBindings()
     }
 }
 

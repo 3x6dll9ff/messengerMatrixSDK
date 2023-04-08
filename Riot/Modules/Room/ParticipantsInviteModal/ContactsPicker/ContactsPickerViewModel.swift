@@ -193,6 +193,7 @@ class ContactsPickerViewModel: NSObject, ContactsPickerViewModelProtocol {
 }
 
 // MARK: - ContactsTableViewControllerDelegate
+@available(iOS 15.0, *)
 extension ContactsPickerViewModel: ContactsTableViewControllerDelegate {
     
     func contactsTableViewController(_ contactsTableViewController: ContactsTableViewController!, didSelect contact: MXKContact?) {

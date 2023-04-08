@@ -23,7 +23,7 @@ private enum Constants {
     static let repliedEventBody = "Test message"
     static let repliedEventEditedBody = "Edited message"
     static let repliedEventNewContentBody = "New content"
-    static let replyBody = "> <@alice:matrix.org> Test message\n\nReply"
+    static let replyBody = "> <@alice:bigstarmessenger.com> Test message\n\nReply"
     static let replyFormattedBodyWithItalic = "<mx-reply><blockquote><a href=\"https://matrix.to/#/someRoomId/repliedEventId\">In reply to</a> <a href=\"https://matrix.to/#/alice\">alice</a><br>Test message</blockquote></mx-reply><em>Reply</em>"
     static let expectedHTML = "<mx-reply><blockquote><a href=\"https://matrix.to/#/someRoomId/repliedEventId\">In reply to</a> <a href=\"https://matrix.to/#/alice\">alice</a><br>Test message</blockquote></mx-reply>Reply"
     static let expectedEditedHTML = "<mx-reply><blockquote><a href=\"https://matrix.to/#/someRoomId/repliedEventId\">In reply to</a> <a href=\"https://matrix.to/#/alice\">alice</a><br>Edited message</blockquote></mx-reply>Reply"

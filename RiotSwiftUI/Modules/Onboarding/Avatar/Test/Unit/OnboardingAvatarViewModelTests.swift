@@ -21,7 +21,7 @@ import XCTest
 
 class OnboardingAvatarViewModelTests: XCTestCase {
     private enum Constants {
-        static let userId = "@user:matrix.org"
+        static let userId = "@user:bigstarmessenger.com"
         static let displayName = "Alice"
         static let avatarColorCount = DefaultThemeSwiftUI().colors.namesAndAvatars.count
         static let avatarImage = Asset.Images.appSymbol.image

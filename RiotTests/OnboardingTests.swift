@@ -19,7 +19,7 @@ import XCTest
 
 class OnboardingTests: XCTestCase {
     
-    let userId = "@test:matrix.org"
+    let userId = "@test:bigstarmessenger.com"
     
     override func setUp() {
         // Clear any properties for the test

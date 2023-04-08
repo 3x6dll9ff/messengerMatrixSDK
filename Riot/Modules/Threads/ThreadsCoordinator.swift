@@ -18,6 +18,7 @@
 
 import UIKit
 
+@available(iOS 15.0, *)
 @objcMembers
 final class ThreadsCoordinator: NSObject, ThreadsCoordinatorProtocol {
     
@@ -143,6 +144,7 @@ final class ThreadsCoordinator: NSObject, ThreadsCoordinatorProtocol {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+@available(iOS 15.0, *)
 extension ThreadsCoordinator: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
@@ -151,6 +153,7 @@ extension ThreadsCoordinator: UIAdaptivePresentationControllerDelegate {
 }
 
 // MARK: - ThreadListCoordinatorDelegate
+@available(iOS 15.0, *)
 extension ThreadsCoordinator: ThreadListCoordinatorDelegate {
     func threadListCoordinatorDidLoadThreads(_ coordinator: ThreadListCoordinatorProtocol) {
         
@@ -174,6 +177,7 @@ extension ThreadsCoordinator: ThreadListCoordinatorDelegate {
 
 //  MARK: - RoomCoordinatorDelegate
 
+@available(iOS 15.0, *)
 extension ThreadsCoordinator: RoomCoordinatorDelegate {
     
     func roomCoordinatorDidLeaveRoom(_ coordinator: RoomCoordinatorProtocol) {

@@ -33,7 +33,7 @@ enum MockOnboardingAvatarScreenState: MockScreenState, CaseIterable {
     
     /// A list of screen state definitions
     static var allCases: [MockOnboardingAvatarScreenState] {
-        let userId = "@example:matrix.org"
+        let userId = "@example:bigstarmessenger.com"
         let displayName = "Jane"
         
         return [

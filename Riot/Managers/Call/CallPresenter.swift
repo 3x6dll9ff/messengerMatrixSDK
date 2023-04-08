@@ -26,6 +26,7 @@ import CallKit
 /// The number of milliseconds in one second.
 private let MSEC_PER_SEC: TimeInterval = 1000
 
+@available(iOS 15.0, *)
 @objcMembers
 /// Service to manage call screens and call bar UI management.
 class CallPresenter: NSObject {
@@ -737,6 +738,7 @@ class CallPresenter: NSObject {
 
 //  MARK: - MXKCallViewControllerDelegate
 
+@available(iOS 15.0, *)
 extension CallPresenter: MXKCallViewControllerDelegate {
     
     func dismiss(_ callViewController: MXKCallViewController!, completion: (() -> Void)!) {
@@ -777,6 +779,7 @@ extension CallPresenter: MXKCallViewControllerDelegate {
 
 //  MARK: - UIViewControllerTransitioningDelegate
 
+@available(iOS 15.0, *)
 extension CallPresenter: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -795,6 +798,7 @@ extension CallPresenter: UIViewControllerTransitioningDelegate {
 
 //  MARK: - PiPViewDelegate
 
+@available(iOS 15.0, *)
 extension CallPresenter: PiPViewDelegate {
     
     func pipViewDidTap(_ view: PiPView) {
@@ -807,6 +811,7 @@ extension CallPresenter: PiPViewDelegate {
 
 //  MARK: - OperationQueue Extension
 
+@available(iOS 15.0, *)
 extension OperationQueue {
     
     var containsPresentCallVCOperation: Bool {
@@ -828,6 +833,7 @@ extension OperationQueue {
 #if canImport(JitsiMeetSDK)
 //  MARK: - JMCallKitListener
 
+@available(iOS 15.0, *)
 extension CallPresenter: JMCallKitListener {
     
     func providerDidReset() {
@@ -888,6 +894,7 @@ extension CallPresenter: JMCallKitListener {
 
 //  MARK: - JitsiViewControllerDelegate
 
+@available(iOS 15.0, *)
 extension CallPresenter: JitsiViewControllerDelegate {
     
     func jitsiViewController(_ jitsiViewController: JitsiViewController!, dismissViewJitsiController completion: (() -> Void)!) {

@@ -18,6 +18,7 @@ import CommonKit
 import MatrixSDK
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AuthenticationLoginCoordinatorParameters {
     let navigationRouter: NavigationRouterType
     let authenticationService: AuthenticationService
@@ -50,6 +51,7 @@ enum AuthenticationLoginCoordinatorResult: CustomStringConvertible {
     }
 }
 
+@available(iOS 15.0, *)
 final class AuthenticationLoginCoordinator: Coordinator, Presentable {
     // MARK: - Properties
     
@@ -83,6 +85,7 @@ final class AuthenticationLoginCoordinator: Coordinator, Presentable {
     
     // MARK: - Setup
     
+    @available(iOS 15.0, *)
     @MainActor init(parameters: AuthenticationLoginCoordinatorParameters) {
         self.parameters = parameters
         

@@ -20,8 +20,8 @@ import Reusable
 class CallCellContentView: UIView {
     
     private enum Constants {
-        static let callSummaryWithBottomViewHeight: CGFloat = 20
-        static let callSummaryStandaloneViewHeight: CGFloat = 20 + 44
+        static let callSummaryWithBottomViewHeight: CGFloat = 8
+        static let callSummaryStandaloneViewHeight: CGFloat = 10
     }
     
     @IBOutlet private weak var paginationTitleView: UIView!
@@ -45,7 +45,7 @@ class CallCellContentView: UIView {
     @IBOutlet weak var bottomContainerView: UIView!
     
     /// Inter-item spacing in the main content stack view
-    let interItemSpacing: CGFloat = 8
+    let interItemSpacing: CGFloat = 5
     
     var statusText: String? {
         didSet {
@@ -97,13 +97,13 @@ extension CallCellContentView: Themable {
     func update(theme: Theme) {
         self.theme = theme
         
-        paginationLabel.textColor = theme.tintColor
-        paginationSeparatorView.backgroundColor = theme.tintColor
-        
-        bgView.backgroundColor = theme.colors.tile
-        callerNameLabel.textColor = theme.textPrimaryColor
-        callIconView.tintColor = theme.textSecondaryColor
-        callStatusLabel.textColor = theme.textSecondaryColor
+//        paginationLabel.textColor = theme.tintColor
+//        paginationSeparatorView.backgroundColor = theme.tintColor
+//
+//        bgView.backgroundColor = theme.colors.tile
+//        callerNameLabel.textColor = theme.textPrimaryColor
+//        callIconView.tintColor = theme.textSecondaryColor
+//        callStatusLabel.textColor = theme.textSecondaryColor
         
         if let bottomContainerView = bottomContainerView as? Themable {
             bottomContainerView.update(theme: theme)

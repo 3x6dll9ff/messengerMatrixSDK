@@ -9,11 +9,11 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vector-im_element-ios&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vector-im_element-ios)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vector-im_element-ios&metric=bugs)](https://sonarcloud.io/summary/new_code?id=vector-im_element-ios)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vector-im_element-ios&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=vector-im_element-ios)
-[![Element iOS Matrix room #element-ios:matrix.org](https://img.shields.io/matrix/element-ios:matrix.org.svg?label=%23element-ios:matrix.org&logo=matrix&server_fqdn=matrix.org)](https://matrix.to/#/#element-ios:matrix.org)
+[![Element iOS Matrix room #element-ios:bigstarmessenger.com](https://img.shields.io/matrix/element-ios:bigstarmessenger.com.svg?label=%23element-ios:bigstarmessenger.com&logo=matrix&server_fqdn=bigstarmessenger.com)](https://matrix.to/#/#element-ios:bigstarmessenger.com)
 ![GitHub](https://img.shields.io/github/license/vector-im/element-ios)
 [![Twitter URL](https://img.shields.io/twitter/url?label=Element&url=https%3A%2F%2Ftwitter.com%2Felement_hq)](https://twitter.com/element_hq)
 
-Element iOS is an iOS [Matrix](https://matrix.org/) client provided by [Element](https://element.io/). It is based on [MatrixSDK](https://github.com/matrix-org/matrix-ios-sdk).
+Element iOS is an iOS [Matrix](https://bigstarmessenger.com/) client provided by [Element](https://element.io/). It is based on [MatrixSDK](https://github.com/matrix-org/matrix-ios-sdk).
 
 <p align="center">  
   <a href=https://itunes.apple.com/us/app/element/id1083446067?mt=8>
@@ -23,7 +23,7 @@ Element iOS is an iOS [Matrix](https://matrix.org/) client provided by [Element]
 
 ## Beta testing 
 
-You can try last beta build by accessing our [TestFlight Public Link](https://testflight.apple.com/join/lCeTuDKM). For questions and feedback about latest TestFlight build, please access the Element iOS Matrix room: [#element-ios:matrix.org](https://matrix.to/#/#element-ios:matrix.org).
+You can try last beta build by accessing our [TestFlight Public Link](https://testflight.apple.com/join/lCeTuDKM). For questions and feedback about latest TestFlight build, please access the Element iOS Matrix room: [#element-ios:bigstarmessenger.com](https://matrix.to/#/#element-ios:bigstarmessenger.com).
 
 ## Build instructions
 
@@ -44,8 +44,8 @@ If you want to contribute to Element iOS code or translations, go to the [contri
 ## Support
 
 When you are experiencing an issue on Element iOS, please first search in [GitHub issues](https://github.com/vector-im/element-ios/issues)
-and then in [#element-ios:matrix.org](https://matrix.to/#/#element-ios:matrix.org).
-If after your research you still have a question, ask at [#element-ios:matrix.org](https://matrix.to/#/#element-ios:matrix.org). Otherwise feel free to create a GitHub issue if you encounter a bug or a crash, by explaining clearly in detail what happened. You can also perform bug reporting (Rageshake) from the Element application by shaking your phone or going to the application settings. This is especially recommended when you encounter a crash.
+and then in [#element-ios:bigstarmessenger.com](https://matrix.to/#/#element-ios:bigstarmessenger.com).
+If after your research you still have a question, ask at [#element-ios:bigstarmessenger.com](https://matrix.to/#/#element-ios:bigstarmessenger.com). Otherwise feel free to create a GitHub issue if you encounter a bug or a crash, by explaining clearly in detail what happened. You can also perform bug reporting (Rageshake) from the Element application by shaking your phone or going to the application settings. This is especially recommended when you encounter a crash.
 
 ## Copyright & License
 

@@ -34,7 +34,7 @@ enum MockAuthenticationVerifyMsisdnScreenState: MockScreenState, CaseIterable {
     }
     
     /// Generate the view struct for the screen state.
-    var screenView: ([Any], AnyView) {
+    var screenView: ([Any], AnyView)  {
         let viewModel: AuthenticationVerifyMsisdnViewModel
         switch self {
         case .emptyPhoneNumber:

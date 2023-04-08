@@ -35,7 +35,7 @@ import XCTest
         XCTAssertNil(service.registrationWizard, "A new service shouldn't have a registration wizard.")
         
         // When starting a new login flow.
-        try await service.startFlow(.login, for: "https://matrix.org")
+        try await service.startFlow(.login, for: "https://bigstarmessenger.com")
         
         // Then a registration wizard shouldn't have been created.
         XCTAssertNotNil(service.loginWizard, "The login wizard should exist after starting a login flow.")
@@ -49,7 +49,7 @@ import XCTest
         XCTAssertNil(service.state.homeserver.registrationFlow, "A new service shouldn't provide a registration flow for the homeserver.")
         
         // When starting a new registration flow.
-        try await service.startFlow(.register, for: "https://matrix.org")
+        try await service.startFlow(.register, for: "https://bigstarmessenger.com")
         
         // Then a registration wizard should be available for use.
         XCTAssertNotNil(service.loginWizard, "The login wizard should exist after starting a registration flow.")
@@ -135,11 +135,11 @@ import XCTest
         XCTAssertEqual(service.state.homeserver.address, "https://matrix.example.com", "The initial address discovered from the well-known should be stored.")
         
         // When switching to a different homeserver
-        try await service.startFlow(.login, for: "https://matrix.org")
+        try await service.startFlow(.login, for: "https://bigstarmessenger.com")
         
         // The the homeserver state should update to represent the new server
-        XCTAssertEqual(service.state.homeserver.addressFromUser, "https://matrix.org", "The new address entered by the user should be stored.")
-        XCTAssertEqual(service.state.homeserver.address, "https://matrix-client.matrix.org", "The new address discovered from the well-known should be stored.")
+        XCTAssertEqual(service.state.homeserver.addressFromUser, "https://bigstarmessenger.com", "The new address entered by the user should be stored.")
+        XCTAssertEqual(service.state.homeserver.address, "https://matrix-client.bigstarmessenger.com", "The new address discovered from the well-known should be stored.")
     }
     
     func testStartingLoginWithInvalidURL() async throws {
@@ -191,7 +191,7 @@ import XCTest
     
     func testPasswordLogin() async throws {
         // Given a server ready for login.
-        try await service.startFlow(.login, for: "https://matrix.org")
+        try await service.startFlow(.login, for: "https://bigstarmessenger.com")
         guard let loginWizard = service.loginWizard else {
             XCTFail("The login wizard should exist after starting a login flow.")
             return
@@ -204,7 +204,7 @@ import XCTest
                                                   initialDeviceName: UIDevice.current.initialDisplayName)
         
         // Then the MXSession should be created for the user ID.
-        XCTAssertEqual(session.myUserId, "@alice:matrix.org")
+        XCTAssertEqual(session.myUserId, "@alice:bigstarmessenger.com")
     }
     
     func testBasicRegistration() async throws {
@@ -230,7 +230,7 @@ import XCTest
     
     func testInteractiveRegistration() async throws {
         // Given a server ready for registration with multiple mandatory stages.
-        try await service.startFlow(.register, for: "https://matrix.org")
+        try await service.startFlow(.register, for: "https://bigstarmessenger.com")
         guard let registrationWizard = service.registrationWizard else {
             XCTFail("The registration wizard should exist after starting a registration flow.")
             return
@@ -279,9 +279,9 @@ import XCTest
     // MARK: - Homeserver View Data
     
     func testHomeserverViewDataForMatrixDotOrg() {
-        // Given a homeserver such as matrix.org.
-        let address = "https://matrix-client.matrix.org"
-        let addressFromUser = "https://matrix.org" // https is added when sanitising the input.
+        // Given a homeserver such as bigstarmessenger.com.
+        let address = "https://matrix-client.bigstarmessenger.com"
+        let addressFromUser = "https://bigstarmessenger.com" // https is added when sanitising the input.
         let ssoIdentityProviders = [
             SSOIdentityProvider(id: "1", name: "Apple", brand: "apple", iconURL: nil),
             SSOIdentityProvider(id: "2", name: "GitHub", brand: "github", iconURL: nil)
@@ -296,7 +296,7 @@ import XCTest
         let viewData = homeserver.viewData
         
         // Then the view data should correctly represent the homeserver.
-        XCTAssertEqual(viewData.address, "matrix.org", "The displayed address should match the address supplied by the user, but without the scheme.")
+        XCTAssertEqual(viewData.address, "bigstarmessenger.com", "The displayed address should match the address supplied by the user, but without the scheme.")
         XCTAssertTrue(viewData.showLoginForm, "The login form should be shown.")
         XCTAssertEqual(viewData.ssoIdentityProviders, ssoIdentityProviders, "The sso identity providers should match.")
         XCTAssertTrue(viewData.showRegistrationForm, "The registration form should be shown.")
@@ -394,7 +394,7 @@ import XCTest
     }
     
     func testHomeserverAddressSanitization() {
-        let basicAddress = "matrix.org"
+        let basicAddress = "bigstarmessenger.com"
         let httpAddress = "http://localhost"
         let trailingSlashAddress = "https://matrix.example.com/"
         let whitespaceAddress = " https://matrix.example.com/  "
@@ -408,7 +408,7 @@ import XCTest
         let sanitizedValidAddress = HomeserverAddress.sanitized(validAddress)
         let sanitizedValidAddressWithPort = HomeserverAddress.sanitized(validAddressWithPort)
         
-        XCTAssertEqual(sanitizedBasicAddress, "https://matrix.org")
+        XCTAssertEqual(sanitizedBasicAddress, "https://bigstarmessenger.com")
         XCTAssertEqual(sanitizedHTTPAddress, "http://localhost")
         XCTAssertEqual(sanitizedTrailingSlashAddress, "https://matrix.example.com")
         XCTAssertEqual(sanitizedWhitespaceAddress, "https://matrix.example.com")

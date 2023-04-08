@@ -66,7 +66,7 @@ final class ComposerLinkActionUITests: MockScreenTestCase {
         XCTAssertEqual(value, "https://element.io")
         linkTextField.clearAndTypeText("")
         XCTAssertFalse(saveButton.isEnabled)
-        linkTextField.clearAndTypeText("matrix.org")
+        linkTextField.clearAndTypeText("bigstarmessenger.com")
         XCTAssertTrue(saveButton.isEnabled)
     }
 }

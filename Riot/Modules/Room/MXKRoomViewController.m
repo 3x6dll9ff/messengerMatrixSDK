@@ -2,7 +2,7 @@
  Copyright 2015 OpenMarket Ltd
  Copyright 2017 Vector Creations Ltd
  Copyright 2018 New Vector Ltd
- Copyright 2019 The Matrix.org Foundation C.I.C
+ Copyright 2019 The bigstarmessenger.com Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -967,7 +967,7 @@ static const CGFloat kCellVisibilityMinimumHeight = 8.0;
     BOOL isRoomEmpty = [msg isEqualToString:@"No known servers"];
     if (isRoomEmpty)
     {
-        // minging kludge until https://matrix.org/jira/browse/SYN-678 is fixed
+        // minging kludge until https://bigstarmessenger.com/jira/browse/SYN-678 is fixed
         // 'Error when trying to join an empty room should be more explicit'
         msg = [VectorL10n roomErrorJoinFailedEmptyRoom];
     }

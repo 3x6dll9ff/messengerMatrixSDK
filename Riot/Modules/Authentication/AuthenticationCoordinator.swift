@@ -19,6 +19,7 @@
 import UIKit
 import CommonKit
 
+@available(iOS 15.0, *)
 struct AuthenticationCoordinatorParameters {
     let navigationRouter: NavigationRouterType
     /// The screen that should be shown when starting the flow.
@@ -28,6 +29,7 @@ struct AuthenticationCoordinatorParameters {
 }
 
 /// A coordinator that handles authentication, verification and setting a PIN.
+@available(iOS 15.0, *)
 final class AuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtocol {
     
     enum EntryPoint {
@@ -114,6 +116,7 @@ final class AuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtoc
     // MARK: - Private
     
     /// Starts the authentication flow.
+    @available(iOS 15.0, *)
     @MainActor private func startAuthenticationFlow() async {
         if let softLogoutCredentials = authenticationService.softLogoutCredentials,
            let homeserverAddress = softLogoutCredentials.homeServer {
@@ -176,6 +179,7 @@ final class AuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtoc
     }
     
     /// Shows the next screen in the flow after the server selection screen.
+    @available(iOS 15.0, *)
     @MainActor private func serverSelectionCoordinator(_ coordinator: AuthenticationServerSelectionCoordinator,
                                                        didCompleteWith result: AuthenticationServerSelectionCoordinatorResult,
                                                        for flow: AuthenticationFlow) {
@@ -253,6 +257,7 @@ final class AuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtoc
     // MARK: - Login
     
     /// Shows the login screen.
+    @available(iOS 15.0, *)
     @MainActor private func showLoginScreen() {
         MXLog.debug("[AuthenticationCoordinator] showLoginScreen")
         
@@ -652,6 +657,7 @@ final class AuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtoc
 
 // MARK: - SSO
 
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator: SSOAuthenticationPresenterDelegate {
     /// Presents SSO authentication for the specified identity provider.
     @MainActor private func presentSSOAuthentication(for identityProvider: SSOIdentityProvider) {
@@ -713,6 +719,7 @@ extension AuthenticationCoordinator: SSOAuthenticationPresenterDelegate {
 }
 
 // MARK: - AuthenticationServiceDelegate
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator: AuthenticationServiceDelegate {
     
     func authenticationService(_ service: AuthenticationService, needsPromptFor unrecognizedCertificate: Data?, completion: @escaping (Bool) -> Void) {
@@ -757,6 +764,7 @@ extension AuthenticationCoordinator: AuthenticationServiceDelegate {
 }
 
 // MARK: - KeyVerificationCoordinatorDelegate
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator: KeyVerificationCoordinatorDelegate {
     func keyVerificationCoordinatorDidComplete(_ coordinator: KeyVerificationCoordinatorType, otherUserId: String, otherDeviceId: String) {
         if let crypto = session?.crypto as? MXLegacyCrypto, let backup = crypto.backup,
@@ -778,6 +786,7 @@ extension AuthenticationCoordinator: KeyVerificationCoordinatorDelegate {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator: UIAdaptivePresentationControllerDelegate {
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         // Prevent Key Verification from using swipe to dismiss
@@ -788,6 +797,7 @@ extension AuthenticationCoordinator: UIAdaptivePresentationControllerDelegate {
 
 
 // MARK: - Unused conformances
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator {
     func update(authenticationFlow: AuthenticationFlow) {
         // unused
@@ -795,6 +805,7 @@ extension AuthenticationCoordinator {
 }
 
 // MARK: - AuthFallBackViewControllerDelegate
+@available(iOS 15.0, *)
 extension AuthenticationCoordinator: AuthFallBackViewControllerDelegate {
     func authFallBackViewController(_ authFallBackViewController: AuthFallBackViewController,
                                     didLoginWith loginResponse: MXLoginResponse) {

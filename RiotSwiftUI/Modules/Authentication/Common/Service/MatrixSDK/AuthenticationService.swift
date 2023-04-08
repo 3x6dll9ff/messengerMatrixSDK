@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 protocol AuthenticationServiceDelegate: AnyObject {
     /// The authentication service encountered an unrecognized certificate and needs to
     /// prompt the user to find out whether or not it should be trusted.
@@ -37,6 +38,7 @@ protocol AuthenticationServiceDelegate: AnyObject {
                                didUpdateStateWithLink link: UniversalLink)
 }
 
+@available(iOS 15.0, *)
 @objcMembers
 class AuthenticationService: NSObject {
     /// The shared service object.

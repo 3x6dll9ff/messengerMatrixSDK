@@ -38,14 +38,14 @@ enum MockAuthenticationTermsScreenState: MockScreenState, CaseIterable {
         switch self {
         case .matrixDotOrg:
             viewModel = AuthenticationTermsViewModel(homeserver: .mockMatrixDotOrg,
-                                                     policies: [AuthenticationTermsPolicy(url: "https://matrix-client.matrix.org/_matrix/consent?v=1.0",
+                                                     policies: [AuthenticationTermsPolicy(url: "https://matrix-client.bigstarmessenger.com/_matrix/consent?v=1.0",
                                                                                           title: "Terms and Conditions",
-                                                                                          subtitle: "matrix.org")])
+                                                                                          subtitle: "bigstarmessenger.com")])
         case .accepted:
             viewModel = AuthenticationTermsViewModel(homeserver: .mockMatrixDotOrg,
-                                                     policies: [AuthenticationTermsPolicy(url: "https://matrix-client.matrix.org/_matrix/consent?v=1.0",
+                                                     policies: [AuthenticationTermsPolicy(url: "https://matrix-client.bigstarmessenger.com/_matrix/consent?v=1.0",
                                                                                           title: "Terms and Conditions",
-                                                                                          subtitle: "matrix.org",
+                                                                                          subtitle: "bigstarmessenger.com",
                                                                                           accepted: true)])
         case .multiple:
             viewModel = AuthenticationTermsViewModel(homeserver: .mockBasicServer, policies: [

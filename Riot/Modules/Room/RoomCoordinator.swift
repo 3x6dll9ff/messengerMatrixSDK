@@ -21,6 +21,7 @@ import UIKit
 import CommonKit
 import MatrixSDK
 
+@available(iOS 15.0, *)
 final class RoomCoordinator: NSObject, RoomCoordinatorProtocol {
 
     // MARK: - Properties
@@ -528,6 +529,7 @@ final class RoomCoordinator: NSObject, RoomCoordinatorProtocol {
 }
 
 // MARK: - RoomIdentifiable
+@available(iOS 15.0, *)
 extension RoomCoordinator: RoomIdentifiable {
      
     var roomId: String? {
@@ -545,6 +547,7 @@ extension RoomCoordinator: RoomIdentifiable {
 
 // MARK: - UIAdaptivePresentationControllerDelegate
 
+@available(iOS 15.0, *)
 extension RoomCoordinator: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
@@ -553,6 +556,7 @@ extension RoomCoordinator: UIAdaptivePresentationControllerDelegate {
 }
 
 // MARK: - RoomViewControllerDelegate
+@available(iOS 15.0, *)
 extension RoomCoordinator: RoomViewControllerDelegate {
         
     func roomViewController(_ roomViewController: RoomViewController, showRoomWithId roomID: String, eventId eventID: String?) {

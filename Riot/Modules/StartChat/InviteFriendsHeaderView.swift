@@ -50,10 +50,10 @@ final class InviteFriendsHeaderView: UIView, NibLoadable, Themable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        button.setTitle(VectorL10n.inviteFriendsAction(AppInfo.current.displayName), for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        button.layer.cornerRadius = 8
-        button.layer.borderWidth = 2
+//        button.setTitle(VectorL10n.inviteFriendsAction(AppInfo.current.displayName), for: .normal)
+//        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+//        button.layer.cornerRadius = 8
+//        button.layer.borderWidth = 2
     }
     
     // MARK: - Public

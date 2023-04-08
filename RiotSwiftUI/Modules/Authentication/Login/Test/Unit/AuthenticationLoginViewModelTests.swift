@@ -29,10 +29,10 @@ class AuthenticationLoginViewModelTests: XCTestCase {
     }
     
     func testMatrixDotOrg() {
-        // Given the initial view model configured for matrix.org with some SSO providers.
+        // Given the initial view model configured for bigstarmessenger.com with some SSO providers.
         let homeserver = defaultHomeserver
         
-        // Then the view state should contain a homeserver that matches matrix.org and shows SSO buttons.
+        // Then the view state should contain a homeserver that matches bigstarmessenger.com and shows SSO buttons.
         XCTAssertEqual(context.viewState.homeserver, homeserver, "The homeserver data should match the original.")
         XCTAssertTrue(context.viewState.showSSOButtons, "The SSO buttons should be shown.")
     }

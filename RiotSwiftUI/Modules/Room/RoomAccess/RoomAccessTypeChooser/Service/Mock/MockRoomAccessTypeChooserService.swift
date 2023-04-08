@@ -30,7 +30,7 @@ class MockRoomAccessTypeChooserService: RoomAccessTypeChooserServiceProtocol {
     private(set) var errorSubject: CurrentValueSubject<Error?, Never>
 
     private(set) var selectedType: RoomAccessTypeChooserAccessType = .private
-    var currentRoomId = "!aaabaa:matrix.org"
+    var currentRoomId = "!aaabaa:bigstarmessenger.com"
     var versionOverride: String? {
         "9"
     }

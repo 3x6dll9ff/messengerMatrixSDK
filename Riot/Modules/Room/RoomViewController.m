@@ -3809,37 +3809,37 @@ static CGSize kThreadListBarButtonItemImageSize;
                 [self showEmojiPickerForEventId:tappedEventId];
             }
         }
-        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.callBackAction])
-        {
-            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
-            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-            
-            [self placeCallWithVideo2:eventContent.isVideoCall];
-        }
-        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.declineAction])
-        {
-            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
-            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-            
-            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
-            [call hangup];
-        }
-        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.answerAction])
-        {
-            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
-            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-            
-            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
-            [call answer];
-        }
-        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.endCallAction])
-        {
-            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
-            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-            
-            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
-            [call hangup];
-        }
+//        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.callBackAction])
+//        {
+//            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
+//            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
+//            
+//            [self placeCallWithVideo2:eventContent.isVideoCall];
+//        }
+//        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.declineAction])
+//        {
+//            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
+//            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
+//            
+//            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
+//            [call hangup];
+//        }
+//        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.answerAction])
+//        {
+//            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
+//            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
+//            
+//            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
+//            [call answer];
+//        }
+//        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.endCallAction])
+//        {
+//            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
+//            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
+//            
+//            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
+//            [call hangup];
+//        }
         else if ([actionIdentifier isEqualToString:RoomGroupCallStatusCell.joinAction] ||
                  [actionIdentifier isEqualToString:RoomGroupCallStatusCell.answerAction])
         {

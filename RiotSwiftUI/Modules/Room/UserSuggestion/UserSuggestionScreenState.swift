@@ -56,7 +56,7 @@ extension MockUserSuggestionScreenState: RoomMembersProviderProtocol {
     private func generateUsersWithCount(_ count: UInt) -> [RoomMembersProviderMember] {
         (0..<count).map { _ in
             let identifier = "@" + UUID().uuidString
-            return RoomMembersProviderMember(userId: identifier, displayName: identifier, avatarUrl: "mxc://matrix.org/VyNYAgahaiAzUoOeZETtQ")
+            return RoomMembersProviderMember(userId: identifier, displayName: identifier, avatarUrl: "mxc://bigstarmessenger.com/VyNYAgahaiAzUoOeZETtQ")
         }
     }
 }

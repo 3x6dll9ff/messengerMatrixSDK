@@ -17,6 +17,7 @@
 import SwiftUI
 
 struct AuthenticationRegistrationScreen: View {
+
     // MARK: - Properties
     
     // MARK: Private
@@ -35,10 +36,10 @@ struct AuthenticationRegistrationScreen: View {
                 header
                     .padding(.top, OnboardingMetrics.topPaddingToNavigationBar)
                     .padding(.bottom, 28)
-                
-                serverInfo
-                    .padding(.leading, 12)
-                    .padding(.bottom, 16)
+//
+//                serverInfo
+//                    .padding(.leading, 12)
+//                    .padding(.bottom, 16)
                 
                 Rectangle()
                     .fill(theme.colors.quinaryContent)
@@ -49,7 +50,7 @@ struct AuthenticationRegistrationScreen: View {
                     registrationForm
                 }
                 
-                if viewModel.viewState.homeserver.showRegistrationForm, viewModel.viewState.showSSOButtons {
+                if viewModel.viewState.homeserver.showRegistrationForm && viewModel.viewState.showSSOButtons {
                     Text(VectorL10n.or)
                         .foregroundColor(theme.colors.secondaryContent)
                         .padding(.top, 16)
@@ -60,9 +61,10 @@ struct AuthenticationRegistrationScreen: View {
                         .padding(.top, 16)
                 }
 
-                if !viewModel.viewState.homeserver.showRegistrationForm, !viewModel.viewState.showSSOButtons {
+                if !viewModel.viewState.homeserver.showRegistrationForm && !viewModel.viewState.showSSOButtons {
                     fallbackButton
                 }
+                
             }
             .readableFrame()
             .padding(.horizontal, 16)
@@ -70,7 +72,7 @@ struct AuthenticationRegistrationScreen: View {
         }
         .background(theme.colors.background.ignoresSafeArea())
         .alert(item: $viewModel.alertInfo) { $0.alert }
-        .accentColor(theme.colors.accent)
+        .accentColor(.purple)
     }
     
     /// The header containing the icon, title and message.
@@ -87,12 +89,12 @@ struct AuthenticationRegistrationScreen: View {
     }
     
     /// The sever information section that includes a button to select a different server.
-    var serverInfo: some View {
-        AuthenticationServerInfoSection(address: viewModel.viewState.homeserver.address,
-                                        flow: .register) {
-            viewModel.send(viewAction: .selectServer)
-        }
-    }
+//    var serverInfo: some View {
+//        AuthenticationServerInfoSection(address: viewModel.viewState.homeserver.address,
+//                                        flow: .register) {
+//            viewModel.send(viewAction: .selectServer)
+//        }
+//    }
     
     /// The form with text fields for username and password, along with a submit button.
     var registrationForm: some View {
@@ -108,25 +110,25 @@ struct AuthenticationRegistrationScreen: View {
                                                                               autocorrectionType: .no),
                                    onEditingChanged: usernameEditingChanged,
                                    onCommit: { isPasswordFocused = true })
-                .onChange(of: viewModel.username) { _ in viewModel.send(viewAction: .resetUsernameAvailability) }
-                .accessibilityIdentifier("usernameTextField")
+            .onChange(of: viewModel.username) { _ in viewModel.send(viewAction: .resetUsernameAvailability) }
+            .accessibilityIdentifier("usernameTextField")
             
-            RoundedBorderTextField(title: nil,
-                                   placeHolder: VectorL10n.authPasswordPlaceholder,
-                                   text: $viewModel.password,
-                                   footerText: VectorL10n.authenticationRegistrationPasswordFooter,
-                                   isError: viewModel.viewState.hasEditedPassword && viewModel.viewState.isPasswordInvalid,
-                                   isFirstResponder: isPasswordFocused,
-                                   configuration: UIKitTextInputConfiguration(returnKeyType: .done,
-                                                                              isSecureTextEntry: true),
-                                   onEditingChanged: passwordEditingChanged,
-                                   onCommit: submit)
-                .accessibilityIdentifier("passwordTextField")
+//            RoundedBorderTextField(title: nil,
+//                                   placeHolder: VectorL10n.authPasswordPlaceholder,
+//                                   text: $viewModel.password,
+//                                   footerText: VectorL10n.authenticationRegistrationPasswordFooter,
+//                                   isError: viewModel.viewState.hasEditedPassword && viewModel.viewState.isPasswordInvalid,
+//                                   isFirstResponder: isPasswordFocused,
+//                                   configuration: UIKitTextInputConfiguration(returnKeyType: .done,
+//                                                                              isSecureTextEntry: true),
+//                                   onEditingChanged: passwordEditingChanged,
+//                                   onCommit: submit)
+//            .accessibilityIdentifier("passwordTextField")
             
             Button(action: submit) {
                 Text(VectorL10n.next)
             }
-            .buttonStyle(PrimaryActionButtonStyle())
+            .buttonStyle(PrimaryActionButtonStyle(customColor: .purple))
             .disabled(!viewModel.viewState.canSubmit)
             .accessibilityIdentifier("nextButton")
         }
@@ -149,7 +151,7 @@ struct AuthenticationRegistrationScreen: View {
         Button(action: fallback) {
             Text(VectorL10n.authRegister)
         }
-        .buttonStyle(PrimaryActionButtonStyle())
+        .buttonStyle(PrimaryActionButtonStyle(customColor: .purple))
         .accessibilityIdentifier("fallbackButton")
     }
     

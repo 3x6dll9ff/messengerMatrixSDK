@@ -785,7 +785,7 @@
 
 "favourites_empty_view_title" = "Tixxamin d yimdanen yettusmenyafen";
 "room_info_list_several_members" = "%@ imttekkiyen";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_show_in_directory" = "Sken taxxamt deg ukaram";
 "create_room_section_footer_type" = "Imdanen ara yernun ɣer texxamt tusligt yettili-d kan s usnubget.";
 "create_room_type_public" = "Taxxamt tazayezt";
@@ -953,7 +953,7 @@
 
 // Events formatter
 "event_formatter_member_updates" = "%tu yisnifal deg umulteɣ";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 "directory_server_all_native_rooms" = "Tixxamin meṛṛa tidiganin n Matrix";
 "directory_server_all_rooms" = "Tixxamin meṛṛa ɣef uqeddac %@";
 "directory_server_picker_title" = "Fren akaram";
@@ -1194,7 +1194,7 @@
 "auth_invalid_phone" = "Ur tettban ara d uṭṭun n tiliɣri ameɣtu";
 "auth_invalid_email" = "Ur tettban ara d tansa n yimayl tameɣtut";
 "auth_identity_server_placeholder" = "URL (e.g. https://vector.im)";
-"auth_home_server_placeholder" = "URL (e.g. https://matrix.org)";
+"auth_home_server_placeholder" = "URL (e.g. https://bigstarmessenger.com)";
 
 // Accessibility
 "accessibility_checkbox_label" = "ṛcem tabewwaḍt";
@@ -1202,7 +1202,7 @@
 "send_to" = "Azen ɣer %@";
 "active_call_details" = "Asiwel urmid (%@)";
 "active_call" = "Rmed asiwel";
-"store_full_description" = "Element d anaw amaynut n usnas n tirawt d umɛiwen i:\n\n1. Ad ak·akem-yeǧǧ ad tsedduḍ aḍman n tudert-ik·im tabaḍnit\n2. Ad ak·akem-yeǧǧ ad teqqneḍ d yal win·tin yellan deg uzeṭṭa n Matrix, ula beṛṛa-ines s usleɣ n yisnasen am Slack\n3. Ad ak·akem-iḥrez seg udellel, seg yilɣa, seg tewwura yeffren d telmatin ifergen\n4. Ad tettuɣellseḍ s uwgelhen seg yixef ɣer yixef, s uzmul anmidag swayes ara tesneqdeḍ wiyaḍ\n\nElement yemgarad akk ɣef yisnasen-nniḍen n tirawt d umɛiwen yerna n uɣbalu yeldin.\n\nElement ad ak·akem-yeǧǧ ad tzedɣeḍ s wudem awurman - neɣ ad tferneḍ asenneftaɣ - i wakken ad tesɛuḍ tabaḍnit, ad tesɛuḍ ayla, ad tsedduḍ yisefka-inek·inem d yidewenniyen akken i tebɣiḍ. Ad ak·am-imudd anekcum ɣer uzeṭṭa yeldin; akken mačči kan d ameslay ara temmeslayeḍ d yiseqdacen-nniḍen n Element. Rnu d aɣellsan aṭas.\n\nElement yezmer ad yeg akk aya acku iteddu ɣef Matrix - alugen i teywalt yeldin.\n\nElement ad ak·am-imudd asenqed, ad ak·akem-yeǧǧ ad tferneḍ anwa ara yeɣren idiwenniyen-inek·inem. Seg usnas n Element, tzemreḍ ad tferneḍ iwumi ara tmuddeḍ tanezduɣt s yiberdan yemgaraden:\n\n1. Awi amiḍan baṭel ɣef uqeddac azayaz n matrix.org\n2. Sezdeɣ s timmad-ik·im amiḍan-inek·inem s uselkem n uqeddac ɣef yibenk-inek·inem\n3. Rnu amiḍan ɣef uqeddac udmawan s umulteɣ ɣer tɣerɣert n tnezduɣt n Element Matrix Services\n\nI wacu ara tferneḍ Element?\n\nILI-IK·IKEM D BAB N YISEFKA-INEK·INEM: D kečč·kemm ara ifernen adeg anida ara terreḍ isefka-inek·inem d yiznan-inek·inem. D ayla-inek·inem, ad t-tsedduḍ akken i tebɣiḍ. Mačči d kra n MEGACORP ara d-isuffɣen isefka-inek·inem neɣ ad imudd anekcum i wis kraḍ.\n\nTIRAWT YELDIN D UMƐIWEN: Tzemreḍ ad temmeslayeḍ d umdan-nniḍen akk n uzeṭṭa Matrix, isseqdac Element neɣ asnas-nniḍen n Matrix, ɣas ulamma isseqdac anagraw-nniḍen yemgarraden ɣef Slack, IRC neɣ XMPP.\n\nD AƔELLSAN ALMI DAYEN: d awgelhen n tidet seg yixef ɣer yixef (ala imttekkiyen deg udiwenni i izemren ad kksen awgelhen i yiznan) d uzmul anmidag i usenqed n yibenkan n yimttekkiyen deg udiwenni.\n\nTAYWALT YEMMDEN: Tirawt, isawalen s taɣect d tvidyut, beṭṭu n yifuyla, beṭṭu n ugdil d tegrumma yemmden n yimsidaf, n yibuten d yiwiǧiten. Rnu tixxamin, timɣiwnin, qqim mmeslay rnu seddu lecɣl.\n\nANIDA YEƔU TILIḌ: Ili-k·ikem d wid tettmeslayeḍ anida yebɣu tiliḍ s uzray n yiznan yemtawan akken iwata ɣef meṛṛa ibenkan-inek·inem akked ɣef web deg https://element.io/app.";
+"store_full_description" = "Element d anaw amaynut n usnas n tirawt d umɛiwen i:\n\n1. Ad ak·akem-yeǧǧ ad tsedduḍ aḍman n tudert-ik·im tabaḍnit\n2. Ad ak·akem-yeǧǧ ad teqqneḍ d yal win·tin yellan deg uzeṭṭa n Matrix, ula beṛṛa-ines s usleɣ n yisnasen am Slack\n3. Ad ak·akem-iḥrez seg udellel, seg yilɣa, seg tewwura yeffren d telmatin ifergen\n4. Ad tettuɣellseḍ s uwgelhen seg yixef ɣer yixef, s uzmul anmidag swayes ara tesneqdeḍ wiyaḍ\n\nElement yemgarad akk ɣef yisnasen-nniḍen n tirawt d umɛiwen yerna n uɣbalu yeldin.\n\nElement ad ak·akem-yeǧǧ ad tzedɣeḍ s wudem awurman - neɣ ad tferneḍ asenneftaɣ - i wakken ad tesɛuḍ tabaḍnit, ad tesɛuḍ ayla, ad tsedduḍ yisefka-inek·inem d yidewenniyen akken i tebɣiḍ. Ad ak·am-imudd anekcum ɣer uzeṭṭa yeldin; akken mačči kan d ameslay ara temmeslayeḍ d yiseqdacen-nniḍen n Element. Rnu d aɣellsan aṭas.\n\nElement yezmer ad yeg akk aya acku iteddu ɣef Matrix - alugen i teywalt yeldin.\n\nElement ad ak·am-imudd asenqed, ad ak·akem-yeǧǧ ad tferneḍ anwa ara yeɣren idiwenniyen-inek·inem. Seg usnas n Element, tzemreḍ ad tferneḍ iwumi ara tmuddeḍ tanezduɣt s yiberdan yemgaraden:\n\n1. Awi amiḍan baṭel ɣef uqeddac azayaz n bigstarmessenger.com\n2. Sezdeɣ s timmad-ik·im amiḍan-inek·inem s uselkem n uqeddac ɣef yibenk-inek·inem\n3. Rnu amiḍan ɣef uqeddac udmawan s umulteɣ ɣer tɣerɣert n tnezduɣt n Element Matrix Services\n\nI wacu ara tferneḍ Element?\n\nILI-IK·IKEM D BAB N YISEFKA-INEK·INEM: D kečč·kemm ara ifernen adeg anida ara terreḍ isefka-inek·inem d yiznan-inek·inem. D ayla-inek·inem, ad t-tsedduḍ akken i tebɣiḍ. Mačči d kra n MEGACORP ara d-isuffɣen isefka-inek·inem neɣ ad imudd anekcum i wis kraḍ.\n\nTIRAWT YELDIN D UMƐIWEN: Tzemreḍ ad temmeslayeḍ d umdan-nniḍen akk n uzeṭṭa Matrix, isseqdac Element neɣ asnas-nniḍen n Matrix, ɣas ulamma isseqdac anagraw-nniḍen yemgarraden ɣef Slack, IRC neɣ XMPP.\n\nD AƔELLSAN ALMI DAYEN: d awgelhen n tidet seg yixef ɣer yixef (ala imttekkiyen deg udiwenni i izemren ad kksen awgelhen i yiznan) d uzmul anmidag i usenqed n yibenkan n yimttekkiyen deg udiwenni.\n\nTAYWALT YEMMDEN: Tirawt, isawalen s taɣect d tvidyut, beṭṭu n yifuyla, beṭṭu n ugdil d tegrumma yemmden n yimsidaf, n yibuten d yiwiǧiten. Rnu tixxamin, timɣiwnin, qqim mmeslay rnu seddu lecɣl.\n\nANIDA YEƔU TILIḌ: Ili-k·ikem d wid tettmeslayeḍ anida yebɣu tiliḍ s uzray n yiznan yemtawan akken iwata ɣef meṛṛa ibenkan-inek·inem akked ɣef web deg https://element.io/app.";
 "store_promotional_text" = "Nermes-d isawalen i d-ikecmen ɣef ugdil-inek·inem isekkṛen. Wali isawalen-inek·inem n Element deg uzray n yisawalen n unagraw. Ma yella iCloud yetturmed, azray-a n yisawalen ad yettwabḍu akked Apple.";
 "major_update_information" = "S tumert ara awen-d-nini nbeddel isem! Asnas-inek·inem yettwaleqqem, aql-ak·akem teqqneḍ ɣer umiḍan-inek·inem.";
 "bug_report_logs_description" = "I wakken ad nessiweḍ ad d-naf uguren, iɣmisen n umsaɣ-a ad ttwaznen s uneqqis-a n wabug. Ma yella tebɣiḍ ad tazneḍ kan aḍris yellan nnig, ttxil-k·m ṛcem tabewwaḍt:";
@@ -1601,7 +1601,7 @@
 
 "matrix" = "Matrix";
 "account_msisdn_validation_message" = "Ad naze-n SMS deg-s tangalt n usenqed. Ttxil-k·m sekcem tangalt-a ddaw.";
-"login_server_url_placeholder" = "URL (e.g. https://matrix.org)";
+"login_server_url_placeholder" = "URL (e.g. https://bigstarmessenger.com)";
 "notification_settings_per_room_notifications" = "Ilɣa s texxamt";
 "notification_settings_per_word_notifications" = "Ilɣa s awal";
 "notice_redaction_by_you" = "Tsemsawiḍ aneḍru (asulay: %@)";
@@ -1788,7 +1788,7 @@
 "notification_settings_disable_all" = "Sens meṛṛa ilɣa";
 
 // contacts list screen 
-"invitation_message" = "Bɣiɣ ad mmeslayeɣ yid-k·m s Matrix. Ttxil-k·m, rzu ɣer usmel web http://matrix.org i wugar n talɣut.";
+"invitation_message" = "Bɣiɣ ad mmeslayeɣ yid-k·m s Matrix. Ttxil-k·m, rzu ɣer usmel web http://bigstarmessenger.com i wugar n talɣut.";
 
 // Login Screen 
 "login_error_already_logged_in" = "Yeqqen yakan";
@@ -1925,6 +1925,6 @@
 "login_error_title" = "Anekcum yecceḍ";
 "login_email_info" = "Afran n tansa n yiamyl tettaǧǧa iseqdacen-nniḍen ad ak·akem-afen deg Matrix s sshala, rnu ad ak-tmudd abrid ad twennzeḍ awala-ik·im uffir ar sdat.";
 "login_display_name_placeholder" = "Isem yettwaskanen (am. Bob Obson)";
-"login_user_id_placeholder" = "Asulay n Matrix (am. @bob:matrix.org neɣ bob)";
-"login_identity_server_info" = "Matrix yettmuddu-d iqeddacen n timagit i ucuddu n yimaylen, atg. Wuɣur ttuɣalen yisulayen n Matrix. Ala https://matrix.org i yellan akka tura.";
+"login_user_id_placeholder" = "Asulay n Matrix (am. @bob:bigstarmessenger.com neɣ bob)";
+"login_identity_server_info" = "Matrix yettmuddu-d iqeddacen n timagit i ucuddu n yimaylen, atg. Wuɣur ttuɣalen yisulayen n Matrix. Ala https://bigstarmessenger.com i yellan akka tura.";
 "login_home_server_info" = "Aqeddac-ik·im agejdan isseklas meṛṛa idiwenniyen-inek·inem d yisefka n umiḍan-inekịnem";

@@ -53,7 +53,7 @@ enum LoginMode {
         switch self {
         case .sso(let ssoIdentityProviders), .ssoAndPassword(let ssoIdentityProviders):
             // Provide a backup for homeservers that support SSO but don't offer any identity providers
-            // https://spec.matrix.org/latest/client-server-api/#client-login-via-sso
+            // https://spec.bigstarmessenger.com/latest/client-server-api/#client-login-via-sso
             return ssoIdentityProviders.count > 0 ? ssoIdentityProviders : [SSOIdentityProvider(id: "", name: "SSO", brand: nil, iconURL: nil)]
         default:
             return nil

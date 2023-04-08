@@ -63,7 +63,13 @@ def import_SwiftUI_pods
 end
 
 abstract_target 'RiotPods' do
-
+  
+  pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/Alamofire"
+  pod 'Firebase/Auth'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
   pod 'GBDeviceInfo', '~> 7.1.0'
   pod 'Reusable', '~> 4.1'
   pod 'KeychainAccess', '~> 4.2.2'

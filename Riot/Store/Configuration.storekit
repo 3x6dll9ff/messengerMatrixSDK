@@ -1,0 +1,222 @@
+{
+  "identifier" : "DEDC19B1",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.44",
+      "familyShareable" : false,
+      "internalID" : "25A5F18C",
+      "localizations" : [
+        {
+          "description" : "Purchase 1 day of displaying advertising",
+          "displayName" : "One day of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 1-го дня показа рекламы",
+          "displayName" : "Один день показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.1",
+      "referenceName" : "One day of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.88",
+      "familyShareable" : false,
+      "internalID" : "C2C66EC5",
+      "localizations" : [
+        {
+          "description" : "Purchase 2 days of displaying advertising",
+          "displayName" : "Two days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 2-х дней показа рекламы",
+          "displayName" : "Два дня показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.2",
+      "referenceName" : "Two days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.32",
+      "familyShareable" : false,
+      "internalID" : "93A5C1C7",
+      "localizations" : [
+        {
+          "description" : "Purchase 3 days of displaying advertising",
+          "displayName" : "Three days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 3-х дней показа рекламы",
+          "displayName" : "Три дня показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.3",
+      "referenceName" : "Three days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.76",
+      "familyShareable" : false,
+      "internalID" : "5F6C2A4F",
+      "localizations" : [
+        {
+          "description" : "Purchase 4 days of displaying advertising",
+          "displayName" : "Four days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 4-х дней показа рекламы",
+          "displayName" : "Четыре дня показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.4",
+      "referenceName" : "Four days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.2",
+      "familyShareable" : false,
+      "internalID" : "F6CD2E75",
+      "localizations" : [
+        {
+          "description" : "Purchase 5 days of displaying advertising",
+          "displayName" : "Five days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 5-х дней показа рекламы",
+          "displayName" : "Пять дней показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.5",
+      "referenceName" : "Five days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.64",
+      "familyShareable" : false,
+      "internalID" : "821AB629",
+      "localizations" : [
+        {
+          "description" : "Purchase 6 days of displaying advertising",
+          "displayName" : "Six days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 6-х дней показа рекламы",
+          "displayName" : "Шесть дней показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.6",
+      "referenceName" : "Six days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.08",
+      "familyShareable" : false,
+      "internalID" : "35789B7F",
+      "localizations" : [
+        {
+          "description" : "Purchase 7 days of displaying advertising",
+          "displayName" : "Seven days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 7-х дней показа рекламы",
+          "displayName" : "Семь дней показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.7",
+      "referenceName" : "Seven days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "6.16",
+      "familyShareable" : false,
+      "internalID" : "69ECBD45",
+      "localizations" : [
+        {
+          "description" : "Purchase 14 days of displaying advertising",
+          "displayName" : "Fourteen days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 14-х дней показа рекламы",
+          "displayName" : "Четырнадцать дней показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.14",
+      "referenceName" : "Fourteen days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.24",
+      "familyShareable" : false,
+      "internalID" : "E72AC0E3",
+      "localizations" : [
+        {
+          "description" : "Purchase 21 days of displaying advertising",
+          "displayName" : "Twenty-one days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 21-х дней показа рекламы",
+          "displayName" : "Двадцать один день показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.21",
+      "referenceName" : "Twenty-one days of ads",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "14.99",
+      "familyShareable" : false,
+      "internalID" : "B68DF3E1",
+      "localizations" : [
+        {
+          "description" : "Purchase 30 days of displaying advertising",
+          "displayName" : "Thirty days of ads",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Покупка 30-х дней показа рекламы",
+          "displayName" : "Тридцать дней показа рекламы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.temporary.ads.bss.30",
+      "referenceName" : "Thirty days of ads",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "7CF80912",
+    "privateKey" : "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgo6F+Y36ovmqHBgiWx7PXFHtSh9SMpzEY2D8yrtSNL1ygCgYIKoZIzj0DAQehRANCAAT/i4dsTsdaQTqcydN8vHQXsNADScR7d4EX30T1jRiFP1NQG4yK8MOO5rT2SqeYLAV7QzRdF1dN8f3dHzqJ2cHt"
+  },
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

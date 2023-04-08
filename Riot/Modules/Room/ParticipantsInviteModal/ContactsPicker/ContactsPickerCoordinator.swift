@@ -96,6 +96,7 @@ class ContactsPickerCoordinator: ContactsPickerCoordinatorProtocol {
 
 // MARK: - ContactsViewModelCoordinatorDelegate
 
+@available(iOS 15.0, *)
 extension ContactsPickerCoordinator: ContactsPickerViewModelCoordinatorDelegate {
     func contactsPickerViewModelDidStartLoading(_ viewModel: ContactsPickerViewModelProtocol) {
         delegate?.contactsPickerCoordinatorDidStartLoading(self)

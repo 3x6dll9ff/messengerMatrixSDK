@@ -21,44 +21,44 @@ import XCTest
 private enum Inputs {
     static let messageStart = "Hello "
     static let aliceDisplayname = "Alice"
-    static let aliceUserId = "@alice:matrix.org"
-    static let aliceAvatarUrl = "mxc://matrix.org/VyNYAgahaiAzUoOeZETtQ"
+    static let aliceUserId = "@alice:bigstarmessenger.com"
+    static let aliceAvatarUrl = "mxc://bigstarmessenger.com/VyNYAgahaiAzUoOeZETtQ"
     static let aliceAwayDisplayname = "Alice_away"
-    static let aliceNewAvatarUrl = "mxc://matrix.org/VyNYAgaFdlLojoOeZETtQ"
+    static let aliceNewAvatarUrl = "mxc://bigstarmessenger.com/VyNYAgaFdlLojoOeZETtQ"
     static let aliceMember = FakeMXRoomMember(displayname: aliceDisplayname, avatarUrl: aliceAvatarUrl, userId: aliceUserId)
-    static let aliceMemberAway = FakeMXRoomMember(displayname: aliceAwayDisplayname, avatarUrl: aliceNewAvatarUrl, userId: "@alice:matrix.org")
-    static let alicePermalink = "https://matrix.to/#/@alice:matrix.org"
+    static let aliceMemberAway = FakeMXRoomMember(displayname: aliceAwayDisplayname, avatarUrl: aliceNewAvatarUrl, userId: "@alice:bigstarmessenger.com")
+    static let alicePermalink = "https://matrix.to/#/@alice:bigstarmessenger.com"
     static let mentionToAlice = NSAttributedString(string: aliceDisplayname, attributes: [.link: URL(string: alicePermalink)!])
     static let markdownLinkToAlice = "[Alice](\(alicePermalink))"
 
-    static let bobUserId = "@bob:matrix.org"
+    static let bobUserId = "@bob:bigstarmessenger.com"
     static let bobDisplayname = "Bob"
-    static let bobAvatarUrl = "mxc://matrix.org/VyNYBgahazAzUuOeZETtQ"
+    static let bobAvatarUrl = "mxc://bigstarmessenger.com/VyNYBgahazAzUuOeZETtQ"
     static let bobMember = FakeMXRoomMember(displayname: bobDisplayname, avatarUrl: bobAvatarUrl, userId: bobUserId)
     
-    static let anotherUserId = "@another.user:matrix.org"
-    static let anotherUserPermalink = "https://matrix.to/#/@another.user:matrix.org"
+    static let anotherUserId = "@another.user:bigstarmessenger.com"
+    static let anotherUserPermalink = "https://matrix.to/#/@another.user:bigstarmessenger.com"
     static let markdownLinkToAnotherUser = "[Another user](\(alicePermalink))"
     static let mentionToAnotherUser = NSAttributedString(string: anotherUserPermalink, attributes: [.link: URL(string: anotherUserPermalink)!])
     static let mentionToAnotherUserWithLabel = NSAttributedString(string: "Link text", attributes: [.link: URL(string: anotherUserPermalink)!])
     
-    static let roomId = "!vWieJcXcUdMwavNSvy:matrix.org"
-    static let roomAlias = "#fake_room_alias:matrix.org"
+    static let roomId = "!vWieJcXcUdMwavNSvy:bigstarmessenger.com"
+    static let roomAlias = "#fake_room_alias:bigstarmessenger.com"
     static let roomDisplayName = "Sample Room"
     static let roomPermalink = "https://matrix.to/#/\(roomId)"
     static let roomAliasPermalink = "https://matrix.to/%23/\(roomAlias)"
-    static let roomAvatarUrl = "mxc://matrix.org/VzNZAgahaiAzUoOeZETtQ"
+    static let roomAvatarUrl = "mxc://bigstarmessenger.com/VzNZAgahaiAzUoOeZETtQ"
     static let mentionToRoom = NSAttributedString(string: roomPermalink, attributes: [.link: URL(string: roomPermalink)!])
     static let mentionToRoomWithLabel = NSAttributedString(string: roomDisplayName, attributes: [.link: URL(string: roomPermalink)!])
     static let mentionToRoomAlias = NSAttributedString(string: roomDisplayName, attributes: [.link: URL(string: roomAliasPermalink)!])
     
-    static let anotherRoomId = "!zWieBcUcUdMwavNSvy:matrix.org"
+    static let anotherRoomId = "!zWieBcUcUdMwavNSvy:bigstarmessenger.com"
     static let anotherRoomDisplayName = "Room/Space"
-    static let anotherRoomAvatarUrl = "mxc://matrix.org/VzNZBgajauAzUoOeZETtQ"
+    static let anotherRoomAvatarUrl = "mxc://bigstarmessenger.com/VzNZBgajauAzUoOeZETtQ"
     
     static let messageEventId = "$JrEsoQO77MCdAubG6z-5oXlOBy1I5QL9FTut_Giztoc"
-    static let messagePermalink = "https://matrix.to/#/\(roomId)/\(messageEventId)?via=matrix.org"
-    static let messageAnotherRoomPermalink = "https://matrix.to/#/\(anotherRoomId)/\(messageEventId)?via=matrix.org"
+    static let messagePermalink = "https://matrix.to/#/\(roomId)/\(messageEventId)?via=bigstarmessenger.com"
+    static let messageAnotherRoomPermalink = "https://matrix.to/#/\(anotherRoomId)/\(messageEventId)?via=bigstarmessenger.com"
     
     static let pillAnotherUserWithLinkText = "Link text"
     static let pillMessageAnotherRoomText = "Message in Sample Room"

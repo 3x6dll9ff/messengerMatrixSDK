@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllChatsViewController" customModule="Element" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllChatsViewController" customModule="BigStarmessenger" customModuleProvider="target">
             <connections>
                 <outlet property="recentsTableView" destination="orV-HH-88x" id="lgA-2k-pXJ"/>
-                <outlet property="toolbar" destination="osO-1z-CZg" id="xRm-cJ-bNi"/>
+                <outlet property="slideshow" destination="JJC-Bw-6sa" id="SQ3-3F-vaO"/>
+                <outlet property="toolbar" destination="CGF-MW-XVZ" id="5xA-TG-bsu"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NUQ-LI-M61"/>
             </connections>
         </placeholder>
@@ -20,30 +21,49 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="orV-HH-88x">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="orV-HH-88x">
+                    <rect key="frame" x="0.0" y="131" width="375" height="528"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osO-1z-CZg">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                <view clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="JJC-Bw-6sa" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <accessibility key="accessibilityConfiguration" identifier="RecentsVCStickyHeadersTopContainer"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="4Pz-fb-Ql3" appends="YES" id="1o8-RZ-eek"/>
+                    </connections>
+                </view>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGF-MW-XVZ">
+                    <rect key="frame" x="0.0" y="594" width="375" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="7k8-Ot-vpH"/>
+                        <constraint firstAttribute="width" constant="375" id="AhE-BU-igb"/>
+                        <constraint firstAttribute="height" constant="40" id="ECq-Lr-vAy"/>
                     </constraints>
                     <items/>
                 </toolbar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="4qf-KS-Fc9"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="orV-HH-88x" secondAttribute="trailing" id="3Np-64-AUe"/>
-                <constraint firstItem="osO-1z-CZg" firstAttribute="trailing" secondItem="4qf-KS-Fc9" secondAttribute="trailing" id="T2o-XM-BgN"/>
+                <constraint firstItem="4qf-KS-Fc9" firstAttribute="bottom" secondItem="orV-HH-88x" secondAttribute="bottom" id="Bka-Zz-CEr"/>
+                <constraint firstItem="CGF-MW-XVZ" firstAttribute="bottom" secondItem="4qf-KS-Fc9" secondAttribute="bottom" id="BxN-Ri-kvN"/>
+                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="JJC-Bw-6sa" secondAttribute="bottom" id="IMR-dV-gUS"/>
+                <constraint firstItem="JJC-Bw-6sa" firstAttribute="top" secondItem="4qf-KS-Fc9" secondAttribute="top" id="OBu-sH-mqE"/>
+                <constraint firstItem="CGF-MW-XVZ" firstAttribute="leading" secondItem="orV-HH-88x" secondAttribute="leading" id="QLo-iG-39E"/>
                 <constraint firstItem="orV-HH-88x" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dTn-zC-Axs"/>
-                <constraint firstItem="osO-1z-CZg" firstAttribute="leading" secondItem="4qf-KS-Fc9" secondAttribute="leading" id="mq4-BS-JFN"/>
-                <constraint firstItem="osO-1z-CZg" firstAttribute="bottom" secondItem="4qf-KS-Fc9" secondAttribute="bottom" id="ups-Ek-9Zs"/>
-                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xMc-15-1wS"/>
-                <constraint firstItem="4qf-KS-Fc9" firstAttribute="bottom" secondItem="orV-HH-88x" secondAttribute="bottom" id="zCp-Ju-dvr"/>
+                <constraint firstItem="CGF-MW-XVZ" firstAttribute="trailing" secondItem="orV-HH-88x" secondAttribute="trailing" id="g7Q-wc-dRT"/>
+                <constraint firstItem="JJC-Bw-6sa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l5C-zt-Env"/>
+                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="4qf-KS-Fc9" secondAttribute="top" constant="125" id="sUd-YJ-VLn"/>
+                <constraint firstAttribute="trailing" secondItem="JJC-Bw-6sa" secondAttribute="trailing" id="trw-3x-yjO"/>
             </constraints>
-            <point key="canvasLocation" x="140" y="137.18140929535232"/>
+            <point key="canvasLocation" x="140" y="70"/>
         </view>
+        <tapGestureRecognizer id="4Pz-fb-Ql3">
+            <connections>
+                <action selector="show:" destination="-1" id="3kO-Y3-0M7"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

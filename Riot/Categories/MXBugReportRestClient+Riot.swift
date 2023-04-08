@@ -18,6 +18,7 @@ import Foundation
 import MatrixSDK
 import GBDeviceInfo
 
+@available(iOS 15.0, *)
 extension MXBugReportRestClient {
     
     @objc static func vc_bugReportRestClient(appName: String) -> MXBugReportRestClient {

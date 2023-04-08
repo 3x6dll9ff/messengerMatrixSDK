@@ -22,14 +22,14 @@ final class PillTypeTests: XCTestCase {
 
     func testUserPill() throws {
         let urls = [
-            "https://matrix.to/#/@bob:matrix.org",
-            "https://matrix.to/#/user/@bob:matrix.org"
+            "https://matrix.to/#/@bob:bigstarmessenger.com",
+            "https://matrix.to/#/user/@bob:bigstarmessenger.com"
         ]
 
         for url in urls {
             switch PillType.from(url: URL(string: url)!) {
             case .user(let userId):
-                XCTAssertEqual(userId, "@bob:matrix.org")
+                XCTAssertEqual(userId, "@bob:bigstarmessenger.com")
             default:
                 XCTFail("Should be a .user pill")
             }
@@ -103,7 +103,7 @@ final class PillTypeTests: XCTestCase {
     }
     
     func testNotAPermalink() throws {
-        XCTAssertNil(PillType.from(url: URL(string: "matrix.org")!))
+        XCTAssertNil(PillType.from(url: URL(string: "bigstarmessenger.com")!))
     }
 
 }

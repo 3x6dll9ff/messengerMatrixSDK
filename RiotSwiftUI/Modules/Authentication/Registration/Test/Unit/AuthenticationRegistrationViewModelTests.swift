@@ -30,10 +30,10 @@ import XCTest
     }
     
     func testMatrixDotOrg() {
-        // Given the initial view model configured for matrix.org with some SSO providers.
+        // Given the initial view model configured for bigstarmessenger.com with some SSO providers.
         let homeserver = defaultHomeserver
         
-        // Then the view state should contain a homeserver that matches matrix.org and shows SSO buttons.
+        // Then the view state should contain a homeserver that matches bigstarmessenger.com and shows SSO buttons.
         XCTAssertEqual(context.viewState.homeserver, homeserver, "The homeserver data should match the original.")
         XCTAssertTrue(context.viewState.showSSOButtons, "The SSO buttons should be shown.")
     }
@@ -107,7 +107,7 @@ import XCTest
         // Then the error should be shown in the footer.
         XCTAssertEqual(context.viewState.usernameAvailability, .available,
                        "The username should be detected as available.")
-        XCTAssertEqual(context.viewState.usernameFooterMessage, VectorL10n.authenticationRegistrationUsernameFooterAvailable("@bob:matrix.org"),
+        XCTAssertEqual(context.viewState.usernameFooterMessage, VectorL10n.authenticationRegistrationUsernameFooterAvailable("@bob:bigstarmessenger.com"),
                        "The footer message should display that the username is available.")
         XCTAssertFalse(context.viewState.isUsernameInvalid,
                        "The username should continue to be valid when it is available.")

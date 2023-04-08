@@ -125,7 +125,7 @@ final class ComposerLinkActionViewModelTests: XCTestCase {
             result = value
         }
         XCTAssertTrue(context.viewState.isSaveButtonDisabled)
-        let link = "matrix.org"
+        let link = "bigstarmessenger.com"
         context.linkUrl = link
         XCTAssertFalse(context.viewState.isSaveButtonDisabled)
         context.send(viewAction: .save)

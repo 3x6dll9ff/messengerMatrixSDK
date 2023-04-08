@@ -16,6 +16,7 @@
 
 import UIKit
 
+@available(iOS 15.0, *)
 class VoiceBroadcastRecorderBubbleCell: VoiceBroadcastRecorderPlainCell {
     
     // MARK: - Properties
@@ -95,6 +96,7 @@ class VoiceBroadcastRecorderBubbleCell: VoiceBroadcastRecorderPlainCell {
 }
 
 // MARK: - TimestampDisplayable
+@available(iOS 15.0, *)
 extension VoiceBroadcastRecorderBubbleCell: TimestampDisplayable {
     
     func addTimestampView(_ timestampView: UIView) {

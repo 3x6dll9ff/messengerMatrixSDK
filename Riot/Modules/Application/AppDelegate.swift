@@ -16,7 +16,9 @@
 
 import UIKit
 import PushKit
+import Firebase
 
+@available(iOS 15.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -61,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Create AppCoordinator
         self.rootRouter = RootRouter(window: window)
-        
+        FirebaseApp.configure()
         let appCoordinator = AppCoordinator(router: self.rootRouter, window: window)
         appCoordinator.start()
         self.legacyAppDelegate.delegate = appCoordinator

@@ -49,7 +49,7 @@
 "auth_phone_placeholder" = "Số điện thoại";
 "auth_repeat_password_placeholder" = "Nhật lại mật khẩu";
 "auth_repeat_new_password_placeholder" = "Xác nhận mật khẩu mới cho danh khoản Matrix";
-"auth_home_server_placeholder" = "URL (ví dụ: https://matrix.org)";
+"auth_home_server_placeholder" = "URL (ví dụ: https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (vd. https://vector.im)";
 "auth_invalid_login_param" = "Tên đăng nhập hoặc mật khẩu không đúng";
 "warning" = "Cảnh báo";
@@ -394,7 +394,7 @@
 "directory_server_all_rooms" = "Tất cả phòng trong máy chủ %@";
 "directory_server_all_native_rooms" = "Tất cả phòng thuần Matrix";
 "directory_server_type_homeserver" = "Gõ một máy chủ nhà để liệt kê danh sách phòng";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu thành viên thay đổi";
 "event_formatter_widget_added" = "%@ widget tạo bởi %@";
@@ -577,7 +577,7 @@
 // MARK: - Room Info
 
 "room_info_list_one_member" = "1 thành viên";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_section_header_address" = "Địa chỉ phòng";
 "create_room_show_in_directory" = "Hiển thị phòng trong thư mục";
 "create_room_section_footer_type" = "Mọi người chỉ tham gia vào phòng riêng bằng lời mời";
@@ -1620,7 +1620,7 @@
 "skip" = "Bỏ qua";
 "close" = "Đóng";
 "store_promotional_text" = "Ứng dụng trò chuyện và cộng tác bảo vệ quyền riêng tư, trên mạng mở. Phi tập trung để đưa bạn vào tầm kiểm soát. Không có datamining, không có backdoors và không có quyền truy cập của bên thứ ba.";
-"store_full_description" = "Element là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng Matrix, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\nElement hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\nElement cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng Element khác. Và nó rất an toàn.\n\nElement có thể làm tất cả điều này bởi vì nó hoạt động trên Matrix - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\nElement giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng Element, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng matrix.org\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ Element Matrix\n\nTại sao chọn Element?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng Matrix, cho dù họ đang sử dụng Element hay ứng dụng Matrix khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng phòng, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://element.io/app.";
+"store_full_description" = "Element là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng Matrix, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\nElement hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\nElement cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng Element khác. Và nó rất an toàn.\n\nElement có thể làm tất cả điều này bởi vì nó hoạt động trên Matrix - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\nElement giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng Element, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng bigstarmessenger.com\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ Element Matrix\n\nTại sao chọn Element?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng Matrix, cho dù họ đang sử dụng Element hay ứng dụng Matrix khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng phòng, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://element.io/app.";
 // String for App Store
 "store_short_description" = "Chat/VoIP bảo mật phi tập trung";
 
@@ -1631,12 +1631,12 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "Tạo tài khoản:";
-"login_server_url_placeholder" = "URL (e.g. https://matrix.org)";
+"login_server_url_placeholder" = "URL (e.g. https://bigstarmessenger.com)";
 "login_home_server_title" = "Máy chủ nhà:";
 "login_home_server_info" = "Máy chủ nhà của bạn lưu trữ tất cả dữ liệu cần giữ gìn và tài khoản";
 "login_identity_server_title" = "Máy chủ xác thực:";
-"login_identity_server_info" = "Matrix cung cấp máy chủ xác thực để theo dõi email nào thuộc về Matrix IDs nào. Chỉ https://matrix.org hiện đang tồn tại.";
-"login_user_id_placeholder" = "Matrix ID (ví dụ: @bob:matrix.org hoặc bob)";
+"login_identity_server_info" = "Matrix cung cấp máy chủ xác thực để theo dõi email nào thuộc về Matrix IDs nào. Chỉ https://bigstarmessenger.com hiện đang tồn tại.";
+"login_user_id_placeholder" = "Matrix ID (ví dụ: @bob:bigstarmessenger.com hoặc bob)";
 "login_password_placeholder" = "Mật khẩu";
 "login_optional_field" = "không bắt buộc";
 "login_display_name_placeholder" = "Tên hiển thị (ví dụ: Bob Obson)";
@@ -1921,7 +1921,7 @@
 "login_error_must_start_http" = "URL phải bắt đầu với http[s]://";
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "Tôi muốn trò chuyện với bạn với matrix. Vui lòng truy cập trang web http://matrix.org để biết thêm thông tin.";
+"invitation_message" = "Tôi muốn trò chuyện với bạn với matrix. Vui lòng truy cập trang web http://bigstarmessenger.com để biết thêm thông tin.";
 // Settings screen 
 "settings_title_config" = "Cấu hình";
 "settings_title_notifications" = "Thông báo";

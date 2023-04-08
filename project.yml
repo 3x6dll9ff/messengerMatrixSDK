@@ -1,6 +1,6 @@
 name: Riot
 attributes:
-  ORGANIZATIONNAME: matrix.org
+  ORGANIZATIONNAME: bigstarmessenger.com
 
 configs:
   Debug: debug

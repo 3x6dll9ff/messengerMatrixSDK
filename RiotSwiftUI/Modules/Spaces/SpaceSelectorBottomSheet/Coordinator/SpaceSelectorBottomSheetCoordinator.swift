@@ -38,6 +38,7 @@ struct SpaceSelectorBottomSheetCoordinatorParameters {
     }
 }
 
+@available(iOS 15.0, *)
 final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presentable {
     // MARK: - Properties
     
@@ -111,6 +112,7 @@ final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presenta
         }
     }
     
+    @available(iOS 15.0, *)
     private func createSpaceSelectorCoordinator(parentSpaceId: String?) -> SpaceSelectorCoordinator {
         let parameters = SpaceSelectorCoordinatorParameters(session: parameters.session,
                                                             parentSpaceId: parentSpaceId,
@@ -191,6 +193,7 @@ final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presenta
 
 // MARK: - UIAdaptivePresentationControllerDelegate
 
+@available(iOS 15.0, *)
 extension SpaceSelectorBottomSheetCoordinator: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         completion?(.cancel)

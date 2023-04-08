@@ -18,7 +18,7 @@ import RiotSwiftUI
 import XCTest
 
 class OnboardingAvatarUITests: MockScreenTestCase {
-    let userId = "@example:matrix.org"
+    let userId = "@example:bigstarmessenger.com"
     let displayName = "Jane"
     
     func testPlaceholderAvatar() {

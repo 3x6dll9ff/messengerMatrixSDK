@@ -24,30 +24,30 @@ final class MarkdownToHTMLRendererTests: XCTestCase {
     func testRenderAutolinks() {
         let input = [
             "Test1:",
-            "<#_foonetic_xkcd:matrix.org>",
+            "<#_foonetic_xkcd:bigstarmessenger.com>",
             "<http://google.com/_thing_>",
-            "<https://matrix.org/_matrix/client/foo/123_>",
-            "<#_foonetic_xkcd:matrix.org>",
+            "<https://bigstarmessenger.com/_matrix/client/foo/123_>",
+            "<#_foonetic_xkcd:bigstarmessenger.com>",
             "",
             "Test1A:",
-            "<#_foonetic_xkcd:matrix.org>",
+            "<#_foonetic_xkcd:bigstarmessenger.com>",
             "<http://google.com/_thing_>",
-            "<https://matrix.org/_matrix/client/foo/123_>",
-            "<#_foonetic_xkcd:matrix.org>",
+            "<https://bigstarmessenger.com/_matrix/client/foo/123_>",
+            "<#_foonetic_xkcd:bigstarmessenger.com>",
             "",
             "Test2:",
             "<http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg>",
             "<http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg>",
             "",
             "Test3:",
-            "<https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org>",
-            "<https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org>",
+            "<https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com>",
+            "<https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com>",
         ].joined(separator: "\n")
         let expectedOutput = [
-            "<p>Test1:\n&lt;#_foonetic_xkcd:matrix.org&gt;\n<a href=\"http://google.com/_thing_\">http://google.com/_thing_</a>\n<a href=\"https://matrix.org/_matrix/client/foo/123_\">https://matrix.org/_matrix/client/foo/123_</a>\n&lt;#_foonetic_xkcd:matrix.org&gt;</p>",
-            "<p>Test1A:\n&lt;#_foonetic_xkcd:matrix.org&gt;\n<a href=\"http://google.com/_thing_\">http://google.com/_thing_</a>\n<a href=\"https://matrix.org/_matrix/client/foo/123_\">https://matrix.org/_matrix/client/foo/123_</a>\n&lt;#_foonetic_xkcd:matrix.org&gt;</p>",
+            "<p>Test1:\n&lt;#_foonetic_xkcd:bigstarmessenger.com&gt;\n<a href=\"http://google.com/_thing_\">http://google.com/_thing_</a>\n<a href=\"https://bigstarmessenger.com/_matrix/client/foo/123_\">https://bigstarmessenger.com/_matrix/client/foo/123_</a>\n&lt;#_foonetic_xkcd:bigstarmessenger.com&gt;</p>",
+            "<p>Test1A:\n&lt;#_foonetic_xkcd:bigstarmessenger.com&gt;\n<a href=\"http://google.com/_thing_\">http://google.com/_thing_</a>\n<a href=\"https://bigstarmessenger.com/_matrix/client/foo/123_\">https://bigstarmessenger.com/_matrix/client/foo/123_</a>\n&lt;#_foonetic_xkcd:bigstarmessenger.com&gt;</p>",
             "<p>Test2:\n<a href=\"http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg\">http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg</a>\n<a href=\"http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg\">http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg</a></p>",
-            "<p>Test3:\n<a href=\"https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org\">https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org</a>\n<a href=\"https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org\">https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org</a></p>",
+            "<p>Test3:\n<a href=\"https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com\">https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com</a>\n<a href=\"https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com\">https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com</a></p>",
             "",
         ].joined(separator: "\n")
         testRenderHTML(input: input, expectedOutput: expectedOutput)
@@ -57,30 +57,30 @@ final class MarkdownToHTMLRendererTests: XCTestCase {
     func testRenderRepairedLinks() {
         let input = [
             "Test1:",
-            "#_foonetic_xkcd:matrix.org",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test1A:",
-            "#_foonetic_xkcd:matrix.org",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test2:",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "",
             "Test3:",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com",
         ].joined(separator: "\n")
         let expectedOutput = [
-            "<p>Test1:\n#_foonetic_xkcd:matrix.org\nhttp://google.com/_thing_\nhttps://matrix.org/_matrix/client/foo/123_\n#_foonetic_xkcd:matrix.org</p>",
-            "<p>Test1A:\n#_foonetic_xkcd:matrix.org\nhttp://google.com/_thing_\nhttps://matrix.org/_matrix/client/foo/123_\n#_foonetic_xkcd:matrix.org</p>",
+            "<p>Test1:\n#_foonetic_xkcd:bigstarmessenger.com\nhttp://google.com/_thing_\nhttps://bigstarmessenger.com/_matrix/client/foo/123_\n#_foonetic_xkcd:bigstarmessenger.com</p>",
+            "<p>Test1A:\n#_foonetic_xkcd:bigstarmessenger.com\nhttp://google.com/_thing_\nhttps://bigstarmessenger.com/_matrix/client/foo/123_\n#_foonetic_xkcd:bigstarmessenger.com</p>",
             "<p>Test2:\nhttp://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg\nhttp://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg</p>",
-            "<p>Test3:\nhttps://riot.im/app/#/room/#_foonetic_xkcd:matrix.org\nhttps://riot.im/app/#/room/#_foonetic_xkcd:matrix.org</p>",
+            "<p>Test3:\nhttps://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com\nhttps://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com</p>",
             "",
         ].joined(separator: "\n")
         testRenderHTML(input: input, expectedOutput: expectedOutput)
@@ -114,12 +114,12 @@ final class MarkdownToHTMLRendererTests: XCTestCase {
 
     func testRenderRepairedLinksWithCharactersRequiringPercentEncoding() {
         let input = "Some link with special characters: "
-        + "https://matrix.to/#/#_oftc_#matrix-dev:matrix.org"
+        + "https://matrix.to/#/#_oftc_#matrix-dev:bigstarmessenger.com"
         + " "
         + "https://matrix.to/#/#?=+-_#_"
         + "\n"
         let expectedOutput = "<p>Some link with special characters: "
-        + "https://matrix.to/#/#_oftc_#matrix-dev:matrix.org"
+        + "https://matrix.to/#/#_oftc_#matrix-dev:bigstarmessenger.com"
         + " "
         + "https://matrix.to/#/#?=+-_#_</p>"
         + "\n"
@@ -131,45 +131,45 @@ final class MarkdownToHTMLRendererTests: XCTestCase {
         let input = "```"
         + [
             "Test1:",
-            "#_foonetic_xkcd:matrix.org",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test1A:",
-            "#_foonetic_xkcd:matrix.org",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test2:",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "",
             "Test3:",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com",
         ].joined(separator: "\n")
         + "```"
         let expectedOutput = [
-            "<pre><code class=\"language-Test1:\">#_foonetic_xkcd:matrix.org",
+            "<pre><code class=\"language-Test1:\">#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test1A:",
-            "#_foonetic_xkcd:matrix.org",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "http://google.com/_thing_",
-            "https://matrix.org/_matrix/client/foo/123_",
-            "#_foonetic_xkcd:matrix.org",
+            "https://bigstarmessenger.com/_matrix/client/foo/123_",
+            "#_foonetic_xkcd:bigstarmessenger.com",
             "",
             "Test2:",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "http://domain.xyz/foo/bar-_stuff-like-this_-in-it.jpg",
             "",
             "Test3:",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org",
-            "https://riot.im/app/#/room/#_foonetic_xkcd:matrix.org```",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com",
+            "https://riot.im/app/#/room/#_foonetic_xkcd:bigstarmessenger.com```",
             "</code></pre>",
             "",
         ].joined(separator: "\n")

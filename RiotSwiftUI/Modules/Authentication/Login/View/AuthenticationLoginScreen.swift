@@ -13,19 +13,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-
+import FirebaseAuth
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AuthenticationLoginScreen: View {
+    
     // MARK: - Properties
     
     // MARK: Private
     
     @Environment(\.theme) private var theme: ThemeSwiftUI
+    @Environment(\.dismiss) var dismiss
     
     /// A boolean that can be toggled to give focus to the password text field.
     /// This must be manually set back to `false` when the text field finishes editing.
     @State private var isPasswordFocused = false
+    @State private var isShowingSheet = false
+    var otpViewModel = OTPViewModel()
+
     
     // MARK: Public
     
@@ -38,37 +44,34 @@ struct AuthenticationLoginScreen: View {
                     .padding(.top, OnboardingMetrics.topPaddingToNavigationBar)
                     .padding(.bottom, 28)
                 
-                serverInfo
-                    .padding(.leading, 12)
-                    .padding(.bottom, 16)
+//                serverInfo
+//                    .padding(.leading, 12)
+//                    .padding(.bottom, 16)
                 
-                Rectangle()
-                    .fill(theme.colors.quinaryContent)
-                    .frame(height: 1)
-                    .padding(.bottom, 22)
+//                Rectangle()
+//                    .fill(theme.colors.quinaryContent)
+//                    .frame(height: 1)
+//                    .padding(.bottom, 22)
                 
                 if viewModel.viewState.homeserver.showLoginForm {
                     loginForm
                 }
-
-                if viewModel.viewState.homeserver.showQRLogin {
-                    qrLoginButton
-                }
                 
-                if viewModel.viewState.homeserver.showLoginForm, viewModel.viewState.showSSOButtons {
-                    Text(VectorL10n.or)
-                        .foregroundColor(theme.colors.secondaryContent)
-                        .padding(.top, 16)
-                }
+//                if viewModel.viewState.homeserver.showLoginForm && viewModel.viewState.showSSOButtons {
+//                    Text(VectorL10n.or)
+//                        .foregroundColor(theme.colors.secondaryContent)
+//                        .padding(.top, 16)
+//                }
                 
-                if viewModel.viewState.showSSOButtons {
-                    ssoButtons
-                        .padding(.top, 16)
-                }
+//                if viewModel.viewState.showSSOButtons {
+//                    ssoButtons
+//                        .padding(.top, 16)
+//                }
 
-                if !viewModel.viewState.homeserver.showLoginForm, !viewModel.viewState.showSSOButtons {
+                if !viewModel.viewState.homeserver.showLoginForm && !viewModel.viewState.showSSOButtons {
                     fallbackButton
                 }
+                
             }
             .readableFrame()
             .padding(.horizontal, 16)
@@ -77,6 +80,34 @@ struct AuthenticationLoginScreen: View {
         .background(theme.colors.background.ignoresSafeArea())
         .alert(item: $viewModel.alertInfo) { $0.alert }
         .accentColor(theme.colors.accent)
+        .fullScreenCover(isPresented: $isShowingSheet) {
+            if #available(iOS 15.0, *) {
+                OTPView(dismissAction: {
+                    isShowingSheet = false
+                    guard viewModel.viewState.canSubmit else { return }
+                    viewModel.send(viewAction: .next)
+                    
+                }, getOTPAction: {
+                    otpViewModel.requestOtp(phoneNumber: viewModel.username) {
+                        (verificationID, error) in
+                        if let error = error {
+                            DispatchQueue.main.async {
+                                let authError = error as NSError?
+                                print(authError?.code)
+                            }
+                            return
+                        }
+                        if let verificationId = verificationID {
+                            DispatchQueue.main.async {
+                                UserDefaults.standard.set(verificationId, forKey: "verificationId")
+                            }
+                        }
+                    }
+                })
+            } else {
+               
+            }
+            }
     }
     
     /// The header containing a Welcome Back title.
@@ -98,7 +129,7 @@ struct AuthenticationLoginScreen: View {
     /// The form with text fields for username and password, along with a submit button.
     var loginForm: some View {
         VStack(spacing: 14) {
-            RoundedBorderTextField(placeHolder: VectorL10n.authenticationLoginUsername,
+            RoundedBorderTextField(placeHolder: "+7 700 00 00 00",
                                    text: $viewModel.username,
                                    isFirstResponder: false,
                                    configuration: UIKitTextInputConfiguration(returnKeyType: .next,
@@ -106,42 +137,27 @@ struct AuthenticationLoginScreen: View {
                                                                               autocorrectionType: .no),
                                    onEditingChanged: usernameEditingChanged,
                                    onCommit: { isPasswordFocused = true })
-                .accessibilityIdentifier("usernameTextField")
-                .padding(.bottom, 7)
+            .accessibilityIdentifier("usernameTextField")
+            .padding(.bottom, 7)
             
-            RoundedBorderTextField(placeHolder: VectorL10n.authPasswordPlaceholder,
-                                   text: $viewModel.password,
-                                   isFirstResponder: isPasswordFocused,
-                                   configuration: UIKitTextInputConfiguration(returnKeyType: .done,
-                                                                              isSecureTextEntry: true),
-                                   onEditingChanged: passwordEditingChanged,
-                                   onCommit: submit)
-                .accessibilityIdentifier("passwordTextField")
+//            RoundedBorderTextField(placeHolder: VectorL10n.authPasswordPlaceholder,
+//                                   text: $viewModel.password,
+//                                   isFirstResponder: isPasswordFocused,
+//                                   configuration: UIKitTextInputConfiguration(returnKeyType: .done,
+//                                                                              isSecureTextEntry: true),
+//                                   onEditingChanged: passwordEditingChanged,
+//                                   onCommit: submit)
+//            .accessibilityIdentifier("passwordTextField")
             
-            Button { viewModel.send(viewAction: .forgotPassword) } label: {
-                Text(VectorL10n.authenticationLoginForgotPassword)
-                    .font(theme.fonts.body)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.bottom, 8)
             
             Button(action: submit) {
                 Text(VectorL10n.next)
             }
-            .buttonStyle(PrimaryActionButtonStyle())
+            
+            .buttonStyle(PrimaryActionButtonStyle(customColor: .purple))
             .disabled(!viewModel.viewState.canSubmit)
             .accessibilityIdentifier("nextButton")
         }
-    }
-
-    /// A QR login button that can be used for login.
-    var qrLoginButton: some View {
-        Button(action: qrLogin) {
-            Text(VectorL10n.authenticationLoginWithQr)
-        }
-        .buttonStyle(SecondaryActionButtonStyle(font: theme.fonts.bodySB))
-        .padding(.vertical)
-        .accessibilityIdentifier("qrLoginButton")
     }
     
     /// A list of SSO buttons that can be used for login.
@@ -161,7 +177,7 @@ struct AuthenticationLoginScreen: View {
         Button(action: fallback) {
             Text(VectorL10n.login)
         }
-        .buttonStyle(PrimaryActionButtonStyle())
+        .buttonStyle(PrimaryActionButtonStyle(customColor: .purple))
         .accessibilityIdentifier("fallbackButton")
     }
     
@@ -180,18 +196,28 @@ struct AuthenticationLoginScreen: View {
     
     /// Sends the `next` view action so long as the form is ready to submit.
     func submit() {
-        guard viewModel.viewState.canSubmit else { return }
-        viewModel.send(viewAction: .next)
+        otpViewModel.requestOtp(phoneNumber: viewModel.username) {
+            (verificationID, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    let authError = error as! NSError?
+                    print(authError?.code)
+                }
+                return
+            }
+            if let verificationId = verificationID {
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(verificationId, forKey: "verificationId")
+                    isShowingSheet = true
+                }
+            }
+        }
     }
+
 
     /// Sends the `fallback` view action.
     func fallback() {
         viewModel.send(viewAction: .fallback)
-    }
-
-    /// Sends the `qrLogin` view action.
-    func qrLogin() {
-        viewModel.send(viewAction: .qrLogin)
     }
 }
 

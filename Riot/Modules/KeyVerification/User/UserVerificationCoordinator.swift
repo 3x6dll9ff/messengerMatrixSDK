@@ -18,6 +18,7 @@
 
 import UIKit
 
+@available(iOS 15.0, *)
 @objcMembers
 final class UserVerificationCoordinator: NSObject, UserVerificationCoordinatorType {
     
@@ -152,6 +153,7 @@ final class UserVerificationCoordinator: NSObject, UserVerificationCoordinatorTy
 }
 
 // MARK: - UserVerificationSessionsStatusCoordinatorDelegate
+@available(iOS 15.0, *)
 extension UserVerificationCoordinator: UserVerificationSessionsStatusCoordinatorDelegate {
     func userVerificationSessionsStatusCoordinatorDidClose(_ coordinator: UserVerificationSessionsStatusCoordinatorType) {
         
@@ -166,6 +168,7 @@ extension UserVerificationCoordinator: UserVerificationSessionsStatusCoordinator
 }
 
 // MARK: - UserVerificationSessionStatusCoordinatorDelegate
+@available(iOS 15.0, *)
 extension UserVerificationCoordinator: UserVerificationSessionStatusCoordinatorDelegate {
     
     func userVerificationSessionStatusCoordinator(_ coordinator: UserVerificationSessionStatusCoordinatorType, wantsToVerifyDeviceWithId deviceId: String, for userId: String) {
@@ -185,6 +188,7 @@ extension UserVerificationCoordinator: UserVerificationSessionStatusCoordinatorD
 }
 
 // MARK: - UserVerificationCoordinatorDelegate
+@available(iOS 15.0, *)
 extension UserVerificationCoordinator: KeyVerificationCoordinatorDelegate {
     
     func keyVerificationCoordinatorDidComplete(_ coordinator: KeyVerificationCoordinatorType, otherUserId: String, otherDeviceId: String) {
@@ -204,6 +208,7 @@ extension UserVerificationCoordinator: KeyVerificationCoordinatorDelegate {
 }
 
 // MARK: - KeyVerificationManuallyVerifyCoordinatorDelegate
+@available(iOS 15.0, *)
 extension UserVerificationCoordinator: KeyVerificationManuallyVerifyCoordinatorDelegate {
     
     func keyVerificationManuallyVerifyCoordinator(_ coordinator: KeyVerificationManuallyVerifyCoordinatorType, didVerifiedDeviceWithId deviceId: String, of userId: String) {

@@ -146,7 +146,7 @@ final class RiotSettings: NSObject {
     // MARK: Labs
     
     /// Indicates if CallKit ringing is enabled for group calls. This setting does not disable the CallKit integration for group calls, only relates to ringing.
-    @UserDefault(key: "enableRingingForGroupCalls", defaultValue: false, storage: defaults)
+    @UserDefault(key: "enableRingingForGroupCalls", defaultValue: true, storage: defaults)
     var enableRingingForGroupCalls
     
     /// Indicates if threads enabled in the timeline.
@@ -162,7 +162,7 @@ final class RiotSettings: NSObject {
     var enableUISIAutoReporting
     
     /// Indicates if live location sharing is enabled
-    @UserDefault(key: UserDefaultsKeys.enableLiveLocationSharing, defaultValue: false, storage: defaults)
+    @UserDefault(key: UserDefaultsKeys.enableLiveLocationSharing, defaultValue: true, storage: defaults)
     var enableLiveLocationSharing {
         didSet {
             NotificationCenter.default.post(name: RiotSettings.didUpdateLiveLocationSharingActivation, object: self)
@@ -178,7 +178,7 @@ final class RiotSettings: NSObject {
     var enableClientInformationFeature
 
     /// Flag indicating if the wysiwyg composer feature is enabled
-    @UserDefault(key: "enableWysiwygComposer", defaultValue: false, storage: defaults)
+    @UserDefault(key: "enableWysiwygComposer", defaultValue: true, storage: defaults)
     var enableWysiwygComposer
 
     @UserDefault(key: "enableWysiwygTextFormatting", defaultValue: true, storage: defaults)

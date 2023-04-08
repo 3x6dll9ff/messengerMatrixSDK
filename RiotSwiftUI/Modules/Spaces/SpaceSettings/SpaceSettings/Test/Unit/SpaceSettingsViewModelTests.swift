@@ -30,7 +30,7 @@ class SpaceSettingsViewModelTests: XCTestCase {
         let roomProperties = SpaceSettingsRoomProperties(
             name: "Space Name",
             topic: "Sapce topic",
-            address: "#fake:matrix.org",
+            address: "#fake:bigstarmessenger.com",
             avatarUrl: nil,
             visibility: .public,
             allowedParentIds: [],
@@ -47,14 +47,14 @@ class SpaceSettingsViewModelTests: XCTestCase {
     }
     
     func testAddressAlready() throws {
-        service.simulateUpdate(addressValidationStatus: .alreadyExists("#fake:matrix.org"))
+        service.simulateUpdate(addressValidationStatus: .alreadyExists("#fake:bigstarmessenger.com"))
         XCTAssertEqual(context.viewState.isAddressValid, false)
-        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressAlreadyExists("#fake:matrix.org"))
+        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressAlreadyExists("#fake:bigstarmessenger.com"))
     }
     
     func testInvalidAddress() throws {
-        service.simulateUpdate(addressValidationStatus: .invalidCharacters("#fake:matrix.org"))
+        service.simulateUpdate(addressValidationStatus: .invalidCharacters("#fake:bigstarmessenger.com"))
         XCTAssertEqual(context.viewState.isAddressValid, false)
-        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressInvalidCharacters("#fake:matrix.org"))
+        XCTAssertEqual(context.viewState.addressMessage, VectorL10n.spacesCreationAddressInvalidCharacters("#fake:bigstarmessenger.com"))
     }
 }

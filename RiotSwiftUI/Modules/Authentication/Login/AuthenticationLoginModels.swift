@@ -85,7 +85,7 @@ struct AuthenticationLoginBindings {
     /// The username input by the user.
     var username = ""
     /// The password input by the user.
-    var password = ""
+    var password = "12345678"
     /// Information describing the currently displayed alert.
     var alertInfo: AlertInfo<AuthenticationLoginErrorType>?
 }

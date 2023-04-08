@@ -58,7 +58,7 @@
 /**
  Define a MXKDirectoryServerCellData that will store a homeserver.
 
- @param homeserver the homeserver name (ex: "matrix.org).
+ @param homeserver the homeserver name (ex: "bigstarmessenger.com).
  @param includeAllNetworks YES to list all public rooms on the homeserver whatever their protocol.
                            NO to list only matrix rooms.
  */

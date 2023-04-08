@@ -1,5 +1,5 @@
 /*
- Copyright 2021 The Matrix.org Foundation C.I.C
+ Copyright 2021 The bigstarmessenger.com Foundation C.I.C
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -93,7 +93,7 @@ private final class StubMXKRoomDataSource: MXKRoomDataSource {
 private final class FakeMXKRoomDataSource: MXKRoomDataSource {
 
     class func make() throws -> FakeMXKRoomDataSource {
-        let dataSource = try XCTUnwrap(FakeMXKRoomDataSource(roomId: "!foofoofoofoofoofoo:matrix.org", andMatrixSession: nil, threadId: nil))
+        let dataSource = try XCTUnwrap(FakeMXKRoomDataSource(roomId: "!foofoofoofoofoofoo:bigstarmessenger.com", andMatrixSession: nil, threadId: nil))
         dataSource.registerCellDataClass(CollapsibleBubbleCellData.self, forCellIdentifier: kMXKRoomBubbleCellDataIdentifier)
         dataSource.eventFormatter = CountingEventFormatter(matrixSession: nil)
         return dataSource
@@ -108,11 +108,11 @@ private final class FakeMXKRoomDataSource: MXKRoomDataSource {
     }
 
     func queueEvent1() throws {
-        try queueEvent(json: #"{"sender":"@alice:matrix.org","content":{"displayname":"bob","membership":"invite"},"origin_server_ts":1616488993287,"state_key":"@bob:matrix.org","room_id":"!foofoofoofoofoofoo:matrix.org","event_id":"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do","type":"m.room.member","unsigned":{"age":1204610,"prev_sender":"@alice:matrix.org","prev_content":{"membership":"leave"},"replaces_state":"$9mQ6RtscXqHCxWqOElI-eP_kwpkuPd2Czm3UHviGoyE"}}"#)
+        try queueEvent(json: #"{"sender":"@alice:bigstarmessenger.com","content":{"displayname":"bob","membership":"invite"},"origin_server_ts":1616488993287,"state_key":"@bob:bigstarmessenger.com","room_id":"!foofoofoofoofoofoo:bigstarmessenger.com","event_id":"$lGK3budX5w009ErtQwE9ZFhwyUUAV9DqEN5yb2fI4Do","type":"m.room.member","unsigned":{"age":1204610,"prev_sender":"@alice:bigstarmessenger.com","prev_content":{"membership":"leave"},"replaces_state":"$9mQ6RtscXqHCxWqOElI-eP_kwpkuPd2Czm3UHviGoyE"}}"#)
     }
 
     func queueEvent2() throws {
-        try queueEvent(json: #"{"sender":"@alice:matrix.org","content":{"displayname":"john","membership":"invite"},"origin_server_ts":1616488967295,"state_key":"@john:matrix.org","room_id":"!foofoofoofoofoofoo:matrix.org","event_id":"$-00slfAluxVTP2VWytgDThTmh3nLd0WJD6gzBo2scJM","type":"m.room.member","unsigned":{"age":1712006,"prev_sender":"@alice:matrix.org","prev_content":{"membership":"leave"},"replaces_state":"$NRNkCMKeKK5NtTfWkMfTlMr5Ygw60Q2CQYnJNkbzyrs"}}"#)
+        try queueEvent(json: #"{"sender":"@alice:bigstarmessenger.com","content":{"displayname":"john","membership":"invite"},"origin_server_ts":1616488967295,"state_key":"@john:bigstarmessenger.com","room_id":"!foofoofoofoofoofoo:bigstarmessenger.com","event_id":"$-00slfAluxVTP2VWytgDThTmh3nLd0WJD6gzBo2scJM","type":"m.room.member","unsigned":{"age":1712006,"prev_sender":"@alice:bigstarmessenger.com","prev_content":{"membership":"leave"},"replaces_state":"$NRNkCMKeKK5NtTfWkMfTlMr5Ygw60Q2CQYnJNkbzyrs"}}"#)
     }
 
     private func queueEvent(json: String) throws {

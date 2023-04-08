@@ -22,6 +22,7 @@ import UIKit
 /// This bridge is used while waiting for global usage of coordinator pattern.
 /// **WARNING**: This class breaks the Coordinator abstraction and it has been introduced for **Objective-C compatibility only** (mainly for integration in legacy view controllers).
 /// Each bridge should be removed once the underlying Coordinator has been integrated by another Coordinator.
+@available(iOS 15.0, *)
 @objcMembers
 final class UserSessionsFlowCoordinatorBridgePresenter: NSObject {
     private let mxSession: MXSession

@@ -26,19 +26,19 @@ class MXRoomAliasResolutionDeeplinkTests: XCTestCase {
     
     func test_fragmentDoesNotContainServers_ifNoServers() {
         let resolution = MXRoomAliasResolution()
-        resolution.roomId = "!abc:matrix.org"
+        resolution.roomId = "!abc:bigstarmessenger.com"
         
-        XCTAssertEqual(resolution.deeplinkFragment, "!abc:matrix.org")
+        XCTAssertEqual(resolution.deeplinkFragment, "!abc:bigstarmessenger.com")
     }
     
     func test_fragmentContainsSingleServer() {
         let resolution = MXRoomAliasResolution()
         resolution.roomId = "xyz:element.io"
         resolution.servers = [
-            "matrix.org"
+            "bigstarmessenger.com"
         ]
         
-        XCTAssertEqual(resolution.deeplinkFragment, "xyz:element.io?via=matrix.org")
+        XCTAssertEqual(resolution.deeplinkFragment, "xyz:element.io?via=bigstarmessenger.com")
     }
     
     func test_fragmentContainsMultipleSerivers() {
@@ -48,9 +48,9 @@ class MXRoomAliasResolutionDeeplinkTests: XCTestCase {
             "server.com",
             "element.io",
             "wikipedia.org",
-            "matrix.org"
+            "bigstarmessenger.com"
         ]
         
-        XCTAssertEqual(resolution.deeplinkFragment, "mno:server.com?via=server.com&via=element.io&via=wikipedia.org&via=matrix.org")
+        XCTAssertEqual(resolution.deeplinkFragment, "mno:server.com?via=server.com&via=element.io&via=wikipedia.org&via=bigstarmessenger.com")
     }
 }

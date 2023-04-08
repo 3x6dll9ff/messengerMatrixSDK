@@ -18,6 +18,7 @@
 
 import UIKit
 
+@available(iOS 15.0, *)
 @objcMembers
 final class KeyVerificationCoordinator: KeyVerificationCoordinatorType {
     
@@ -295,6 +296,7 @@ final class KeyVerificationCoordinator: KeyVerificationCoordinatorType {
 }
 
 // MARK: - KeyVerificationDataLoadingCoordinatorDelegate
+@available(iOS 15.0, *)
 extension KeyVerificationCoordinator: KeyVerificationDataLoadingCoordinatorDelegate {
     
     func keyVerificationDataLoadingCoordinator(_ coordinator: KeyVerificationDataLoadingCoordinatorType, didAcceptKeyVerificationRequest keyVerificationRequest: MXKeyVerificationRequest) {
@@ -326,6 +328,7 @@ extension KeyVerificationCoordinator: KeyVerificationDataLoadingCoordinatorDeleg
 }
 
 // MARK: - DeviceVerificationStartCoordinatorDelegate
+@available(iOS 15.0, *)
 extension KeyVerificationCoordinator: DeviceVerificationStartCoordinatorDelegate {
     func deviceVerificationStartCoordinator(_ coordinator: DeviceVerificationStartCoordinatorType, otherDidAcceptRequest request: MXKeyVerificationRequest) {
         self.showVerifyByScanning(keyVerificationRequest: request, animated: true)
@@ -335,17 +338,19 @@ extension KeyVerificationCoordinator: DeviceVerificationStartCoordinatorDelegate
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - DeviceVerificationIncomingCoordinatorDelegate
 extension KeyVerificationCoordinator: DeviceVerificationIncomingCoordinatorDelegate {
     func deviceVerificationIncomingCoordinator(_ coordinator: DeviceVerificationIncomingCoordinatorType, didAcceptTransaction transaction: MXSASTransaction) {
         self.showVerifyBySAS(transaction: transaction, animated: true)
     }
-
+    
     func deviceVerificationIncomingCoordinatorDidCancel(_ coordinator: DeviceVerificationIncomingCoordinatorType) {
         self.didCancel()
     }
-}
+    }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationVerifyBySASCoordinatorDelegate
 extension KeyVerificationCoordinator: KeyVerificationVerifyBySASCoordinatorDelegate {
@@ -357,6 +362,7 @@ extension KeyVerificationCoordinator: KeyVerificationVerifyBySASCoordinatorDeleg
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationVerifiedViewControllerDelegate
 extension KeyVerificationCoordinator: KeyVerificationVerifiedViewControllerDelegate {
@@ -368,6 +374,7 @@ extension KeyVerificationCoordinator: KeyVerificationVerifiedViewControllerDeleg
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - UserVerificationStartCoordinatorDelegate
 extension KeyVerificationCoordinator: UserVerificationStartCoordinatorDelegate {
@@ -388,6 +395,7 @@ extension KeyVerificationCoordinator: UserVerificationStartCoordinatorDelegate {
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationVerifyByScanningCoordinatorDelegate
 extension KeyVerificationCoordinator: KeyVerificationVerifyByScanningCoordinatorDelegate {
@@ -408,6 +416,7 @@ extension KeyVerificationCoordinator: KeyVerificationVerifyByScanningCoordinator
         self.showVerifyBySAS(transaction: transaction, animated: true)
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationSelfVerifyStartCoordinatorDelegate
 extension KeyVerificationCoordinator: KeyVerificationSelfVerifyStartCoordinatorDelegate {
@@ -420,6 +429,7 @@ extension KeyVerificationCoordinator: KeyVerificationSelfVerifyStartCoordinatorD
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationSelfVerifyWaitCoordinatorDelegate
 extension KeyVerificationCoordinator: KeyVerificationSelfVerifyWaitCoordinatorDelegate {
@@ -440,6 +450,7 @@ extension KeyVerificationCoordinator: KeyVerificationSelfVerifyWaitCoordinatorDe
         self.showSecretsRecovery(with: secretsRecoveryMode)
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - KeyVerificationScanConfirmationCoordinatorDelegate
 extension KeyVerificationCoordinator: KeyVerificationScanConfirmationCoordinatorDelegate {
@@ -452,6 +463,7 @@ extension KeyVerificationCoordinator: KeyVerificationScanConfirmationCoordinator
         self.didCancel()
     }
 }
+@available(iOS 15.0, *)
 
 // MARK: - SecretsRecoveryCoordinatorDelegate
 extension KeyVerificationCoordinator: SecretsRecoveryCoordinatorDelegate {

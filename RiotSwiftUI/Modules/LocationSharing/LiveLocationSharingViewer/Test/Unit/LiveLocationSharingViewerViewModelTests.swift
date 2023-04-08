@@ -43,7 +43,7 @@ class LiveLocationSharingViewerViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.context.viewState.showsUserLocationMode, .hide)
         viewModel.context.send(viewAction: .showUserLocation)
         XCTAssertEqual(viewModel.context.viewState.showsUserLocationMode, .follow)
-        viewModel.context.send(viewAction: .tapListItem("@bob:matrix.org"))
+        viewModel.context.send(viewAction: .tapListItem("@bob:bigstarmessenger.com"))
         XCTAssertEqual(viewModel.context.viewState.showsUserLocationMode, .show)
     }
 }

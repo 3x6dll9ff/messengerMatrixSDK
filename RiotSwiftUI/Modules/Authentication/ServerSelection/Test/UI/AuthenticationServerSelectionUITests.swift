@@ -27,7 +27,7 @@ class AuthenticationServerSelectionUITests: MockScreenTestCase {
         XCTAssertEqual(message.label, VectorL10n.authenticationServerSelectionRegisterMessage)
         
         let serverTextField = app.textFields.element
-        XCTAssertEqual(serverTextField.value as? String, "matrix.org", "The server shown should be matrix.org as passed to the view model init.")
+        XCTAssertEqual(serverTextField.value as? String, "bigstarmessenger.com", "The server shown should be bigstarmessenger.com as passed to the view model init.")
         
         let confirmButton = app.buttons["confirmButton"]
         XCTAssertEqual(confirmButton.label, VectorL10n.confirm, "The confirm button should say Confirm when in modal presentation.")

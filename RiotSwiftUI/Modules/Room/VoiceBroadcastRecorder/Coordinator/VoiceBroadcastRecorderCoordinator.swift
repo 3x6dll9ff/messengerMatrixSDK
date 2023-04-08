@@ -23,6 +23,7 @@ struct VoiceBroadcastRecorderCoordinatorParameters {
     let senderDisplayName: String?
 }
 
+@available(iOS 15.0, *)
 final class VoiceBroadcastRecorderCoordinator: Coordinator, Presentable {
     // MARK: - Properties
     

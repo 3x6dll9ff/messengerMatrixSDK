@@ -18,12 +18,14 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 @objc protocol UserVerificationCoordinatorBridgePresenterDelegate {
     func userVerificationCoordinatorBridgePresenterDelegateDidComplete(_ coordinatorBridgePresenter: UserVerificationCoordinatorBridgePresenter)
 }
 
 /// UserVerificationCoordinatorBridgePresenter enables to start UserVerificationCoordinator from a view controller.
 /// This bridge is used while waiting for global usage of coordinator pattern.
+@available(iOS 15.0, *)
 @objcMembers
 final class UserVerificationCoordinatorBridgePresenter: NSObject {
     
@@ -83,6 +85,7 @@ final class UserVerificationCoordinatorBridgePresenter: NSObject {
     }
 }
 
+@available(iOS 15.0, *)
 extension UserVerificationCoordinatorBridgePresenter: UserVerificationCoordinatorDelegate {
     func userVerificationCoordinatorDidComplete(_ coordinator: UserVerificationCoordinatorType) {
         delegate?.userVerificationCoordinatorBridgePresenterDelegateDidComplete(self)

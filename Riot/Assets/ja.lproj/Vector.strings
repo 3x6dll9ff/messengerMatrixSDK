@@ -50,7 +50,7 @@
 "auth_phone_placeholder" = "電話番号";
 "auth_repeat_password_placeholder" = "パスワードを再確認";
 "auth_repeat_new_password_placeholder" = "Matrixアカウントの新しいパスワードを確認";
-"auth_home_server_placeholder" = "URL (例 https://matrix.org)";
+"auth_home_server_placeholder" = "URL (例 https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (例 https://vector.im)";
 "auth_invalid_login_param" = "ユーザー名とパスワードの一方あるいは両方が正しくありません";
 "auth_invalid_user_name" = "ユーザー名には半角英数字、ドット、ハイフン、アンダースコアのみを使用してください";
@@ -390,7 +390,7 @@
 "directory_server_all_rooms" = "%@サーバー上の全てのルーム";
 "directory_server_all_native_rooms" = "全てのMatrix連携ルーム";
 "directory_server_type_homeserver" = "公開ルームの一覧を表示するホームサーバーを入力してください";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu個のメンバーシップの変更";
 "event_formatter_widget_added" = "%@のウィジェットが%@により追加されました";
@@ -564,7 +564,7 @@
 // MARK: - Room Info
 
 "room_info_list_one_member" = "1人のメンバー";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_section_header_address" = "アドレス";
 "create_room_show_in_directory" = "ルーム一覧に掲載";
 "create_room_section_footer_type" = "非公開のルームは、ルームに招待された人のみ参加できます。";
@@ -866,7 +866,7 @@
 "settings_security" = "セキュリティー";
 "settings_three_pids_management_information_part3" = "で設定しましょう。";
 "settings_three_pids_management_information_part2" = "ディスカバリー（発見）";
-"store_full_description" = "Elementは画期的なメッセンジャーアプリです。\n\n1. あなた自身が、プライバシーをコントロールできます。\n2. Matrixネットワークにいる誰とでもコミュニケーションできます。Slackなどのアプリと連携すれば、他のネットワークのユーザーともコミュニケーションを行うことができます。\n3. 広告やデータマイニング、バックドア、ユーザーの囲い込みから、あなたを守ります。\n4. エンドツーエンド暗号化と、クロス署名による認証で、コミュニケーションの安全性を確保します。\n\nElementは分散型（非中央集権型）でオープンソースのメッセンジャーアプリです。他のメッセンジャーアプリとは全く性質が異なります。\n\nElementでは、あなた自身がサーバーを運営することも、サーバーを選ぶこともできます。あなたのデータや会話に関するプライバシーや、誰があなたのデータを所有するかは、あなた自身で定められます。さらに、Elementがアクセスするネットワークは、誰でも参加できるオープンなネットワークなので、Elementのユーザー以外ともコミュニケーションを行うことができます。しかもきわめて安全です。\n\nこれら全ては、ElementがMatrix――オープンな分散型通信の標準規格――で動作するために可能になっています。\n\nElementでは、どのサーバーを使用するかを、ご自身でElementのアプリから決めることができます。\n\n1. 開発者がホストする matrix.org のパブリックサーバーで無料アカウントを取得。\n2. あなた自身がサーバーを運営し、アカウントを管理。\n3. Element Matrix Servicesのホスティングプラットフォームに加入し、カスタムサーバー上でアカウントを作成。\n\nElementを選ぶべき理由：\n\n自分のデータを、自分で所有：データやメッセージを保管する場所を自分で決めることができます。データを所有しコントロールするのは、あなた自身です。データを解析したり、第三者にデータを渡したりする巨大IT企業ではありません。\n\nオープンなメッセージングと、コラボレーション：Matrixネットワーク上の誰とでも、メッセージのやり取りを行うことができます。Elementや他のMatrixアプリだけでなく、Slack、IRC、XMPPのような他のメッセージングシステムのユーザーとも、チャットをすることができます。\n\n非常に安全：本物のエンド・ツー・エンドの暗号化（会話に参加している人だけがメッセージを読み取ることができます）を備えています。また、クロス署名を行えば、会話に参加しているユーザーの端末が、本当にそのユーザーのものであるかを認証することができます。\n\n包括的なコミュニケーション：メッセージのやり取り、音声・ビデオ通話、ファイル共有、画面共有、その他多くの機能、ボット、ウィジェットを提供します。ルームやコミュニティーを立ち上げて連絡を取り合い、タスクをスムーズに成し遂げましょう。\n\nいつでも、どこにいても：アプリをインストールしている全ての端末とウェブ https://app.element.io でメッセージの履歴が同期されるため、どこにいても連絡を取ることができます。";
+"store_full_description" = "Elementは画期的なメッセンジャーアプリです。\n\n1. あなた自身が、プライバシーをコントロールできます。\n2. Matrixネットワークにいる誰とでもコミュニケーションできます。Slackなどのアプリと連携すれば、他のネットワークのユーザーともコミュニケーションを行うことができます。\n3. 広告やデータマイニング、バックドア、ユーザーの囲い込みから、あなたを守ります。\n4. エンドツーエンド暗号化と、クロス署名による認証で、コミュニケーションの安全性を確保します。\n\nElementは分散型（非中央集権型）でオープンソースのメッセンジャーアプリです。他のメッセンジャーアプリとは全く性質が異なります。\n\nElementでは、あなた自身がサーバーを運営することも、サーバーを選ぶこともできます。あなたのデータや会話に関するプライバシーや、誰があなたのデータを所有するかは、あなた自身で定められます。さらに、Elementがアクセスするネットワークは、誰でも参加できるオープンなネットワークなので、Elementのユーザー以外ともコミュニケーションを行うことができます。しかもきわめて安全です。\n\nこれら全ては、ElementがMatrix――オープンな分散型通信の標準規格――で動作するために可能になっています。\n\nElementでは、どのサーバーを使用するかを、ご自身でElementのアプリから決めることができます。\n\n1. 開発者がホストする bigstarmessenger.com のパブリックサーバーで無料アカウントを取得。\n2. あなた自身がサーバーを運営し、アカウントを管理。\n3. Element Matrix Servicesのホスティングプラットフォームに加入し、カスタムサーバー上でアカウントを作成。\n\nElementを選ぶべき理由：\n\n自分のデータを、自分で所有：データやメッセージを保管する場所を自分で決めることができます。データを所有しコントロールするのは、あなた自身です。データを解析したり、第三者にデータを渡したりする巨大IT企業ではありません。\n\nオープンなメッセージングと、コラボレーション：Matrixネットワーク上の誰とでも、メッセージのやり取りを行うことができます。Elementや他のMatrixアプリだけでなく、Slack、IRC、XMPPのような他のメッセージングシステムのユーザーとも、チャットをすることができます。\n\n非常に安全：本物のエンド・ツー・エンドの暗号化（会話に参加している人だけがメッセージを読み取ることができます）を備えています。また、クロス署名を行えば、会話に参加しているユーザーの端末が、本当にそのユーザーのものであるかを認証することができます。\n\n包括的なコミュニケーション：メッセージのやり取り、音声・ビデオ通話、ファイル共有、画面共有、その他多くの機能、ボット、ウィジェットを提供します。ルームやコミュニティーを立ち上げて連絡を取り合い、タスクをスムーズに成し遂げましょう。\n\nいつでも、どこにいても：アプリをインストールしている全ての端末とウェブ https://app.element.io でメッセージの履歴が同期されるため、どこにいても連絡を取ることができます。";
 "user_verification_session_details_additional_information_untrusted_other_user" = "ユーザーがこのセッションを信頼するまでは、セッションとの間で送受信されるメッセージには警告が表示されます。また、手動で認証することもできます。";
 "user_verification_session_details_information_untrusted_other_user" = " が新しいセッションを使ってサインインしました：";
 "user_verification_session_details_information_untrusted_current_user" = "このセッションを認証して信頼済としてマークし、暗号化されたメッセージへのアクセスを許可。";
@@ -1147,7 +1147,7 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "アカウントを作成：";
-"login_server_url_placeholder" = "URL (例 https://matrix.org)";
+"login_server_url_placeholder" = "URL (例 https://bigstarmessenger.com)";
 "login_home_server_title" = "ホームサーバーのURL：";
 "login_home_server_info" = "あなたのホームサーバーは、あなたの全ての会話とアカウント情報を保存します";
 "login_identity_server_title" = "IDサーバーのURL：";
@@ -1160,8 +1160,8 @@
 "resend_message" = "メッセージを再送信";
 "select_all" = "全て選択";
 "show_details" = "詳細を表示";
-"login_identity_server_info" = "Matrixは、電子メールなどからMatrix IDを検索するIDサーバーを提供します。現在は https://matrix.org のみが存在します。";
-"login_user_id_placeholder" = "Matrix ID（例 @bob:matrix.org または bob）";
+"login_identity_server_info" = "Matrixは、電子メールなどからMatrix IDを検索するIDサーバーを提供します。現在は https://bigstarmessenger.com のみが存在します。";
+"login_user_id_placeholder" = "Matrix ID（例 @bob:bigstarmessenger.com または bob）";
 "login_optional_field" = "任意";
 "login_display_name_placeholder" = "表示名（例 Bob Obson）";
 "login_email_info" = "メールアドレスを指定すると、他のユーザーがあなたをMatrixでより簡単に見つけられます。また、電子メールでパスワードをリセットすることも可能となります。";
@@ -1452,7 +1452,7 @@
 "login_error_must_start_http" = "URLは http[s]:// で始まる必要があります";
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "matrixでチャットしましょう。 詳細はウェブサイト http://matrix.org で確認してください。";
+"invitation_message" = "matrixでチャットしましょう。 詳細はウェブサイト http://bigstarmessenger.com で確認してください。";
 // Settings screen 
 "settings_title_config" = "設定";
 "settings_title_notifications" = "通知";

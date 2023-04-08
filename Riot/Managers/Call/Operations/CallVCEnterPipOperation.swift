@@ -16,6 +16,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 class CallVCEnterPipOperation: AsyncOperation {
     
     private var presenter: CallPresenter

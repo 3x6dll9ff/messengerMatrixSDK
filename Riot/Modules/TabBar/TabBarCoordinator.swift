@@ -22,6 +22,7 @@ import UIKit
 import CommonKit
 import MatrixSDK
 
+@available(iOS 15.0, *)
 @objcMembers
 final class TabBarCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
     
@@ -739,6 +740,7 @@ final class TabBarCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
 }
 
 // MARK: - MasterTabBarControllerDelegate
+@available(iOS 15.0, *)
 extension TabBarCoordinator: MasterTabBarControllerDelegate {
        
     func masterTabBarController(_ masterTabBarController: MasterTabBarController!, didSelectRoomWith roomNavigationParameters: RoomNavigationParameters!, completion: (() -> Void)!) {
@@ -777,6 +779,7 @@ extension TabBarCoordinator: MasterTabBarControllerDelegate {
 }
 
 // MARK: - RoomCoordinatorDelegate
+@available(iOS 15.0, *)
 extension TabBarCoordinator: RoomCoordinatorDelegate {
     
     func roomCoordinatorDidDismissInteractively(_ coordinator: RoomCoordinatorProtocol) {
@@ -827,6 +830,7 @@ extension TabBarCoordinator: RoomCoordinatorDelegate {
  Prevent the side menu gesture from clashing with other gestures like the home screen horizontal scroll views.
  Also make sure that it doesn't cancel out UINavigationController backwards swiping
  */
+@available(iOS 15.0, *)
 extension TabBarCoordinator: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false

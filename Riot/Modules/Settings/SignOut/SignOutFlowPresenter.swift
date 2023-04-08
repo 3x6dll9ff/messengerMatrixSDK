@@ -127,6 +127,7 @@ import Foundation
 }
 
 // MARK: - SignOutAlertPresenterDelegate
+@available(iOS 15.0, *)
 extension SignOutFlowPresenter: SignOutAlertPresenterDelegate {
     
     func signOutAlertPresenterDidTapSignOutAction(_ presenter: SignOutAlertPresenter) {

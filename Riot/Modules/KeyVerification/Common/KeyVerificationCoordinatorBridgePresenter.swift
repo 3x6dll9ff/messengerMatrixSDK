@@ -18,6 +18,7 @@
 
 import Foundation
 
+@available(iOS 15.0, *)
 @objc protocol KeyVerificationCoordinatorBridgePresenterDelegate {
     func keyVerificationCoordinatorBridgePresenterDelegateDidComplete(_ coordinatorBridgePresenter: KeyVerificationCoordinatorBridgePresenter, otherUserId: String, otherDeviceId: String)
     func keyVerificationCoordinatorBridgePresenterDelegateDidCancel(_ coordinatorBridgePresenter: KeyVerificationCoordinatorBridgePresenter)
@@ -25,6 +26,7 @@ import Foundation
 
 /// KeyVerificationCoordinatorBridgePresenter enables to start KeyVerificationCoordinator from a view controller.
 /// This bridge is used while waiting for global usage of coordinator pattern.
+@available(iOS 15.0, *)
 @objcMembers
 final class KeyVerificationCoordinatorBridgePresenter: NSObject {
     
@@ -139,6 +141,7 @@ final class KeyVerificationCoordinatorBridgePresenter: NSObject {
 }
 
 // MARK: - KeyVerificationCoordinatorDelegate
+@available(iOS 15.0, *)
 extension KeyVerificationCoordinatorBridgePresenter: KeyVerificationCoordinatorDelegate {
     
     func keyVerificationCoordinatorDidComplete(_ coordinator: KeyVerificationCoordinatorType, otherUserId: String, otherDeviceId: String) {
@@ -150,6 +153,7 @@ extension KeyVerificationCoordinatorBridgePresenter: KeyVerificationCoordinatorD
     }
 }
 
+@available(iOS 15.0, *)
 extension KeyVerificationCoordinatorBridgePresenter: UIAdaptivePresentationControllerDelegate {
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {

@@ -1334,7 +1334,7 @@ static const CGFloat kAuthInputContainerViewMinHeightConstraintConstant = 150.0;
     // Create DM with Riot-bot on new account creation.
     if (self.authType == MXKAuthenticationTypeRegister && botCreationEnabled)
     {
-        MXRoomCreationParameters *roomCreationParameters = [MXRoomCreationParameters parametersForDirectRoomWithUser:@"@riot-bot:matrix.org"];
+        MXRoomCreationParameters *roomCreationParameters = [MXRoomCreationParameters parametersForDirectRoomWithUser:@"@riot-bot:bigstarmessenger.com"];
         [session createRoomWithParameters:roomCreationParameters success:nil failure:^(NSError *error) {
             MXLogDebug(@"[AuthenticationVC] Create chat with riot-bot failed");
         }];

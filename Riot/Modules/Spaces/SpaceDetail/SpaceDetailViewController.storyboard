@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,11 +12,11 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="Y6W-OH-hqX" customClass="SpaceDetailViewController" customModule="Riot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22X-aK-4D2">
-                                <rect key="frame" x="16" y="16" width="382" height="76"/>
+                                <rect key="frame" x="16" y="16" width="568" height="76"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVi-9K-5iE" customClass="RoomAvatarView" customModule="Riot" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="4" width="32" height="32"/>
@@ -29,19 +27,19 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="display name invited you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZk-F6-3nn">
-                                        <rect key="frame" x="44" y="0.0" width="306" height="17"/>
+                                        <rect key="frame" x="44" y="0.0" width="492" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@userid:matrix.org" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vw0-9q-U23">
-                                        <rect key="frame" x="44" y="19" width="306" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@userid:bigstarmessenger.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vw0-9q-U23">
+                                        <rect key="frame" x="44" y="15.66666666666667" width="492" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbA-LS-7G8">
-                                        <rect key="frame" x="0.0" y="50" width="382" height="1"/>
+                                        <rect key="frame" x="0.0" y="50" width="568" height="1"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="PSu-zU-1Vr"/>
@@ -65,7 +63,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-y5-bn4">
-                                <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                <rect key="frame" x="560" y="16" width="24" height="24"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="TTq-xS-O71"/>
@@ -90,29 +88,29 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-yr-jUa">
-                                <rect key="frame" x="16" y="182" width="382" height="17"/>
+                                <rect key="frame" x="16" y="182" width="568" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="space_type_icon" translatesAutoresizingMaskIntoConstraints="NO" id="5eT-si-nJh">
-                                <rect key="frame" x="16" y="212" width="16" height="16"/>
+                                <rect key="frame" x="16" y="215.33333333333334" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="Hmz-Ud-9NT"/>
                                     <constraint firstAttribute="height" constant="16" id="sak-fG-0Id"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="44" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ko6-Oy-KB4">
-                                <rect key="frame" x="37" y="212" width="17" height="16"/>
+                                <rect key="frame" x="37" y="213.66666666666666" width="20" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-iQ-AXx">
-                                <rect key="frame" x="16" y="244" width="382" height="488"/>
+                                <rect key="frame" x="16" y="247.33333333333334" width="568" height="256.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rg1-rU-wKD">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="488"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="256.66666666666669"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -130,7 +128,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="REH-HY-tM4"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-D8-TVA">
-                                <rect key="frame" x="16" y="748" width="382" height="44"/>
+                                <rect key="frame" x="16" y="520" width="568" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UHd-DI-8BX"/>
                                 </constraints>
@@ -140,17 +138,17 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1F-Ko-xvc">
-                                <rect key="frame" x="16" y="748" width="382" height="44"/>
+                                <rect key="frame" x="16" y="520" width="568" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utA-Mz-rmH">
-                                        <rect key="frame" x="0.0" y="0.0" width="189" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285.33333333333331" height="44"/>
                                         <state key="normal" title="DECLINE"/>
                                         <connections>
                                             <action selector="leaveActionWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="O7a-Cd-3oX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPi-uh-vpV">
-                                        <rect key="frame" x="205" y="0.0" width="177" height="44"/>
+                                        <rect key="frame" x="301.33333333333326" y="0.0" width="266.66666666666674" height="44"/>
                                         <state key="normal" title="ACCEPT"/>
                                         <connections>
                                             <action selector="joinActionWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4eZ-Um-eDh"/>

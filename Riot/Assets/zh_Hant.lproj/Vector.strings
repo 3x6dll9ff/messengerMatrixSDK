@@ -51,7 +51,7 @@
 "auth_phone_placeholder" = "電話號碼";
 "auth_repeat_password_placeholder" = "確認密碼";
 "auth_repeat_new_password_placeholder" = "確認新 Matrix 帳號的密碼";
-"auth_home_server_placeholder" = "網址（例如 https://matrix.org）";
+"auth_home_server_placeholder" = "網址（例如 https://bigstarmessenger.com）";
 "auth_identity_server_placeholder" = "網址（例如 https://vector.im）";
 "auth_invalid_login_param" = "使用者名稱和／或密碼不正確";
 "auth_invalid_user_name" = "使用者名稱只能包含英數字、點、連字符號、底線";
@@ -452,7 +452,7 @@
 "directory_server_all_rooms" = "在 %@ 伺服器上的所有聊天室";
 "directory_server_all_native_rooms" = "所有 Matrix 的本地聊天室";
 "directory_server_type_homeserver" = "輸入一個家伺服器來列出所有公開聊天室";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "變更 %tu 成員身分";
 "event_formatter_widget_added" = "%@ 小工具已由 %@ 新增";
@@ -619,7 +619,7 @@
 "skip" = "略過";
 "close" = "關閉";
 "store_promotional_text" = "開放網路上的隱私保護聊天和協作應用程式。去中心化機制讓您可自行管控。沒有資料探勘、沒有後門，也不會被第三方存取。";
-"store_full_description" = "Element 是一套新型的通訊和協作應用程式，它提供下列功能：\n\n1. 您可以自行掌控隱私\n2. 可以與 Matrix 網路中的任何人進行通訊，甚至可以與 Slack 等應用程式整合\n3. 保護您免受廣告、資料探勘、後門和封閉平台的侵害\n4. 透過端到端加密和交叉簽署來驗證彼此，互相確保安全\n\nElement 是去中心化的開源軟體，因此與其他通訊和協作應用程式完全不同。\n\nElement 允許您自行架設（或選擇託管）伺服器，使您可針對隱私權，所有權以及對資料和對話內容的完整控制權。您可以連線到所有開放的網路，所以您不是只能與其他 Element 使用者聊天。而且還非常安全。\n\nElement 之所以能夠做到所有這些目標，是因為它使用 Matrix（一套開放、去中心化的通訊標準）運作。\n\nElement 讓您可以自行選擇要將對話放在哪一台伺服器來讓您可自行控制自己的訊息和資料。在 Element 應用程式中，您可以選擇以不同方式託管您的訊息：\n\n1. 在 matrix.org 公開伺服器註冊免費帳號\n2. 使用自行架設的硬體主機上的伺服器來註冊帳號\n3. 訂閱 Element Matrix Services 代管平台，註冊自己的伺服器\n\n為什麼要選擇 Element？\n\n自己擁有自己資料：由您決定將資料與訊息保留在何處。您自己擁有並管理這些資料，而不用讓某些「超大型企業」來探勘您的資料，或將資料提供給第三方。\n\n開放的通訊與協作機制：您可以與 Matrix 網路中的任何人聊天，不管他們使用的是 Element 還是其他 Matrix 應用程式，甚至他們也可以使用像 Slack 、IRC 或 XMPP 之類的其他通訊系統。\n\n超級安全：真正的端對端加密（只有對話中的人才能解開訊息內容），並進行交叉簽署以驗證對話參與者的設備。\n\n完整的通訊：傳訊息、進行語音或視訊通話、分享檔案、畫面，還有大量整合、機器人與小工具。建立聊天室、社群，保持聯繫並完成工作。\n\n無論您身在何處都可保持聯繫：無論您身在何處，都可以透過 https://element.io/app 在所有裝置與網路取得完全同步的訊息記錄來保持聯繫。";
+"store_full_description" = "Element 是一套新型的通訊和協作應用程式，它提供下列功能：\n\n1. 您可以自行掌控隱私\n2. 可以與 Matrix 網路中的任何人進行通訊，甚至可以與 Slack 等應用程式整合\n3. 保護您免受廣告、資料探勘、後門和封閉平台的侵害\n4. 透過端到端加密和交叉簽署來驗證彼此，互相確保安全\n\nElement 是去中心化的開源軟體，因此與其他通訊和協作應用程式完全不同。\n\nElement 允許您自行架設（或選擇託管）伺服器，使您可針對隱私權，所有權以及對資料和對話內容的完整控制權。您可以連線到所有開放的網路，所以您不是只能與其他 Element 使用者聊天。而且還非常安全。\n\nElement 之所以能夠做到所有這些目標，是因為它使用 Matrix（一套開放、去中心化的通訊標準）運作。\n\nElement 讓您可以自行選擇要將對話放在哪一台伺服器來讓您可自行控制自己的訊息和資料。在 Element 應用程式中，您可以選擇以不同方式託管您的訊息：\n\n1. 在 bigstarmessenger.com 公開伺服器註冊免費帳號\n2. 使用自行架設的硬體主機上的伺服器來註冊帳號\n3. 訂閱 Element Matrix Services 代管平台，註冊自己的伺服器\n\n為什麼要選擇 Element？\n\n自己擁有自己資料：由您決定將資料與訊息保留在何處。您自己擁有並管理這些資料，而不用讓某些「超大型企業」來探勘您的資料，或將資料提供給第三方。\n\n開放的通訊與協作機制：您可以與 Matrix 網路中的任何人聊天，不管他們使用的是 Element 還是其他 Matrix 應用程式，甚至他們也可以使用像 Slack 、IRC 或 XMPP 之類的其他通訊系統。\n\n超級安全：真正的端對端加密（只有對話中的人才能解開訊息內容），並進行交叉簽署以驗證對話參與者的設備。\n\n完整的通訊：傳訊息、進行語音或視訊通話、分享檔案、畫面，還有大量整合、機器人與小工具。建立聊天室、社群，保持聯繫並完成工作。\n\n無論您身在何處都可保持聯繫：無論您身在何處，都可以透過 https://element.io/app 在所有裝置與網路取得完全同步的訊息記錄來保持聯繫。";
 // String for App Store
 "store_short_description" = "去中心化的安全通訊／VoIP 軟體";
 "settings_three_pids_management_information_part1" = "在此管理您用作登入或恢復帳號的電子郵件地址或電話號碼。您也可控制誰可以用這些資料找到您 ";
@@ -908,12 +908,12 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "建立帳號：";
-"login_server_url_placeholder" = "網址（例如 https://matrix.org）";
+"login_server_url_placeholder" = "網址（例如 https://bigstarmessenger.com）";
 "login_home_server_title" = "家伺服器網址：";
 "login_home_server_info" = "您的家伺服器會儲存所有的對話紀錄跟帳號資料";
 "login_identity_server_title" = "身分伺服器網址：";
-"login_identity_server_info" = "Matrix 提供身分認證伺服器來追蹤電子郵件信箱與 Matrix ID 的關係。目前只有 https://matrix.org 提供這個服務。";
-"login_user_id_placeholder" = "Matrix ID（如 @bob:matrix.org 或 bob）";
+"login_identity_server_info" = "Matrix 提供身分認證伺服器來追蹤電子郵件信箱與 Matrix ID 的關係。目前只有 https://bigstarmessenger.com 提供這個服務。";
+"login_user_id_placeholder" = "Matrix ID（如 @bob:bigstarmessenger.com 或 bob）";
 "login_password_placeholder" = "密碼";
 "login_optional_field" = "選擇性";
 "login_display_name_placeholder" = "顯示名稱（如 Bob Obson）";
@@ -1339,7 +1339,7 @@
 // room details dialog screen
 
 // contacts list screen
-"invitation_message" = "我想要在 Matrix 上與您聯繫。請到 http://matrix.org 取得更多資訊。";
+"invitation_message" = "我想要在 Matrix 上與您聯繫。請到 http://bigstarmessenger.com 取得更多資訊。";
 "login_error_must_start_http" = "網址必須以 http[s]:// 開頭";
 
 // Login Screen
@@ -1891,7 +1891,7 @@
 "create_room_processing" = "正在建立聊天室";
 "create_room_suggest_room_footer" = "將向聊天空間中的成員推薦建議的聊天室。";
 "create_room_suggest_room" = "推薦給聊天空間成員";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:bigstarmessenger.com";
 "create_room_section_header_address" = "位址";
 "create_room_show_in_directory_footer" = "這會幫助人們找到並加入此聊天室。";
 "create_room_show_in_directory" = "在聊天室目錄中顯示";

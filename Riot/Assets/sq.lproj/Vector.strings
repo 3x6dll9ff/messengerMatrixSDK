@@ -47,7 +47,7 @@
 "auth_phone_placeholder" = "Numër telefoni";
 "auth_repeat_password_placeholder" = "Rijepeni fjalëkalimin";
 "auth_repeat_new_password_placeholder" = "Që ta ripohoni, jepni fjalëkalimin e llogarisë tuaj Matrix";
-"auth_home_server_placeholder" = "URL (p.sh., https://matrix.org)";
+"auth_home_server_placeholder" = "URL (p.sh., https://bigstarmessenger.com)";
 "auth_identity_server_placeholder" = "URL (p.sh., https://vector.im)";
 "auth_invalid_login_param" = "Emër përdoruesi dhe/ose fjalëkalim i pasaktë";
 "auth_invalid_password" = "Fjalëkalim shumë i shkurtër (min 6)";
@@ -339,7 +339,7 @@
 "directory_title" = "Drejtori";
 "directory_server_picker_title" = "Përzgjidhni drejtori";
 "directory_server_all_rooms" = "Krejt dhomat te shërbyesi %@";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "bigstarmessenger.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu ndryshime anëtarësie";
 "event_formatter_jitsi_widget_added" = "Konferencë VoIP e shtuar nga %@";
@@ -660,7 +660,7 @@
 "key_backup_setup_intro_manual_export_action" = "Eksportoni kyçe dorazi";
 // String for App Store
 "store_short_description" = "Fjalosje /VoIP e siguruar, e decentralizuar";
-"store_full_description" = "Element-i është një lloj i ri aplikacioni shkëmbimi mesazhesh dhe bashkëpunimi që:\n\n1. Ju vë juve në kontroll të ruajtjes së privatësisë\n2. Ju lejon të komunikoni me këdo në rrjetin Matrix, dhe madje edhe tej tij, duke u integruar me aplikacione të tillë si Slack\n3. Ju mbron nga reklama, shfrytëzim të dhënash, deriçka të pasme dhe kopshte të gardhuar\n4. Ju siguron përmes fshehtëzimi skaj-më-skaj, me ndër-nënshkrim për verifikim të tjerësh\n\nElement-i është plotësisht i ndryshëm nga aplikacione të tjerë mesazhesh dhe bashkëpunimi, ngaqë është i decentralizuar dhe me burim të hapët.\n\nElement-i ju lejon ta strehoni ju vetë - ose të zgjidhni një strehë - që kështu të keni privatësi, pronësi dhe kontroll të të dhënave dhe bisedave tuaja. Ju jep hyrje në një rrjet të hapët; kështu që s’jeni të kufizuar për të folur vetëm me përdorues të tjerë të Element-i. Dhe është shumë i sigurt.\n\nElement-i është në gjendje të bëjë gjithë këtë ngaqë funksionon me Matrix - standardi për komunikim të hapët, të decentralizuar. \n\nElement-i ju vë juve në kontroll, duke ju lejuar të zgjidhni se cili strehon bisedat tuaja. Prej aplikacionit Element, mund të zgjidhni t’i strehoni në rrugë të ndryshme:\n\n1. Të merrni një llogari falas te shërbyesi publik matrix.org\n2. Të vetëstrehoni llogarinë tuaj duke xhiruar një shërbyes në hardware-in tuaj\n3. Të regjistroni një llogari në një shërbyes vetjak thjesht duke u pajtuar te platforma Element Matrix Services\n\nPse të zgjidhet Element-i?\n\nJINI ZOT I TË DHËNAVE TUAJA: Se ku të mbani të dhënat dhe mesazhet tuaja, e vendosni ju vetë. I keni pronë tuajën dhe i kontrolloni, jo ndonjë MEGAKORPORATË që shfrytëzon të dhënat tuaja dhe u lejon hyrje në to palëve të treta.\n\nSHKËMBIM MESAZHESH DHE BASHKËPUNIM I HAPËT: Mund të bisedoni me këdo tjetër në rrjetin Matrix, qoftë kur përdorin Element-in, qoftë tjetër aplikacion Matrix, dhe edhe kur përdorin tjetër sistem shkëmbimi mesazhesh, bie fjala, Slack, IRC apo XMPP.\n\nSUPER-I-SIGURT: Fshehtëzim i vërtetë skaj-më-skaj (vetëm ata që marrim pjesë në bisedë mund të shfshehtëzojnë mesazhe), dhe ndër-nënshkrim për verifikimin e pajisjeve të pjesëmarrësve në bisedë.\n\nKOMUNIKIM I PLOTË: Shkëmbim mesazhesh, thirrje zanore dhe video, shkëmbim kartelash, tregim ekrani dhe një gamë të tërë integrimesh, robotë dhe widget-e. Krijoni dhoma, bashkësi, mbani kontakte dhe mbaroni punë.\n\nKUDO QË JENI: Mbani lidhje kudo që të jeni, me historik tërësisht të njëkohësuar përmes krejt pajisjeve tuaja dhe në internet te https://element.io/app.";
+"store_full_description" = "Element-i është një lloj i ri aplikacioni shkëmbimi mesazhesh dhe bashkëpunimi që:\n\n1. Ju vë juve në kontroll të ruajtjes së privatësisë\n2. Ju lejon të komunikoni me këdo në rrjetin Matrix, dhe madje edhe tej tij, duke u integruar me aplikacione të tillë si Slack\n3. Ju mbron nga reklama, shfrytëzim të dhënash, deriçka të pasme dhe kopshte të gardhuar\n4. Ju siguron përmes fshehtëzimi skaj-më-skaj, me ndër-nënshkrim për verifikim të tjerësh\n\nElement-i është plotësisht i ndryshëm nga aplikacione të tjerë mesazhesh dhe bashkëpunimi, ngaqë është i decentralizuar dhe me burim të hapët.\n\nElement-i ju lejon ta strehoni ju vetë - ose të zgjidhni një strehë - që kështu të keni privatësi, pronësi dhe kontroll të të dhënave dhe bisedave tuaja. Ju jep hyrje në një rrjet të hapët; kështu që s’jeni të kufizuar për të folur vetëm me përdorues të tjerë të Element-i. Dhe është shumë i sigurt.\n\nElement-i është në gjendje të bëjë gjithë këtë ngaqë funksionon me Matrix - standardi për komunikim të hapët, të decentralizuar. \n\nElement-i ju vë juve në kontroll, duke ju lejuar të zgjidhni se cili strehon bisedat tuaja. Prej aplikacionit Element, mund të zgjidhni t’i strehoni në rrugë të ndryshme:\n\n1. Të merrni një llogari falas te shërbyesi publik bigstarmessenger.com\n2. Të vetëstrehoni llogarinë tuaj duke xhiruar një shërbyes në hardware-in tuaj\n3. Të regjistroni një llogari në një shërbyes vetjak thjesht duke u pajtuar te platforma Element Matrix Services\n\nPse të zgjidhet Element-i?\n\nJINI ZOT I TË DHËNAVE TUAJA: Se ku të mbani të dhënat dhe mesazhet tuaja, e vendosni ju vetë. I keni pronë tuajën dhe i kontrolloni, jo ndonjë MEGAKORPORATË që shfrytëzon të dhënat tuaja dhe u lejon hyrje në to palëve të treta.\n\nSHKËMBIM MESAZHESH DHE BASHKËPUNIM I HAPËT: Mund të bisedoni me këdo tjetër në rrjetin Matrix, qoftë kur përdorin Element-in, qoftë tjetër aplikacion Matrix, dhe edhe kur përdorin tjetër sistem shkëmbimi mesazhesh, bie fjala, Slack, IRC apo XMPP.\n\nSUPER-I-SIGURT: Fshehtëzim i vërtetë skaj-më-skaj (vetëm ata që marrim pjesë në bisedë mund të shfshehtëzojnë mesazhe), dhe ndër-nënshkrim për verifikimin e pajisjeve të pjesëmarrësve në bisedë.\n\nKOMUNIKIM I PLOTË: Shkëmbim mesazhesh, thirrje zanore dhe video, shkëmbim kartelash, tregim ekrani dhe një gamë të tërë integrimesh, robotë dhe widget-e. Krijoni dhoma, bashkësi, mbani kontakte dhe mbaroni punë.\n\nKUDO QË JENI: Mbani lidhje kudo që të jeni, me historik tërësisht të njëkohësuar përmes krejt pajisjeve tuaja dhe në internet te https://element.io/app.";
 "auth_login_single_sign_on" = "Hyni përmes një hyrjeje njëshe";
 "room_message_unable_open_link_error_message" = "S’arrihet të hapet lidhja.";
 "auth_autodiscover_invalid_response" = "Përgjigje e pavlefshme pikasjeje shërbyesi Home";
@@ -1197,7 +1197,7 @@
 "create_room_section_footer_type" = "Njerëzit marrin pjesë në një dhomë vetëm me ftesën për te dhoma.";
 "create_room_show_in_directory" = "Shfaqe te listë dhomash";
 "create_room_section_header_address" = "ADRESË";
-"create_room_placeholder_address" = "#provëdhome:matrix.org";
+"create_room_placeholder_address" = "#provëdhome:bigstarmessenger.com";
 "room_info_list_room_encrypted" = "Mesazhet në këtë dhomë janë të fshehtëzuar skaj më skaj";
 "room_info_list_one_member" = "1 anëtar";
 "room_info_list_several_members" = "%@ anëtarë";
@@ -1659,7 +1659,7 @@
 "matrix" = "Matrix";
 // Login Screen
 "login_create_account" = "Krijo llogari:";
-"login_server_url_placeholder" = "URL (p.sh. https://matrix.org)";
+"login_server_url_placeholder" = "URL (p.sh. https://bigstarmessenger.com)";
 "login_home_server_title" = "URL Shërbyesi Home:";
 "login_identity_server_title" = "URL Shërbyesi Identitetesh:";
 "login_password_placeholder" = "Fjalëkalim";
@@ -1944,8 +1944,8 @@
 "network_error_not_reachable" = "Ju lutemi, kontrolloni aftësinë e lidhjes në rrjetin tuaj";
 "share" = "Ndajeni me të tjerët";
 "login_home_server_info" = "Shërbyesi juaj home depoziton krejt të dhënat e bisedave dhe llogarive tuaja";
-"login_identity_server_info" = "Matrix ofron shërbyes identiteti për të ndjekur se cilat email-e, etj, u përkasin ID-ve Matrix IDs. Hëpërhë ekziston vetëm https://matrix.org.";
-"login_user_id_placeholder" = "ID Matrix (p.sh. @poku:matrix.org ose poku)";
+"login_identity_server_info" = "Matrix ofron shërbyes identiteti për të ndjekur se cilat email-e, etj, u përkasin ID-ve Matrix IDs. Hëpërhë ekziston vetëm https://bigstarmessenger.com.";
+"login_user_id_placeholder" = "ID Matrix (p.sh. @poku:bigstarmessenger.com ose poku)";
 "login_display_name_placeholder" = "Emër në ekran (p.sh. Mane Trimi)";
 "login_email_info" = "Përcaktimi i një adrese email i lejon përdoruesit e tjerë t’ju gjejnë më lehtë në Matrix, dhe do t’ju japë një rrugë për ricaktimin e fjalëkalimit tuaj në të ardhmen.";
 "login_error_no_login_flow" = "Dështuam në marrje të dhënash mirëfilltësimi nga ky Shërbyes Home";
@@ -1987,7 +1987,7 @@
 "notice_room_unban" = "%@ i hoqi dëbimin %@";
 "redact" = "Hiqe";
 // contacts list screen 
-"invitation_message" = "Do të doja të bisedoja me ju me Matrix. Për të pasur më tepër itë dhëna, ju lutem, vizitoni sajtin http://matrix.org.";
+"invitation_message" = "Do të doja të bisedoja me ju me Matrix. Për të pasur më tepër itë dhëna, ju lutem, vizitoni sajtin http://bigstarmessenger.com.";
 "notification_settings_global_info" = "Rregullimet mbi njoftimet ruhen te llogaria juaj e përdoruesit dhe ndahen me krejt klientët që i mbulojnë ato (përfshi njoftimet në desktop).\n\nRregullat zbatohen sipas një radhe; rregulli i parë që ka përputhje përcakton lëndën për mesazhin.\nKështu: njoftimet sipas fjalësh janë më të rëndësishme se njoftimet sipas dhomash të cilat janë më të rëndësishme se njoftimet sipas dërguesish.\nFor multiple rules of the same kind, the first one in the list that matches takes priority.";
 "notification_settings_per_word_notifications" = "Njoftime sipas fjale";
 "notification_settings_per_word_info" = "Për fjalët përputhjet gjenden pa marrë parasysh shkrimin me të madhe apo të vogël, dhe mund të përfshijnë një shenjë të gjithëpushtetshme *. Kështu:\nkot përputhet me vargun kot të rrethuar nga përkufizues fjalësh (p.sh. shenja pikësimi apo hapësira, ose fillim/fund rreshti).\nkot* përputhet me çfarëdo fjale që fillon me kot.\n*kot* përputhet me çfarëdo fjale që përfshin 3 shkronjat kot.";

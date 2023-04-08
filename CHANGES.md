@@ -2993,7 +2993,7 @@ Improvements:
  * Complete Security: Support SAS verification start (#3183).
 
 Bug fix:
- * AuthenticationViewController: Remove fallback to matrix.org when authentication failed (PR #3165).
+ * AuthenticationViewController: Remove fallback to bigstarmessenger.com when authentication failed (PR #3165).
 
 ## Changes in 0.11.1 (2020-04-24)
 
@@ -3098,7 +3098,7 @@ Improvements:
  * Upgrade MatrixKit version ([v0.11.0](https://github.com/matrix-org/matrix-ios-kit/releases/tag/v0.11.0)).
  * Widgets: Whitelist [MSC1961](https://github.com/matrix-org/matrix-doc/pull/1961) widget urls.
  * Settings: CALLS section: Always display the CallKit option but grey it out when not available (only on China).
- * VoIP: Fallback to matrix.org STUN server with a confirmation dialog (#2646).
+ * VoIP: Fallback to bigstarmessenger.com STUN server with a confirmation dialog (#2646).
  * Widgets: Whitelist [MSC1961](https://github.com/matrix-org/matrix-doc/pull/1961) widget urls
  * i18n: Enable Polish (pl).
  * Room members: third-party invites can now be revoked
@@ -4311,11 +4311,11 @@ Improvements:
 Improvements:
  * Upgrade MatrixKit version (v0.3.9).
  * Remove the 'optional' in the email registration field #352.
- * Restore matrix.org as default homeserver.
+ * Restore bigstarmessenger.com as default homeserver.
 
 Bug fixes:
  * Directory item in search doesn't open the directory if I don't search #353.
- * Room avatars on matrix.org are badly rendered in the directory from a vector.im account #355.
+ * Room avatars on bigstarmessenger.com are badly rendered in the directory from a vector.im account #355.
  * Authentication: "Send Reset Email" is truncated on iPhone 4S.
 
 ## Changes in Vector iOS in 0.1.8 (2016-06-01)
@@ -4332,7 +4332,7 @@ Improvements:
  * Settings: Disable spell-checking on add email field.
  * Permalinks: Use the beta path of the web app instead of /develop.
  * Authentication: Update the default login flow to the vector.im HS.
- * Authentication: Support automatic fallback to matrix.org HS for existing users.
+ * Authentication: Support automatic fallback to bigstarmessenger.com HS for existing users.
  * Chat screen: Improved images & videos sending failure UX: Show a red border when the attachment sending failed.
  * Change App badge handling: Replace the missed notifications count with the missed discussions count.
  * Created Room: replace active member label with "invite members" #346.

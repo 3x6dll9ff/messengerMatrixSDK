@@ -25,6 +25,7 @@ struct LegacyAuthenticationCoordinatorParameters {
 }
 
 /// A coordinator that handles authentication, verification and setting a PIN using the old UIViewController flow for iOS 12 & 13.
+@available(iOS 15.0, *)
 final class LegacyAuthenticationCoordinator: NSObject, AuthenticationCoordinatorProtocol {
     
     // MARK: - Properties
@@ -140,6 +141,7 @@ final class LegacyAuthenticationCoordinator: NSObject, AuthenticationCoordinator
 }
 
 // MARK: - AuthenticationServiceDelegate
+@available(iOS 15.0, *)
 extension LegacyAuthenticationCoordinator: AuthenticationServiceDelegate {
     func authenticationService(_ service: AuthenticationService, didReceive ssoLoginToken: String, with transactionID: String) -> Bool {
         authenticationViewController.continueSSOLogin(withToken: ssoLoginToken, txnId: transactionID)
@@ -160,6 +162,7 @@ extension LegacyAuthenticationCoordinator: AuthenticationServiceDelegate {
 }
 
 // MARK: - AuthenticationViewControllerDelegate
+@available(iOS 15.0, *)
 extension LegacyAuthenticationCoordinator: AuthenticationViewControllerDelegate {
     func authenticationViewController(_ authenticationViewController: AuthenticationViewController,
                                       didLoginWith session: MXSession!,
@@ -218,6 +221,7 @@ extension LegacyAuthenticationCoordinator: AuthenticationViewControllerDelegate 
 }
 
 // MARK: - KeyVerificationCoordinatorDelegate
+@available(iOS 15.0, *)
 extension LegacyAuthenticationCoordinator: KeyVerificationCoordinatorDelegate {
     func keyVerificationCoordinatorDidComplete(_ coordinator: KeyVerificationCoordinatorType, otherUserId: String, otherDeviceId: String) {
         if let crypto = session?.crypto as? MXLegacyCrypto, let backup = crypto.backup,
@@ -239,6 +243,7 @@ extension LegacyAuthenticationCoordinator: KeyVerificationCoordinatorDelegate {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+@available(iOS 15.0, *)
 extension LegacyAuthenticationCoordinator: UIAdaptivePresentationControllerDelegate {
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         // Prevent Key Verification from using swipe to dismiss

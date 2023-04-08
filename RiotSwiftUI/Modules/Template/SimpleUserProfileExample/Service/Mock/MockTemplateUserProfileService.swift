@@ -23,9 +23,9 @@ class MockTemplateUserProfileService: TemplateUserProfileServiceProtocol {
     let userId: String
     let displayName: String?
     let avatarUrl: String?
-    init(userId: String = "@alice:matrix.org",
+    init(userId: String = "@alice:bigstarmessenger.com",
          displayName: String? = "Alice",
-         avatarUrl: String? = "mxc://matrix.org/VyNYAgahaiAzUoOeZETtQ",
+         avatarUrl: String? = "mxc://bigstarmessenger.com/VyNYAgahaiAzUoOeZETtQ",
          presence: TemplateUserProfilePresence = .offline) {
         self.userId = userId
         self.displayName = displayName
