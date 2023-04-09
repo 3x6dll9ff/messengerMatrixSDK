@@ -37,6 +37,38 @@ struct AuthenticationLoginScreen: View {
     
     @ObservedObject var viewModel: AuthenticationLoginViewModel.Context
     
+    @State var selectedCountry: PhoneNumberCountryDefinition? = PhoneNumberCountryDefinition(iso2: "KZ", name: "Kazakhstan", prefix: "7")
+
+    @State private var searchText = ""
+    @State var phoneNumberText = ""
+    
+    var сountryPicker: some View {
+        Picker(selection: $selectedCountry, label: Text("")) {
+            ForEach(filteredCountries) { country in
+                HStack {
+                    Text(getEmojiFlag(countryCode: country.iso2))
+                        .font(.system(size: 30))
+                    Text(country.name)
+                    Spacer()
+                    Text("(+\(country.prefix))")
+                        .font(.caption)
+                        .font(.system(size: 24))
+                }
+                .tag(country)
+            }
+        }
+        .pickerStyle(WheelPickerStyle())
+    }
+
+    private var filteredCountries: [PhoneNumberCountryDefinition] {
+        if searchText.isEmpty {
+            return COUNTRIES
+        } else {
+            return COUNTRIES.filter { $0.name.localizedCaseInsensitiveContains(searchText) || $0.prefix.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -129,16 +161,30 @@ struct AuthenticationLoginScreen: View {
     /// The form with text fields for username and password, along with a submit button.
     var loginForm: some View {
         VStack(spacing: 14) {
-            RoundedBorderTextField(placeHolder: "+7 700 00 00 00",
-                                   text: $viewModel.username,
-                                   isFirstResponder: false,
-                                   configuration: UIKitTextInputConfiguration(returnKeyType: .next,
-                                                                              autocapitalizationType: .none,
-                                                                              autocorrectionType: .no),
-                                   onEditingChanged: usernameEditingChanged,
-                                   onCommit: { isPasswordFocused = true })
-            .accessibilityIdentifier("usernameTextField")
-            .padding(.bottom, 7)
+            VStack(spacing: 8){
+                HStack(spacing: 8){
+                    RoundedBorderTextField(placeHolder: VectorL10n.searchDefaultPlaceholder, text: $searchText)
+                        .padding(.bottom, 7)
+                        .frame(width: UIScreen.main.bounds.width / 3)
+                    
+                    RoundedBorderTextField(placeHolder: VectorL10n.settingsPhoneNumber,
+                                           text: $phoneNumberText,
+                                           isFirstResponder: false,
+                                           configuration: UIKitTextInputConfiguration(returnKeyType: .next,
+                                                                                      autocapitalizationType: .none,
+                                                                                      autocorrectionType: .no),
+                                           onTextChanged: { newText in
+                        viewModel.username = "+\(selectedCountry?.prefix ?? "")" + newText
+                        print(viewModel.username)
+                                           },
+                                           onEditingChanged: usernameEditingChanged,
+                                           onCommit: { isPasswordFocused = true })
+                    .accessibilityIdentifier("usernameTextField")
+                    .padding(.bottom, 7)
+                }
+                
+                сountryPicker
+            }
             
 //            RoundedBorderTextField(placeHolder: VectorL10n.authPasswordPlaceholder,
 //                                   text: $viewModel.password,
@@ -196,12 +242,12 @@ struct AuthenticationLoginScreen: View {
     
     /// Sends the `next` view action so long as the form is ready to submit.
     func submit() {
-        otpViewModel.requestOtp(phoneNumber: viewModel.username) {
-            (verificationID, error) in
+        otpViewModel.requestOtp(phoneNumber: viewModel.username) { verificationID, error in
             if let error = error {
                 DispatchQueue.main.async {
-                    let authError = error as! NSError?
-                    print(authError?.code)
+                    print("Error: \(error.localizedDescription)")
+                    let authError = error as NSError
+                    print(authError.code)
                 }
                 return
             }
@@ -213,7 +259,6 @@ struct AuthenticationLoginScreen: View {
             }
         }
     }
-
 
     /// Sends the `fallback` view action.
     func fallback() {
