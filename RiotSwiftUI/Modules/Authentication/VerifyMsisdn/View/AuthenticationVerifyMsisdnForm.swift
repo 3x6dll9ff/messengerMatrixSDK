@@ -30,7 +30,40 @@ struct AuthenticationVerifyMsisdnForm: View {
     
     @ObservedObject var viewModel: AuthenticationVerifyMsisdnViewModel.Context
     
+    @State var selectedCountry: PhoneNumberCountryDefinition? = PhoneNumberCountryDefinition(iso2: "KZ", name: "Kazakhstan", prefix: "7")
+
+    @State private var searchText = ""
+    @State var phoneNumberText = ""
+    
     // MARK: Views
+    
+    var сountryPicker: some View {
+        Picker(selection: $selectedCountry, label: Text("")) {
+            ForEach(filteredCountries) { country in
+                HStack {
+                    Text(getEmojiFlag(countryCode: country.iso2))
+                        .font(.system(size: 30))
+                    Text(country.name)
+                    Spacer()
+                    Text("(+\(country.prefix))")
+                        .font(.caption)
+                        .font(.system(size: 24))
+                }
+                .tag(country)
+            }
+        }
+        .pickerStyle(WheelPickerStyle())
+    }
+
+    private var filteredCountries: [PhoneNumberCountryDefinition] {
+        if searchText.isEmpty {
+            return COUNTRIES
+        } else {
+            return COUNTRIES.filter { $0.name.localizedCaseInsensitiveContains(searchText) || $0.prefix.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+
+
     
     var body: some View {
         VStack(spacing: 0) {
@@ -83,13 +116,28 @@ struct AuthenticationVerifyMsisdnForm: View {
     
     /// The text field, extracted for iOS 15 modifiers to be applied.
     var textField: some View {
-        TextField(VectorL10n.authenticationVerifyMsisdnTextFieldPlaceholder, text: $viewModel.phoneNumber) {
-            isEditingTextField = $0
+        VStack(spacing: 8){
+            HStack(spacing: 8){
+                RoundedBorderTextField(placeHolder: VectorL10n.searchDefaultPlaceholder, text: $searchText)
+                    .padding(.bottom, 7)
+                    .frame(width: UIScreen.main.bounds.width / 3)
+                
+                RoundedBorderTextField(placeHolder: VectorL10n.settingsPhoneNumber,
+                                       text: $phoneNumberText,
+                                       isFirstResponder: false,
+                                       configuration: UIKitTextInputConfiguration(returnKeyType: .next,
+                                                                                  autocapitalizationType: .none,
+                                                                                  autocorrectionType: .no),
+                                       onTextChanged: { newText in
+                    viewModel.phoneNumber = "+\(selectedCountry?.prefix ?? "")" + newText
+                    print(viewModel.phoneNumber)
+                                       })
+                .accessibilityIdentifier("usernameTextField")
+                .padding(.bottom, 7)
+            }
+            
+            сountryPicker
         }
-        .textFieldStyle(BorderedInputFieldStyle(isEditing: isEditingTextField, isError: false))
-        .keyboardType(.phonePad)
-        .disableAutocorrection(true)
-        .accessibilityIdentifier("phoneNumberTextField")
     }
     
     /// Sends the `send` view action so long as a valid phone number has been input.
