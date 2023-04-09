@@ -136,6 +136,7 @@ struct AnalyticsPrompt: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear { viewModel.send(viewAction: .disable) }
     }
 }
 
