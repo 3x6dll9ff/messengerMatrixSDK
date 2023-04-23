@@ -6479,7 +6479,7 @@ public class VectorL10n: NSObject {
   public static var roomRecentsConversationsSection: String { 
     return VectorL10n.tr("Vector", "room_recents_conversations_section") 
   }
-  /// Create room
+  /// Create group
   public static var roomRecentsCreateEmptyRoom: String { 
     return VectorL10n.tr("Vector", "room_recents_create_empty_room") 
   }
@@ -8495,7 +8495,7 @@ public class VectorL10n: NSObject {
   public static var spacesEmptySpaceTitle: String { 
     return VectorL10n.tr("Vector", "spaces_empty_space_title") 
   }
-  /// Explore rooms
+  /// Explore groups
   public static var spacesExploreRooms: String { 
     return VectorL10n.tr("Vector", "spaces_explore_rooms") 
   }

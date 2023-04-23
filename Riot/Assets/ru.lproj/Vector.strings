@@ -105,7 +105,7 @@
 "room_recents_low_priority_section" = "МАЛОВАЖНЫЕ";
 "room_recents_invites_section" = "ПРИГЛАШЕНИЯ";
 "room_recents_start_chat_with" = "Найти контакты";
-"room_recents_create_empty_room" = "Создать комнату";
+"room_recents_create_empty_room" = "Создать группу";
 "room_recents_join_room" = "Войти в комнату";
 "room_recents_join_room_title" = "Вход в комнату";
 "room_recents_join_room_prompt" = "Введите идентификатор или псевдоним комнаты";
@@ -296,7 +296,7 @@
 "room_details_access_section_anyone_apart_from_guest" = "Любой, кто знает адрес комнаты, кроме гостей";
 "room_details_access_section_anyone" = "Любой, кто знает адрес комнаты, включая гостей";
 "room_details_access_section_no_address_warning" = "Для связи с комнатой необходимо иметь адрес";
-"room_details_access_section_directory_toggle" = "Список комнат в каталоге";
+"room_details_access_section_directory_toggle" = "Список групп в каталоге";
 "room_details_history_section" = "Кто может читать историю?";
 "room_details_history_section_anyone" = "Кто угодно";
 "room_details_history_section_members_only" = "Только участники (с момента выбора этого варианта)";
@@ -1467,7 +1467,7 @@
 "spaces_empty_space_title" = "В этом пространстве нет комнат (пока)";
 "room_recents_suggested_rooms_section" = "РЕКОМЕНДУЕМЫЕ КОМНАТЫ";
 "spaces_suggested_room" = "Рекомендуется";
-"spaces_explore_rooms" = "Список комнат";
+"spaces_explore_rooms" = "Список групп";
 "leave_space_and_all_rooms_action" = "Покинуть все комнаты и пространства";
 "leave_space_only_action" = "Не покидать ни одну комнату";
 "leave_space_message_admin_warning" = "Вы являетесь администратором этого пространства, перед уходом убедитесь, что передали права администратора другому пользователю.";
@@ -1668,7 +1668,7 @@
 "delete" = "Удалить";
 // actions 
 "action_logout" = "Выйти";
-"create_room" = "Создать комнату";
+"create_room" = "Создать группу";
 "login" = "Войти";
 "create_account" = "Создать аккаунт";
 "membership_invite" = "Приглашен";
@@ -2157,7 +2157,6 @@
 "user_other_session_verified_additional_info" = "Эта сессия готова к безопасному обмену сообщениями.";
 "user_other_session_current_session_details" = "Текущая сессия";
 "user_other_session_filter_menu_all" = "Все сессии";
-"wysiwyg_composer_start_action_stickers" = "Наклейки";
 "authentication_login_with_qr" = "Войти при помощи QR-кода";
 "onboarding_avatar_message" = "Время добавить лицо к имени";
 "onboarding_congratulations_home_button" = "На главную";
@@ -2233,3 +2232,10 @@
 "all_chats_edit_layout_alphabetical_order" = "Сортировать от A-Z";
 "all_chats_all_filter" = "Все";
 "all_chats_edit_layout_unreads" = "Непрочитанные";
+"wysiwyg_composer_start_action_stickers" = "Наклейки";
+"wysiwyg_composer_start_action_media_picker" = "Фото/видео";
+"wysiwyg_composer_start_action_attachments" = "Вложения";
+"wysiwyg_composer_start_action_polls" = "Списки";
+"wysiwyg_composer_start_action_location" = "Локация";
+"wysiwyg_composer_start_action_camera" = "Камера";
+"wysiwyg_composer_start_action_text_formatting" = "Форматирование текста";

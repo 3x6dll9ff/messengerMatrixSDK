@@ -646,7 +646,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         
         switch notificationCount {
         case 0:
-            badgeValue = hasSpaceInvite ? "!" : "0"
+            badgeValue = "\(notificationCount)"
         case (1 ... Constants.spacesButtonMaxCount):
             badgeValue = "\(notificationCount)"
         default:

@@ -485,7 +485,7 @@ static NSString *const kEventFormatterTimeFormat = @"HH:mm";
         self.showEditionMention = YES;
         self.editionMentionTextColor = ThemeService.shared.theme.textSecondaryColor;
         
-        self.defaultTextFont = [UIFont systemFontOfSize:15];
+        self.defaultTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         self.prefixTextFont = [UIFont boldSystemFontOfSize:15];
         self.bingTextFont = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
         self.stateEventTextFont = [UIFont italicSystemFontOfSize:15];

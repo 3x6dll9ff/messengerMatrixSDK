@@ -419,7 +419,7 @@ final class BuildSettings: NSObject {
     static let presenceColorForUnavailableUser: Int = 15066368
     static let showAllEventsInRoomHistory: Bool = false
     static let showLeftMembersInRoomMemberList: Bool = false
-    static let showRedactionsInRoomHistory: Bool = true
+    static let showRedactionsInRoomHistory: Bool = false
     static let showUnsupportedEventsInRoomHistory: Bool = false
     static let sortRoomMembersUsingLastSeenTime: Bool = true
     static let syncLocalContacts: Bool = true

@@ -141,7 +141,7 @@ class AllChatsEditActionProvider {
     
     private var createRoomAction: UIAction {
         UIAction(title: parentSpace == nil ? VectorL10n.roomRecentsCreateEmptyRoom : VectorL10n.spacesAddRoom,
-                 image: UIImage(systemName: "number"),
+                 image: UIImage(systemName: "person.2.circle"),
                  attributes: isAddRoomAvailable ? [] : .disabled) { [weak self] action in
             guard let self = self else { return }
             
