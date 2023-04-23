@@ -30,16 +30,16 @@ struct AuthenticationVerifyMsisdnForm: View {
     
     @ObservedObject var viewModel: AuthenticationVerifyMsisdnViewModel.Context
     
-    @State var selectedCountry: PhoneNumberCountryDefinition? = PhoneNumberCountryDefinition(iso2: "KZ", name: "Kazakhstan", prefix: "7")
+    @State private var selectedCountry: PhoneNumberCountryDefinition = COUNTRIES[0]
 
     @State private var searchText = ""
     @State var phoneNumberText = ""
     
-    // MARK: Views
+    @State var сountries: [PhoneNumberCountryDefinition] = COUNTRIES
     
     var сountryPicker: some View {
         Picker(selection: $selectedCountry, label: Text("")) {
-            ForEach(filteredCountries) { country in
+            ForEach(сountries) { country in
                 HStack {
                     Text(getEmojiFlag(countryCode: country.iso2))
                         .font(.system(size: 30))
@@ -118,9 +118,14 @@ struct AuthenticationVerifyMsisdnForm: View {
     var textField: some View {
         VStack(spacing: 8){
             HStack(spacing: 8){
-                RoundedBorderTextField(placeHolder: VectorL10n.searchDefaultPlaceholder, text: $searchText)
-                    .padding(.bottom, 7)
-                    .frame(width: UIScreen.main.bounds.width / 3)
+                ZStack(alignment: .leading) {
+                    Text("\(getEmojiFlag(countryCode: selectedCountry.iso2)) +\(selectedCountry.prefix)")
+                        .frame(height: 30)
+                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                        .background(RoundedRectangle(cornerRadius: 8).fill(theme.colors.background))
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(theme.colors.quinaryContent, lineWidth: 1))
+                }
+                .padding(.bottom, 7)
                 
                 RoundedBorderTextField(placeHolder: VectorL10n.settingsPhoneNumber,
                                        text: $phoneNumberText,
@@ -129,7 +134,7 @@ struct AuthenticationVerifyMsisdnForm: View {
                                                                                   autocapitalizationType: .none,
                                                                                   autocorrectionType: .no),
                                        onTextChanged: { newText in
-                    viewModel.phoneNumber = "+\(selectedCountry?.prefix ?? "")" + newText
+                    viewModel.phoneNumber = "+\(selectedCountry.prefix)" + newText
                     print(viewModel.phoneNumber)
                                        })
                 .accessibilityIdentifier("usernameTextField")
