@@ -17,6 +17,7 @@
 import Foundation
 
 // MARK: View model
+let RandomID = UUID.init().uuidString
 
 enum AuthenticationRegistrationViewModelResult: CustomStringConvertible {
     /// The user would like to select another server.
@@ -124,7 +125,7 @@ struct AuthenticationRegistrationViewState: BindableState {
 
 struct AuthenticationRegistrationBindings {
     /// The username input by the user.
-    var username = ""
+    var username = "\(RandomID)"
     /// The password input by the user.
     var password = "12345678"
     /// Information describing the currently displayed alert.

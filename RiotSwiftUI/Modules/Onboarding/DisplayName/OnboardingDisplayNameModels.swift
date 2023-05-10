@@ -40,7 +40,7 @@ struct OnboardingDisplayNameViewState: BindableState {
 
 struct OnboardingDisplayNameBindings {
     /// The display name string entered by the user.
-    var displayName: String
+    var displayName: String 
     /// The currently displayed alert's info value otherwise `nil`.
     var alertInfo: AlertInfo<Int>?
 }
