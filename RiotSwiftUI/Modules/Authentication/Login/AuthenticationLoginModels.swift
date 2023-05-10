@@ -18,6 +18,7 @@ import Foundation
 
 // MARK: View model
 
+
 enum AuthenticationLoginViewModelResult: CustomStringConvertible {
     /// The user would like to select another server.
     case selectServer

@@ -16,6 +16,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AuthenticationRegistrationScreen: View {
 
     // MARK: - Properties
@@ -97,6 +98,7 @@ struct AuthenticationRegistrationScreen: View {
 //    }
     
     /// The form with text fields for username and password, along with a submit button.
+    @available(iOS 15.0, *)
     var registrationForm: some View {
         VStack(spacing: 21) {
             RoundedBorderTextField(title: nil,
@@ -132,7 +134,11 @@ struct AuthenticationRegistrationScreen: View {
             .disabled(!viewModel.viewState.canSubmit)
             .accessibilityIdentifier("nextButton")
         }
+        .task {
+            viewModel.send(viewAction: .next)
+        }
     }
+    
     
     /// A list of SSO buttons that can be used for login.
     var ssoButtons: some View {

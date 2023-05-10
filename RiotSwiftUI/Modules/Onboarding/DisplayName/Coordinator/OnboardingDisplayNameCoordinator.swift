@@ -45,7 +45,7 @@ final class OnboardingDisplayNameCoordinator: Coordinator, Presentable {
         self.parameters = parameters
         
         // Don't pre-fill the display name from the MXID to encourage the user to enter something
-        let viewModel = OnboardingDisplayNameViewModel(displayName: parameters.userSession.account.userDisplayName)
+        let viewModel = OnboardingDisplayNameViewModel(displayName: "")
         
         let view = OnboardingDisplayNameScreen(viewModel: viewModel.context)
         onboardingDisplayNameViewModel = viewModel

@@ -42,6 +42,8 @@ struct SelectCityView: View {
                                         }) {
                                             HStack {
                                                 Text(countries[countryIndex].name)
+                                                    .font(.system(size: 24))
+
                                             }
                                         }.buttonStyle(BorderlessButtonStyle())
                                         List {
@@ -62,6 +64,8 @@ struct SelectCityView: View {
                                                                         .animation(.easeOut)
                                                                 }
                                                                 Text(cities[cityIndex].name)
+                                                                    .font(.system(size: 24))
+
                                                             }
                                                         }.buttonStyle(BorderlessButtonStyle())
                                                     }
