@@ -61,7 +61,7 @@ private class Ad {
             "Authorization": "Bearer \(accessToken)"
         ]
         
-        let params: [String: Any] = [
+        var params: [String: Any] = [
             "title": title,
             "description": description,
             "cityUuids": cityUuids,
@@ -72,11 +72,23 @@ private class Ad {
             "phoneNumber": phoneNumber,
             "startsAt": startsAt,
             "endsAt": endsAt,
-            "youtubeUrl": youtubeUrl,
-            "instagramUrl": instagramUrl,
-            "bigstarUrl": bigstarUrl,
-            "websiteUrl": websiteUrl
         ]
+        
+        if !youtubeUrl.isEmpty {
+            params["youtubeUrl"] = youtubeUrl
+        }
+
+        if !instagramUrl.isEmpty {
+            params["instagramUrl"] = instagramUrl
+        }
+
+        if !bigstarUrl.isEmpty {
+            params["bigstarUrl"] = bigstarUrl
+        }
+
+        if !websiteUrl.isEmpty {
+            params["websiteUrl"] = websiteUrl
+        }
         
         let uuid = try! await AF.request(
             "\(baseURL)/ads/apple",
@@ -84,8 +96,20 @@ private class Ad {
             parameters: params,
             headers: headers
         ).serializingDecodable(CreateClientAds.self).value.uuid
+//        AF.request(
+//            "\(baseURL)/ads/apple",
+//            method: .post,
+//            parameters: params,
+//            headers: headers
+//        ).responseString { response in
+//            switch response.result {
+//            case .success(let text):
+//                print("Text response: \(text)")
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
         print("Boris \(uuid)")
-        print(uuid)
         return uuid
     }
 }

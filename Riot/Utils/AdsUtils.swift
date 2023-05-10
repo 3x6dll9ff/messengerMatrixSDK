@@ -64,10 +64,10 @@ struct CreateClientAds: Decodable {
     let advertiserUuid: String
     let startsAt: String
     let endsAt: String
-    let youtubeUrl: String
-    let instagramUrl: String
-    let bigstarUrl: String
-    let websiteUrl: String
+    let youtubeUrl: String?
+    let instagramUrl: String?
+    let bigstarUrl: String?
+    let websiteUrl: String?
     let createdAt: String
     let updatedAt: String
     let showsNumber: Int
