@@ -26,6 +26,7 @@ struct ClientAds: Decodable {
     let instagramUrl: String?
     let bigstarUrl: String?
     let websiteUrl: String?
+    let phoneNumber: String?
     let createdAt: String
     let updatedAt: String
     let startsAt: String
@@ -43,6 +44,7 @@ struct AdvertiserAds: Decodable {
     let instagramUrl: String
     let bigstarUrl: String
     let websiteUrl: String
+    let phoneNumber: String?
     let showsNumber: Int
     let clicksNumber: Int
     let bigstarClicksNumber: Int

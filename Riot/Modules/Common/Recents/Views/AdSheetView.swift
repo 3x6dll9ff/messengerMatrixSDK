@@ -14,7 +14,9 @@ enum LinkType: String, CaseIterable{
     case bigstar,
          youtube,
          instagram,
-         website
+         website,
+         phoneNumber,
+         whatsApp
 }
 
 @available(iOS 15.0, *)
@@ -31,8 +33,13 @@ struct AdSheetView: View{
             return clientAd.instagramUrl ?? ""
             case .website:
             return clientAd.websiteUrl ?? ""
+            case .phoneNumber:
+            return "tel:\(clientAd.phoneNumber ?? "")"
+            case .whatsApp:
+            return "https://api.whatsapp.com/send?phone=\(clientAd.phoneNumber ?? "")&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9F%D0%B8%D1%88%D1%83%20%D0%B2%D0%B0%D0%BC%20%D0%B8%D0%B7%20BigStar%20Messenger"
         }
     }
+
     
     func clickUrl(linkType: LinkType) async {
         var link = ""
@@ -45,20 +52,25 @@ struct AdSheetView: View{
                 link = "instagram"
             case .website:
                 link = "website"
+            case .phoneNumber:
+                link = ""
+            case .whatsApp:
+                link = ""
+            
         }
         print("\(baseURL)/ads/\(clientAd.uuid)/\(link)/click")
-         let asd = try! await AF.request(
-            "\(baseURL)/ads/\(clientAd.uuid)/\(link)/click",
-            method: .patch
-         ).serializingDecodable(ClientAds.self).value.uuid
-        print(asd)
+        if link != "" {
+        let asd = try! await AF.request(
+                "\(baseURL)/ads/\(clientAd.uuid)/\(link)/click",
+                method: .patch
+             ).serializingDecodable(ClientAds.self).value.uuid
+            print(asd)
+        }
+       
     }
     func openUrl(urlString: String) {
-        let url = URL(string:
-            urlString.starts(with: "http")
-                ? urlString
-                :"https://\(urlString)"
-        )!
+        let url = URL(string: urlString)!
+      
         
         UIApplication.shared.open(url)
     }

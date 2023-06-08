@@ -128,7 +128,7 @@ private func uploadFile(fileData: Data) async -> String {
     let uuid = try! await AF.upload(
         multipartFormData: { multipart in
             multipart.append(fileData, withName: "file", fileName: "test", mimeType: "")
-        },
+        },  
         to: "\(baseURL)/files/upload",
         method: .post,
         headers: headers
@@ -276,6 +276,7 @@ struct AdsView: View{
     @State private var instagramUrl = ""
     @State private var bigstarUrl = ""
     @State private var websiteUrl = ""
+    @State private var phoneNumber = ""
     @State private var days = 30
     @State private var cities: [City] = []
     @State private var countries: [Country] = []
@@ -495,6 +496,13 @@ struct AdsView: View{
                                     .frame(width: 30, height: 30, alignment: .leading)
                                 TextField ("Вставьте ссылку", text: $bigstarUrl)
                             }
+                            HStack {
+                                Image("phoneNumber")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 30, height: 30, alignment: .leading)
+                                TextField ("Вставьте номер телефона", text: $phoneNumber)
+                            }
                         }.headerProminence(.increased)
                         
                         SwiftUI.Section(header: Text("Время показа       7500тг/30 дней")) {
@@ -533,7 +541,7 @@ struct AdsView: View{
                                 title: self.title,
                                 description: self.description,
                                 email: userInfo.email,
-                                phoneNumber: userInfo.phoneNumber,
+                                phoneNumber: self.phoneNumber,
                                 cityUuids: [self.selectedCityUuid],
                                 advertiserUuid: advertiserUuid,
                                 thumbnailUuid: thumbnailUuid,
