@@ -88,6 +88,11 @@ struct OnboardingSplashScreen: View {
         }
         .onDisappear { stopTimer() }
         .track(screen: .welcome)
+        HStack {
+            Text("[Agreement](https://e87472946711.wixsite.com/dogovorbigstar)")
+            Text("[Privacy Policy](https://aiocorpkz.wixsite.com/politics)")
+            Text("[Public offer](https://e87472946711.wixsite.com/my-site)")
+        }
     }
     
     /// The main action buttons.

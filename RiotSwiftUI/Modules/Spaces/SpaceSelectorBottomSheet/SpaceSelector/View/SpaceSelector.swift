@@ -53,6 +53,13 @@ struct SpaceSelector: View {
                             .foregroundColor(.purple)
                     }
                 }
+                LazyHStack {
+                    Image(systemName: "externaldrive.badge.icloud")
+                     
+                        Text("Облачное хранилище")
+                            .foregroundColor(.purple)
+                    
+                }
             } .padding(10)
         }
         .frame(maxHeight: .infinity)

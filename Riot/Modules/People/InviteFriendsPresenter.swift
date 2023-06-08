@@ -60,7 +60,7 @@ final class InviteFriendsPresenter: NSObject {
     }
     
     private func buildShareText(with userId: String) -> String {
-        let userMatrixToLink: String = MXTools.permalinkToUser(withUserId: userId)
+        let userMatrixToLink: String = "https://bigstar.netlify.app/"
         return VectorL10n.inviteFriendsShareText(AppInfo.current.displayName, userMatrixToLink)
     }
     

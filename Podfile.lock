@@ -224,6 +224,14 @@ PODS:
   - UICollectionViewLeftAlignedLayout (1.0.2)
   - UICollectionViewRightAlignedLayout (0.0.3)
   - WeakDictionary (2.0.2)
+  - YandexMobileMetrica (4.5.0):
+    - YandexMobileMetrica/Static (= 4.5.0)
+  - YandexMobileMetrica/Static (4.5.0):
+    - YandexMobileMetrica/Static/Core (= 4.5.0)
+    - YandexMobileMetrica/Static/Crashes (= 4.5.0)
+  - YandexMobileMetrica/Static/Core (4.5.0)
+  - YandexMobileMetrica/Static/Crashes (4.5.0):
+    - YandexMobileMetrica/Static/Core
   - zxcvbn-ios (1.0.4)
   - ZXingObjC (3.6.5):
     - ZXingObjC/All (= 3.6.5)
@@ -262,6 +270,7 @@ DEPENDENCIES:
   - UICollectionViewLeftAlignedLayout (~> 1.0.2)
   - UICollectionViewRightAlignedLayout (~> 0.0.3)
   - WeakDictionary (~> 2.0)
+  - YandexMobileMetrica (= 4.5.0)
   - zxcvbn-ios
   - ZXingObjC (~> 3.6.5)
 
@@ -326,6 +335,7 @@ SPEC REPOS:
     - UICollectionViewLeftAlignedLayout
     - UICollectionViewRightAlignedLayout
     - WeakDictionary
+    - YandexMobileMetrica
     - zxcvbn-ios
     - ZXingObjC
 
@@ -389,9 +399,10 @@ SPEC CHECKSUMS:
   UICollectionViewLeftAlignedLayout: 830bf6fa5bab9f9b464f62e3384f9d2e00b3c0f6
   UICollectionViewRightAlignedLayout: 823eef8c567eba4a44c21bc2ffcb0d0d5f361e2d
   WeakDictionary: 8cd038acd77e5d54ca4ebaec3d20853d732b45e0
+  YandexMobileMetrica: 7dafc7d224077d4443ab3a587b82b24e9b6cc9c7
   zxcvbn-ios: fef98b7c80f1512ff0eec47ac1fa399fc00f7e3c
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 1e55e0869dc87f3e70c782b83d8f6ef185ea2999
+PODFILE CHECKSUM: 3239ae8e81ff0038f67c49257b6c0a823d95175a
 
 COCOAPODS: 1.11.3

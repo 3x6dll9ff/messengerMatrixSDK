@@ -24,13 +24,13 @@ struct AdSheetView: View{
     func getLinkByLinkType(linkType: LinkType) -> String {
         switch linkType {
             case .bigstar:
-                return clientAd.bigstarUrl
+            return clientAd.bigstarUrl ?? ""
             case .youtube:
-                return clientAd.youtubeUrl
+            return clientAd.youtubeUrl ?? ""
             case .instagram:
-                return clientAd.instagramUrl
+            return clientAd.instagramUrl ?? ""
             case .website:
-                return clientAd.websiteUrl
+            return clientAd.websiteUrl ?? ""
         }
     }
     

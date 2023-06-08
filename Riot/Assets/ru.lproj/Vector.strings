@@ -153,7 +153,7 @@
 "room_participants_action_section_devices" = "Сессии";
 "room_participants_action_section_other" = "Параметры";
 "room_participants_action_leave" = "Покинуть эту комнату";
-"room_participants_action_remove" = "Удалить из этой комнаты";
+"room_participants_action_remove" = "Удалить из этой группы";
 "room_participants_action_ignore" = "Скрыть все сообщения этого пользователя";
 "room_participants_action_unignore" = "Показать все сообщения этого пользователя";
 "room_participants_action_set_moderator" = "Сделать модератором";
@@ -392,7 +392,7 @@
 "contacts_user_directory_offline_section" = "КАТАЛОГ ПОЛЬЗОВАТЕЛЕЙ (offline)";
 "room_participants_unknown" = "Неизвестно";
 "room_participants_idle" = "Свободен";
-"room_participants_action_ban" = "Забанить в этой комнате";
+"room_participants_action_ban" = "Забанить в этой группе";
 "room_participants_action_unban" = "Разбанить";
 "room_warning_about_encryption" = "Сквозное шифрование является экспериментальным и может быть ненадежным.\n\nПока еще не стоит доверять ему для защиты важных данных.\n\nУстройства не смогут расшифровать историю чатов которые велись до их входа в комнату.\n\nЗашифрованные сообщения не будут видны на клиентах, которые еще не применяют шифрование.";
 "unknown_devices_alert" = "Эта комната содержит неизвестные сеансы, которые не были проверены.\nЭто означает, что нет никакой гарантии, что сеансы принадлежат тем пользователям, которые их используют.\nМы рекомендуем Вам пройти процесс проверки для каждого сеанса, прежде чем продолжить, но вы можете повторно отправить сообщение без проверки, если хотите.";
@@ -1249,7 +1249,7 @@
 "rooms_empty_view_title" = "Комнаты";
 "people_empty_view_information" = "Общайтесь в безопасном чате с кем угодно. Нажмите +, чтобы начать добавлять людей.";
 "people_empty_view_title" = "Люди";
-"invite_friends_share_text" = "Эй, поговори со мной в %@: %@";
+"invite_friends_share_text" = "Привет, поговори со мной в %@: %@";
 
 // MARK: - Invite friends
 

@@ -14,9 +14,12 @@
 // limitations under the License.
 //
 
+
+import YandexMobileMetrica
 import UIKit
 import PushKit
 import Firebase
+
 
 @available(iOS 15.0, *)
 @UIApplicationMain
@@ -61,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
         
+        let configuration = YMMYandexMetricaConfiguration.init(apiKey: "024d32cf-0acf-4b54-9a90-2f90f11eb45f")
+        YMMYandexMetrica.activate(with: configuration!)
+            
         // Create AppCoordinator
         self.rootRouter = RootRouter(window: window)
         FirebaseApp.configure()
