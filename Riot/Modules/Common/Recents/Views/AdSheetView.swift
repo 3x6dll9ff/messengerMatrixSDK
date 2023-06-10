@@ -11,12 +11,13 @@ import SwiftUI
 import Alamofire
 
 enum LinkType: String, CaseIterable{
-    case bigstar,
-         youtube,
-         instagram,
-         website,
-         phoneNumber,
-         whatsApp
+    case
+//        bigstar,
+        phoneNumber,
+        whatsApp,
+        instagram,
+        youtube,
+        website
 }
 
 @available(iOS 15.0, *)
@@ -25,8 +26,8 @@ struct AdSheetView: View{
     
     func getLinkByLinkType(linkType: LinkType) -> String {
         switch linkType {
-            case .bigstar:
-            return clientAd.bigstarUrl ?? ""
+//            case .bigstar:
+//            return clientAd.bigstarUrl ?? ""
             case .youtube:
             return clientAd.youtubeUrl ?? ""
             case .instagram:
@@ -44,8 +45,8 @@ struct AdSheetView: View{
     func clickUrl(linkType: LinkType) async {
         var link = ""
         switch linkType {
-            case .bigstar:
-                link = "bigstar"
+//            case .bigstar:
+//                link = "bigstar"
             case .youtube:
                 link = "youtube"
             case .instagram:
@@ -60,10 +61,10 @@ struct AdSheetView: View{
         }
         print("\(baseURL)/ads/\(clientAd.uuid)/\(link)/click")
         if link != "" {
-        let asd = try! await AF.request(
+            let asd = try! await AF.request(
                 "\(baseURL)/ads/\(clientAd.uuid)/\(link)/click",
                 method: .patch
-             ).serializingDecodable(ClientAds.self).value.uuid
+            ).serializingDecodable(ClientAds.self).value.uuid
             print(asd)
         }
        
@@ -71,79 +72,110 @@ struct AdSheetView: View{
     func openUrl(urlString: String) {
         let url = URL(string: urlString)!
       
-        
         UIApplication.shared.open(url)
     }
 
     var body: some View {
         ScrollView{
             VStack(alignment: .center){
-                HStack{
+                Text(clientAd.title)
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                    .padding(.bottom, 4)
+                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
+
+                HStack {
                     AsyncImage(
                         url: URL(string: "\(baseURL)/files/\(clientAd.bannerUuid)")
-                    ){ phase in
+                    ) { phase in
                         switch phase {
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 200)
-                     
-                            case .failure(_):
-                                Text("Произошла ошибка")
-                                    .foregroundColor(.purple)
-
-                            case .empty:
-                                Text("Загрузка")
-                                    .foregroundColor(.purple)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .mask(
+                                    Image("bannerMask")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(maxWidth: .infinity)
+                                )
+                                .shadow(color: Color.black.opacity(0.25), radius: 30, x: 0, y: 4)
+                                .frame(maxHeight: 275)
+                                .frame(maxWidth: .infinity)
                             
-                            @unknown default:
-                                Text("Произошла ошибка")
-                                    .foregroundColor(.purple)
+                        case .failure(_):
+                            Text("Произошла ошибка")
+                                .foregroundColor(.purple)
+                            
+                        case .empty:
+                            Text("Загрузка")
+                                .foregroundColor(.purple)
+                            
+                        @unknown default:
+                            Text("Произошла ошибка")
+                                .foregroundColor(.purple)
                         }
                     }
+                    
+                    Spacer().frame(width: 24)
                 }
-                .frame(height: 170)
-                
+
+
                 VStack(alignment: .leading){
-                    Text(clientAd.title)
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
-                        .padding(.bottom, 4)
                     Text(clientAd.description)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
-                        .foregroundColor(.gray)
-                }.padding(16)
+                        .foregroundColor(.white)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
                 
                 Spacer()
                 
-                HStack(spacing: 16){
-                    ForEach(LinkType.allCases, id: \.rawValue) { linkType in
-                        Button(action: {
-                            let link = getLinkByLinkType(linkType: linkType)
-                            
-                            if(link.count > 0){
-                                openUrl(urlString: link)
-                                Task {
-                                await clickUrl(linkType: linkType)
+                ZStack {
+                    Image("adSheetFooter")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity)
+                    
+                    HStack(spacing: 16) {
+                        ForEach(LinkType.allCases, id: \.rawValue) { linkType in
+                            Button(action: {
+                                let link = getLinkByLinkType(linkType: linkType)
+                                
+                                if(link.count > 0){
+                                    openUrl(urlString: link)
+                                    Task {
+                                        await clickUrl(linkType: linkType)
+                                    }
                                 }
-                            }
-                        }) {
-                            if(getLinkByLinkType(linkType: linkType).count > 0){
-                                Image(
-                                    uiImage: UIImage(named: "\(linkType.rawValue).png")!
-                                    )
-                            } else {
-                                Image(
-                                    uiImage: UIImage(named: "\(linkType.rawValue)_inactive.png")!
-                                )
+                            }) {
+                                Image(uiImage: UIImage(named: "\(linkType.rawValue).png")!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 45, height: 45)
                             }
                         }
                     }
-                }.padding(.bottom, 24)
+                    .padding(.top, 28)
+                }
+                .frame(maxWidth: .infinity)
             }
         }
+        .padding(.top, 16)
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        Color(UIColor(red: 156/255, green: 58/255, blue: 218/255, alpha: 1.0)),
+                        Color(UIColor(red: 135/255, green: 43/255, blue: 184/255, alpha: 0.6))
+                    ]
+                ),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+        )
     }
 }
 

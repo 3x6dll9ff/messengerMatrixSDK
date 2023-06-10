@@ -22,6 +22,8 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal class Asset: NSObject {
   @objcMembers
   @objc(AssetImages) internal class Images: NSObject {
+    internal static let adSheetFooter = ImageAsset(name: "adSheetFooter")
+    internal static let bannerMask = ImageAsset(name: "bannerMask")
     internal static let analyticsCheckmark = ImageAsset(name: "AnalyticsCheckmark")
     internal static let analyticsLogo = ImageAsset(name: "AnalyticsLogo")
     internal static let socialLoginButtonApple = ImageAsset(name: "social_login_button_apple")
@@ -312,17 +314,11 @@ internal class Asset: NSObject {
     internal static let sideMenuIcon = ImageAsset(name: "side_menu_icon")
     internal static let sideMenuNotifIcon = ImageAsset(name: "side_menu_notif_icon")
     internal static let bigstar = ImageAsset(name: "bigstar")
-    internal static let bigstarInactive = ImageAsset(name: "bigstar_inactive")
     internal static let instagram = ImageAsset(name: "instagram")
-    internal static let instagramInactive = ImageAsset(name: "instagram_inactive")
     internal static let phoneNumber = ImageAsset(name: "phoneNumber")
-    internal static let phoneNumberInactive = ImageAsset(name: "phoneNumber_inactive")
     internal static let website = ImageAsset(name: "website")
-    internal static let websiteInactive = ImageAsset(name: "website_inactive")
     internal static let whatsApp = ImageAsset(name: "whatsApp")
-    internal static let whatsAppInactive = ImageAsset(name: "whatsApp_inactive")
     internal static let youtube = ImageAsset(name: "youtube")
-    internal static let youtubeInactive = ImageAsset(name: "youtube_inactive")
     internal static let featureUnavaibleArtwork = ImageAsset(name: "feature_unavaible_artwork")
     internal static let featureUnavaibleArtworkDark = ImageAsset(name: "feature_unavaible_artwork_dark")
     internal static let spaceAddRoom = ImageAsset(name: "space_add_room")

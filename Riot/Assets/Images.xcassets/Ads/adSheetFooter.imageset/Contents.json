@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "website_inactive.png",
+      "filename" : "adSheetFooter.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "website_inactive-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "website_inactive-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
