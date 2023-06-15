@@ -76,14 +76,27 @@ struct AdSheetView: View{
     }
 
     var body: some View {
-        ScrollView{
+        ZStack{
+            ScrollView {
+                VStack(alignment: .leading){
+                    Text("\n\(clientAd.description)")
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                }
+                .padding(.top, 168)
+                .padding(.bottom, 112)
+                .padding(.horizontal, 16)
+            }
+            .padding(.top, 70)
+            
             VStack(alignment: .center){
                 Text(clientAd.title)
                     .font(.system(size: 22))
                     .fontWeight(.bold)
                     .padding(.bottom, 4)
                     .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
-
+                    .foregroundColor(.white)
                 HStack {
                     AsyncImage(
                         url: URL(string: "\(baseURL)/files/\(clientAd.bannerUuid)")
@@ -119,23 +132,21 @@ struct AdSheetView: View{
                     
                     Spacer().frame(width: 24)
                 }
+                .offset(y: -14)
 
 
-                VStack(alignment: .leading){
-                    Text(clientAd.description)
-                        .font(.system(size: 16))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
-                
                 Spacer()
-                
+            }
+            .offset(y: -8)
+            .allowsHitTesting(false)
+
+            VStack{
+                Spacer()
+
                 ZStack {
                     Image("adSheetFooter")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: .infinity)
                     
                     HStack(spacing: 16) {
@@ -161,6 +172,10 @@ struct AdSheetView: View{
                 }
                 .frame(maxWidth: .infinity)
             }
+            .allowsHitTesting(true)
+            .offset(y: 4)
+            
+
         }
         .padding(.top, 16)
         .background(
@@ -176,6 +191,9 @@ struct AdSheetView: View{
             )
             .edgesIgnoringSafeArea(.all)
         )
+        .edgesIgnoringSafeArea(.all)
+
     }
 }
 
+    

@@ -1,4 +1,4 @@
-// 
+//
 // Copyright 2022 New Vector Ltd
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -387,8 +387,16 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             let adSheetViewController = UIHostingController(rootView: adSheetView)
             
             if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
-                    presentationController.detents = [.medium(), .large()]
+                if #available(iOS 16.0, *) {
+                    presentationController.detents = [
+                        .custom { _ in
+                            return 495
+                        }
+                    ]
+                } else {
+                    // Fallback on earlier versions
                 }
+            }
                 
             present(adSheetViewController, animated: true)
         } else {
@@ -929,7 +937,7 @@ extension AllChatsViewController: SpaceMembersCoordinatorDelegate {
         coordinator.toPresentable().dismiss(animated: true) {
             self.remove(childCoordinator: coordinator)
         }
-    }    
+    }
 }
 
 // MARK: - BannerPresentationProtocol
