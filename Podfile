@@ -70,6 +70,8 @@ abstract_target 'RiotPods' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
   pod 'GBDeviceInfo', '~> 7.1.0'
   pod 'Reusable', '~> 4.1'
   pod 'KeychainAccess', '~> 4.2.2'

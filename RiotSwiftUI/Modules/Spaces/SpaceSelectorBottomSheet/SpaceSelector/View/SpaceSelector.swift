@@ -55,10 +55,10 @@ struct SpaceSelector: View {
                 }
                 LazyHStack {
                     Image(systemName: "externaldrive.badge.icloud")
-                     
+                    NavigationLink(destination: CloudListView()) {
                         Text("Облачное хранилище")
                             .foregroundColor(.purple)
-                    
+                    }
                 }
             } .padding(10)
         }
