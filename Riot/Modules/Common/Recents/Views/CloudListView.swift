@@ -4,6 +4,7 @@ import SwiftUI
 import FirebaseStorage
 
 let storageUrl = "gs://bigstarconnect.appspot.com"
+var userId = ""
 
 struct CloudListView: View {
     @State private var fileList: [String] = []
@@ -25,6 +26,12 @@ struct CloudListView: View {
                 }
                 .padding()
                 .onAppear {
+                    let mainAccount = MXKAccountManager.shared().accounts.first
+                    
+                    if let newUserId = mainAccount?.mxSession.myUser.userId {
+                        userId = newUserId
+                    }
+                    
                     fetchFileList()
                 }
             }
@@ -35,7 +42,7 @@ struct CloudListView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let filesRef = storageRef.child("files")
+        let filesRef = storageRef.child("files/\(userId)")
 
         filesRef.listAll { (result, error) in
             if let error = error {
@@ -52,7 +59,7 @@ struct CloudListView: View {
         let storageRef = storage.reference()
 
         // Get a reference to the file in Firebase Cloud Storage
-        let fileRef = storageRef.child("files/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/\(file)")
 
         // Delete the file
         fileRef.delete { error in
@@ -116,7 +123,7 @@ struct FileView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let fileRef = storageRef.child("files/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/\(file)")
 
         fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
@@ -137,7 +144,7 @@ struct FileView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let fileRef = storageRef.child("files/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/\(file)")
 
         // Create a temporary file URL to store the downloaded file
         let tempFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(file)

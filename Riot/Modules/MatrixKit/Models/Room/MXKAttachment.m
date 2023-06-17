@@ -612,11 +612,15 @@ NSString *const kMXKAttachmentFileNameBase = @"attatchment";
             [self decryptToTempFile:^(NSString *path) {
                 NSURL *fileURL = [NSURL fileURLWithPath:path];
                 
+                MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
+                NSString *userId = currentAccount.mxSession.myUser.userId;
+                
                 // Создайте ссылку на файл в Firebase Storage
                 FIRStorage *storage = [FIRStorage storage];
-                FIRStorageReference *storageRef = [storage referenceWithPath:@"files"];
+                FIRStorageReference *storageRef = [storage reference];
+                FIRStorageReference *userRef = [storageRef child:[NSString stringWithFormat:@"files/%@", userId]];
                 NSString *filename = [NSString stringWithFormat:@"%@.jpg", self.eventId];
-                FIRStorageReference *fileRef = [storageRef child:filename];
+                FIRStorageReference *fileRef = [userRef child:filename];
                 
                 FIRStorageUploadTask *uploadTask = [fileRef putFile:fileURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                     if (error) {
@@ -635,10 +639,14 @@ NSString *const kMXKAttachmentFileNameBase = @"attatchment";
         {
             NSURL *fileURL = [NSURL fileURLWithPath:self.cacheFilePath];
             
+            MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
+            NSString *userId = currentAccount.mxSession.myUser.userId;
+            
             FIRStorage *storage = [FIRStorage storage];
-            FIRStorageReference *storageRef = [storage referenceWithPath:@"files"];
+            FIRStorageReference *storageRef = [storage reference];
+            FIRStorageReference *userRef = [storageRef child:[NSString stringWithFormat:@"files/%@", userId]];
             NSString *filename = [NSString stringWithFormat:@"%@.jpg", self.eventId];
-            FIRStorageReference *fileRef = [storageRef child:filename];
+            FIRStorageReference *fileRef = [userRef child:filename];
             
             FIRStorageUploadTask *uploadTask = [fileRef putFile:fileURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                 if (error) {
@@ -662,6 +670,7 @@ NSString *const kMXKAttachmentFileNameBase = @"attatchment";
         }
     }
 }
+
 
 - (void)copy:(void (^)(void))onSuccess failure:(void (^)(NSError *error))onFailure
 {
