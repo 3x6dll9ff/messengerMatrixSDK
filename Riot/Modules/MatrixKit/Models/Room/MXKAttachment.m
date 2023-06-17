@@ -663,9 +663,6 @@ NSString *const kMXKAttachmentFileNameBase = @"attatchment";
     }
 }
 
-
-
-
 - (void)copy:(void (^)(void))onSuccess failure:(void (^)(NSError *error))onFailure
 {
     MXWeakify(self);

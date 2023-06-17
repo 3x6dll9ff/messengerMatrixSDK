@@ -4167,7 +4167,7 @@ static CGSize kThreadListBarButtonItemImageSize;
         if (attachment.type == MXKAttachmentTypeImage || attachment.type == MXKAttachmentTypeVideo)
         {
             [self.eventMenuBuilder addItemWithType:EventMenuItemTypeSaveMedia
-                                            action:[UIAlertAction actionWithTitle:@"Сохранить в облако"
+                                            action:[UIAlertAction actionWithTitle:[VectorL10n roomEventActionSaveToCloud]
                                                                             style:UIAlertActionStyleDefault
                                                                           handler:^(UIAlertAction * action) {
                 MXStrongifyAndReturnIfNil(self);

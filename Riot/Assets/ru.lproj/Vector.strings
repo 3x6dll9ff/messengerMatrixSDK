@@ -202,6 +202,7 @@
 "room_event_action_report_prompt_reason" = "Причина сообщениея о недопустимом контенте";
 "room_event_action_report_prompt_ignore_user" = "Вы хотите скрыть все сообщения от этого пользователя?";
 "room_event_action_save" = "Сохранить";
+"room_event_action_save_to_cloud" = "Сохранить в облако";
 "room_event_action_resend" = "Переотправить";
 "room_event_action_delete" = "Удалить";
 "room_event_action_cancel_upload" = "Отменить отправку";
@@ -1665,6 +1666,7 @@
 "redact" = "Удалить";
 "share" = "Поделиться";
 "set_power_level" = "Установить уровень мощности";
+"download" = "Скачать";
 "delete" = "Удалить";
 // actions 
 "action_logout" = "Выйти";
@@ -1772,6 +1774,8 @@
 "e2e_passphrase_empty" = "Парольная фраза не может быть пустой";
 "e2e_passphrase_not_match" = "Парольные фразы должны совпадать";
 // Others
+"my_files_title" = "Мои Файлы";
+"downloading" = "Скачивание";
 "user_id_title" = "Идентификатор пользователя:";
 "offline" = "не в сети";
 "unsent" = "Не отправлено";

@@ -11,7 +11,7 @@ struct CloudListView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("My Files")
+                Text(VectorL10n.myFilesTitle)
                     .font(.title)
                     .bold()
                     .padding(.horizontal)
@@ -101,10 +101,10 @@ struct FileView: View {
         }
         .actionSheet(isPresented: $showMenu) {
             ActionSheet(title: Text(file), buttons: [
-                .default(Text("Download"), action: {
+                .default(Text(VectorL10n.download), action: {
                     downloadFile()
                 }),
-                .destructive(Text("Delete"), action: {
+                .destructive(Text(VectorL10n.delete), action: {
                     onDelete()
                 }),
                 .cancel()
@@ -144,23 +144,68 @@ struct FileView: View {
 
         let downloadTask = fileRef.write(toFile: tempFileURL)
 
+        // Create a progress view to show the download progress
+        let progressView = UIProgressView(progressViewStyle: .default)
+           progressView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Create an alert controller to show the progress view
+        let alertController = UIAlertController(title: VectorL10n.downloading, message: nil, preferredStyle: .alert)
+        alertController.view.addSubview(progressView)
+
+        // Add constraints for the progress view
+        progressView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 16).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -16).isActive = true
+        progressView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -16).isActive = true
+
+        // Find the topmost view controller to present the alert controller
+        guard let topViewController = UIApplication.shared.windows.first?.rootViewController?.topmostViewController() else {
+            return
+        }
+
+        // Present the alert controller
+        topViewController.present(alertController, animated: true, completion: nil)
+
+        // Observe the progress of the download task
+        let observer = downloadTask.observe(.progress) { snapshot in
+            // Update the progress view based on the download progress
+            let progress = Float(snapshot.progress?.fractionCompleted ?? 0)
+            progressView.setProgress(progress, animated: true)
+        }
+
         // Start the download task
         downloadTask.observe(.success) { snapshot in
-            // Create a UIActivityViewController to share or save the file
-            let activityViewController = UIActivityViewController(activityItems: [tempFileURL], applicationActivities: nil)
+            // Remove the observer
+            downloadTask.removeObserver(withHandle: observer)
 
-            // Find the topmost view controller to present the activity view controller
-            if let topViewController = UIApplication.shared.windows.first?.rootViewController?.topmostViewController() {
-                topViewController.present(activityViewController, animated: true, completion: nil)
+            // Dismiss the progress alert controller on the main queue
+            DispatchQueue.main.async {
+                alertController.dismiss(animated: true) {
+                    // Create a UIActivityViewController to share or save the file
+                    let activityViewController = UIActivityViewController(activityItems: [tempFileURL], applicationActivities: nil)
+
+                    // Find the topmost view controller to present the activity view controller
+                    if let topViewController = UIApplication.shared.windows.first?.rootViewController?.topmostViewController() {
+                        topViewController.present(activityViewController, animated: true, completion: nil)
+                    }
+                }
             }
         }
 
         downloadTask.observe(.failure) { snapshot in
-            if let error = snapshot.error as NSError? {
-                print("Error downloading file: \(error.localizedDescription)")
+            // Remove the observer
+            downloadTask.removeObserver(withHandle: observer)
+
+            // Dismiss the progress alert controller on the main queue
+            DispatchQueue.main.async {
+                alertController.dismiss(animated: true) {
+                    if let error = snapshot.error as NSError? {
+                        print("Error downloading file: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
+
 }
 
 extension UIViewController {
