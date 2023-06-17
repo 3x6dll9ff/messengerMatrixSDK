@@ -4164,6 +4164,35 @@ static CGSize kThreadListBarButtonItemImageSize;
             }
         }
         
+        if (attachment.type == MXKAttachmentTypeImage || attachment.type == MXKAttachmentTypeVideo)
+        {
+            [self.eventMenuBuilder addItemWithType:EventMenuItemTypeSaveMedia
+                                            action:[UIAlertAction actionWithTitle:@"Сохранить в облако"
+                                                                            style:UIAlertActionStyleDefault
+                                                                          handler:^(UIAlertAction * action) {
+                MXStrongifyAndReturnIfNil(self);
+                
+                [self cancelEventSelection];
+                
+                [self startActivityIndicator];
+                
+                MXWeakify(self);
+                [attachment uploadImageToFirebaseStorage:^{
+                    MXStrongifyAndReturnIfNil(self);
+                    [self stopActivityIndicator];
+                } failure:^(NSError *error) {
+                    MXStrongifyAndReturnIfNil(self);
+                    [self stopActivityIndicator];
+                    
+                    //Alert user
+                    [self showError:error];
+                }];
+                
+                // Start animation in case of download during attachment preparing
+                [roomBubbleTableViewCell startProgressUI];
+            }]];
+        }
+        
         // Check status of the selected event
         if (selectedEvent.sentState == MXEventSentStatePreparing ||
             selectedEvent.sentState == MXEventSentStateEncrypting ||

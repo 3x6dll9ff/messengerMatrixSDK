@@ -359,7 +359,7 @@ final class BuildSettings: NSObject {
     // MARK: - Message
     static let messageDetailsAllowShare: Bool = true
     static let messageDetailsAllowPermalink: Bool = true
-    static let messageDetailsAllowViewSource: Bool = true
+    static let messageDetailsAllowViewSource: Bool = false
     static let messageDetailsAllowSave: Bool = true
     static let messageDetailsAllowCopyMedia: Bool = true
     static let messageDetailsAllowPasteMedia: Bool = true
