@@ -1267,6 +1267,14 @@ public class VectorL10n: NSObject {
   public static var confirm: String { 
     return VectorL10n.tr("Vector", "confirm") 
   }
+  /// Confirm Delete
+  public static var confirmDelete: String { 
+    return VectorL10n.tr("Vector", "confirm_delete") 
+  }
+  /// Are you sure you want to delete this ad?
+  public static var confirmDeleteDescription: String { 
+    return VectorL10n.tr("Vector", "confirm_delete_description") 
+  }
   /// Local Contacts
   public static var contactLocalContacts: String { 
     return VectorL10n.tr("Vector", "contact_local_contacts") 

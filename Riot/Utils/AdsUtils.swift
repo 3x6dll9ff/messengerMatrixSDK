@@ -40,10 +40,10 @@ struct AdvertiserAds: Decodable {
     let thumbnailUuid: String
     let bannerUuid: String
     let advertiserUuid: String
-    let youtubeUrl: String
-    let instagramUrl: String
-    let bigstarUrl: String
-    let websiteUrl: String
+    let youtubeUrl: String?
+    let instagramUrl: String?
+    let bigstarUrl: String?
+    let websiteUrl: String?
     let phoneNumber: String?
     let showsNumber: Int
     let clicksNumber: Int

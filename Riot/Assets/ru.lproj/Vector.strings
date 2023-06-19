@@ -1776,6 +1776,8 @@
 // Others
 "my_files_title" = "Мои Файлы";
 "downloading" = "Скачивание";
+"confirm_delete" = "Подтвердите удаление";
+"confirm_delete_description" = "Вы уверены, что хотите удалить эту рекламу?";
 "user_id_title" = "Идентификатор пользователя:";
 "offline" = "не в сети";
 "unsent" = "Не отправлено";
