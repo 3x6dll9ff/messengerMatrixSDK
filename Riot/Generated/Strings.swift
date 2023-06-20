@@ -1267,6 +1267,14 @@ public class VectorL10n: NSObject {
   public static var confirm: String { 
     return VectorL10n.tr("Vector", "confirm") 
   }
+  /// Confirm Delete
+  public static var confirmDelete: String { 
+    return VectorL10n.tr("Vector", "confirm_delete") 
+  }
+  /// Are you sure you want to delete this ad?
+  public static var confirmDeleteDescription: String { 
+    return VectorL10n.tr("Vector", "confirm_delete_description") 
+  }
   /// Local Contacts
   public static var contactLocalContacts: String { 
     return VectorL10n.tr("Vector", "contact_local_contacts") 
@@ -2026,6 +2034,14 @@ public class VectorL10n: NSObject {
   /// Done
   public static var done: String { 
     return VectorL10n.tr("Vector", "done") 
+  }
+  /// Download
+  public static var download: String { 
+    return VectorL10n.tr("Vector", "download") 
+  }
+  /// Downloading
+  public static var downloading: String { 
+    return VectorL10n.tr("Vector", "downloading") 
   }
   /// %@ now supports end-to-end encryption but you need to log in again to enable it.\n\nYou can do it now or later from the application settings.
   public static func e2eEnablingOnAppUpdate(_ p1: String) -> String {
@@ -3794,6 +3810,10 @@ public class VectorL10n: NSObject {
   /// More
   public static var more: String { 
     return VectorL10n.tr("Vector", "more") 
+  }
+  /// My Files
+  public static var myFilesTitle: String { 
+    return VectorL10n.tr("Vector", "my_files_title") 
   }
   /// Please check your network connectivity
   public static var networkErrorNotReachable: String { 
@@ -5802,6 +5822,10 @@ public class VectorL10n: NSObject {
   /// Save
   public static var roomEventActionSave: String { 
     return VectorL10n.tr("Vector", "room_event_action_save") 
+  }
+  /// Save to the cloud
+  public static var roomEventActionSaveToCloud: String { 
+    return VectorL10n.tr("Vector", "room_event_action_save_to_cloud") 
   }
   /// Share
   public static var roomEventActionShare: String { 

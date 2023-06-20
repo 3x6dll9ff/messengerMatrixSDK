@@ -20,6 +20,7 @@
 
 @import MatrixSDK;
 @import MobileCoreServices;
+@import FirebaseStorage;
 
 #import "MXKTools.h"
 
@@ -601,6 +602,75 @@ NSString *const kMXKAttachmentFileNameBase = @"attatchment";
         }
     }
 }
+
+- (void)uploadImageToFirebaseStorage:(void (^)(void))onSuccess failure:(void (^)(NSError *error))onFailure
+{
+    if (_type == MXKAttachmentTypeImage || _type == MXKAttachmentTypeVideo)
+    {
+        if (self.isEncrypted) {
+            // Если вложение зашифровано, сначала расшифруйте его и сохраните во временный файл
+            [self decryptToTempFile:^(NSString *path) {
+                NSURL *fileURL = [NSURL fileURLWithPath:path];
+                
+                MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
+                NSString *userId = currentAccount.mxSession.myUser.userId;
+                
+                // Создайте ссылку на файл в Firebase Storage
+                FIRStorage *storage = [FIRStorage storage];
+                FIRStorageReference *storageRef = [storage reference];
+                FIRStorageReference *userRef = [storageRef child:[NSString stringWithFormat:@"files/%@", userId]];
+                NSString *filename = [NSString stringWithFormat:@"%@.jpg", self.eventId];
+                FIRStorageReference *fileRef = [userRef child:filename];
+                
+                FIRStorageUploadTask *uploadTask = [fileRef putFile:fileURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                    if (error) {
+                        if (onFailure) {
+                            onFailure(error);
+                        }
+                    } else {
+                        if (onSuccess) {
+                            onSuccess();
+                        }
+                    }
+                }];
+            } failure:onFailure];
+        }
+        else
+        {
+            NSURL *fileURL = [NSURL fileURLWithPath:self.cacheFilePath];
+            
+            MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
+            NSString *userId = currentAccount.mxSession.myUser.userId;
+            
+            FIRStorage *storage = [FIRStorage storage];
+            FIRStorageReference *storageRef = [storage reference];
+            FIRStorageReference *userRef = [storageRef child:[NSString stringWithFormat:@"files/%@", userId]];
+            NSString *filename = [NSString stringWithFormat:@"%@.jpg", self.eventId];
+            FIRStorageReference *fileRef = [userRef child:filename];
+            
+            FIRStorageUploadTask *uploadTask = [fileRef putFile:fileURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                if (error) {
+                    if (onFailure) {
+                        onFailure(error);
+                    }
+                } else {
+                    if (onSuccess) {
+                        onSuccess();
+                    }
+                }
+            }];
+        }
+    }
+    else
+    {
+        // Не поддерживается
+        if (onFailure)
+        {
+            onFailure(nil);
+        }
+    }
+}
+
 
 - (void)copy:(void (^)(void))onSuccess failure:(void (^)(NSError *error))onFailure
 {

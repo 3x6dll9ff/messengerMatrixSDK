@@ -1,4 +1,4 @@
-//swiftlint:disable all
+// swiftlint:disable all
 //
 //  AdSheetView.swift
 //  UiKitQa

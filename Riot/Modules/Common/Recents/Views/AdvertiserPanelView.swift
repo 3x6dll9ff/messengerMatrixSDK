@@ -1,4 +1,3 @@
-
 // swiftlint:disable all
 
 import Foundation
@@ -11,6 +10,7 @@ private var accessToken: String = ""
 @available(iOS 15.0, *)
 struct AdvertiserPanelView: View {
     @State private var ads: [AdvertiserAds] = []
+    @State private var showAlert: Bool = false
     @Environment(\.dismiss) var dismiss
     
     let locale = Locale.current
@@ -28,40 +28,66 @@ struct AdvertiserPanelView: View {
                                     Text(ads[index].description)
                                         .lineLimit(1)
                                         .foregroundColor(.gray)
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Shows" : "Просмотров"): ")
-                                        Text("\(ads[index].showsNumber)")
-                                            .foregroundColor(.purple)
+                                        .padding(.bottom, 4)
+                                    VStack(alignment: .leading){
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Shows" : "Просмотров"): ")
+                                            Text("\(ads[index].showsNumber)")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Clicks" : "Переходов"): ")
+                                            Text("\(ads[index].clicksNumber)")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Created at" : "Создано"): ")
+                                            Text("\(convertDateFormat(inputDate: ads[index].createdAt))")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Instagram clicks" : "Instagram переходов"): ")
+                                            Text("\(ads[index].instagramClicksNumber)")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Youtube clicks" : "Youtube переходов"): ")
+                                            Text("\(ads[index].youtubeClicksNumber)")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Website clicks" : "Website переходов"): ")
+                                            Text("\(ads[index].websiteClicksNumber)")
+                                                .foregroundColor(.purple)
+                                        }
+                                        HStack {
+                                            Text("\(locale.identifier.hasPrefix("en") ? "Big Star clicks" : "Big Star переходов"): ")
+                                            Text("\(ads[index].bigstarClicksNumber)")
+                                                .foregroundColor(.purple)
+                                        }
                                     }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Clicks" : "Переходов"): ")
-                                        Text("\(ads[index].clicksNumber)")
-                                            .foregroundColor(.purple)
-                                    }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Created at" : "Создано"): ")
-                                        Text("\(convertDateFormat(inputDate: ads[index].createdAt))")
-                                            .foregroundColor(.purple)
-                                    }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Instagram clicks" : "Instagram переходов"): ")
-                                        Text("\(ads[index].instagramClicksNumber)")
-                                            .foregroundColor(.purple)
-                                    }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Youtube clicks" : "Youtube переходов"): ")
-                                        Text("\(ads[index].youtubeClicksNumber)")
-                                            .foregroundColor(.purple)
-                                    }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Website clicks" : "Website переходов"): ")
-                                        Text("\(ads[index].websiteClicksNumber)")
-                                            .foregroundColor(.purple)
-                                    }
-                                    HStack {
-                                        Text("\(locale.identifier.hasPrefix("en") ? "Big Star clicks" : "Big Star переходов"): ")
-                                        Text("\(ads[index].bigstarClicksNumber)")
-                                            .foregroundColor(.purple)
+                                    .padding(.bottom, 8)
+                                    Button(
+                                        VectorL10n.delete,
+                                        role: .destructive,
+                                        action: {
+                                            showAlert = true
+                                        }
+                                    )
+                                    .alert(isPresented: $showAlert) {
+                                        Alert(
+                                            title: Text(VectorL10n.confirmDelete),
+                                            message: Text(VectorL10n.confirmDeleteDescription),
+                                            primaryButton: .destructive(
+                                                Text(VectorL10n.delete),
+                                                action: {
+                                                    Task {
+                                                        await deleteAd(adUuid: ads[index].uuid)
+                                                    }
+                                                }
+                                            ),
+                                            secondaryButton: .cancel()
+                                        )
                                     }
                                 }
                             }
@@ -76,20 +102,43 @@ struct AdvertiserPanelView: View {
     }
     
     private func convertDateFormat(inputDate: String) -> String {
-        var endOfStr = inputDate.firstIndex(of: ".")!
-        let date = inputDate[...endOfStr].dropLast()
+        let inputDateFormat = ISO8601DateFormatter()
+        inputDateFormat.formatOptions = [.withInternetDateTime]
 
-        let olDateFormatter = DateFormatter()
-        olDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        guard let date = inputDateFormat.date(from: inputDate) else {
+            return ""
+        }
 
-        let oldDate = olDateFormatter.date(from: String(date))
+        let outputDateFormat = DateFormatter()
+        outputDateFormat.dateFormat = "MMM dd yyyy h:mm a"
+        outputDateFormat.locale = Locale(identifier: "en_US_POSIX")
 
-        let convertDateFormatter = DateFormatter()
-        convertDateFormatter.dateFormat = "MMM dd yyyy h:mm a"
+        return outputDateFormat.string(from: date)
+    }
+                                        
+    private func deleteAd(adUuid: String) async {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
 
-        return convertDateFormatter.string(from: oldDate!)
-   }
-    
+        AF.request(
+            "\(baseURL)/ads/\(adUuid)",
+            method: .delete,
+            headers: headers
+        ).response { response in
+            if let error = response.error {
+                print("Ошибка удаления рекламы: \(error)")
+            } else {
+                if let index = ads.firstIndex(where: { $0.uuid == adUuid }) {
+                    ads.remove(at: index)
+                    print("Реклама с UUID \(adUuid) успешно удалена")
+                } else {
+                    print("Реклама с UUID \(adUuid) не найдена в массиве ads")
+                }
+            }
+        }
+    }
+
     private func createAdvertiser() async {
         print(userInfo.userId)
         print(userInfo.phoneNumber)
@@ -158,14 +207,13 @@ struct AdvertiserPanelView: View {
                 userInfo.phoneNumber = phoneNumber
             }
             
+            let token = await login()
             
-            _ = await login()
-            
-            ///TODO change to normal fetching
-            let headers:HTTPHeaders = [
-                    "Authorization": "Bearer \(accessToken)"
-                ]
             let advertiserUuid = await getMyAdvertiserUuid()
+
+            let headers:HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
             ads = try! await AF.request(
                 "\(baseURL)/ads/advertiser/\(advertiserUuid)",
                 method: .get,

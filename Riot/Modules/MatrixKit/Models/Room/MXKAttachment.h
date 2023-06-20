@@ -193,6 +193,14 @@ typedef NS_ENUM(NSUInteger, MXKAttachmentType) {
 - (void)copy:(void (^_Nullable)(void))onSuccess failure:(void (^_Nullable)(NSError * _Nullable error))onFailure;
 
 /**
+ Save the attachment in user's Firebase Storage folder. This operation is available only for images.
+
+ @param onSuccess the block called on success.
+ @param onFailure the block called on failure.
+ */
+- (void)uploadImageToFirebaseStorage:(void (^_Nullable)(void))onSuccess failure:(void (^_Nullable)(NSError * _Nullable error))onFailure;
+/**
+ 
  Prepare the attachment data to share it. The original name of the attachment (if any) is used
  to name the prepared file.
  
