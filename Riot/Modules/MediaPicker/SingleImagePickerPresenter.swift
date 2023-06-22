@@ -14,6 +14,9 @@
  limitations under the License.
  */
 
+// swiftlint:disable all
+
+
 import Foundation
 import UIKit
 import AVFoundation
@@ -59,6 +62,7 @@ final class SingleImagePickerPresenter: NSObject {
                  sourceView: UIView?,
                  sourceRect: CGRect,
                  animated: Bool) {
+        print("photoLibraryAction TEST")
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         

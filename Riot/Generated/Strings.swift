@@ -7163,6 +7163,14 @@ public class VectorL10n: NSObject {
   public static func sendTo(_ p1: String) -> String {
     return VectorL10n.tr("Vector", "send_to", p1)
   }
+  /// Send to Chat
+  public static var sendToChat: String { 
+    return VectorL10n.tr("Vector", "send_to_chat") 
+  }
+  /// Send to Cloud
+  public static var sendToCloud: String { 
+    return VectorL10n.tr("Vector", "send_to_cloud") 
+  }
   /// Sending
   public static var sending: String { 
     return VectorL10n.tr("Vector", "sending") 

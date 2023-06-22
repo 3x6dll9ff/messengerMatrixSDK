@@ -1777,6 +1777,8 @@
 "my_files_title" = "Мои Файлы";
 "downloading" = "Скачивание";
 "confirm_delete" = "Подтвердите удаление";
+"send_to_cloud" = "Отправить в облако";
+"send_to_chat" = "Отправить в чат";
 "confirm_delete_description" = "Вы уверены, что хотите удалить эту рекламу?";
 "user_id_title" = "Идентификатор пользователя:";
 "offline" = "не в сети";

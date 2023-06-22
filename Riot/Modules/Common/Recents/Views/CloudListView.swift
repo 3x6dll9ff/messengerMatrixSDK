@@ -2,6 +2,7 @@
 
 import SwiftUI
 import FirebaseStorage
+import FirebaseAuth
 
 let storageUrl = "gs://bigstarconnect.appspot.com"
 var userId = ""

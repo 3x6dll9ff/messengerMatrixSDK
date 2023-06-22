@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-// swiftlint:disable file_length
 // swiftlint:disable all
 
 
@@ -24,6 +23,9 @@ import Alamofire
 import Foundation
 import Reusable
 import SwiftUI
+import FirebaseFirestore
+import FirebaseStorage
+
 
 
 struct AdSlide {
@@ -63,6 +65,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         didTapAd()
     }
     
+    let db = Firestore.firestore()
+    var currentUserId = ""
     var ads = [AdSlide]()
     var clientAds: [ClientAds] = []
     var cityUuid: String = ""
@@ -163,7 +167,6 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         slideshow.activityIndicator = DefaultActivityIndicator()
         slideshow.delegate = self
         
-        
         updateUI()
         
         navigationItem.largeTitleDisplayMode = .automatic
@@ -175,6 +178,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupEditOptions), name: AllChatsLayoutSettingsManager.didUpdateSettings, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,11 +213,11 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                 authIsShown = false
             }
         }
-        
+                
         guard !authIsShown else {
             return
         }
-
+        
         AppDelegate.theDelegate().checkAppVersion()
     }
     
@@ -227,6 +231,126 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     }
     
     // MARK: - Public
+    func acceptPendingFile(filePath: String, documentID: String) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        // Create a reference to the pending file
+        let pendingRef = storageRef.child(filePath)
+        
+        // Define the path for the saved file
+        let savedPath = filePath.replacingOccurrences(of: "/pending/", with: "/saved/")
+        let savedRef = storageRef.child(savedPath)
+        
+        // Download the pending file
+        pendingRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred while downloading the file
+                print("Error downloading file:", error)
+                return
+            }
+            
+            // Upload the downloaded file to the saved path
+            savedRef.putData(data!, metadata: nil) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred while uploading the file
+                    print("Error uploading file:", error ?? "Unknown error")
+                    return
+                }
+                
+                // Delete the pending file
+                pendingRef.delete { error in
+                    if let error = error {
+                        // Uh-oh, an error occurred while deleting the file
+                        print("Error deleting file:", error)
+                    } else {
+                        // File deleted successfully
+                        print("File deleted successfully")
+                        self.db.collection("cloud").document(documentID).delete() { err in
+                            if let err = err {
+                                print("Error removing document: \(err)")
+                            } else {
+                                print("Document successfully removed!")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func firestoreDocumentsUpdateHandler(documents: [QueryDocumentSnapshot]) {
+        print("TSETSETSET \(documents)")
+        
+        let storage = Storage.storage(url: storageUrl)
+        let storageRef = storage.reference()
+        
+        for document in documents {
+            let senderName = (document["senderName"] ?? "") as! String
+            let filePath = document["filePath"]! as! String
+            let fileName = filePath.components(separatedBy: "/").last ?? ""
+            let fileRef = storageRef.child(filePath)
+            
+            fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    print("Error downloading file: \(error.localizedDescription)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "\(senderName) отправил файл в облако", message: fileName, preferredStyle: .alert)
+                    
+                    let rejectAction = UIAlertAction(title: "Отклонить", style: .destructive) { _ in
+                        // Delete the file
+                        fileRef.delete { error in
+                          if let error = error {
+                              print("Error removing file: \(error)")
+                          } else {
+                              self.db.collection("cloud").document(document.documentID).delete() { err in
+                                  if let err = err {
+                                      print("Error removing document: \(err)")
+                                  } else {
+                                      print("Document successfully removed!")
+                                  }
+                              }
+                          }
+                        }
+                    }
+                    
+                    let acceptAction = UIAlertAction(title: "Принять", style: .default) { _ in
+                        self.acceptPendingFile(filePath: filePath, documentID: document.documentID)
+                    }
+                    
+                    alertController.addAction(rejectAction)
+                    alertController.addAction(acceptAction)
+                    
+                    // Показать модальное окно
+                    if let viewController = UIApplication.shared.keyWindow?.rootViewController {
+                        viewController.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+
+    func watchFirestore (userId: String) {
+        if (currentUserId == userId) {
+            return
+        }
+        
+        currentUserId = userId
+        db.collection("cloud")
+            .whereField("recipientID", isEqualTo: userId)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                self.firestoreDocumentsUpdateHandler(documents: documents)
+                let filePaths = documents.map { $0.documentID }
+                print("Current documents (uuid: \(userId)): \(filePaths)")
+            }
+    }
     
     func switchSpace(withId spaceId: String?) {
         searchController.isActive = false
@@ -548,11 +672,15 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             let appName = AppInfo.current.displayName
             title = VectorL10n.homeEmptyViewTitle(appName, displayName)
             informationText = VectorL10n.allChatsEmptyViewInformation
+            
+            if let userId = myUser?.userId {
+                watchFirestore(userId: userId)
+            }
         }
         
         self.emptyView?.fill(with: emptyViewArtwork,
                              title: title,
-                             informationText: informationText)
+                             informationText: informationText)        
     }
     
     private var emptyViewArtwork: UIImage {
