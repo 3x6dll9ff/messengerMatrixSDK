@@ -418,14 +418,14 @@
             }
             else
             {
-                // The contact has here a phone number.
-                // Ignore this contact if the phone number is not linked to a matrix id because the invitation by SMS is not supported yet.
-                MXKPhoneNumber *phoneNumber = contact.phoneNumbers.firstObject;
-                if (!phoneNumber.matrixID)
-                {
-                    [unfilteredLocalContacts removeObjectAtIndex:index];
-                    continue;
-                }
+//                // The contact has here a phone number.
+//                // Ignore this contact if the phone number is not linked to a matrix id because the invitation by SMS is not supported yet.
+//                MXKPhoneNumber *phoneNumber = contact.phoneNumbers.firstObject;
+//                if (!phoneNumber.matrixID)
+//                {
+//                    [unfilteredLocalContacts removeObjectAtIndex:index];
+//                    continue;
+//                }
             }  
         }
         

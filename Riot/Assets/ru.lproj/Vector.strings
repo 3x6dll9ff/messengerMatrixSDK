@@ -128,7 +128,7 @@
 "directory_search_fail" = "Не удалось получить данные";
 // Contacts
 "contacts_address_book_section" = "ЛОКАЛЬНЫЕ КОНТАКТЫ";
-"contacts_address_book_matrix_users_toggle" = "Только пользователи Matrix";
+"contacts_address_book_matrix_users_toggle" = "Только пользователи Big Star";
 "contacts_address_book_no_contact" = "Нет локальных контактов";
 "contacts_address_book_permission_required" = "Разрешение на доступ к локальным контактам";
 "contacts_address_book_permission_denied" = "Вы не разрешили %@ получить доступ к вашим локальным контактам";
@@ -1751,7 +1751,7 @@
 "attachment_e2e_keys_file_prompt" = "Этот файл содержит ключи шифрования, экспортированные из клиента Matrix.\nВы хотите просмотреть содержимое файла или импортировать содержащиеся в нем ключи?";
 "attachment_e2e_keys_import" = "Импорт...";
 // Contacts
-"contact_mx_users" = "Пользователи Matrix";
+"contact_mx_users" = "Пользователи Big Star";
 "contact_local_contacts" = "Локальные контакты";
 // Search
 "search_no_results" = "Нет результатов";
