@@ -7840,12 +7840,12 @@ static CGSize kThreadListBarButtonItemImageSize;
                 
                 MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
                 NSString *userId = currentAccount.mxSession.myUser.userId;
-
+                NSString *displayName = currentAccount.mxSession.myUser.displayname;
                 
                 for (MXRoomMember *member in membersList)
                 {
                     if (![member.userId isEqualToString:userId]) {
-                        [self uploadFileToFirebaseStorage:url userID:member.userId senderName:member.displayname];
+                        [self uploadFileToFirebaseStorage:url userID:member.userId senderName:displayName];
                     }
                 }
             }];
@@ -8053,12 +8053,13 @@ static CGSize kThreadListBarButtonItemImageSize;
                 
                 MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
                 NSString *userId = currentAccount.mxSession.myUser.userId;
+                NSString *displayName = currentAccount.mxSession.myUser.displayname;
 
                 
                 for (MXRoomMember *member in membersList)
                 {
                     if (![member.userId isEqualToString:userId]) {
-                        [self uploadImageToFirebaseStorageWithImageData:imageData userID:member.userId senderName:member.displayname];
+                        [self uploadImageToFirebaseStorageWithImageData:imageData userID:member.userId senderName:displayName];
                     }
                 }
             }];

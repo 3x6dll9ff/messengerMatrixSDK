@@ -43,7 +43,7 @@ struct CloudListView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let filesRef = storageRef.child("files/\(userId)")
+        let filesRef = storageRef.child("files/\(userId)/saved")
 
         filesRef.listAll { (result, error) in
             if let error = error {
@@ -60,7 +60,7 @@ struct CloudListView: View {
         let storageRef = storage.reference()
 
         // Get a reference to the file in Firebase Cloud Storage
-        let fileRef = storageRef.child("files/\(userId)/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/saved/\(file)")
 
         // Delete the file
         fileRef.delete { error in
@@ -124,7 +124,7 @@ struct FileView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let fileRef = storageRef.child("files/\(userId)/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/saved/\(file)")
 
         fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
@@ -145,7 +145,7 @@ struct FileView: View {
         let storage = Storage.storage(url: storageUrl)
         let storageRef = storage.reference()
 
-        let fileRef = storageRef.child("files/\(userId)/\(file)")
+        let fileRef = storageRef.child("files/\(userId)/saved/\(file)")
 
         // Create a temporary file URL to store the downloaded file
         let tempFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(file)

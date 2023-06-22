@@ -25,8 +25,7 @@ import Reusable
 import SwiftUI
 import FirebaseFirestore
 import FirebaseStorage
-
-
+import QuickLook
 
 struct AdSlide {
     let clientAd: ClientAds
@@ -71,6 +70,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     var clientAds: [ClientAds] = []
     var cityUuid: String = ""
     var tapGestureRecognizer: UITapGestureRecognizer!
+    var previewItemData: Data?
+    var previewItemTitle: String?
+    var previewItemFileExtension: String?
+    var documents: [QueryDocumentSnapshot]? = []
     
     // MARK: - Properties
     
@@ -321,6 +324,31 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                         self.acceptPendingFile(filePath: filePath, documentID: document.documentID)
                     }
                     
+                    let previewAction = UIAlertAction(title: "Просмотр", style: .default) { _ in
+                        // Открыть предпросмотр файла
+                        if let data = data {
+                            let previewController = QLPreviewController()
+                            previewController.dataSource = self
+                            previewController.currentPreviewItemIndex = 0
+                            
+                            // Передать данные файла в просмотрщик
+                            self.previewItemData = data
+                            
+                            // Получить расширение файла
+                            let fileExtension = (fileName as NSString).pathExtension
+                            
+                            // Установить расширение файла для просмотрщика
+                            self.previewItemTitle = fileName
+                            self.previewItemFileExtension = fileExtension
+                            
+                            // Показать просмотрщик
+                            if let viewController = UIApplication.shared.keyWindow?.rootViewController {
+                                previewController.delegate = self
+                                viewController.present(previewController, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                    alertController.addAction(previewAction)
                     alertController.addAction(rejectAction)
                     alertController.addAction(acceptAction)
                     
@@ -332,7 +360,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             }
         }
     }
-
+    
     func watchFirestore (userId: String) {
         if (currentUserId == userId) {
             return
@@ -346,6 +374,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                     print("Error fetching documents: \(error!)")
                     return
                 }
+                self.documents = documents
                 self.firestoreDocumentsUpdateHandler(documents: documents)
                 let filePaths = documents.map { $0.documentID }
                 print("Current documents (uuid: \(userId)): \(filePaths)")
@@ -1392,5 +1421,36 @@ private extension MXSpaceService {
     
     var hasHighlightNotification: Bool {
         notificationCounter.homeNotificationState.allHighlightCount > 0
+    }
+}
+
+@available(iOS 15.0, *)
+extension AllChatsViewController: QLPreviewControllerDataSource, QLPreviewControllerDelegate {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        // Вернуть количество файлов для предпросмотра (в данном случае - 1)
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        // Создать временный файл для предпросмотра
+        let tempDirectory = NSTemporaryDirectory()
+        let tempFilePath = tempDirectory + "previewFile." + (previewItemFileExtension ?? "")
+        
+        FileManager.default.createFile(atPath: tempFilePath, contents: previewItemData, attributes: nil)
+        
+        // Вернуть путь к временному файлу в качестве предпросмотра
+        return NSURL(fileURLWithPath: tempFilePath)
+    }
+    
+    func previewController(_ controller: QLPreviewController, titleForPreviewItemAt index: Int) -> String? {
+        // Вернуть имя файла для отображения в просмотрщике
+        return previewItemTitle
+    }
+    
+    func previewControllerDidDismiss(_ controller: QLPreviewController) {
+        // Показать снова первое модальное окно после закрытия просмотрщика
+        if let documents = self.documents {
+            firestoreDocumentsUpdateHandler(documents: documents)
+        }
     }
 }
