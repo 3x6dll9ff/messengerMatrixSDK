@@ -17,8 +17,6 @@
  */
 
 @import MobileCoreServices;
-@import FirebaseStorage;
-@import FirebaseFirestore;
 
 #import "RoomViewController.h"
 
@@ -101,7 +99,6 @@ static CGSize kThreadListBarButtonItemImageSize;
     ReactionHistoryCoordinatorBridgePresenterDelegate, CameraPresenterDelegate, MediaPickerCoordinatorBridgePresenterDelegate,
     RoomDataSourceDelegate, RoomCreationModalCoordinatorBridgePresenterDelegate, RoomInfoCoordinatorBridgePresenterDelegate, DialpadViewControllerDelegate, RemoveJitsiWidgetViewDelegate, VoiceMessageControllerDelegate, SpaceDetailPresenterDelegate, UserSuggestionCoordinatorBridgeDelegate, ThreadsCoordinatorBridgePresenterDelegate, ThreadsBetaCoordinatorBridgePresenterDelegate, MXThreadingServiceDelegate, RoomParticipantsInviteCoordinatorBridgePresenterDelegate, RoomInputToolbarViewDelegate, ComposerCreateActionListBridgePresenterDelegate>
 {
-    FIRFirestore *defaultFirestore;
     
     // The preview header
     __weak PreviewRoomTitleView *previewHeader;
@@ -1208,7 +1205,7 @@ static CGSize kThreadListBarButtonItemImageSize;
         
         BOOL canSend = (userPowerLevel >= [powerLevels minimumPowerLevelForSendingEventAsMessage:kMXEventTypeStringRoomMessage]);
         BOOL isRoomObsolete = self.roomDataSource.roomState.isObsolete;
-        BOOL isResourceLimitExceeded = [self.roomDataSource.mxSession.syncError.errcode isEqualToString:kMXErrCodeStringResourceLimitExceeded];        
+        BOOL isResourceLimitExceeded = [self.roomDataSource.mxSession.syncError.errcode isEqualToString:kMXErrCodeStringResourceLimitExceeded];
         
         if (isRoomObsolete || isResourceLimitExceeded || _isWaitingForOtherParticipants)
         {
@@ -1518,7 +1515,7 @@ static CGSize kThreadListBarButtonItemImageSize;
     }
     if (URLPreviewDidUpdateNotificationObserver)
     {
-        [NSNotificationCenter.defaultCenter removeObserver:URLPreviewDidUpdateNotificationObserver];        
+        [NSNotificationCenter.defaultCenter removeObserver:URLPreviewDidUpdateNotificationObserver];
     }
     
     [self removeCallNotificationsListeners];
@@ -1876,7 +1873,7 @@ static CGSize kThreadListBarButtonItemImageSize;
     
     URLPreviewDidUpdateNotificationObserver = [NSNotificationCenter.defaultCenter addObserverForName:URLPreviewDidUpdateNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification * _Nonnull notification) {
         
-        MXStrongifyAndReturnIfNil(self);        
+        MXStrongifyAndReturnIfNil(self);
         
         // Ensure this is the correct room
         if (![(NSString*)notification.userInfo[@"roomId"] isEqualToString:self.roomDataSource.roomId])
@@ -2336,8 +2333,6 @@ static CGSize kThreadListBarButtonItemImageSize;
 }
 
 - (void)setupActions {
-    MXLogDebug(@"SETUP TEST")
-
     
     if (![self.inputToolbarView isKindOfClass:RoomInputToolbarView.class]) {
         return;
@@ -2348,7 +2343,6 @@ static CGSize kThreadListBarButtonItemImageSize;
     NSMutableArray *actionItems = [NSMutableArray new];
     if (RiotSettings.shared.roomScreenAllowMediaLibraryAction)
     {
-        MXLogDebug(@"PHOTO LIBRARY TEST")
         [actionItems addObject:[[RoomActionItem alloc] initWithImage:AssetImages.actionMediaLibrary.image andAction:^{
             MXStrongifyAndReturnIfNil(self);
             if ([self.inputToolbarView isKindOfClass:RoomInputToolbarView.class]) {
@@ -2369,7 +2363,6 @@ static CGSize kThreadListBarButtonItemImageSize;
     }
     if (RiotSettings.shared.roomScreenAllowFilesAction)
     {
-        MXLogDebug(@"FILES TEST")
         [actionItems addObject:[[RoomActionItem alloc] initWithImage:AssetImages.actionFile.image andAction:^{
             MXStrongifyAndReturnIfNil(self);
             if ([self.inputToolbarView isKindOfClass:RoomInputToolbarView.class]) {
@@ -3820,14 +3813,14 @@ static CGSize kThreadListBarButtonItemImageSize;
 //        {
 //            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
 //            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-//            
+//
 //            [self placeCallWithVideo2:eventContent.isVideoCall];
 //        }
 //        else if ([actionIdentifier isEqualToString:RoomDirectCallStatusCell.declineAction])
 //        {
 //            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
 //            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-//            
+//
 //            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
 //            [call hangup];
 //        }
@@ -3835,7 +3828,7 @@ static CGSize kThreadListBarButtonItemImageSize;
 //        {
 //            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
 //            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-//            
+//
 //            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
 //            [call answer];
 //        }
@@ -3843,7 +3836,7 @@ static CGSize kThreadListBarButtonItemImageSize;
 //        {
 //            MXEvent *callInviteEvent = userInfo[kMXKRoomBubbleCellEventKey];
 //            MXCallInviteEventContent *eventContent = [MXCallInviteEventContent modelFromJSON:callInviteEvent.content];
-//            
+//
 //            MXCall *call = [self.mainSession.callManager callWithCallId:eventContent.callId];
 //            [call hangup];
 //        }
@@ -4169,35 +4162,6 @@ static CGSize kThreadListBarButtonItemImageSize;
                     [roomBubbleTableViewCell startProgressUI];
                 }]];
             }
-        }
-        
-        if (attachment.type == MXKAttachmentTypeImage || attachment.type == MXKAttachmentTypeVideo)
-        {
-            [self.eventMenuBuilder addItemWithType:EventMenuItemTypeSaveMedia
-                                            action:[UIAlertAction actionWithTitle:[VectorL10n roomEventActionSaveToCloud]
-                                                                            style:UIAlertActionStyleDefault
-                                                                          handler:^(UIAlertAction * action) {
-                MXStrongifyAndReturnIfNil(self);
-                
-                [self cancelEventSelection];
-                
-                [self startActivityIndicator];
-                
-                MXWeakify(self);
-                [attachment uploadImageToFirebaseStorage:^{
-                    MXStrongifyAndReturnIfNil(self);
-                    [self stopActivityIndicator];
-                } failure:^(NSError *error) {
-                    MXStrongifyAndReturnIfNil(self);
-                    [self stopActivityIndicator];
-                    
-                    //Alert user
-                    [self showError:error];
-                }];
-                
-                // Start animation in case of download during attachment preparing
-                [roomBubbleTableViewCell startProgressUI];
-            }]];
         }
         
         // Check status of the selected event
@@ -7710,17 +7674,17 @@ static CGSize kThreadListBarButtonItemImageSize;
     MXKUTI *fileUTI = [[MXKUTI alloc] initWithLocalFileURL:url];
     NSString *mimeType = fileUTI.mimeType;
     
-//    if (fileUTI.isImage)
-//    {
-//        NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
-//
-//        [self sendImage:imageData mimeType:mimeType];
-//    }
-//    else if (fileUTI.isVideo)
-//    {
-//        [self sendVideo:url];
-//    }
-    if (fileUTI.isImage || fileUTI.isVideo || fileUTI.isFile)
+    if (fileUTI.isImage)
+    {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
+        
+        [self sendImage:imageData mimeType:mimeType];
+    }
+    else if (fileUTI.isVideo)
+    {
+        [self sendVideo:url];
+    }
+    else if (fileUTI.isFile)
     {
         [self sendFile:url mimeType:mimeType];
     }
@@ -7734,7 +7698,6 @@ static CGSize kThreadListBarButtonItemImageSize;
 }
 
 - (void)sendImage:(NSData *)imageData mimeType:(NSString *)mimeType {
-    MXLogDebug(@"SEND IMAGE TEST")
     // Create before sending the message in case of a discussion (direct chat)
     MXWeakify(self);
     [self createDiscussionIfNeeded:^(BOOL readyToSend) {
@@ -7752,8 +7715,6 @@ static CGSize kThreadListBarButtonItemImageSize;
 }
 
 - (void)sendVideo:(NSURL * _Nonnull)url {
-    MXLogDebug(@"SEND VIDEO TEST")
-
     // Create before sending the message in case of a discussion (direct chat)
     MXWeakify(self);
     [self createDiscussionIfNeeded:^(BOOL readyToSend) {
@@ -7770,99 +7731,18 @@ static CGSize kThreadListBarButtonItemImageSize;
     }];
 }
 
-- (void)uploadFileToFirebaseStorage:(NSURL *)fileURL userID:(NSString *)userID senderName:(NSString *)senderName
-{
-    // Create a reference to Firebase Storage
-    FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage reference];
-    
-    // Generate a unique file name with the original file extension
-    NSString *fileName = [[NSUUID UUID] UUIDString];
-    NSString *fileExtension = [fileURL pathExtension];
-    NSString *filePath = [NSString stringWithFormat:@"files/%@/pending/%@.%@", userID, fileName, fileExtension];
-    
-    // Create a reference to the file path in Storage
-    FIRStorageReference *fileRef = [storageRef child:filePath];
-    
-    // Create metadata with the appropriate content type based on the file extension
-    NSString *contentType = [NSString stringWithFormat:@"image/%@", fileExtension]; // Default content type is "image/*"
-    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    metadata.contentType = contentType;
-    
-    // Upload the file to Storage using its URL and metadata
-    FIRStorageUploadTask *uploadTask = [fileRef putFile:fileURL metadata:metadata completion:^(FIRStorageMetadata *metadata, NSError *error) {
-        if (error) {
-            // Handle upload error
-            NSLog(@"Error uploading file: %@", error.localizedDescription);
-        } else {
-            // Upload successful
-            NSLog(@"File uploaded successfully!");
-            [self createFirestoreCloudDocument:filePath recipientID:userID senderName:senderName];
-            
-            // Get the download URL for the uploaded file
-            [fileRef downloadURLWithCompletion:^(NSURL *URL, NSError *error) {
-                if (error) {
-                    // Handle URL retrieval error
-                    NSLog(@"Error getting download URL: %@", error.localizedDescription);
-                } else {
-                    // URL of the uploaded file
-                    NSURL *downloadURL = URL;
-                    
-                    // Perform additional actions with the uploaded file, if needed
-                }
-            }];
-        }
-    }];
-    
-    // Use uploadTask to track the upload progress, for example:
-    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
-        double percentComplete = 100.0 * (double)(snapshot.progress.completedUnitCount) / (double)(snapshot.progress.totalUnitCount);
-        NSLog(@"Upload progress: %.2f%%", percentComplete);
-    }];
-}
-
 - (void)sendFile:(NSURL * _Nonnull)url mimeType:(NSString *)mimeType {
-    MXLogDebug(@"SEND FILE TEST")
-
     // Create before sending the message in case of a discussion (direct chat)
     MXWeakify(self);
     [self createDiscussionIfNeeded:^(BOOL readyToSend) {
         MXStrongifyAndReturnIfNil(self);
         if (readyToSend)
         {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            
-            UIAlertAction *cloudAction = [UIAlertAction actionWithTitle:[VectorL10n sendToCloud] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSLog(@"CLOUD SEND TEST");
-                
-                NSArray* membersList = [self.roomDataSource.roomState.members membersWithMembership:MXMembershipJoin];
-                
-                MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
-                NSString *userId = currentAccount.mxSession.myUser.userId;
-                NSString *displayName = currentAccount.mxSession.myUser.displayname;
-                
-                for (MXRoomMember *member in membersList)
-                {
-                    if (![member.userId isEqualToString:userId]) {
-                        [self uploadFileToFirebaseStorage:url userID:member.userId senderName:displayName];
-                    }
-                }
+            // Let the datasource send it and manage the local echo
+            [self.roomDataSource sendFile:url mimeType:mimeType success:nil failure:^(NSError *error) {
+                // Nothing to do. The file is marked as unsent in the room history by the datasource
+                MXLogDebug(@"[MXKRoomViewController] sendFile failed.");
             }];
-
-            UIAlertAction *dialogAction = [UIAlertAction actionWithTitle:[VectorL10n sendToChat] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                // Let the datasource send it and manage the local echo
-                [self.roomDataSource sendFile:url mimeType:mimeType success:nil failure:^(NSError *error) {
-                    // Nothing to do. The file is marked as unsent in the room history by the datasource
-                    MXLogDebug(@"[MXKRoomViewController] sendFile failed.");
-                }];
-            }];
-            
-            [alertController addAction:cloudAction];
-            [alertController addAction:dialogAction];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
         }
         // Errors are handled at the request level. This should be improved in case of code rewriting.
     }];
@@ -7963,123 +7843,23 @@ static CGSize kThreadListBarButtonItemImageSize;
     self.mediaPickerPresenter = nil;
 }
 
-- (void)uploadImageToFirebaseStorageWithImageData:(NSData *)imageData userID:(NSString *)userID senderName:(NSString *)senderName
-{
-    // Создаем ссылку на Firebase Storage
-    FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage reference];
-    
-    // Генерируем уникальное имя файла с расширением ".jpg"
-    NSString *fileName = [[NSUUID UUID] UUIDString];
-    NSString *filePath = [NSString stringWithFormat:@"files/%@/pending/%@.jpg", userID, fileName];
-    
-    // Создаем путь к файлу в Storage
-    FIRStorageReference *fileRef = [storageRef child:filePath];
-    
-    // Создаем метаданные для указания типа MIME
-    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    metadata.contentType = @"image/jpeg";
-    
-    // Загружаем данные изображения в Storage с указанием метаданных
-    FIRStorageUploadTask *uploadTask = [fileRef putData:imageData metadata:metadata completion:^(FIRStorageMetadata *metadata, NSError *error) {
-        if (error) {
-            // Обработка ошибки загрузки
-            NSLog(@"Error uploading image: %@", error.localizedDescription);
-        } else {
-            // Загрузка успешна
-            NSLog(@"Image uploaded successfully!");
-            [self createFirestoreCloudDocument:filePath recipientID:userID senderName:senderName];
-            
-            // Получаем URL для загруженного файла
-            [fileRef downloadURLWithCompletion:^(NSURL *URL, NSError *error) {
-                if (error) {
-                    // Обработка ошибки получения URL
-                    NSLog(@"Error getting download URL: %@", error.localizedDescription);
-                } else {
-                    // URL загруженного файла
-                    NSURL *downloadURL = URL;
-                    
-                    // Выполнение дополнительных действий с загруженным изображением, если необходимо
-                }
-            }];
-        }
-    }];
-    
-    // Можно использовать uploadTask для отслеживания прогресса загрузки, например:
-    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
-        double percentComplete = 100.0 * (double)(snapshot.progress.completedUnitCount) / (double)(snapshot.progress.totalUnitCount);
-        NSLog(@"Upload progress: %.2f%%", percentComplete);
-    }];
-}
-
-- (void)createFirestoreCloudDocument:(NSString *)filePath recipientID:(NSString *)recipientID senderName:(NSString *)senderName
-{
-    defaultFirestore = [FIRFirestore firestore];
-
-    __block FIRDocumentReference *ref =
-    [[self->defaultFirestore collectionWithPath:@"cloud"] addDocumentWithData:@{
-        @"filePath": filePath,
-        @"recipientID": recipientID,
-        @"senderName": senderName
-    } completion:^(NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"TEST Error adding document: %@", error);
-        } else {
-            NSLog(@"TEST Document added with ID: %@", ref.documentID);
-            
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kMXKErrorNotification
-//                                                                object:error
-//                                                              userInfo: @{kMXKErrorUserIdKey: recipientID}];
-        }
-    }];
-}
-
-
 - (void)mediaPickerCoordinatorBridgePresenter:(MediaPickerCoordinatorBridgePresenter *)coordinatorBridgePresenter didSelectImageData:(NSData *)imageData withUTI:(MXKUTI *)uti
 {
     [coordinatorBridgePresenter dismissWithAnimated:YES completion:nil];
     self.mediaPickerPresenter = nil;
     
+    // Create before sending the message in case of a discussion (direct chat)
     [self createDiscussionIfNeeded:^(BOOL readyToSend) {
         if (readyToSend && [self inputToolbarConformsToToolbarViewProtocol])
         {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            
-            UIAlertAction *cloudAction = [UIAlertAction actionWithTitle:[VectorL10n sendToCloud] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSLog(@"CLOUD SEND TEST");
-                
-                NSArray* membersList = [self.roomDataSource.roomState.members membersWithMembership:MXMembershipJoin];
-                
-                MXKAccount *currentAccount = [MXKAccountManager sharedManager].activeAccounts.firstObject;
-                NSString *userId = currentAccount.mxSession.myUser.userId;
-                NSString *displayName = currentAccount.mxSession.myUser.displayname;
-
-                
-                for (MXRoomMember *member in membersList)
-                {
-                    if (![member.userId isEqualToString:userId]) {
-                        [self uploadImageToFirebaseStorageWithImageData:imageData userID:member.userId senderName:displayName];
-                    }
-                }
-            }];
-
-            UIAlertAction *dialogAction = [UIAlertAction actionWithTitle:[VectorL10n sendToChat] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                [self.inputToolbarView sendSelectedImage:imageData
-                                           withMimeType:uti.mimeType
-                                     andCompressionMode:MediaCompressionHelper.defaultCompressionMode
-                                    isPhotoLibraryAsset:YES];
-            }];
-            
-            [alertController addAction:cloudAction];
-            [alertController addAction:dialogAction];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
+            [self.inputToolbarView sendSelectedImage:imageData
+                                       withMimeType:uti.mimeType
+                                 andCompressionMode:MediaCompressionHelper.defaultCompressionMode
+                                isPhotoLibraryAsset:YES];
         }
+        // Errors are handled at the request level. This should be improved in case of code rewriting.
     }];
 }
-
 
 - (void)mediaPickerCoordinatorBridgePresenter:(MediaPickerCoordinatorBridgePresenter *)coordinatorBridgePresenter didSelectVideo:(AVAsset *)videoAsset
 {

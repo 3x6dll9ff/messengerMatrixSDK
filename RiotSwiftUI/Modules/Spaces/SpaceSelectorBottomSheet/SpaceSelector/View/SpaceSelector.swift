@@ -61,9 +61,9 @@ struct SpaceSelector: View {
                     }
                 }
                 LazyHStack {
-                    Image(systemName: "externaldrive.badge.icloud")
+                    Image(systemName: "doc.badge.plus")
                     NavigationLink(destination: CloudShareView()) {
-                        Text("Отправить в облако")
+                        Text("Отправить файл")
                             .foregroundColor(.purple)
                     }
                 }

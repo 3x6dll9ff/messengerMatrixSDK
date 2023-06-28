@@ -12,40 +12,86 @@ struct RoomData: Identifiable {
     let room: MXRoom
 }
 
+struct ContactData: Identifiable {
+    let id = UUID()
+    let avatarData: AvatarInput
+    let displayName: String
+    let contact: MXKContact
+}
+
 @available(iOS 15.0, *)
 struct CloudShareView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var roomsData: [RoomData] = []
+    @State private var contactsData: [ContactData] = []
     @State private var session: MXSession?
     @State private var showImagePicker = false
     @State private var showDocumentPicker = false
+    @State private var showContacts = false
     @State private var selectedImage = UIImage()
     @State private var selectedURL: URL?
+    @State private var uploadProgress: Double = 0.0
 
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack {
             if selectedURL != nil || !selectedImage.isEqual(UIImage()) {
-                Text("Список чатов")
+                if (uploadProgress != 0) {
+                    ProgressView(value: uploadProgress)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .padding(.horizontal)
+                        .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top)
+                }
+
+                Text("Список \(showContacts ? "контактов" : "чатов")")
                     .font(.title)
                     .bold()
                     .padding(.top, 16)
                     .padding(.horizontal)
-                List(roomsData) { room in
-                    Button(action: {
-                        Task {
-                            await onRoomTap(roomData: room)
-                        }
-                    }) {
-                        HStack {
-                            if (session != nil) {
-                                AvatarImage(avatarData: room.avatarData, size: .small)
+                
+                Toggle("Показать контакты", isOn: $showContacts)
+                    .padding(.horizontal)
+
+                if showContacts {
+                    List(contactsData) { contact in
+                        Button(action: {
+                            Task {
+                                await onContactTap(contactData: contact)
                             }
-                            
-                            Text(room.displayName)
-                                .font(.headline)
-                                .foregroundColor(.white)
+                        }) {
+                            HStack {
+                                if (session != nil) {
+                                    AvatarImage(avatarData: contact.avatarData, size: .small)
+                                }
+                                
+                                Text(contact.displayName)
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: session!.mediaManager)))
+                            .padding(.vertical, 6)
                         }
-                        .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: session!.mediaManager)))
-                        .padding(.vertical, 6)
+                    }
+                    .onAppear(perform: setContacts)
+                }
+                else {
+                    List(roomsData) { room in
+                        Button(action: {
+                            Task {
+                                await onRoomTap(roomData: room)
+                            }
+                        }) {
+                            HStack {
+                                if (session != nil) {
+                                    AvatarImage(avatarData: room.avatarData, size: .small)
+                                }
+                                
+                                Text(room.displayName)
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: session!.mediaManager)))
+                            .padding(.vertical, 6)
+                        }
                     }
                 }
             }
@@ -54,15 +100,21 @@ struct CloudShareView: View {
                     .font(.title)
                     .bold()
                     .padding(.top, 16)
-                Text("Отправить из:")
-                    .font(.subheadline)
-                    .bold()
-                    .foregroundColor(.gray)
-                VStack {
+                Spacer()
+                VStack (alignment: .center){
+                    Text("Отправить:")
+                        .font(.subheadline)
+                        .bold()
+                        .foregroundColor(.gray)
+                        .padding(.vertical, 8)
+
                     Button(action: {
                         showImagePicker = true
                     }){
-                        Text("Галереи")
+                        HStack {
+                            Image(systemName: "photo.on.rectangle.angled")
+                            Text("Из галереи")
+                        }
                     }
                     .padding(.vertical, 6)
                     .sheet(isPresented: $showImagePicker) {
@@ -72,7 +124,10 @@ struct CloudShareView: View {
                     Button(action: {
                         showDocumentPicker = true
                     }){
-                        Text("Файлов")
+                        HStack {
+                            Image(systemName: "arrow.up.doc")
+                            Text("Из файлов")
+                        }
                     }
                     .padding(.vertical, 6)
                     .sheet(isPresented: $showDocumentPicker) {
@@ -87,12 +142,26 @@ struct CloudShareView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    func onRoomTap (roomData: RoomData) async {
+    private var progressView: some View {
+        if uploadProgress > 0 && uploadProgress < 1 {
+            return AnyView(ProgressView(value: uploadProgress))
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+    
+    private func onContactTap(contactData: ContactData) async {
+        guard let recipientID: String = contactData.contact.matrixIdentifiers[0] as? String else {
+            return
+        }
+        
+        await sendAttachmentToUser(recipientID: recipientID)
+    }
+    
+    private func onRoomTap(roomData: RoomData) async {
         print("Нажата комната:", roomData.displayName)
         
-        
         guard let userId = session?.myUser?.userId,
-              let senderName = session?.myUser?.displayName,
               var members: [MXRoomMember] = try? await roomData.room.members()?.joinedMembers
         else {
             return
@@ -100,19 +169,25 @@ struct CloudShareView: View {
         
         members.removeAll { $0.userId == userId }
         
-        if selectedURL != nil {
-            for member in members {
-                uploadFileToFirebaseStorage(fileURL: selectedURL!, recipientID: member.userId, senderName: senderName)
-            }
-        }
-        else if !selectedImage.isEqual(UIImage()) {
-            for member in members {
-                uploadImageToFirebaseStorage(image: selectedImage, recipientID: member.userId, senderName: senderName)
-            }
+        for member in members {
+            await sendAttachmentToUser(recipientID: member.userId)
         }
     }
     
-    func setRooms () {
+    private func sendAttachmentToUser (recipientID: String) async {
+        guard let senderName = session?.myUser?.displayName else {
+            return
+        }
+
+        if selectedURL != nil {
+            await uploadFileToFirebaseStorage(fileURL: selectedURL!, recipientID: recipientID, senderName: senderName)
+        }
+        else if !selectedImage.isEqual(UIImage()) {
+            await uploadImageToFirebaseStorage(image: selectedImage, recipientID: recipientID, senderName: senderName)
+        }
+    }
+    
+    private func setRooms() {
         let mainSession = AppDelegate.theDelegate().mxSessions.first as? MXSession
         session = mainSession
         
@@ -123,7 +198,22 @@ struct CloudShareView: View {
         }
     }
     
-    func createFirestoreCloudDocument(filePath: String, recipientID: String, senderName: String) {
+    private func setContacts () {
+        guard var contacts: [MXKContact] = MXKContactManager.shared().matrixContacts as? [MXKContact] else {
+            return
+        }
+        
+        if let userId = session?.myUser?.userId {
+            contacts.removeAll { $0.matrixIdentifiers[0] as! String == userId }
+        }
+
+        contactsData = contacts.map {
+            let avatarData = AvatarInput(mxContentUri: nil, matrixItemId: "", displayName: $0.displayName)
+            return ContactData(avatarData: avatarData, displayName: $0.displayName, contact: $0)
+        }
+    }
+    
+    private func createFirestoreCloudDocument(filePath: String, recipientID: String, senderName: String) {
         let defaultFirestore = Firestore.firestore()
         
         let data: [String: Any] = [
@@ -142,72 +232,81 @@ struct CloudShareView: View {
         
         if let documentID = ref?.documentID {
             print("TEST Document ID: \(documentID)")
+            dismiss()
         }
     }
     
-    func uploadImageToFirebaseStorage(imageData: Data, recipientID: String, senderName: String) {
-        // Create a reference to Firebase Storage
+    private func uploadImageToFirebaseStorage(imageData: Data, recipientID: String, senderName: String) async {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
-        // Generate a unique file name with the ".jpg" extension
         let fileName = UUID().uuidString
         let filePath = "files/\(recipientID)/pending/\(fileName).jpg"
-        
-        // Create a path to the file in Storage
         let fileRef = storageRef.child(filePath)
         
-        // Create metadata to specify the MIME type
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
-        // Upload the image data to Storage with the specified metadata
         let uploadTask = fileRef.putData(imageData, metadata: metadata) { metadata, error in
             if let error = error {
-                // Handle upload error
                 print("Error uploading image: \(error.localizedDescription)")
             } else {
-                // Upload successful
                 print("Image uploaded successfully!")
-                self.createFirestoreCloudDocument(filePath: filePath, recipientID: recipientID, senderName: senderName)
+                createFirestoreCloudDocument(filePath: filePath, recipientID: recipientID, senderName: senderName)
             }
         }
+        
+        uploadTask.observe(.progress) { snapshot in
+            guard let progress = snapshot.progress else { return }
+            uploadProgress = Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
+        }
+        
+        do {
+            _ = try await uploadTask.resume()
+        } catch {
+            print("Error uploading image: \(error)")
+        }
     }
-
-    func uploadImageToFirebaseStorage(image: UIImage, recipientID: String, senderName: String) {
+    
+    private func uploadImageToFirebaseStorage(image: UIImage, recipientID: String, senderName: String) async {
         if let imageData = image.jpegData(compressionQuality: 0.8) {
-            // Call the original uploadImageToFirebaseStorage function with the image data
-            uploadImageToFirebaseStorage(imageData: imageData, recipientID: recipientID, senderName: senderName)
+            await uploadImageToFirebaseStorage(imageData: imageData, recipientID: recipientID, senderName: senderName)
         } else {
             print("TEST Failed to convert image to data")
         }
     }
-
-    func uploadFileToFirebaseStorage(fileURL: URL, recipientID: String, senderName: String) {
+    
+    private func uploadFileToFirebaseStorage(fileURL: URL, recipientID: String, senderName: String) async {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
         let fileName = UUID().uuidString
         let fileExtension = fileURL.pathExtension
         let filePath = "files/\(recipientID)/pending/\(fileName).\(fileExtension)"
-        
         let fileRef = storageRef.child(filePath)
         
-        let contentType = "image/\(fileExtension)" // Default content type is "image/*"
+        let contentType = "image/\(fileExtension)"
         let metadata = StorageMetadata()
         metadata.contentType = contentType
         
         let uploadTask = fileRef.putFile(from: fileURL, metadata: metadata) { metadata, error in
             if let error = error {
-                // Handle upload error
                 print("TEST Error uploading file: \(error.localizedDescription)")
             } else {
-                // Upload successful
                 print("TEST File uploaded successfully!")
-                self.createFirestoreCloudDocument(filePath: filePath, recipientID: recipientID, senderName: senderName)
+                createFirestoreCloudDocument(filePath: filePath, recipientID: recipientID, senderName: senderName)
             }
         }
+        
+        uploadTask.observe(.progress) { snapshot in
+            guard let progress = snapshot.progress else { return }
+            uploadProgress = Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
+        }
+        
+        do {
+            _ = try await uploadTask.resume()
+        } catch {
+            print("TEST Error uploading file: \(error)")
+        }
     }
-
-
 }
