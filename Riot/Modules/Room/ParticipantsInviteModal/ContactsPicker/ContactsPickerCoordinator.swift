@@ -139,4 +139,12 @@ extension ContactsPickerCoordinator: ContactsPickerViewModelCoordinatorDelegate 
         
         currentAlert = alert
     }
+    
+    func contactsPickerViewModelDidStartValidatingUser(_ coordinator: ContactsPickerViewModelProtocol) {
+        contactsPickerViewController?.startActivityIndicator()
+    }
+    
+    func contactsPickerViewModelDidEndValidatingUser(_ coordinator: ContactsPickerViewModelProtocol) {
+        contactsPickerViewController?.stopActivityIndicator()
+    }
 }

@@ -52,7 +52,7 @@ enum MockAppScreens {
         MockStaticLocationViewingScreenState.self,
         MockLocationSharingScreenState.self,
         MockAnalyticsPromptScreenState.self,
-        MockUserSuggestionScreenState.self,
+        MockCompletionSuggestionScreenState.self,
         MockPollEditFormScreenState.self,
         MockSpaceCreationEmailInvitesScreenState.self,
         MockSpaceSettingsScreenState.self,

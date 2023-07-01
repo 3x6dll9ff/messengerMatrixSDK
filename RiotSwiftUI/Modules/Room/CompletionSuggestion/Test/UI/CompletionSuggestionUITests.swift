@@ -14,8 +14,14 @@
 // limitations under the License.
 //
 
-import Foundation
+import RiotSwiftUI
+import XCTest
 
-protocol UserSuggestionViewModelProtocol {
-    var completion: ((UserSuggestionViewModelResult) -> Void)? { get set }
+class CompletionSuggestionUITests: MockScreenTestCase {
+    func testCompletionSuggestionScreen() throws {
+        app.goToScreenWithIdentifier(MockCompletionSuggestionScreenState.multipleResults.title)
+        
+        let firstButton = app.buttons["displayNameText-userIdText"].firstMatch
+        XCTAssert(firstButton.waitForExistence(timeout: 10))
+    }
 }

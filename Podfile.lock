@@ -838,9 +838,9 @@ PODS:
     - ImageSlideshow/Core
   - ImageSlideshow/Core (1.9.2)
   - Introspect (0.1.4)
-  - JitsiMeetSDKLite (7.0.1-lite):
-    - JitsiWebRTC (~> 106.0)
-  - JitsiWebRTC (106.0.0)
+  - JitsiMeetSDKLite (8.1.2-lite):
+    - JitsiWebRTC (~> 111.0)
+  - JitsiWebRTC (111.0.2)
   - KeychainAccess (4.2.2)
   - KituraContracts (1.2.1):
     - LoggerAPI (~> 1.7)
@@ -857,20 +857,20 @@ PODS:
   - LoggerAPI (1.9.200):
     - Logging (~> 1.1)
   - Logging (1.4.0)
-  - MatrixSDK (0.26.6):
-    - MatrixSDK/Core (= 0.26.6)
-  - MatrixSDK/Core (0.26.6):
+  - MatrixSDK (0.26.12):
+    - MatrixSDK/Core (= 0.26.12)
+  - MatrixSDK/Core (0.26.12):
     - AFNetworking (~> 4.0.0)
     - GZIP (~> 1.3.0)
     - libbase58 (~> 0.1.4)
-    - MatrixSDKCrypto (= 0.3.2)
+    - MatrixSDKCrypto (= 0.3.4)
     - OLMKit (~> 3.2.5)
     - Realm (= 10.27.0)
     - SwiftyBeaver (= 1.9.5)
-  - MatrixSDK/JingleCallStack (0.26.6):
-    - JitsiMeetSDKLite (= 7.0.1-lite)
+  - MatrixSDK/JingleCallStack (0.26.12):
+    - JitsiMeetSDKLite (= 8.1.2-lite)
     - MatrixSDK/Core
-  - MatrixSDKCrypto (0.3.2)
+  - MatrixSDKCrypto (0.3.4)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -944,8 +944,8 @@ DEPENDENCIES:
   - KeychainAccess (~> 4.2.2)
   - KTCenterFlowLayout (~> 1.3.1)
   - libPhoneNumber-iOS (~> 0.9.13)
-  - MatrixSDK (= 0.26.6)
-  - MatrixSDK/JingleCallStack (= 0.26.6)
+  - MatrixSDK (= 0.26.12)
+  - MatrixSDK/JingleCallStack (= 0.26.12)
   - OLMKit
   - PostHog (~> 2.0.0)
   - ReadMoreTextView (~> 3.0.1)
@@ -1077,8 +1077,8 @@ SPEC CHECKSUMS:
   GZIP: 416858efbe66b41b206895ac6dfd5493200d95b3
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   Introspect: b62c4dd2063072327c21d618ef2bedc3c87bc366
-  JitsiMeetSDKLite: d59573336ce887ec52327a9927aa8443f560d0b9
-  JitsiWebRTC: f441eb0e2d67f0588bf24e21c5162e97342714fb
+  JitsiMeetSDKLite: 895213158cf62342069a10634a41d2f1c00057f7
+  JitsiWebRTC: 80f62908fcf2a1160e0d14b584323fb6e6be630b
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   KituraContracts: e845e60dc8627ad0a76fa55ef20a45451d8f830b
   KTCenterFlowLayout: 6e02b50ab2bd865025ae82fe266ed13b6d9eaf97
@@ -1088,8 +1088,8 @@ SPEC CHECKSUMS:
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   LoggerAPI: ad9c4a6f1e32f518fdb43a1347ac14d765ab5e3d
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  MatrixSDK: 8179c184d819782282f47dab16ce6c2b68ef8a74
-  MatrixSDKCrypto: 7073c382c484cb8ba7dba0a83e112ead96d3bbfd
+  MatrixSDK: 0af737bc461b82d0ec9edd6fdf8f70b02771ebd3
+  MatrixSDKCrypto: ac805c22c24f79f349cdbfa065855c73a4c81b51
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OLMKit: da115f16582e47626616874e20f7bb92222c7a51
   PostHog: 660ec6c9d80cec17b685e148f17f6785a88b597d
@@ -1113,6 +1113,6 @@ SPEC CHECKSUMS:
   zxcvbn-ios: fef98b7c80f1512ff0eec47ac1fa399fc00f7e3c
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: d6323b16516957df49bbeebc16d0ba25843088d9
+PODFILE CHECKSUM: 080f321c02aac8d50831b3eecce70106e1a6fea1
 
 COCOAPODS: 1.11.3

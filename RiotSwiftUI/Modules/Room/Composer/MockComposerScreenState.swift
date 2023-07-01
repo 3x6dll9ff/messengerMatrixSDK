@@ -29,12 +29,22 @@ enum MockComposerScreenState: MockScreenState, CaseIterable {
     
     var screenView: ([Any], AnyView) {
         let viewModel: ComposerViewModel
+        let completionSuggestionViewModel = MockCompletionSuggestionViewModel(initialViewState: CompletionSuggestionViewState(items: []))
         let bindings = ComposerBindings(focused: false)
         
         switch self {
-        case .send: viewModel = ComposerViewModel(initialViewState: ComposerViewState(textFormattingEnabled: true, isLandscapePhone: false, bindings: bindings))
-        case .edit: viewModel = ComposerViewModel(initialViewState: ComposerViewState(sendMode: .edit, textFormattingEnabled: true, isLandscapePhone: false, bindings: bindings))
-        case .reply: viewModel = ComposerViewModel(initialViewState: ComposerViewState(eventSenderDisplayName: "TestUser", sendMode: .reply, textFormattingEnabled: true, isLandscapePhone: false, bindings: bindings))
+        case .send: viewModel = ComposerViewModel(initialViewState: ComposerViewState(textFormattingEnabled: true,
+                                                                                      isLandscapePhone: false,
+                                                                                      bindings: bindings))
+        case .edit: viewModel = ComposerViewModel(initialViewState: ComposerViewState(sendMode: .edit,
+                                                                                      textFormattingEnabled: true,
+                                                                                      isLandscapePhone: false,
+                                                                                      bindings: bindings))
+        case .reply: viewModel = ComposerViewModel(initialViewState: ComposerViewState(eventSenderDisplayName: "TestUser",
+                                                                                       sendMode: .reply,
+                                                                                       textFormattingEnabled: true,
+                                                                                       isLandscapePhone: false,
+                                                                                       bindings: bindings))
         }
         
         let wysiwygviewModel = WysiwygComposerViewModel(minHeight: 20, maxCompressedHeight: 360)
@@ -57,6 +67,7 @@ enum MockComposerScreenState: MockScreenState, CaseIterable {
                 Spacer()
                 Composer(viewModel: viewModel.context,
                          wysiwygViewModel: wysiwygviewModel,
+                         completionSuggestionSharedContext: completionSuggestionViewModel.context,
                          resizeAnimationDuration: 0.1,
                          sendMessageAction: { _ in },
                          showSendMediaActions: { })
@@ -70,3 +81,5 @@ enum MockComposerScreenState: MockScreenState, CaseIterable {
         )
     }
 }
+
+private final class MockCompletionSuggestionViewModel: CompletionSuggestionViewModelType { }

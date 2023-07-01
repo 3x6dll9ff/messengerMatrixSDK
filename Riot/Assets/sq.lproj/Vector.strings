@@ -2718,3 +2718,31 @@
 "device_verification_self_verify_open_on_other_device_information" = "Lypset të verifikoni këtë sesion, që të mund të lexoni historikun e mesazheve tuaj të siguruar.\n\nHapeni Element-in në një nga pajisjet tuaja të tjera dhe ndiqni udhëzimet.";
 "device_verification_self_verify_open_on_other_device_title" = "Hapeni %@ në pajisjen tuaj tjetër";
 "room_creation_only_one_email_invite" = "Mund të ftoni vetëm një email në herë";
+"pill_message_in" = "Mesazh te %@";
+"pill_message_from" = "Mesazh nga %@";
+"pill_message" = "Mesazh";
+
+// Pills
+"pill_room_fallback_display_name" = "Hapësirë/Dhomë";
+"key_verification_self_verify_security_upgrade_alert_message" = "Me përditësimin e fundit shkëmbimi i siguruar i mesazheve është përmirësuar. Ju lutemi, riverifikoni pajisjen tuaj.";
+
+// Legacy to Rust security upgrade
+
+"key_verification_self_verify_security_upgrade_alert_title" = "Aplikacioni u përditësua";
+"settings_acceptable_use" = "Rregull Përdorimi të Pranueshëm";
+"accessibility_selected" = "përzgjedhur";
+"notice_display_name_changed_to" = "%@ ndërroi emrin e vet për në ekran si %@";
+"room_command_error_unknown_command" = "Urdhër i pavlefshëm ose i patrajtuar";
+"room_command_change_room_topic_description" = "Cakton temën e dhomës";
+"room_command_reset_user_power_level_description" = "I heq gjendjen e operatorit përdoruesit me ID-në e dhënë";
+"room_command_set_user_power_level_description" = "Përcaktoni shkallën e pushtetit së një përdoruesi";
+"room_command_unban_user_description" = "Heq dëbimin për përdoruesin me ID-në e dhënë";
+"room_command_ban_user_description" = "Dëbon përdoruesin me ID-në e dhënë";
+"room_command_kick_user_description" = "Heq nga dhoma aktuale përdoruesin me ID-në e dhënë";
+"room_command_invite_user_description" = "Fton në dhomën aktuale përdoruesin me ID-në e dhënë";
+"room_command_part_room_description" = "Dil nga dhoma";
+"room_command_join_room_description" = "Hyhet në dhomën me adresën e dhënë";
+"room_command_emote_description" = "Veprim shfaqjeje";
+
+// Room commands descriptions
+"room_command_change_display_name_description" = "Kjo ndryshon nofkën tuaj në ekran";

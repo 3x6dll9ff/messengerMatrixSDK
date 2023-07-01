@@ -1,5 +1,5 @@
-//
-// Copyright 2021 New Vector Ltd
+// 
+// Copyright 2020 Vector Creations Ltd
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,13 @@
 // limitations under the License.
 //
 
-import Foundation
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
 
-enum UserSuggestionViewAction {
-    case selectedItem(UserSuggestionViewStateItem)
-}
+#include "Common.xcconfig"
+#include "Pods/Target Support Files/Pods-RiotPods-BroadcastUploadExtension/Pods-RiotPods-BroadcastUploadExtension.release.xcconfig"
 
-enum UserSuggestionViewModelResult {
-    case selectedItemWithIdentifier(String)
-}
+PROVISIONING_PROFILE = $(BROADCAST_UPLOAD_EXTENSION_PROVISIONING_PROFILE)
+PROVISIONING_PROFILE_SPECIFIER = $(BROADCAST_UPLOAD_EXTENSION_PROVISIONING_PROFILE_SPECIFIER)
 
-struct UserSuggestionViewStateItem: Identifiable {
-    let id: String
-    let avatar: AvatarInputProtocol?
-    let displayName: String?
-}
-
-struct UserSuggestionViewState: BindableState {
-    var items: [UserSuggestionViewStateItem]
-}
+COPY_PHASE_STRIP = NO

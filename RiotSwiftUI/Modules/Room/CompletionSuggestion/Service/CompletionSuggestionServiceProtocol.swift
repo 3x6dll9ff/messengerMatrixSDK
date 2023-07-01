@@ -16,24 +16,37 @@
 
 import Combine
 import Foundation
+import WysiwygComposer
 
-protocol UserSuggestionItemProtocol: Avatarable {
+protocol CompletionSuggestionUserItemProtocol: Avatarable {
     var userId: String { get }
     var displayName: String? { get }
     var avatarUrl: String? { get }
 }
 
-protocol UserSuggestionServiceProtocol {
-    var items: CurrentValueSubject<[UserSuggestionItemProtocol], Never> { get }
+protocol CompletionSuggestionCommandItemProtocol {
+    var name: String { get }
+    var parametersFormat: String { get }
+    var description: String { get }
+}
+
+enum CompletionSuggestionItem {
+    case command(value: CompletionSuggestionCommandItemProtocol)
+    case user(value: CompletionSuggestionUserItemProtocol)
+}
+
+protocol CompletionSuggestionServiceProtocol {
+    var items: CurrentValueSubject<[CompletionSuggestionItem], Never> { get }
     
     var currentTextTrigger: String? { get }
     
     func processTextMessage(_ textMessage: String?)
+    func processSuggestionPattern(_ suggestionPattern: SuggestionPattern?)
 }
 
 // MARK: Avatarable
 
-extension UserSuggestionItemProtocol {
+extension CompletionSuggestionUserItemProtocol {
     var mxContentUri: String? {
         avatarUrl
     }

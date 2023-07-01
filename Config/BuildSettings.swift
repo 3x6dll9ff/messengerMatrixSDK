@@ -99,6 +99,7 @@ final class BuildSettings: NSObject {
     // MARK: - Server configuration
     
     // Default servers proposed on the authentication screen
+    static let forceHomeserverSelection = false
     static let serverConfigDefaultHomeserverUrlString = "https://matrix.bigstarmessenger.com"
     static let serverConfigDefaultIdentityServerUrlString = "https://matrix.bigstarmessenger.com"
     

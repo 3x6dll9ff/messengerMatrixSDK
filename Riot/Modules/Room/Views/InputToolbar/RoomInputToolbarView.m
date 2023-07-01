@@ -70,6 +70,8 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
     
     _sendMode = RoomInputToolbarViewSendModeSend;
     self.inputContextViewHeightConstraint.constant = 0;
+    self.inputContextLabel.isAccessibilityElement = NO;
+    self.inputContextButton.isAccessibilityElement = NO;
 
     [self.rightInputToolbarButton setTitle:nil forState:UIControlStateNormal];
     [self.rightInputToolbarButton setTitle:nil forState:UIControlStateHighlighted];
@@ -154,7 +156,7 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
     {
         NSMutableAttributedString *mutableTextMessage = [[NSMutableAttributedString alloc] initWithAttributedString:attributedTextMessage];
         [mutableTextMessage addAttributes:@{ NSForegroundColorAttributeName: ThemeService.shared.theme.textPrimaryColor,
-                                             NSFontAttributeName: self.textDefaultFont }
+                                             NSFontAttributeName: self.defaultFont }
                                     range:NSMakeRange(0, mutableTextMessage.length)];
         attributedTextMessage = mutableTextMessage;
     }
@@ -181,7 +183,7 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
     return self.textView.text;
 }
 
-- (UIFont *)textDefaultFont
+- (UIFont *)defaultFont
 {
     if (self.textView.font)
     {
@@ -251,6 +253,10 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
             self.inputContextViewHeightConstraint.constant = 0;
             break;
     }
+    
+    // Hide the context items from VoiceOver when the context view is "hidden".
+    self.inputContextLabel.isAccessibilityElement = self.inputContextViewHeightConstraint.constant > 0;
+    self.inputContextButton.isAccessibilityElement = self.inputContextViewHeightConstraint.constant > 0;
     
     [self.rightInputToolbarButton setImage:buttonImage forState:UIControlStateNormal];
     
@@ -477,11 +483,22 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
                                                   [self.mainToolbarView.leftAnchor constraintEqualToAnchor:self.voiceMessageToolbarView.leftAnchor],
                                                   [self.mainToolbarView.bottomAnchor constraintEqualToAnchor:self.voiceMessageToolbarView.bottomAnchor],
                                                   [self.mainToolbarView.rightAnchor constraintEqualToAnchor:self.voiceMessageToolbarView.rightAnchor]]];
+        
+        // The voice message toolbar is taller than the input toolbar so the record button is read
+        // out before the other subviews. Fix this by manually adding the elements in the right order.
+        self.accessibilityElements = @[self.attachMediaButton,
+                                       self.actionsBar,
+                                       self.inputContextLabel,
+                                       self.inputContextButton,
+                                       self.textView,
+                                       self.rightInputToolbarButton,
+                                       self.voiceMessageToolbarView];
     }
     else
     {
         [self.voiceMessageToolbarView removeFromSuperview];
         _voiceMessageToolbarView = nil;
+        self.accessibilityElements = nil;
     }
 }
 @end

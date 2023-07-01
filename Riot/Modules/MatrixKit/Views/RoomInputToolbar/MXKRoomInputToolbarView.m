@@ -358,6 +358,10 @@
     self.textMessage = [NSString stringWithFormat:@"%@%@", self.textMessage, text];
 }
 
+- (UIFont *)defaultFont
+{
+    return [UIFont systemFontOfSize:15.f];
+}
 
 #pragma mark - MXKFileSizes
 
@@ -1399,6 +1403,11 @@ NSString* MXKFileSizes_description(MXKFileSizes sizes)
         }
     }
     return NO;
+}
+
+- (void)setPartialContent:(NSAttributedString *)attributedTextMessage
+{
+    self.attributedTextMessage = attributedTextMessage;
 }
 
 @end

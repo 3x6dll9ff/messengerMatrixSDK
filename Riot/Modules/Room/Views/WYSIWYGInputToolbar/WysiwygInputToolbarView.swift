@@ -72,6 +72,12 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
     }
     
     // MARK: Public
+
+    override var delegate: MXKRoomInputToolbarViewDelegate! {
+        didSet {
+            setupComposerIfNeeded()
+        }
+    }
     
     override var placeholder: String! {
         get {
@@ -84,6 +90,29 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
     
     override var isFocused: Bool {
         viewModel.isFocused
+    }
+
+    override var attributedTextMessage: NSAttributedString? {
+        // Note: this is only interactive in plain text mode. If RTE is enabled,
+        // APIs from the composer view model should be used.
+        get {
+            guard !self.textFormattingEnabled else {
+                MXLog.failure("[WysiwygInputToolbarView] Trying to get attributedTextMessage in RTE mode")
+                return nil
+            }
+            return self.wysiwygViewModel.textView.attributedText
+        }
+        set {
+            guard !self.textFormattingEnabled else {
+                MXLog.failure("[WysiwygInputToolbarView] Trying to set attributedTextMessage in RTE mode")
+                return
+            }
+            self.wysiwygViewModel.textView.attributedText = newValue
+        }
+    }
+
+    override var defaultFont: UIFont {
+        return UIFont.preferredFont(forTextStyle: .body)
     }
     
     var isMaximised: Bool {
@@ -120,93 +149,15 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
     private weak var toolbarViewDelegate: RoomInputToolbarViewDelegate? {
         return (delegate as? RoomInputToolbarViewDelegate) ?? nil
     }
+
+    private var permalinkReplacer: PermalinkReplacer? {
+        return (delegate as? PermalinkReplacer)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewModel = ComposerViewModel(
-            initialViewState: ComposerViewState(textFormattingEnabled: RiotSettings.shared.enableWysiwygTextFormatting,
-                                                isLandscapePhone: isLandscapePhone, bindings: ComposerBindings(focused: false)))
-        
-        viewModel.callback = { [weak self] result in
-            self?.handleViewModelResult(result)
-        }
-        wysiwygViewModel.plainTextMode = !RiotSettings.shared.enableWysiwygTextFormatting
-        
-        inputAccessoryViewForKeyboard = UIView(frame: .zero)
-        
-        let composer = Composer(
-            viewModel: viewModel.context,
-            wysiwygViewModel: wysiwygViewModel,
-            resizeAnimationDuration: Double(kResizeComposerAnimationDuration),
-            sendMessageAction: { [weak self] content in
-            guard let self = self else { return }
-            self.sendWysiwygMessage(content: content)
-        }, showSendMediaActions: { [weak self]  in
-            guard let self = self else { return }
-            self.showSendMediaActions()
-        }).introspectTextView { [weak self] textView in
-            guard let self = self else { return }
-            textView.inputAccessoryView = self.inputAccessoryViewForKeyboard
-        }
-        
-        hostingViewController = VectorHostingController(rootView: composer)
-        hostingViewController.publishHeightChanges = true
-        let height = hostingViewController.sizeThatFits(in: CGSize(width: self.frame.width, height: UIView.layoutFittingExpandedSize.height)).height
-        let subView: UIView = hostingViewController.view
-        self.addSubview(subView)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        subView.translatesAutoresizingMaskIntoConstraints = false
-        heightConstraint = subView.heightAnchor.constraint(equalToConstant: height)
-        NSLayoutConstraint.activate([
-            heightConstraint,
-            subView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            subView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            subView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
-        
-        cancellables = [
-            hostingViewController.heightPublisher
-                .removeDuplicates()
-                .sink(receiveValue: { [weak self] idealHeight in
-                    guard let self = self else { return }
-                    self.updateToolbarHeight(wysiwygHeight: idealHeight)
-                }),
-            // Required to update the view constraints after minimise/maximise is tapped
-            wysiwygViewModel.$idealHeight
-                .removeDuplicates()
-                .sink { [weak hostingViewController] _ in
-                    hostingViewController?.view.setNeedsLayout()
-                },
-            
-            wysiwygViewModel.$maximised
-                .dropFirst()
-                .removeDuplicates()
-                .sink { [weak self] value in
-                    guard let self = self else { return }
-                    self.toolbarViewDelegate?.didChangeMaximisedState(value)
-                    self.hostingViewController.view.layer.cornerRadius = value ? 20 : 0
-                    if !value {
-                        self.voiceMessageBottomConstraint?.constant = 2
-                    }
-                }
-        ]
-        
-        update(theme: ThemeService.shared().theme)
-        registerThemeServiceDidChangeThemeNotification()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceDidRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+        setupComposerIfNeeded()
     }
     
     override func customizeRendering() {
@@ -217,12 +168,27 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
     override func dismissKeyboard() {
         self.viewModel.dismissKeyboard()
     }
+
+    @discardableResult
+    override func becomeFirstResponder() -> Bool {
+        self.wysiwygViewModel.textView.becomeFirstResponder()
+    }
     
     override func dismissValidationView(_ validationView: MXKImageView!) {
         super.dismissValidationView(validationView)
         if isMaximised {
             showKeyboard()
         }
+    }
+
+    override func setPartialContent(_ attributedTextMessage: NSAttributedString) {
+        let content: String
+        if #available(iOS 15.0, *) {
+            content = PillsFormatter.stringByReplacingPills(in: attributedTextMessage, mode: .markdown)
+        } else {
+            content = attributedTextMessage.string
+        }
+        self.wysiwygViewModel.setMarkdownContent(content)
     }
     
     func showKeyboard() {
@@ -239,8 +205,142 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
         }
         wysiwygViewModel.applyLinkOperation(linkOperation)
     }
+
+    func mention(_ member: MXRoomMember) {
+        self.wysiwygViewModel.setMention(url: MXTools.permalinkToUser(withUserId: member.userId),
+                                         name: member.displayname,
+                                         mentionType: .user)
+    }
+
+    func command(_ command: String) {
+        self.wysiwygViewModel.setCommand(name: command)
+    }
     
     // MARK: - Private
+
+    private func setupComposerIfNeeded() {
+        guard hostingViewController == nil,
+              let toolbarViewDelegate,
+              let permalinkReplacer else { return }
+
+        viewModel = ComposerViewModel(
+            initialViewState: ComposerViewState(textFormattingEnabled: RiotSettings.shared.enableWysiwygTextFormatting,
+                                                isLandscapePhone: isLandscapePhone,
+                                                bindings: ComposerBindings(focused: false)))
+
+        viewModel.callback = { [weak self] result in
+            self?.handleViewModelResult(result)
+        }
+        wysiwygViewModel.plainTextMode = !RiotSettings.shared.enableWysiwygTextFormatting
+        wysiwygViewModel.permalinkReplacer = permalinkReplacer
+
+        inputAccessoryViewForKeyboard = UIView(frame: .zero)
+
+        let composer = Composer(
+            viewModel: viewModel.context,
+            wysiwygViewModel: wysiwygViewModel,
+            completionSuggestionSharedContext: toolbarViewDelegate.completionSuggestionContext().context,
+            resizeAnimationDuration: Double(kResizeComposerAnimationDuration),
+            sendMessageAction: { [weak self] content in
+            guard let self = self else { return }
+            self.sendWysiwygMessage(content: content)
+        }, showSendMediaActions: { [weak self]  in
+            guard let self = self else { return }
+            self.showSendMediaActions()
+        })
+            .introspectTextView { [weak self] textView in
+                guard let self = self else { return }
+                textView.inputAccessoryView = self.inputAccessoryViewForKeyboard
+            }
+            .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: toolbarViewDelegate.mediaManager())))
+
+        hostingViewController = VectorHostingController(rootView: composer)
+        hostingViewController.publishHeightChanges = true
+        let height = hostingViewController.sizeThatFits(in: CGSize(width: self.frame.width, height: UIView.layoutFittingExpandedSize.height)).height
+        let subView: UIView = hostingViewController.view
+        self.addSubview(subView)
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        heightConstraint = subView.heightAnchor.constraint(equalToConstant: height)
+        NSLayoutConstraint.activate([
+            heightConstraint,
+            subView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            subView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            subView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+
+        cancellables = [
+            hostingViewController.heightPublisher
+                .removeDuplicates()
+                .sink(receiveValue: { [weak self] idealHeight in
+                    guard let self = self else { return }
+                    self.updateToolbarHeight(wysiwygHeight: idealHeight)
+                }),
+            // Required to update the view constraints after minimise/maximise is tapped
+            wysiwygViewModel.$idealHeight
+                .removeDuplicates()
+                .sink { [weak hostingViewController] _ in
+                    hostingViewController?.view.setNeedsLayout()
+                },
+
+            wysiwygViewModel.$maximised
+                .dropFirst()
+                .removeDuplicates()
+                .sink { [weak self] value in
+                    guard let self = self else { return }
+                    self.toolbarViewDelegate?.didChangeMaximisedState(value)
+                    self.hostingViewController.view.layer.cornerRadius = value ? 20 : 0
+                    if !value {
+                        self.voiceMessageBottomConstraint?.constant = 2
+                    }
+                },
+
+            wysiwygViewModel.$plainTextContent
+                .removeDuplicates()
+                .dropFirst()
+                .sink { [weak self] attributed in
+                    // Note: filter out `plainTextMode` being off, as switching to RTE will trigger this
+                    // publisher with empty content. This avoids saving the partial text message
+                    // or trying to compute suggestion from this empty content.
+                    guard let self, self.wysiwygViewModel.plainTextMode else { return }
+                    self.textMessage = attributed.string
+                    self.toolbarViewDelegate?.roomInputToolbarViewDidChangeTextMessage(self)
+                    self.toolbarViewDelegate?.roomInputToolbarView?(self, shouldStorePartialContent: attributed)
+                },
+            
+            wysiwygViewModel.$attributedContent
+                .removeDuplicates(by: {
+                    $0.text == $1.text
+                })
+                .dropFirst()
+                .sink { [weak self] _ in
+                    // Note: filter out `plainTextMode` being on, as switching to plain text mode will trigger this
+                    // publisher with empty content. This avoids saving the partial text message
+                    // or trying to compute suggestion from this empty content.
+                    guard let self, !self.wysiwygViewModel.plainTextMode else { return }
+                    let markdown = self.wysiwygViewModel.content.markdown
+                    let attributed = NSAttributedString(string: markdown, attributes: [.font: self.defaultFont])
+                    self.toolbarViewDelegate?.roomInputToolbarView?(self, shouldStorePartialContent: attributed)
+                }
+        ]
+
+        update(theme: ThemeService.shared().theme)
+        registerThemeServiceDidChangeThemeNotification()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDidRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -273,7 +373,30 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
     }
     
     private func sendWysiwygMessage(content: WysiwygComposerContent) {
-        delegate?.roomInputToolbarView?(self, sendFormattedTextMessage: content.html, withRawText: content.markdown)
+        if content.markdown.prefix(while: { $0 == "/" }).count == 1 {
+            let commandText: String
+            if content.markdown.hasPrefix(MXKSlashCommand.emote.cmd) {
+                // `/me` command works with markdown content
+                commandText = content.markdown
+            } else if #available(iOS 15.0, *) {
+                // Other commands should see pills replaced by matrix identifiers
+                commandText = PillsFormatter.stringByReplacingPills(in: self.wysiwygViewModel.textView.attributedText, mode: .identifier)
+            } else {
+                // Without Pills support, just use the raw text for command
+                commandText = self.wysiwygViewModel.textView.text
+            }
+
+            // Fix potential command failures due to trailing characters
+            // or NBSP that are not properly handled by the command interpreter
+            let sanitizedCommand = commandText
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .replacingOccurrences(of: String.nbsp, with: " ")
+
+            delegate?.roomInputToolbarView?(self, sendCommand: sanitizedCommand)
+        } else {
+            delegate?.roomInputToolbarView?(self, sendFormattedTextMessage: content.html, withRawText: content.markdown)
+        }
+
         if isMaximised {
             minimise()
         }
@@ -291,6 +414,8 @@ class WysiwygInputToolbarView: MXKRoomInputToolbarView, NibLoadable, HtmlRoomInp
             setVoiceMessageToolbarIsHidden(!isEmpty)
         case let .linkTapped(linkAction):
             toolbarViewDelegate?.didSendLinkAction(LinkActionWrapper(linkAction))
+        case let .suggestion(pattern):
+            toolbarViewDelegate?.didDetectTextPattern(SuggestionPatternWrapper(pattern))
         }
     }
     
