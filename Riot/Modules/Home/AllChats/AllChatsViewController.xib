@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="orV-HH-88x">
-                    <rect key="frame" x="0.0" y="131" width="375" height="528"/>
+                    <rect key="frame" x="0.0" y="196" width="375" height="463"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view clipsSubviews="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JJC-Bw-6sa" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                    <rect key="frame" x="0.0" y="20" width="375" height="125"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="168"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <accessibility key="accessibilityConfiguration" identifier="RecentsVCStickyHeadersTopContainer"/>
                     <connections>
@@ -49,13 +49,13 @@
                 <constraint firstAttribute="trailing" secondItem="orV-HH-88x" secondAttribute="trailing" id="3Np-64-AUe"/>
                 <constraint firstItem="4qf-KS-Fc9" firstAttribute="bottom" secondItem="orV-HH-88x" secondAttribute="bottom" id="Bka-Zz-CEr"/>
                 <constraint firstItem="CGF-MW-XVZ" firstAttribute="bottom" secondItem="4qf-KS-Fc9" secondAttribute="bottom" id="BxN-Ri-kvN"/>
-                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="JJC-Bw-6sa" secondAttribute="bottom" constant="8" symbolic="YES" id="IMR-dV-gUS"/>
+                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="JJC-Bw-6sa" secondAttribute="bottom" constant="10" id="IMR-dV-gUS"/>
                 <constraint firstItem="JJC-Bw-6sa" firstAttribute="top" secondItem="4qf-KS-Fc9" secondAttribute="top" id="OBu-sH-mqE"/>
                 <constraint firstItem="CGF-MW-XVZ" firstAttribute="leading" secondItem="orV-HH-88x" secondAttribute="leading" id="QLo-iG-39E"/>
                 <constraint firstItem="orV-HH-88x" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dTn-zC-Axs"/>
                 <constraint firstItem="CGF-MW-XVZ" firstAttribute="trailing" secondItem="orV-HH-88x" secondAttribute="trailing" id="g7Q-wc-dRT"/>
                 <constraint firstItem="JJC-Bw-6sa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l5C-zt-Env"/>
-                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="4qf-KS-Fc9" secondAttribute="top" constant="125" id="sUd-YJ-VLn"/>
+                <constraint firstItem="orV-HH-88x" firstAttribute="top" secondItem="4qf-KS-Fc9" secondAttribute="top" constant="176" id="sUd-YJ-VLn"/>
                 <constraint firstAttribute="trailing" secondItem="JJC-Bw-6sa" secondAttribute="trailing" id="trw-3x-yjO"/>
             </constraints>
             <point key="canvasLocation" x="140" y="69.715142428785612"/>

@@ -3,12 +3,14 @@
 import SwiftUI
 import FirebaseStorage
 import FirebaseAuth
+import QuickLook
 
 let storageUrl = "gs://bigstarconnect.appspot.com"
 var userId = ""
 
 struct CloudListView: View {
     @State private var fileList: [String] = []
+    
 
     var body: some View {
         ScrollView {
@@ -112,6 +114,9 @@ struct FileView: View {
                 .default(Text(VectorL10n.download), action: {
                     downloadFile()
                 }),
+                .default(Text(VectorL10n.view), action: {
+                    previewFile()
+                }),
                 .destructive(Text(VectorL10n.delete), action: {
                     onDelete()
                 }),
@@ -119,6 +124,84 @@ struct FileView: View {
             ])
         }
     }
+    
+    private func previewFile() {
+        let storage = Storage.storage(url: storageUrl)
+        let storageRef = storage.reference()
+
+        let fileRef = storageRef.child("files/\(userId)/saved/\(file)")
+
+        // Create a temporary file URL to store the downloaded file
+        let tempFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(file)
+
+        let downloadTask = fileRef.write(toFile: tempFileURL)
+
+        // Create a progress view to show the download progress
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Create an alert controller to show the progress view
+        let alertController = UIAlertController(title: VectorL10n.view, message: nil, preferredStyle: .alert)
+        alertController.view.addSubview(progressView)
+
+        // Add constraints for the progress view
+        progressView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 16).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -16).isActive = true
+        progressView.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor, constant: -16).isActive = true
+
+        // Find the topmost view controller to present the alert controller
+        guard let topViewController = UIApplication.shared.windows.first?.rootViewController?.topmostViewController() else {
+            return
+        }
+
+        // Present the alert controller
+        topViewController.present(alertController, animated: true, completion: nil)
+
+        // Observe the progress of the download task
+        let observer = downloadTask.observe(.progress) { snapshot in
+            // Update the progress view based on the download progress
+            let progress = Float(snapshot.progress?.fractionCompleted ?? 0)
+            progressView.setProgress(progress, animated: true)
+        }
+
+        // Start the download task
+        downloadTask.observe(.success) { snapshot in
+            // Remove the observer
+            downloadTask.removeObserver(withHandle: observer)
+
+            // Dismiss the progress alert controller on the main queue
+            DispatchQueue.main.async {
+                alertController.dismiss(animated: true) {
+                    // Create a QLPreviewController to preview the file
+                    let previewController = QLPreviewController()
+                    let dataSource = PreviewDataSource(fileURL: tempFileURL)
+                    previewController.dataSource = dataSource
+
+
+                    // Find the topmost view controller to present the preview controller
+                    if let topViewController = UIApplication.shared.windows.first?.rootViewController?.topmostViewController() {
+                        topViewController.present(previewController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+
+        downloadTask.observe(.failure) { snapshot in
+            // Remove the observer
+            downloadTask.removeObserver(withHandle: observer)
+
+            // Dismiss the progress alert controller on the main queue
+            DispatchQueue.main.async {
+                alertController.dismiss(animated: true) {
+                    if let error = snapshot.error as NSError? {
+                        print("Error downloading file: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+
+
 
     private func loadImage() {
         let storage = Storage.storage(url: storageUrl)
@@ -126,7 +209,7 @@ struct FileView: View {
 
         let fileRef = storageRef.child("files/\(userId)/saved/\(file)")
 
-        fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        fileRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
             if let error = error {
                 print("Error downloading file: \(error.localizedDescription)")
                 return
@@ -216,6 +299,8 @@ struct FileView: View {
 
 }
 
+
+
 extension UIViewController {
     func topmostViewController() -> UIViewController {
         if let presentedViewController = presentedViewController {
@@ -228,5 +313,22 @@ extension UIViewController {
             return tabBarController.selectedViewController?.topmostViewController() ?? self
         }
         return self
+    }
+}
+
+class PreviewDataSource: NSObject, QLPreviewControllerDataSource {
+    let fileURL: URL
+
+    init(fileURL: URL) {
+        self.fileURL = fileURL
+        super.init()
+    }
+
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return fileURL as QLPreviewItem
     }
 }

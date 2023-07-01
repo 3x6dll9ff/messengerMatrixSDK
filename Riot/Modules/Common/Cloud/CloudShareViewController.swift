@@ -31,6 +31,7 @@ struct CloudShareView: View {
     @State private var selectedImage = UIImage()
     @State private var selectedURL: URL?
     @State private var uploadProgress: Double = 0.0
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack {
@@ -65,7 +66,7 @@ struct CloudShareView: View {
                                 
                                 Text(contact.displayName)
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                             }
                             .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: session!.mediaManager)))
                             .padding(.vertical, 6)
@@ -87,7 +88,7 @@ struct CloudShareView: View {
                                 
                                 Text(room.displayName)
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                             }
                             .environmentObject(AvatarViewModel(avatarService: AvatarService(mediaManager: session!.mediaManager)))
                             .padding(.vertical, 6)

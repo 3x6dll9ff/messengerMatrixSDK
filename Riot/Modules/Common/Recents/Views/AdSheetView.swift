@@ -94,7 +94,7 @@ struct AdSheetView: View{
                 Text(clientAd.title)
                     .font(.system(size: 22))
                     .fontWeight(.bold)
-                    .padding(.bottom, 4)
+                    .padding(.bottom, 8)
                     .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                     .foregroundColor(.white)
                 HStack {

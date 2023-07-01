@@ -16,7 +16,7 @@
 
 // Permissions usage explanations
 "NSCameraUsageDescription" = "The camera is used to make video calls, or take and upload photos and videos.";
-"NSPhotoLibraryUsageDescription" = "Allow access to photos to upload photos and videos from your library.";
+"NSPhotoLibraryUsageDescription" = "Allow access to photos to upload photos and videos from your library in the chats to share with people.";
 "NSMicrophoneUsageDescription" = "bigstarmessenger needs to access your microphone to make and receive calls, take videos, and record voice messages.";
 "NSContactsUsageDescription" = "They will be shared with your identity server to help find your contacts on Matrix.";
 "NSCalendarsUsageDescription" = "See your scheduled meetings in the app.";

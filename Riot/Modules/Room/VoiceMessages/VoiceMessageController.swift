@@ -17,6 +17,7 @@
 import Foundation
 import AVFoundation
 import DSWaveformImage
+import Speech
 
 @objc public protocol VoiceMessageControllerDelegate: AnyObject {
     func voiceMessageControllerDidRequestMicrophonePermission(_ voiceMessageController: VoiceMessageController)
@@ -102,6 +103,28 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
     }
     
     // MARK: - VoiceMessageToolbarViewDelegate
+    func transcribeAudio(url: URL) {
+        
+        // create a new recognizer and point it at our audio
+        let recognizer = SFSpeechRecognizer()
+        let request = SFSpeechURLRecognitionRequest(url: url)
+
+        // start recognition!
+        recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
+            // abort if we didn't get any transcription back
+            guard let result = result else {
+                print("There was an error: \(error!)")
+                return
+            }
+
+            // if we got the final transcription back, print it
+            if result.isFinal {
+                // pull out the best transcription...
+                print("TESTTESTTEST\(result.bestTranscription.formattedString)")
+            }
+        }
+    }
+    
     
     func voiceMessageToolbarViewDidRequestRecordingStart(_ toolbarView: VoiceMessageToolbarView) {
         guard let temporaryFileURL = temporaryFileURL else {
@@ -197,6 +220,8 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
     }
     
     // MARK: - AudioRecorderDelegate
+    
+    
     
     func audioRecorderDidStartRecording(_ audioRecorder: VoiceMessageAudioRecorder) {
         guard self.audioRecorder === audioRecorder else {
@@ -294,6 +319,8 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
             }
             return
         }
+        
+        transcribeAudio(url: temporaryFileURL)
         
         loadDraftRecording()
         

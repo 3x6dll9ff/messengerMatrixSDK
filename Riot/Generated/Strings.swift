@@ -1483,15 +1483,15 @@ public class VectorL10n: NSObject {
   public static var deactivateAccountPasswordAlertMessage: String { 
     return VectorL10n.tr("Vector", "deactivate_account_password_alert_message") 
   }
-  /// Deactivate Account
+  /// Delete Account
   public static var deactivateAccountPasswordAlertTitle: String { 
     return VectorL10n.tr("Vector", "deactivate_account_password_alert_title") 
   }
-  /// Deactivate Account
+  /// Delete Account
   public static var deactivateAccountTitle: String { 
     return VectorL10n.tr("Vector", "deactivate_account_title") 
   }
-  /// Deactivate account
+  /// Delete account
   public static var deactivateAccountValidateAction: String { 
     return VectorL10n.tr("Vector", "deactivate_account_validate_action") 
   }
@@ -7387,11 +7387,11 @@ public class VectorL10n: NSObject {
   public static var settingsCryptography: String { 
     return VectorL10n.tr("Vector", "settings_cryptography") 
   }
-  /// DEACTIVATE ACCOUNT
+  /// DELETE ACCOUNT
   public static var settingsDeactivateAccount: String { 
     return VectorL10n.tr("Vector", "settings_deactivate_account") 
   }
-  /// Deactivate account permanently
+  /// Delete account permanently
   public static var settingsDeactivateMyAccount: String { 
     return VectorL10n.tr("Vector", "settings_deactivate_my_account") 
   }

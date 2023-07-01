@@ -505,7 +505,7 @@ struct AdsView: View{
                             }
                         }.headerProminence(.increased)
                         
-                        SwiftUI.Section(header: Text("Время показа       7500тг/30 дней")) {
+                        SwiftUI.Section(header: Text("Время показа       15000тг/30 дней")) {
                             Picker("Выберите количество", selection: $days) {
                                 ForEach(periods.reversed(), id: \.self) {
                                     Text("\($0) \($0 == 1 ? "сутки" : "суток")")
