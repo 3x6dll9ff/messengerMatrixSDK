@@ -20,13 +20,14 @@ private class Ad {
     let advertiserUuid: String
     let thumbnailUuid: String
     let bannerUuid: String
+    let categoryUuid: String
     
     let youtubeUrl: String
     let instagramUrl: String
     let bigstarUrl: String
     let websiteUrl: String
     
-    init(title: String, description: String, email: String, phoneNumber: String, cityUuids: [String], advertiserUuid: String, thumbnailUuid: String, bannerUuid: String, youtubeUrl: String, instagramUrl: String, bigstarUrl: String, websiteUrl: String, days: Int){
+    init(title: String, description: String, email: String, phoneNumber: String, cityUuids: [String], advertiserUuid: String, thumbnailUuid: String, bannerUuid: String, categoryUuid: String, youtubeUrl: String, instagramUrl: String, bigstarUrl: String, websiteUrl: String, days: Int){
         
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "yyyy-MM-dd"
@@ -46,6 +47,7 @@ private class Ad {
         self.phoneNumber = phoneNumber
         self.advertiserUuid = advertiserUuid
         self.thumbnailUuid = thumbnailUuid
+        self.categoryUuid = categoryUuid
         self.bannerUuid = bannerUuid
         self.youtubeUrl = youtubeUrl
         self.instagramUrl = instagramUrl
@@ -67,6 +69,7 @@ private class Ad {
             "cityUuids": cityUuids,
             "thumbnailUuid": thumbnailUuid,
             "bannerUuid": bannerUuid,
+            "categoryUuid": categoryUuid,
             "advertiserUuid": advertiserUuid,
             "email": email,
             "phoneNumber": phoneNumber,
@@ -278,10 +281,13 @@ struct AdsView: View{
     @State private var websiteUrl = ""
     @State private var phoneNumber = ""
     @State private var days = 30
+    @State private var categories: [AdCategory] = []
     @State private var cities: [City] = []
     @State private var countries: [Country] = []
     @State private var selectedCountryUuid: String = ""
     @State private var selectedCityUuid: String = ""
+    @State private var selectedCategoryUuid: String = ""
+    
     
     let periods = [30]
 //    var dismissAction: (() -> Void)
@@ -294,6 +300,15 @@ struct AdsView: View{
                 "\(baseURL)/countries",
                 method: .get
             ).serializingDecodable([Country].self).value
+        }
+    }
+    
+    private func fetchCategories() {
+        Task {
+            categories = try await AF.request(
+                "\(baseURL)/categories",
+                method: .get
+            ).serializingDecodable([AdCategory].self).value
         }
     }
     
@@ -314,6 +329,7 @@ struct AdsView: View{
     private func fetch() {
         
         fetchCountries()
+        fetchCategories()
         
         let mainAccount = MXKAccountManager.shared().accounts.first
         
@@ -399,6 +415,40 @@ struct AdsView: View{
                                                 }
                                             }
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }.headerProminence(.increased)
+                    
+                    SwiftUI.Section(header: Text("Выберите категорию")) {
+                        List {
+                            if(categories.count != 0) {
+                                ForEach(0 ..< categories.count) { categoryIndex in
+                                    HStack {
+                                        Button(action: {
+                                            let categoryUuid = categories[categoryIndex].uuid
+                                            if selectedCategoryUuid == categoryUuid {
+                                                selectedCategoryUuid = ""
+                                            } else {
+                                                selectedCategoryUuid = categoryUuid
+                                            }
+                                        }) {
+                                            HStack {
+                                                if (categories[categoryIndex].uuid == selectedCategoryUuid) {
+                                                    Image(systemName: "checkmark.circle.fill")
+                                                        .foregroundColor(.green)
+                                                        .animation(.easeIn)
+                                                } else {
+                                                    Image(systemName: "circle")
+                                                        .foregroundColor(.primary)
+                                                        .animation(.easeOut)
+                                                }
+                                                Text(categories[categoryIndex].name)
+                                                    .font(.system(size: 24))
+
+                                            }
+                                        }.buttonStyle(BorderlessButtonStyle())
                                     }
                                 }
                             }
@@ -546,6 +596,7 @@ struct AdsView: View{
                                 advertiserUuid: advertiserUuid,
                                 thumbnailUuid: thumbnailUuid,
                                 bannerUuid: bannerUuid,
+                                categoryUuid: self.selectedCategoryUuid,
                                 youtubeUrl: self.youtubeUrl,
                                 instagramUrl: self.instagramUrl,
                                 bigstarUrl: self.bigstarUrl,

@@ -67,6 +67,13 @@ struct SpaceSelector: View {
                             .foregroundColor(.purple)
                     }
                 }
+                LazyHStack {
+                    Image(systemName: "doc.badge.plus")
+                    NavigationLink(destination: SelectCategoryView()) {
+                        Text("Фильтр рекламы")
+                            .foregroundColor(.purple)
+                    }
+                }
             } .padding(10)
         }
         .frame(maxHeight: .infinity)

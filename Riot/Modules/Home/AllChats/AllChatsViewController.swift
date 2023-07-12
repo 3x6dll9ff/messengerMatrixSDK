@@ -485,7 +485,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     
     private func getStoredCityUuid() -> String?{
         return UserDefaults.standard.string(forKey: "cityUuid")
-      
+    }
+    
+    private func getStoredCategoryUuid() -> String?{
+        return UserDefaults.standard.string(forKey: "categoryUuid")
     }
     
     private func staticCityUuid() {
@@ -496,14 +499,20 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         staticCityUuid()
         
         let cityUuid = getStoredCityUuid()
+        let categoryUuid = getStoredCategoryUuid()
+
        
         print("привет как дела \(cityUuid)")
         
         
         if cityUuid != nil {
-            let parameters: Parameters = [
+            var parameters: [String: Any] = [
                 "cityUuid": cityUuid!
             ]
+
+            if let categoryUuid = categoryUuid, !categoryUuid.isEmpty {
+                parameters["categoryUuid"] = categoryUuid
+            }
 
             AF.request("\(baseURL)/ads/client", parameters: parameters).responseDecodable(of: [ClientAds].self) { response in
                 if (response.value != nil) {
