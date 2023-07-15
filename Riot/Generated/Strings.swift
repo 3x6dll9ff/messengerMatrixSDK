@@ -2519,6 +2519,10 @@ public class VectorL10n: NSObject {
   public static var groupSection: String { 
     return VectorL10n.tr("Vector", "group_section") 
   }
+  /// History
+  public static var history: String { 
+    return VectorL10n.tr("Vector", "history") 
+  }
   /// Favourite
   public static var homeContextMenuFavourite: String { 
     return VectorL10n.tr("Vector", "home_context_menu_favourite") 

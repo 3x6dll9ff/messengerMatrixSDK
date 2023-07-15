@@ -220,7 +220,9 @@ struct CloudShareView: View {
         let data: [String: Any] = [
             "filePath": filePath,
             "recipientID": recipientID,
-            "senderName": senderName
+            "senderName": senderName,
+            "status": "Pending",
+            "createdAt": FieldValue.serverTimestamp()
         ]
         
         let ref: DocumentReference? = defaultFirestore.collection("cloud").addDocument(data: data) { error in

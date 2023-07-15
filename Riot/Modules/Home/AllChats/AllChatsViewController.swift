@@ -269,11 +269,12 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                     } else {
                         // File deleted successfully
                         print("File deleted successfully")
-                        self.db.collection("cloud").document(documentID).delete() { err in
+                        
+                        self.db.collection("cloud").document(documentID).setData([ "status": "Accepted", "filePath": savedPath ], merge: true) { err in
                             if let err = err {
-                                print("Error removing document: \(err)")
+                                print("Error updating document status: \(err)")
                             } else {
-                                print("Document successfully removed!")
+                                print("Document status successfully updated!")
                             }
                         }
                     }
@@ -309,11 +310,11 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                           if let error = error {
                               print("Error removing file: \(error)")
                           } else {
-                              self.db.collection("cloud").document(document.documentID).delete() { err in
+                              self.db.collection("cloud").document(document.documentID).setData([ "status": "Rejected" ], merge: true) { err in
                                   if let err = err {
-                                      print("Error removing document: \(err)")
+                                      print("Error updating document status: \(err)")
                                   } else {
-                                      print("Document successfully removed!")
+                                      print("Document status successfully updated!")
                                   }
                               }
                           }
@@ -369,6 +370,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         currentUserId = userId
         db.collection("cloud")
             .whereField("recipientID", isEqualTo: userId)
+            .whereField("status", isEqualTo: "Pending")
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")
