@@ -148,6 +148,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("TEST: viewDidLoad")
         
         editActionProvider.delegate = self
         spaceActionProvider.delegate = self
@@ -186,6 +187,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("TEST: viewWillAppear")
+
         fetchAds()
         self.toolbar.tintColor = theme.colors.accent
         if self.navigationItem.searchController == nil {
@@ -200,7 +203,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        print("TEST: viewDidAppear")
+
         // Check whether we're not logged in
         let authIsShown: Bool
         if MXKAccountManager.shared().accounts.isEmpty {
@@ -226,6 +230,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        print("TEST: viewWillTransition")
         
         coordinator.animate { context in
             self.recentsTableView?.tableHeaderView?.layoutIfNeeded()
@@ -472,7 +477,6 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     }
     
     private func fetchImages(){
-        
         for clientAd in self.clientAds {
             AF.request("\(baseURL)/files/\(clientAd.thumbnailUuid)").responseImage { response in
                 let ad = AdSlide (
@@ -517,9 +521,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             }
 
             AF.request("\(baseURL)/ads/client", parameters: parameters).responseDecodable(of: [ClientAds].self) { response in
-                if (response.value != nil) {
+                if (response.value != nil && !response.value!.isEmpty) {
                     print(response.value!)
                     self.clientAds = response.value!
+                    self.ads = []
                     self.fetchImages()
                 }
             }
@@ -992,6 +997,7 @@ extension AllChatsViewController: SpaceSelectorBottomSheetCoordinatorBridgePrese
         coordinatorBridgePresenter.dismiss(animated: true) {
             self.spaceSelectorBridgePresenter = nil
         }
+        fetchAds()
     }
     
     func spaceSelectorBottomSheetCoordinatorBridgePresenterDidSelectHome(_ coordinatorBridgePresenter: SpaceSelectorBottomSheetCoordinatorBridgePresenter) {

@@ -62,11 +62,21 @@ struct SelectCategoryView: View {
             }
             .navigationTitle("Выберите категорию")
             .navigationBarTitleDisplayMode(.large)
-            .onAppear(perform: fetch)
+            .onAppear {
+                fetch()
+                setInitialCategory()
+            }
         }
     }
     
+    private func getStoredCategoryUuid() -> String?{
+        return UserDefaults.standard.string(forKey: "categoryUuid")
+    }
     
+    private func setInitialCategory () {
+        let categoryUuid = getStoredCategoryUuid()
+        selectedCategoryUuid = categoryUuid ?? ""
+    }
 
     private func fetch() {
         Task {
