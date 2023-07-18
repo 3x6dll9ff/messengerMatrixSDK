@@ -84,6 +84,9 @@ struct SelectCategoryView: View {
                 "\(baseURL)/categories",
                 method: .get
             ).serializingDecodable([AdCategory].self).value
+            
+            let allCategory = AdCategory(uuid: "", name: "Все категории", createdAt: "", updatedAt: "")
+            categories.insert(allCategory, at: 0)
         }
     }
 }
