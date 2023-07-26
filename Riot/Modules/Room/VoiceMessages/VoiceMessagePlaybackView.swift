@@ -14,6 +14,8 @@
 // limitations under the License.
 //
 
+// swiftlint:disable all
+
 import Foundation
 import Reusable
 import UIKit
@@ -23,6 +25,7 @@ protocol VoiceMessagePlaybackViewDelegate: AnyObject {
     func voiceMessagePlaybackViewDidRequestPlaybackToggle()
     func voiceMessagePlaybackViewDidRequestSeek(to progress: CGFloat)
     func voiceMessagePlaybackViewDidChangeWidth()
+    func voiceMessagePlaybackViewDidRequestTranscription(completion: @escaping (String?) -> Void)
 }
 
 struct VoiceMessagePlaybackViewDetails {
@@ -47,6 +50,8 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
     @IBOutlet private var backgroundView: UIView!
     @IBOutlet private var recordingIcon: UIView!
     @IBOutlet private var playButton: UIButton!
+    @IBOutlet private var transcriptionButton: UIButton!
+    @IBOutlet var stackView: UIStackView!
     @IBOutlet private var elapsedTimeLabel: UILabel!
     @IBOutlet private var waveformContainerView: UIView!
     @IBOutlet private (set)var stackViewTrailingContraint: NSLayoutConstraint!
@@ -57,7 +62,7 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
     weak var delegate: VoiceMessagePlaybackViewDelegate?
     
     var details: VoiceMessagePlaybackViewDetails?
-    
+        
     var waveformView: UIView {
         return _waveformView
     }
@@ -112,6 +117,10 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
                 playButton.isHidden = details.recording
             }
             
+            if transcriptionButton.isHidden != details.recording {
+                transcriptionButton.isHidden = details.recording
+            }
+            
             // UIStackView doesn't respond well to re-setting hidden states https://openradar.appspot.com/22819594
             if recordingIcon.isHidden != !details.recording {
                 recordingIcon.isHidden = !details.recording
@@ -139,6 +148,7 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
         self.backgroundColor = theme.colors.background
         playButton.backgroundColor = theme.roomCellIncomingBubbleBackgroundColor
         playButton.tintColor = theme.colors.secondaryContent
+        transcriptionButton.tintColor = theme.colors.secondaryContent
         
         let backgroundViewColor = self.customBackgroundViewColor ?? theme.colors.quinaryContent
         
@@ -161,11 +171,48 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
         currentTheme = theme
         configureWithDetails(details)
     }
+    
+    func voiceMessagePlaybackViewDidReceiveTranscription(_ transcription: String) {
+        print("voiceMessagePlaybackViewDidReceiveTranscription. \(transcription)")
+//        let transcriptionLabel = UILabel()
+//        transcriptionLabel.text = transcription
+//        transcriptionLabel.numberOfLines = 0
+//        transcriptionLabel.textColor = currentTheme?.colors.secondaryContent
+//        transcriptionLabel.font = currentTheme?.fonts.body
+//        transcriptionLabel.textAlignment = .left
+//        transcriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+//        self.addSubview(transcriptionLabel)
+//
+//        NSLayoutConstraint.activate([
+//            transcriptionLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 10),
+//            transcriptionLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10),
+//            transcriptionLabel.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 10),
+//            transcriptionLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10)
+//        ])
+//
+//        let maxSize = CGSize(width: transcriptionLabel.frame.size.width, height: CGFloat.greatestFiniteMagnitude)
+//        let labelSize = transcriptionLabel.systemLayoutSizeFitting(maxSize)
+//        let labelHeight = labelSize.height
+//        print(labelHeight)
+//
+//        heightConstraint?.constant = (70 + labelHeight * 2)
+//        self.addConstraint(heightConstraint!)
+//        self.layoutIfNeeded()
+    }
+
         
     // MARK: - Private
         
     @IBAction private func onPlayButtonTap() {
         delegate?.voiceMessagePlaybackViewDidRequestPlaybackToggle()
+    }
+    
+    @IBAction private func onTranscriptionButtonTap() {
+        print("transcription")
+        delegate?.voiceMessagePlaybackViewDidRequestTranscription { [weak self] transcription in
+            guard let self = self, let transcription = transcription else { return }
+            self.voiceMessagePlaybackViewDidReceiveTranscription(transcription)
+        }
     }
     
     @objc private func handleLongPressGesture(_ gestureRecognizer: UITapGestureRecognizer) {

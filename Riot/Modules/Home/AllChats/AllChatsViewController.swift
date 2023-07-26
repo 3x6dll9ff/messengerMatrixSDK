@@ -312,17 +312,17 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                     let rejectAction = UIAlertAction(title: "Отклонить", style: .destructive) { _ in
                         // Delete the file
                         fileRef.delete { error in
-                          if let error = error {
-                              print("Error removing file: \(error)")
-                          } else {
-                              self.db.collection("cloud").document(document.documentID).setData([ "status": "Rejected" ], merge: true) { err in
-                                  if let err = err {
-                                      print("Error updating document status: \(err)")
-                                  } else {
-                                      print("Document status successfully updated!")
-                                  }
-                              }
-                          }
+                            if let error = error {
+                                print("Error removing file: \(error)")
+                            } else {
+                                self.db.collection("cloud").document(document.documentID).setData([ "status": "Rejected" ], merge: true) { err in
+                                    if let err = err {
+                                        print("Error updating document status: \(err)")
+                                    } else {
+                                        print("Document status successfully updated!")
+                                    }
+                                }
+                            }
                         }
                     }
                     

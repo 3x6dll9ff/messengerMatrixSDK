@@ -212,6 +212,10 @@ class VoiceMessageToolbarView: PassthroughView, NibLoadable, Themable, UIGesture
         
     }
     
+    func voiceMessagePlaybackViewDidRequestTranscription(completion: @escaping (String?) -> Void) {
+        
+    }
+    
     // MARK: - Private
     
     @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {

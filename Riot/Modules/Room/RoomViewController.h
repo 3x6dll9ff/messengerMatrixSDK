@@ -162,6 +162,8 @@ extern NSTimeInterval const kResizeComposerAnimationDuration;
  */
 - (void)popToHomeViewController;
 
+- (void)voiceMessagePlainCellDidRequestTableUpdate:(UITableViewCell *)cell;
+
 /**
  If `YES`, the room settings screen will be initially displayed. Default `NO`
  */

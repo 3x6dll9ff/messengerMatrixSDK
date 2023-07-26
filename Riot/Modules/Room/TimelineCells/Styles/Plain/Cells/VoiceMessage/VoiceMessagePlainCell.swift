@@ -1,27 +1,34 @@
-// 
-// Copyright 2021 New Vector Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
+// swiftlint:disable all
 
 import Foundation
 
-class VoiceMessagePlainCell: SizableBaseRoomCell, RoomCellReactionsDisplayable, RoomCellReadMarkerDisplayable, RoomCellThreadSummaryDisplayable {
+@objc protocol VoiceMessagePlainCellDelegate: AnyObject {
+    func voiceMessagePlainCellDidRequestTableUpdate(_ cell: VoiceMessagePlainCell)
+}
+
+@objc class VoiceMessagePlainCell: SizableBaseRoomCell, RoomCellReactionsDisplayable, RoomCellReadMarkerDisplayable, RoomCellThreadSummaryDisplayable {
     
+    @objc weak var voiceMessageDelegate: VoiceMessagePlainCellDelegate?
+
     private(set) var playbackController: VoiceMessagePlaybackController!
+    private var transcriptionLabel: UILabel = UILabel()
+    
+    func updateTranscriptionLabel(with text: String) {
+        print("TEXT \(text)")
+        transcriptionLabel.text = text
+        transcriptionLabel.sizeToFit()
+        
+        DispatchQueue.main.async {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            self.voiceMessageDelegate?.voiceMessagePlainCellDidRequestTableUpdate(self)
+        }
+    }
     
     override func render(_ cellData: MXKCellData!) {
         super.render(cellData)
+        
+        print("RENDER \(transcriptionLabel.text ?? "")")
         
         guard let data = cellData as? RoomBubbleCellData else {
             return
@@ -37,6 +44,7 @@ class VoiceMessagePlainCell: SizableBaseRoomCell, RoomCellReactionsDisplayable, 
         
         self.update(theme: ThemeService.shared().theme)
     }
+
     
     override func setupViews() {
         super.setupViews()
@@ -50,14 +58,36 @@ class VoiceMessagePlainCell: SizableBaseRoomCell, RoomCellReactionsDisplayable, 
         }
         
         playbackController = VoiceMessagePlaybackController(mediaServiceProvider: VoiceMessageMediaServiceProvider.sharedProvider,
-                                                            cacheManager: VoiceMessageAttachmentCacheManager.sharedManager)
+                                                            cacheManager: VoiceMessageAttachmentCacheManager.sharedManager, updateTranscriptionLabel: updateTranscriptionLabel)
+
+        transcriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        transcriptionLabel.numberOfLines = 0
+        transcriptionLabel.text = " "
         
-        contentView.vc_addSubViewMatchingParent(playbackController.playbackView)
+        print("SETUPVIEWS \(transcriptionLabel.text ?? "")")
+        
+        let stackView = UIStackView(arrangedSubviews: [playbackController.playbackView, transcriptionLabel])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
-    
+
+
+
     override func update(theme: Theme) {
         
         super.update(theme: theme)
+        
+        print("UPDATE: \(transcriptionLabel.text ?? "")")
         
         guard let playbackController = playbackController else {
             return

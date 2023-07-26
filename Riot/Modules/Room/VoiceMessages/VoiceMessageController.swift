@@ -51,7 +51,7 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
     private var isInLockedMode: Bool = false
     private var notifiedRemainingTime = false
     private var recordDuration: TimeInterval?
-    
+        
     private static let elapsedTimeFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constants.elapsedTimeFormat
@@ -105,28 +105,6 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
     }
     
     // MARK: - VoiceMessageToolbarViewDelegate
-    func transcribeAudio(url: URL) {
-        
-        // create a new recognizer and point it at our audio
-        let recognizer = SFSpeechRecognizer()
-        let request = SFSpeechURLRecognitionRequest(url: url)
-
-        // start recognition!
-        recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
-            // abort if we didn't get any transcription back
-            guard let result = result else {
-                print("There was an error: \(error!)")
-                return
-            }
-
-            // if we got the final transcription back, print it
-            if result.isFinal {
-                // pull out the best transcription...
-                print("TESTTESTTEST\(result.bestTranscription.formattedString)")
-            }
-        }
-    }
-    
     
     func voiceMessageToolbarViewDidRequestRecordingStart(_ toolbarView: VoiceMessageToolbarView) {
         guard let temporaryFileURL = temporaryFileURL else {
@@ -321,8 +299,6 @@ public class VoiceMessageController: NSObject, VoiceMessageToolbarViewDelegate, 
             }
             return
         }
-        
-        transcribeAudio(url: temporaryFileURL)
         
         loadDraftRecording()
         

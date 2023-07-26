@@ -1,18 +1,4 @@
-// 
-// Copyright 2021 New Vector Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
+// swiftlint:disable all
 
 import Foundation
 import DSWaveformImage
@@ -32,13 +18,16 @@ class VoiceMessagePlaybackController: VoiceMessageAudioPlayerDelegate, VoiceMess
     
     private let mediaServiceProvider: VoiceMessageMediaServiceProvider
     private let cacheManager: VoiceMessageAttachmentCacheManager
-    
+    private let updateTranscriptionLabel: ((String) -> Void)?
+
     private var audioPlayer: VoiceMessageAudioPlayer?
     private var displayLink: CADisplayLink!
     private var samples: [Float] = []
     private var duration: TimeInterval = 0
     private var urlToLoad: URL?
     private var loading: Bool = false
+    
+    private let speechToTextService = SpeechToTextService(apiKey: "AIzaSyAS-TRJXaAqwFmcaD4cxaL6aLdQVcWumMI")
     
     private var state: VoiceMessagePlaybackControllerState = .stopped {
         didSet {
@@ -56,9 +45,10 @@ class VoiceMessagePlaybackController: VoiceMessageAudioPlayerDelegate, VoiceMess
     
     let playbackView: VoiceMessagePlaybackView
     
-    init(mediaServiceProvider: VoiceMessageMediaServiceProvider, cacheManager: VoiceMessageAttachmentCacheManager) {
+    init(mediaServiceProvider: VoiceMessageMediaServiceProvider, cacheManager: VoiceMessageAttachmentCacheManager, updateTranscriptionLabel: ((String) -> Void)?) {
         self.mediaServiceProvider = mediaServiceProvider
         self.cacheManager = cacheManager
+        self.updateTranscriptionLabel = updateTranscriptionLabel
         
         playbackView = VoiceMessagePlaybackView.loadFromNib()
         playbackView.delegate = self
@@ -79,6 +69,31 @@ class VoiceMessagePlaybackController: VoiceMessageAudioPlayerDelegate, VoiceMess
     }
     
     // MARK: - VoiceMessagePlaybackViewDelegate
+    
+    func voiceMessagePlaybackViewDidRequestTranscription(completion: @escaping (String?) -> Void) {
+        if let url = urlToLoad {
+            let outputURL = url.deletingPathExtension().appendingPathExtension("ogg")
+            VoiceMessageAudioConverter.convertToOpusOgg(sourceURL: url, destinationURL: outputURL) { result in
+                switch result {
+                case .success:
+                    print("Conversion to ogg completed successfully.")
+                    self.speechToTextService.transcribeAudio(audioFileURL: outputURL) { transcription, error in
+                        if let error = error {
+                            print("Failed to transcribe audio: \(error)")
+                        } else if let transcription = transcription {
+                            print("Transcription: \(transcription)")
+                            DispatchQueue.main.async {
+                                self.updateTranscriptionLabel?(transcription)
+                                completion(transcription)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print("Conversion to ogg failed with error: \(error)")
+                }
+            }
+        }
+    }
     
     func voiceMessagePlaybackViewDidRequestPlaybackToggle() {
         guard let audioPlayer = audioPlayer else {

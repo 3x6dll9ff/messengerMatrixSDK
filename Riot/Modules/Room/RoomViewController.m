@@ -97,7 +97,7 @@ static CGSize kThreadListBarButtonItemImageSize;
 @interface RoomViewController () <UISearchBarDelegate, UIGestureRecognizerDelegate, UIScrollViewAccessibilityDelegate, RoomTitleViewTapGestureDelegate, MXKRoomMemberDetailsViewControllerDelegate, ContactsTableViewControllerDelegate, MXServerNoticesDelegate, RoomContextualMenuViewControllerDelegate,
     ReactionsMenuViewModelCoordinatorDelegate, EditHistoryCoordinatorBridgePresenterDelegate, MXKDocumentPickerPresenterDelegate, EmojiPickerCoordinatorBridgePresenterDelegate,
     ReactionHistoryCoordinatorBridgePresenterDelegate, CameraPresenterDelegate, MediaPickerCoordinatorBridgePresenterDelegate,
-    RoomDataSourceDelegate, RoomCreationModalCoordinatorBridgePresenterDelegate, RoomInfoCoordinatorBridgePresenterDelegate, DialpadViewControllerDelegate, RemoveJitsiWidgetViewDelegate, VoiceMessageControllerDelegate, SpaceDetailPresenterDelegate, CompletionSuggestionCoordinatorBridgeDelegate, ThreadsCoordinatorBridgePresenterDelegate, ThreadsBetaCoordinatorBridgePresenterDelegate, MXThreadingServiceDelegate, RoomParticipantsInviteCoordinatorBridgePresenterDelegate, RoomInputToolbarViewDelegate, ComposerCreateActionListBridgePresenterDelegate>
+    RoomDataSourceDelegate, RoomCreationModalCoordinatorBridgePresenterDelegate, RoomInfoCoordinatorBridgePresenterDelegate, DialpadViewControllerDelegate, RemoveJitsiWidgetViewDelegate, VoiceMessageControllerDelegate, SpaceDetailPresenterDelegate, CompletionSuggestionCoordinatorBridgeDelegate, ThreadsCoordinatorBridgePresenterDelegate, ThreadsBetaCoordinatorBridgePresenterDelegate, MXThreadingServiceDelegate, RoomParticipantsInviteCoordinatorBridgePresenterDelegate, RoomInputToolbarViewDelegate, ComposerCreateActionListBridgePresenterDelegate, VoiceMessagePlainCellDelegate>
 {
     
     // The preview header
@@ -505,6 +505,19 @@ static CGSize kThreadListBarButtonItemImageSize;
     [self.liveLocationSharingBannerView updateWithTheme:ThemeService.shared.theme];
     
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)voiceMessagePlainCellDidRequestTableUpdate:(VoiceMessagePlainCell *)cell {
+    // Найти индекс ячейки, которую нужно обновить
+    MXLogDebug(@"[MXKRoomViewController] voiceMessagePlainCellDidRequestTableUpdate.");
+    
+    NSIndexPath *indexPath = [self.bubblesTableView indexPathForCell:cell];
+    if (indexPath) {
+//        [self.bubblesTableView reloadData];
+        [self.bubblesTableView reloadData];
+
+//        [self.bubblesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -5421,6 +5434,11 @@ static CGSize kThreadListBarButtonItemImageSize;
                 [self checkReadMarkerVisibility];
             });
         }
+    }
+    
+    if ([cell isKindOfClass:[VoiceMessagePlainCell class]]) {
+        VoiceMessagePlainCell *voiceMessageCell = (VoiceMessagePlainCell *)cell;
+        voiceMessageCell.voiceMessageDelegate = self;
     }
 }
 
