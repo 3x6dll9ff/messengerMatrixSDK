@@ -14,14 +14,11 @@ import Foundation
     private var transcriptionLabel: UILabel = UILabel()
     
     func updateTranscriptionLabel(with text: String) {
-        print("TEXT \(text)")
-        transcriptionLabel.text = text
-        transcriptionLabel.sizeToFit()
-        
         DispatchQueue.main.async {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-            self.voiceMessageDelegate?.voiceMessagePlainCellDidRequestTableUpdate(self)
+            print("TEXT \(text)")
+//            self.transcriptionLabel.text = text
+//            self.layoutIfNeeded()
+//            self.voiceMessageDelegate?.voiceMessagePlainCellDidRequestTableUpdate(self)
         }
     }
     
@@ -62,7 +59,6 @@ import Foundation
 
         transcriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         transcriptionLabel.numberOfLines = 0
-        transcriptionLabel.text = " "
         
         print("SETUPVIEWS \(transcriptionLabel.text ?? "")")
         

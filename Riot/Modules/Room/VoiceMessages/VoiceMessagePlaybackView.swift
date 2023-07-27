@@ -1,18 +1,3 @@
-// 
-// Copyright 2021 New Vector Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
 
 // swiftlint:disable all
 
@@ -174,6 +159,27 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
     
     func voiceMessagePlaybackViewDidReceiveTranscription(_ transcription: String) {
         print("voiceMessagePlaybackViewDidReceiveTranscription. \(transcription)")
+
+        // Создаем UIAlertController
+        let alertController = UIAlertController(title: "Транскрипция", message: transcription, preferredStyle: .alert)
+
+        // Добавляем кнопку "Закрыть"
+        let closeAction = UIAlertAction(title: "Закрыть", style: .default)
+        alertController.addAction(closeAction)
+
+        // Находим topmost controller
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+
+            // Презентуем alertController
+            topController.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+//    func voiceMessagePlaybackViewDidReceiveTranscription(_ transcription: String) {
+//        print("voiceMessagePlaybackViewDidReceiveTranscription. \(transcription)")
 //        let transcriptionLabel = UILabel()
 //        transcriptionLabel.text = transcription
 //        transcriptionLabel.numberOfLines = 0
@@ -190,15 +196,8 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
 //            transcriptionLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10)
 //        ])
 //
-//        let maxSize = CGSize(width: transcriptionLabel.frame.size.width, height: CGFloat.greatestFiniteMagnitude)
-//        let labelSize = transcriptionLabel.systemLayoutSizeFitting(maxSize)
-//        let labelHeight = labelSize.height
-//        print(labelHeight)
-//
-//        heightConstraint?.constant = (70 + labelHeight * 2)
-//        self.addConstraint(heightConstraint!)
 //        self.layoutIfNeeded()
-    }
+//    }
 
         
     // MARK: - Private

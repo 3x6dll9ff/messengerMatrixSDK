@@ -83,8 +83,8 @@ class VoiceMessagePlaybackController: VoiceMessageAudioPlayerDelegate, VoiceMess
                         } else if let transcription = transcription {
                             print("Transcription: \(transcription)")
                             DispatchQueue.main.async {
-                                self.updateTranscriptionLabel?(transcription)
                                 completion(transcription)
+                                self.updateTranscriptionLabel?(transcription)
                             }
                         }
                     }

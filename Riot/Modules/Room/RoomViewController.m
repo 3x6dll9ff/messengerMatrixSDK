@@ -355,6 +355,9 @@ static CGSize kThreadListBarButtonItemImageSize;
     // Register first customized cell view classes used to render bubbles
     [[RoomTimelineConfiguration shared].currentStyle.cellProvider registerCellsForTableView:self.bubblesTableView];
     
+    self.bubblesTableView.rowHeight = UITableViewAutomaticDimension;
+    self.bubblesTableView.estimatedRowHeight = 50;
+    
     [self vc_removeBackTitle];
     
     // Display leftBarButtonItems or leftBarButtonItem to the right of the Back button
@@ -513,10 +516,10 @@ static CGSize kThreadListBarButtonItemImageSize;
     
     NSIndexPath *indexPath = [self.bubblesTableView indexPathForCell:cell];
     if (indexPath) {
-//        [self.bubblesTableView reloadData];
         [self.bubblesTableView reloadData];
-
-//        [self.bubblesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.bubblesTableView beginUpdates];
+        [self.bubblesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.bubblesTableView endUpdates];
     }
 }
 
