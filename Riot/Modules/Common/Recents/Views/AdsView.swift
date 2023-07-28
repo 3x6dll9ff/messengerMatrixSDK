@@ -539,13 +539,13 @@ struct AdsView: View{
                                     .frame(width: 30, height: 30, alignment: .leading)
                                 TextField ("Вставьте ссылку", text: $youtubeUrl)
                             }
-                            HStack {
-                                Image("bigstar")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 30, height: 30, alignment: .leading)
-                                TextField ("Вставьте ссылку", text: $bigstarUrl)
-                            }
+//                            HStack {
+//                                Image("bigstar")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fill)
+//                                    .frame(width: 30, height: 30, alignment: .leading)
+//                                TextField ("Вставьте ссылку", text: $bigstarUrl)
+//                            }
                             HStack {
                                 Image("phoneNumber")
                                     .resizable()
