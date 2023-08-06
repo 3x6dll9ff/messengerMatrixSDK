@@ -217,9 +217,14 @@ struct CloudShareView: View {
     private func createFirestoreCloudDocument(filePath: String, recipientID: String, senderName: String) {
         let defaultFirestore = Firestore.firestore()
         
+        guard let senderID = session?.myUser?.userId else {
+            return
+        }
+        
         let data: [String: Any] = [
             "filePath": filePath,
             "recipientID": recipientID,
+            "senderID": senderID,
             "senderName": senderName,
             "status": "Pending",
             "createdAt": FieldValue.serverTimestamp()

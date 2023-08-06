@@ -1776,6 +1776,8 @@
 // Others
 "my_files_title" = "Мои Файлы";
 "history" = "История";
+"sent" = "Отправленные";
+"received" = "Принятые";
 "downloading" = "Скачивание";
 "confirm_delete" = "Подтвердите удаление";
 "send_to_cloud" = "Отправить в облако";

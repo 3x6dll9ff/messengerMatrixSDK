@@ -2942,6 +2942,8 @@ To enable access, tap Settings> Location and select Always";
 // Others
 "my_files_title" = "My Files";
 "history" = "History";
+"sent" = "Sent";
+"received" = "Received";
 "downloading" = "Downloading";
 "confirm_delete" = "Confirm Delete";
 "confirm_delete_description" = "Are you sure you want to delete this ad?";

@@ -15,34 +15,54 @@ struct FileHistory: Hashable {
     let filePath: String
 }
 
+enum DisplayMode {
+    case fileList
+    case receivedHistory
+    case sentHistory
+}
+
 struct CloudListView: View {
+    @State private var displayMode: DisplayMode = .fileList
+
     @State private var fileList: [String] = []
-    @State private var showHistory: Bool = false
-    @State private var fileHistory: [FileHistory] = []
+    @State private var sentHistory: [FileHistory] = []
+    @State private var receivedHistory: [FileHistory] = []
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
-                    Text(VectorL10n.myFilesTitle)
-                        .font(.title)
-                        .bold()
-                        .padding(.horizontal)
+//                    Text(VectorL10n.myFilesTitle)
+//                        .font(.title)
+//                        .bold()
+//                        .padding(.horizontal)
+                    Button(action: {
+                        displayMode = .fileList
+                    }) {
+                        Text(VectorL10n.myFilesTitle)
+                            .padding(.horizontal)
+                    }
                     
                     Spacer()
                     
                     Button(action: {
-                        showHistory.toggle()
+                        displayMode = .receivedHistory
                     }) {
-                        Text(VectorL10n.history)
+                        Text(VectorL10n.received)
                             .padding(.horizontal)
                     }
-                }
-                
-                if showHistory {
-                    LazyVGrid(columns: [GridItem(.flexible())], spacing: 16) {                        ForEach(fileHistory, id: \.self) { history in
-                        FileHistoryView(fileHistory: history)
+                    Button(action: {
+                        displayMode = .sentHistory
+                    }) {
+                        Text(VectorL10n.sent)
+                            .padding(.horizontal)
                     }
+                }.padding(.top, 16)
+                
+                if displayMode == .receivedHistory {
+                    LazyVGrid(columns: [GridItem(.flexible())], spacing: 16) {                        ForEach(receivedHistory, id: \.self) { history in
+                            FileHistoryView(fileHistory: history)
+                        }
                     }
                     .padding()
                     .onAppear {
@@ -52,9 +72,24 @@ struct CloudListView: View {
                             userId = newUserId
                         }
                         
-                        fetchFileHistory()
+                        fetchReceivedHistory()
                     }
-                } else {
+                } else if displayMode == .sentHistory {
+                    LazyVGrid(columns: [GridItem(.flexible())], spacing: 16) {                        ForEach(sentHistory, id: \.self) { history in
+                            FileHistoryView(fileHistory: history)
+                        }
+                    }
+                    .padding()
+                    .onAppear {
+                        let mainAccount = MXKAccountManager.shared().accounts.first
+                        
+                        if let newUserId = mainAccount?.mxSession.myUser.userId {
+                            userId = newUserId
+                        }
+                        
+                        fetchSentHistory()
+                    }
+                } else if displayMode == .fileList {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(fileList, id: \.self) { file in
                             FileView(file: file) {
@@ -77,7 +112,7 @@ struct CloudListView: View {
         }
     }
     
-    private func fetchFileHistory() {
+    private func fetchReceivedHistory() {
         let db = Firestore.firestore()
         
         db.collection("cloud")
@@ -94,7 +129,7 @@ struct CloudListView: View {
                     return
                 }
                 
-                fileHistory = documents.compactMap { document in
+                receivedHistory = documents.compactMap { document in
                     guard
                         let senderName = document.data()["senderName"] as? String,
                         let filePath = document.data()["filePath"] as? String,
@@ -118,6 +153,49 @@ struct CloudListView: View {
                 print("Current documents (uuid: \(userId)): \(filePaths)")
             }
     }
+    
+    private func fetchSentHistory() {
+        let db = Firestore.firestore()
+        
+        db.collection("cloud")
+            .whereField("senderID", isEqualTo: userId)
+            .whereField("status", isEqualTo: "Accepted")
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error fetching documents: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents found")
+                    return
+                }
+                
+                sentHistory = documents.compactMap { document in
+                    guard
+                        let senderName = document.data()["senderName"] as? String,
+                        let filePath = document.data()["filePath"] as? String,
+                        let createdAtTimestamp = document.data()["createdAt"] as? Timestamp
+                    else {
+                        return nil
+                    }
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+                    let formattedDate = dateFormatter.string(from: createdAtTimestamp.dateValue())
+                    
+                    print(senderName)
+                    print(filePath)
+                    print(formattedDate)
+                    
+                    return FileHistory(senderName: senderName, createdAt: formattedDate, filePath: filePath)
+                }
+                
+                let filePaths = documents.map { $0.documentID }
+                print("Current documents (uuid: \(userId)): \(filePaths)")
+            }
+    }
+
     
     private func fetchFileList() {
         let storage = Storage.storage(url: storageUrl)

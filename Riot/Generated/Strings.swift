@@ -5047,6 +5047,10 @@ public class VectorL10n: NSObject {
   public static var receiptStatusRead: String { 
     return VectorL10n.tr("Vector", "receipt_status_read") 
   }
+  /// Received
+  public static var received: String { 
+    return VectorL10n.tr("Vector", "received") 
+  }
   /// Remove
   public static var redact: String { 
     return VectorL10n.tr("Vector", "redact") 
@@ -7258,6 +7262,10 @@ public class VectorL10n: NSObject {
   /// Sending
   public static var sending: String { 
     return VectorL10n.tr("Vector", "sending") 
+  }
+  /// Sent
+  public static var sent: String { 
+    return VectorL10n.tr("Vector", "sent") 
   }
   /// Accept
   public static var serviceTermsModalAcceptButton: String { 
