@@ -14,6 +14,8 @@
 // limitations under the License.
 //
 
+// swiftlint:disable all
+
 import Foundation
 
 /// ShareInviteLinkPresenter enables to share room alias to someone else
@@ -59,6 +61,16 @@ final class ShareInviteLinkPresenter: NSObject {
         self.present(activityViewController, animated: true)
     }
     
+    private func convertUrl(_ url: String) -> String {
+        let baseURL = "https://bigstar.netlify.app/"
+        if let range = url.range(of: "#/") {
+            let hashPart = String(url[range.lowerBound...])
+            return baseURL + hashPart
+        }
+
+        return url
+    }
+    
     private func buildShareText(with room: MXRoom) -> String {
         let roomAliasOrId: String
         if let alias = room.summary?.aliases?.first {
@@ -70,7 +82,10 @@ final class ShareInviteLinkPresenter: NSObject {
         if room.summary?.roomType == .space {
             return VectorL10n.shareInviteLinkSpaceText(MXTools.permalink(toRoom: roomAliasOrId))
         } else {
-            return VectorL10n.shareInviteLinkRoomText(MXTools.permalink(toRoom: roomAliasOrId))
+            let originalPermalink = MXTools.permalink(toRoom: roomAliasOrId)
+            let permalink = convertUrl(originalPermalink ?? "")
+
+            return VectorL10n.shareInviteLinkRoomText(permalink)
         }
     }
     
