@@ -150,6 +150,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         super.viewDidLoad()
         print("TEST: viewDidLoad")
         
+        MXKContactManager.shared().allowLocalContactsAccess = true
+        MXKContactManager.shared().refreshLocalContacts()
+        MXKContactManager.shared().updateMatrixIDsForAllLocalContacts()
+        
         editActionProvider.delegate = self
         spaceActionProvider.delegate = self
         
@@ -183,18 +187,14 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupEditOptions), name: AllChatsLayoutSettingsManager.didUpdateSettings, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
         
-        self.recentsTableView.reloadData()
+        recentsTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("TEST: viewWillAppear")
         
-        MXKContactManager.shared().allowLocalContactsAccess = true
-        MXKContactManager.shared().refreshLocalContacts()
-        MXKContactManager.shared().updateMatrixIDsForAllLocalContacts()
-        
-        self.recentsTableView.reloadData()
+        recentsTableView.reloadData()
         
         fetchAds()
         self.toolbar.tintColor = theme.colors.accent
@@ -211,7 +211,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("TEST: viewDidAppear")
-
+        
         // Check whether we're not logged in
         let authIsShown: Bool
         if MXKAccountManager.shared().accounts.isEmpty {
@@ -234,19 +234,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         
         AppDelegate.theDelegate().checkAppVersion()
         
-//        updateUI()
-        self.recentsTableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.recentsTableView.reloadData()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.recentsTableView.reloadData()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.recentsTableView.reloadData()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            self.recentsTableView.reloadData()
+        for i in 0...5 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                self.recentsTableView.reloadData()
+            }
         }
     }
     
@@ -259,7 +250,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             self.recentsTableView?.tableHeaderView = self.recentsTableView?.tableHeaderView
         }
         
-        self.recentsTableView.reloadData()
+        recentsTableView.reloadData()
     }
     
     // MARK: - Public
