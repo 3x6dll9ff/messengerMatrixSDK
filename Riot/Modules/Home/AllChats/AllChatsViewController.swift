@@ -183,6 +183,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupEditOptions), name: AllChatsLayoutSettingsManager.didUpdateSettings, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
         
+        self.recentsTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,6 +193,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         MXKContactManager.shared().allowLocalContactsAccess = true
         MXKContactManager.shared().refreshLocalContacts()
         MXKContactManager.shared().updateMatrixIDsForAllLocalContacts()
+        
+        self.recentsTableView.reloadData()
         
         fetchAds()
         self.toolbar.tintColor = theme.colors.accent
@@ -255,6 +258,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             self.recentsTableView?.tableHeaderView?.layoutIfNeeded()
             self.recentsTableView?.tableHeaderView = self.recentsTableView?.tableHeaderView
         }
+        
+        self.recentsTableView.reloadData()
     }
     
     // MARK: - Public
