@@ -82,6 +82,20 @@
 
 - (NSString *)roomDisplayname
 {
+    NSArray *contacts = [[MXKContactManager sharedManager] localContacts];
+    NSLog(@"[DirectContacts] Begin");
+    for (MXKContact *contact in contacts) {
+        for (NSString *matrixIdentifier in contact.matrixIdentifiers) {
+            if ([matrixIdentifier isEqualToString:roomSummary.directUserId]) {
+                NSLog(@"[DirectContacts] Found match: %@", contact.displayName);
+                return contact.displayName;
+            }
+        }
+    }
+    NSLog(@"[DirectContacts] End");
+
+    NSLog(@"[DirectUserId] %@", roomSummary.directUserId);
+
     if (self.isSuggestedRoom)
     {
         return self.roomSummary.spaceChildInfo.displayName;

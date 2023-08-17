@@ -253,8 +253,8 @@ static NSString *const kMXAppGroupID = @"group.org.matrix";
         sortRoomMembersUsingLastSeenTime = YES;
         showLeftMembersInRoomMemberList = NO;
         
-        syncLocalContactsPermissionRequested = NO;
-        syncLocalContacts = NO;
+        syncLocalContactsPermissionRequested = YES;
+        syncLocalContacts = YES;
         phonebookCountryCode = nil;
         
         presenceColorForOnlineUser = [UIColor greenColor];

@@ -188,7 +188,11 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("TEST: viewWillAppear")
-
+        
+        MXKContactManager.shared().allowLocalContactsAccess = true
+        MXKContactManager.shared().refreshLocalContacts()
+        MXKContactManager.shared().updateMatrixIDsForAllLocalContacts()
+        
         fetchAds()
         self.toolbar.tintColor = theme.colors.accent
         if self.navigationItem.searchController == nil {
@@ -226,6 +230,21 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         }
         
         AppDelegate.theDelegate().checkAppVersion()
+        
+//        updateUI()
+        self.recentsTableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.recentsTableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.recentsTableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.recentsTableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.recentsTableView.reloadData()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -747,7 +766,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     }
     
     override func shouldShowEmptyView() -> Bool {
-        let shouldShowEmptyView = super.shouldShowEmptyView() && !AllChatsLayoutSettingsManager.shared.hasAnActiveFilter
+        let shouldShowEmptyView = false
         
         if shouldShowEmptyView {
             self.navigationItem.searchController = nil

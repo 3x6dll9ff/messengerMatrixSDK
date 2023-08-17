@@ -4420,7 +4420,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         
         [self presentViewController:alertController animated:YES completion:nil];
         
-        [MXKAppSettings standardAppSettings].syncLocalContacts = NO;
+        [MXKAppSettings standardAppSettings].syncLocalContacts = YES;
         [self updateSections];
     }];
 }

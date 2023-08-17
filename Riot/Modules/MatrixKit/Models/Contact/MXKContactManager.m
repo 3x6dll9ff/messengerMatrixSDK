@@ -515,7 +515,7 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
         if (!areAllTermsAgreed || [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] != CNAuthorizationStatusAuthorized)
         {
             MXLogDebug(@"[MXKContactManager] validateSyncLocalContactsState : Disabling contacts sync.");
-            MXKAppSettings.standardAppSettings.syncLocalContacts = false;
+            MXKAppSettings.standardAppSettings.syncLocalContacts = true;
             return;
         }
     }
@@ -558,7 +558,7 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
             // The user authorised syncLocalContacts and allowed access to his contacts
             // but he then removed contacts access from app permissions.
             // So, reset syncLocalContacts value
-            [MXKAppSettings standardAppSettings].syncLocalContacts = NO;
+            [MXKAppSettings standardAppSettings].syncLocalContacts = YES;
         }
         
         // Local contacts list is empty if the access is denied.
@@ -582,16 +582,16 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
         BOOL isColdStart = NO;
         
         // Check whether the local contacts sync has been disabled.
-        if (self->matrixIDBy3PID && ![MXKAppSettings standardAppSettings].syncLocalContacts)
-        {
-            // The user changed his mind and disabled the local contact sync, remove the cached data.
-            self->matrixIDBy3PID = nil;
-            [self cacheMatrixIDsDict];
-            
-            // Reload the local contacts from the system
-            self->localContactByContactID = nil;
-            [self cacheLocalContacts];
-        }
+//        if (self->matrixIDBy3PID && ![MXKAppSettings standardAppSettings].syncLocalContacts)
+//        {
+//            // The user changed his mind and disabled the local contact sync, remove the cached data.
+//            self->matrixIDBy3PID = nil;
+//            [self cacheMatrixIDsDict];
+//            
+//            // Reload the local contacts from the system
+//            self->localContactByContactID = nil;
+//            [self cacheLocalContacts];
+//        }
         
         // Check whether this is a cold start.
         if (!self->matrixIDBy3PID)
@@ -694,10 +694,10 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
             }
 
             // something has been modified in the local contact book
-            if (didContactBookChange)
-            {
+//            if (didContactBookChange)
+//            {
                 [self cacheLocalContacts];
-            }
+//            }
             
             self->lastSyncDate = [NSDate date];
             [self cacheContactBookInfo];
@@ -712,10 +712,10 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
                 [[NSNotificationCenter defaultCenter] postNotificationName:kMXKContactManagerDidUpdateLocalContactsNotification object:nil userInfo:nil];
                 
                 // Check the conditions required before triggering a matrix users lookup.
-                if (isColdStart || didContactBookChange)
-                {
+//                if (isColdStart || didContactBookChange)
+//                {
                     [self updateMatrixIDsForAllLocalContacts];
-                }
+//                }
                 
                 MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Complete");
                 MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Refresh %tu local contacts in %.0fms", self->localContactByContactID.count, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
@@ -833,14 +833,14 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
 {
     // If localContactByContactID is not loaded, the manager will consider there is no local contacts
     // and will reset its cache
-    NSAssert(localContactByContactID, @"[MXKContactManager] updateMatrixIDsForAllLocalContacts: refreshLocalContacts must be called before");
-
-    // Check if the user allowed to sync local contacts.
-    // + Check if at least an identity server is available, and if the loading step is not in progress.
-    if (![MXKAppSettings standardAppSettings].syncLocalContacts || ![self isUsersDiscoveringEnabled] || isLocalContactListRefreshing)
-    {
-        return;
-    }
+//    NSAssert(localContactByContactID, @"[MXKContactManager] updateMatrixIDsForAllLocalContacts: refreshLocalContacts must be called before");
+//
+//    // Check if the user allowed to sync local contacts.
+//    // + Check if at least an identity server is available, and if the loading step is not in progress.
+//    if (![MXKAppSettings standardAppSettings].syncLocalContacts || ![self isUsersDiscoveringEnabled] || isLocalContactListRefreshing)
+//    {
+//        return;
+//    }
     
     MXWeakify(self);
     
@@ -1456,10 +1456,10 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
 - (void)updateAllLocalContactsMatrixIDs
 {
     // Check if the user allowed to sync local contacts
-    if (![MXKAppSettings standardAppSettings].syncLocalContacts)
-    {
-        return;
-    }
+//    if (![MXKAppSettings standardAppSettings].syncLocalContacts)
+//    {
+//        return;
+//    }
     
     NSArray* localContacts = [localContactByContactID allValues];
     
@@ -1531,7 +1531,7 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
     }
     else
     {
-        [self resetMatrixIDs];
+//        [self resetMatrixIDs];
     }
 }
 
