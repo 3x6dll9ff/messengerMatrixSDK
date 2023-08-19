@@ -927,6 +927,8 @@
         // Refresh display by leaving search session
         [self searchBarCancelButtonClicked:_searchBarView];
     }
+    
+    [self onButtonPressed:createBarButtonItem];
 }
 
 #pragma mark - InviteFriendsHeaderViewDelegate
