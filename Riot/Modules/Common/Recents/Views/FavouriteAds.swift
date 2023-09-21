@@ -1,33 +1,20 @@
 // swiftlint:disable all
-//
-//  AdSheetView.swift
-//  UiKitQa
-//
-//  Created by Boris on 20.08.2022.
-//
 
 import Foundation
 import SwiftUI
 import Alamofire
+import MatrixSDKCrypto
 
-enum LinkType: String, CaseIterable{
-    case
-//        bigstar,
-        phoneNumber,
-        whatsApp,
-        instagram,
-        youtube,
-        website
-}
+private var accessToken: String = ""
+
 
 @available(iOS 15.0, *)
-struct AdSheetView: View{
+struct FavouriteAdsItemView: View {
     
     var clientAd: ClientAds
     @State private var isAnimatedLottie = true
     @State private var showText = false
     @State private var isImageVisible = false
-    @State private var isLottieAnimation = false
     
     
     func getLinkByLinkType(linkType: LinkType) -> String {
@@ -89,6 +76,7 @@ struct AdSheetView: View{
                                   .font(.system(size: 16))
                                   .fontWeight(.semibold)
                                   .foregroundColor(.white)
+                                  .lineLimit(5)
                                   .opacity(showText ? 1 : 0)
                                   .animation(.easeIn(duration: 0.5))
                                   .onAppear {
@@ -100,8 +88,7 @@ struct AdSheetView: View{
 
                        }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 130)
+            .padding(.top, 168)
             .padding(.bottom, 112)
             .padding(.horizontal, 16)
           
@@ -109,7 +96,7 @@ struct AdSheetView: View{
         .padding(.top, 170)
         
         VStack{
-            VStack{
+            ZStack{
                 HStack(alignment: .center){
                     Spacer()
                     Text(clientAd.title)
@@ -123,7 +110,6 @@ struct AdSheetView: View{
             }
             VStack(alignment: .trailing) {
                 ZStack {
-                  
                     GeometryReader { proxy in
               
                         let maskWidth = proxy.size.width
@@ -148,6 +134,7 @@ struct AdSheetView: View{
                                     .shadow(color: Color.black.opacity(0.25), radius: 30, x: 0, y: 4)
                                     .offset(x: isImageVisible ? 0 : -UIScreen.main.bounds.width)
                                     .animation(.easeInOut(duration: 1.0))
+
                             case .failure(_):
                                 Text("Произошла ошибка")
                                     .foregroundColor(.purple)
@@ -167,47 +154,6 @@ struct AdSheetView: View{
                                     .frame(maxWidth: maskWidth)
                             }
                         }
-                       
-                    }
-                    
-                    HStack{
-                        Spacer()
-                        
-                        Circle()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                            .shadow(
-                                color: Color.black.opacity(0.3),
-                                radius: 4,
-                                x: 0,
-                                y: 0
-                            )
-                            .padding(-10)
-                            .padding(.top, -20)
-                            .overlay(
-                                ZStack {
-                                   
-
-                                    Button(action: {
-                                        isLottieAnimation.toggle()
-                                       if isLottieAnimation{   print("\(baseURL)/ads/\(clientAd.uuid)/\(link)/click")}
-                                    }) {
-                                        if isLottieAnimation{
-                                            LottieViewAnimationOnce(lottieFile: "heart")
-                                                .frame(width: 60, height: 60)
-                                            
-                                        }
-                                        else{
-                                            LottieView(lottieFile: "heart")
-                                                .frame(width: 60, height: 60)
-                                        }
-                                        
-                              
-                                    }
-                                    .frame(width: 60, height: 60)
-                                    .offset(y: -10)
-                                }
-                            )
                     }
                 }
 
@@ -224,6 +170,7 @@ struct AdSheetView: View{
             Spacer()
         }
         .offset(y: -8)
+        .allowsHitTesting(false)
        
         VStack{
             Spacer()
@@ -232,7 +179,7 @@ struct AdSheetView: View{
                 Image("adSheetFooter")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 400)
                 
                 HStack(spacing: 16) {
                     ForEach(LinkType.allCases, id: \.rawValue) { linkType in
@@ -290,5 +237,114 @@ struct AdSheetView: View{
     }
 }
 
-    
 
+@available(iOS 15.0, *)
+struct FavouriteAds: View {
+    @State private var ads: [ClientAds] = []
+    @State private var isLottieAnimation = false
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                ZStack {
+                    LazyVStack(spacing: 20) {
+                        ForEach(ads, id: \.uuid) { ad in
+                            ZStack(alignment: .topTrailing) {
+                                FavouriteAdsItemView(clientAd: ad)
+                                    .frame(maxWidth: .infinity)
+                                    .cornerRadius(20)
+                                    .padding(.horizontal, 5)
+                                
+                                Circle()
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.white)
+                                    .shadow(
+                                        color: Color.black.opacity(0.3),
+                                        radius: 4,
+                                        x: 0,
+                                        y: 0
+                                    )
+                                    .padding(-10)
+                                    .padding(.top, -20)
+                                    .overlay(
+                                        ZStack {
+                                           
+
+                                            Button(action: {
+                                                isLottieAnimation.toggle()
+                                            }) {
+                                                if isLottieAnimation{
+                                                    LottieViewAnimationFavourite(lottieFile: "heart")
+                                                        .frame(width: 60, height: 60) 
+                                                }
+                                                else{
+                                                    LottieView(lottieFile: "heart")
+                                                        .frame(width: 60, height: 60)
+                                                }
+                                                
+                                      
+                                            }
+                                            .frame(width: 60, height: 60)
+                                            .offset(y: -10)
+                                        }
+                                    )
+                            }
+                            .padding()
+                        }
+
+                    }
+                    .padding(.top, 20)
+
+                }
+            }
+            .navigationTitle("Избранные объявления")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear(perform: fetch)
+        }
+
+      }
+    
+ 
+    
+    private func login() async -> String{
+        
+        let params: [String: Any] = [
+            "username": userInfo.phoneNumber,
+            "password": "12345678",
+            "fingerprint": "fingerprint"
+        ]
+        
+        let token = try? await AF.request(
+            "\(baseURL)/auth/login",
+            method: .post,
+            parameters: params
+        ).serializingDecodable(LoginResponse.self).value.access_token
+        
+        if(token == nil){
+
+            return await login()
+        }
+        
+        accessToken = token!
+        return token!
+    }
+    
+        
+    private func fetch() {
+        Task {
+            let token = await login()
+            
+            let headers:HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            ads = try! await AF.request(
+                "\(baseURL)/ads/",
+                method: .get,
+                headers: headers
+            ).serializingDecodable([ClientAds].self).value
+        }
+    }
+
+}

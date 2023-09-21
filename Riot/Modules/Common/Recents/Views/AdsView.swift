@@ -633,10 +633,12 @@ struct AdsView: View{
                         }
                     })
                 }
+    
                 .navigationTitle("Создание объявления")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear(perform: fetch)
             }
+   
         }
     }
     

@@ -42,6 +42,7 @@ struct SpaceSelectorBottomSheetCoordinatorParameters {
 final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presentable {
     // MARK: - Properties
     
+    
     private let parameters: SpaceSelectorBottomSheetCoordinatorParameters
     
     private let navigationRouter: NavigationRouterType
@@ -54,7 +55,7 @@ final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presenta
     // Must be used only internally
     var childCoordinators: [Coordinator] = []
     var completion: ((SpaceSelectorBottomSheetCoordinatorResult) -> Void)?
-    
+
     // MARK: - Setup
     
     init(parameters: SpaceSelectorBottomSheetCoordinatorParameters,
@@ -64,7 +65,7 @@ final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presenta
         spaceIdStack = []
         
         super.init()
-        
+   
         setupNavigationRouter()
     }
     
@@ -81,22 +82,24 @@ final class SpaceSelectorBottomSheetCoordinator: NSObject, Coordinator, Presenta
     
     // MARK: - Private
     
-    private func setupNavigationRouter() {
-        guard #available(iOS 15.0, *) else { return }
-        
-        guard let sheetController = navigationRouter.toPresentable().sheetPresentationController else {
-            MXLog.debug("[SpaceSelectorBottomSheetCoordinator] setup: no sheetPresentationController found")
-            return
-        }
-        
-        sheetController.detents = [.medium(), .large()]
-        sheetController.prefersGrabberVisible = true
-        sheetController.selectedDetentIdentifier = .medium
-        sheetController.prefersScrollingExpandsWhenScrolledToEdge = true
-        
-        navigationRouter.toPresentable().presentationController?.delegate = self
-    }
+     func setupNavigationRouter() {
+         guard #available(iOS 15.0, *) else { return }
+         
+         guard let sheetController = navigationRouter.toPresentable().sheetPresentationController else {
+             MXLog.debug("[SpaceSelectorBottomSheetCoordinator] setup: no sheetPresentationController found")
+             return
+         }
+         
+         sheetController.detents = [.medium(), .large()]
+         sheetController.prefersGrabberVisible = true
+         sheetController.selectedDetentIdentifier = .medium
+         sheetController.prefersScrollingExpandsWhenScrolledToEdge = true
+         
+         navigationRouter.toPresentable().presentationController?.delegate = self
+     }
 
+  
+    
     private func push(_ coordinator: Coordinator & Presentable) {
         if navigationRouter.modules.isEmpty {
             navigationRouter.setRootModule(coordinator)

@@ -570,6 +570,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             
             let adSheetViewController = UIHostingController(rootView: adSheetView)
             
+       
+            
             if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
                 if #available(iOS 16.0, *) {
                     presentationController.detents = [
@@ -591,7 +593,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
                     // Fallback on earlier versions
                 }
             }
-                
+       
             present(adSheetViewController, animated: true)
         } else {
             // Fallback on earlier versions
@@ -612,6 +614,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         spaceSelectorBridgePresenter.present(from: self, animated: true)
         spaceSelectorBridgePresenter.delegate = self
         self.spaceSelectorBridgePresenter = spaceSelectorBridgePresenter
+        
     }
     
     // MARK: - UITableViewDataSource

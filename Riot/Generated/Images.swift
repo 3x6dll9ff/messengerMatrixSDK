@@ -278,6 +278,7 @@ internal class Asset: NSObject {
     internal static let addMemberFloatingAction = ImageAsset(name: "add_member_floating_action")
     internal static let addParticipant = ImageAsset(name: "add_participant")
     internal static let addParticipants = ImageAsset(name: "add_participants")
+    internal static let bgChatImg = ImageAsset(name: "bgChatImg")
     internal static let detailsIcon = ImageAsset(name: "details_icon")
     internal static let editIcon = ImageAsset(name: "edit_icon")
     internal static let fileAttachment = ImageAsset(name: "file_attachment")

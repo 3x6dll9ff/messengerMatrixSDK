@@ -72,6 +72,7 @@ class SizableBaseRoomCell: BaseRoomCell, SizableBaseRoomCellType {
         super.prepareForReuse()
     }
         
+    
     // MARK - SizableBaseRoomCellType
     
     // Each sublcass should override this method, to indicate a unique identifier for a view height.

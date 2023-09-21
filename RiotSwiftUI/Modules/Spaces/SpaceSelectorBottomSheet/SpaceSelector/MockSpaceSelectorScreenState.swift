@@ -27,7 +27,7 @@ enum MockSpaceSelectorScreenState: MockScreenState, CaseIterable {
     case emptyList
     case initialList
     case selection
-
+    
     /// The associated screen
     var screenType: Any.Type {
         SpaceSelector.self
@@ -51,11 +51,9 @@ enum MockSpaceSelectorScreenState: MockScreenState, CaseIterable {
         }
         let viewModel = SpaceSelectorViewModel.makeViewModel(service: service, showCancel: true)
         
-        // can simulate service and viewModel actions here if needs be.
-        
         return (
             [service, viewModel],
-            AnyView(SpaceSelector(viewModel: viewModel.context))
+            AnyView(SpaceSelector( viewModel: viewModel.context))
         )
     }
 }

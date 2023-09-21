@@ -121,6 +121,7 @@ static CGSize kThreadListBarButtonItemImageSize;
     UILabel *missedDiscussionsBadgeLabel;
     UIView *missedDiscussionsDotView;
     
+    
     // Potential encryption details view.
     __weak EncryptionInfoView *encryptionInfoView;
     
@@ -458,8 +459,12 @@ static CGSize kThreadListBarButtonItemImageSize;
     
     self.previewHeaderContainer.backgroundColor = ThemeService.shared.theme.headerBackgroundColor;
     
-    // Check the table view style to select its bg color.
-    self.bubblesTableView.backgroundColor = ((self.bubblesTableView.style == UITableViewStylePlain) ? ThemeService.shared.theme.backgroundColor : ThemeService.shared.theme.headerBackgroundColor);
+    // Check the table view style to select its bg color. ThemeService.shared.theme.backgroundColor
+    UIImage *backgroundImage = [UIImage imageNamed:@"bgChatImg"];
+    //фон сообщений bgChatImg
+    UIView *backgroundView = [[UIView alloc] initWithFrame:self.bubblesTableView.bounds];
+    backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.bubblesTableView.backgroundView = backgroundView;
     self.bubblesTableView.separatorColor = ThemeService.shared.theme.lineBreakColor;
     self.view.backgroundColor = self.bubblesTableView.backgroundColor;
     
@@ -5406,7 +5411,7 @@ static CGSize kThreadListBarButtonItemImageSize;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.backgroundColor = ThemeService.shared.theme.backgroundColor;
+    cell.backgroundColor = [UIColor clearColor];
     
     // Update the selected background view
     if (ThemeService.shared.theme.selectedBackgroundColor)

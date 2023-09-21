@@ -110,7 +110,8 @@ final class RoomCreationIntroCellContentView: UIView, NibLoadable, Themable {
     func update(theme: Theme) {
         self.theme = theme
         
-        self.backgroundColor = theme.backgroundColor
+        //убрал цвет
+        self.backgroundColor = UIColor.systemPink.withAlphaComponent(0.0)
         self.titleLabel.textColor = theme.textPrimaryColor
         
         self.informationLabel.attributedText = self.buildInformationText()

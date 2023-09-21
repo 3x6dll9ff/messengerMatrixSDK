@@ -184,7 +184,8 @@ final class RoomCellContentView: UIView, NibLoadable {
     // MARK: - Public
     
     func update(theme: Theme) {
-        self.backgroundColor = theme.backgroundColor
+//   отключил цвет
+        self.backgroundColor = theme.backgroundColor.withAlphaComponent(0.0)
         self.paginationLabel.textColor = theme.tintColor
         self.paginationSeparatorView.backgroundColor = theme.tintColor
     }
