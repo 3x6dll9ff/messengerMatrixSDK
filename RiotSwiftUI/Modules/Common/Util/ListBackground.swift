@@ -33,10 +33,9 @@ struct ListBackgroundModifier: ViewModifier {
         #else
         if #available(iOS 16, *) {
             // SwiftUI's List is backed by a collection view on iOS 16.
-            content
-                .introspectCollectionView { $0.backgroundColor = UIColor(color) }
-                .scrollContentBackground(.hidden)
-        } else {
+            content.introspectTableView { (tableView: UITableView) in
+                tableView.backgroundColor = UIColor(color)
+            }} else {
             // SwiftUI's List is backed by a table view on iOS 15 and below.
             content.introspectTableView { $0.backgroundColor = UIColor(color) }
         }

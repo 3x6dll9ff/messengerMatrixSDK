@@ -7,7 +7,6 @@ import MatrixSDKCrypto
 
 private var accessToken: String = ""
 
-
 @available(iOS 15.0, *)
 struct FavouriteAdsItemView: View {
     
@@ -15,6 +14,7 @@ struct FavouriteAdsItemView: View {
     @State private var isAnimatedLottie = true
     @State private var showText = false
     @State private var isImageVisible = false
+    @State private var isLottieAnimation = false
     
     
     func getLinkByLinkType(linkType: LinkType) -> String {
@@ -67,9 +67,53 @@ struct FavouriteAdsItemView: View {
       
         UIApplication.shared.open(url)
     }
+    
+    private func login() async -> String{
+       
+       let params: [String: Any] = [
+           "username": userInfo.phoneNumber,
+           "password": "12345678",
+           "fingerprint": "fingerprint"
+       ]
+       
+       let token = try? await AF.request(
+           "\(baseURL)/auth/login",
+           method: .post,
+           parameters: params
+       ).serializingDecodable(LoginResponse.self).value.access_token
+       
+       if(token == nil){
 
+           return await login()
+       }
+       
+       accessToken = token!
+       return token!
+    }
+
+    private func unFavorite(adUUID: String) async {
+        do {
+            let token = await login()
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(token)"
+            ]
+            
+            let url = "\(baseURL)/ads/\(clientAd.uuid)/unfavorite"
+            
+            let response = try await AF.request(
+                url,
+                method: .post,
+                headers: headers
+            ).serializingDecodable(ClientAds.self).value
+        } catch {
+            // Обработка ошибки сетевого запроса или аутентификации
+        }
+    }
+    
     var body: some View {
-        ZStack{
+        ZStack(alignment: .topTrailing){
+   
         ScrollView {
             VStack(alignment: .leading){
                               Text("\n\(clientAd.description)")
@@ -210,6 +254,46 @@ struct FavouriteAdsItemView: View {
         .allowsHitTesting(true)
         .offset(y: 4)
             
+            Circle()
+                .frame(width: 60, height: 60)
+                .foregroundColor(.white)
+                .shadow(
+                    color: Color.black.opacity(0.3),
+                    radius: 4,
+                    x: 0,
+                    y: 0
+                )
+                .padding(-10)
+                .padding(.top, -10)
+                .overlay(
+                    ZStack {
+                       
+
+                        Button(action: {
+                            isLottieAnimation.toggle()
+                            if isLottieAnimation {
+                                Task {
+                                    await unFavorite(adUUID: clientAd.uuid)
+                         
+                                }
+                            }
+                        }) {
+                            if isLottieAnimation{
+                                LottieViewAnimationFavourite(lottieFile: "heart")
+                                    .frame(width: 60, height: 60)
+                            }
+                            else{
+                                LottieView(lottieFile: "heart")
+                                    .frame(width: 60, height: 60)
+                            }
+                            
+                  
+                        }
+                        .frame(width: 60, height: 60)
+                        .offset(y: 0)
+                    }
+                )
+            
 
         }
         .padding(.top, 16)
@@ -241,7 +325,6 @@ struct FavouriteAdsItemView: View {
 @available(iOS 15.0, *)
 struct FavouriteAds: View {
     @State private var ads: [ClientAds] = []
-    @State private var isLottieAnimation = false
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -255,40 +338,6 @@ struct FavouriteAds: View {
                                     .frame(maxWidth: .infinity)
                                     .cornerRadius(20)
                                     .padding(.horizontal, 5)
-                                
-                                Circle()
-                                    .frame(width: 60, height: 60)
-                                    .foregroundColor(.white)
-                                    .shadow(
-                                        color: Color.black.opacity(0.3),
-                                        radius: 4,
-                                        x: 0,
-                                        y: 0
-                                    )
-                                    .padding(-10)
-                                    .padding(.top, -20)
-                                    .overlay(
-                                        ZStack {
-                                           
-
-                                            Button(action: {
-                                                isLottieAnimation.toggle()
-                                            }) {
-                                                if isLottieAnimation{
-                                                    LottieViewAnimationFavourite(lottieFile: "heart")
-                                                        .frame(width: 60, height: 60) 
-                                                }
-                                                else{
-                                                    LottieView(lottieFile: "heart")
-                                                        .frame(width: 60, height: 60)
-                                                }
-                                                
-                                      
-                                            }
-                                            .frame(width: 60, height: 60)
-                                            .offset(y: -10)
-                                        }
-                                    )
                             }
                             .padding()
                         }
@@ -305,33 +354,32 @@ struct FavouriteAds: View {
 
       }
     
- 
-    
     private func login() async -> String{
-        
-        let params: [String: Any] = [
-            "username": userInfo.phoneNumber,
-            "password": "12345678",
-            "fingerprint": "fingerprint"
-        ]
-        
-        let token = try? await AF.request(
-            "\(baseURL)/auth/login",
-            method: .post,
-            parameters: params
-        ).serializingDecodable(LoginResponse.self).value.access_token
-        
-        if(token == nil){
+       
+       let params: [String: Any] = [
+           "username": userInfo.phoneNumber,
+           "password": "12345678",
+           "fingerprint": "fingerprint"
+       ]
+       
+       let token = try? await AF.request(
+           "\(baseURL)/auth/login",
+           method: .post,
+           parameters: params
+       ).serializingDecodable(LoginResponse.self).value.access_token
+       
+       if(token == nil){
 
-            return await login()
-        }
-        
-        accessToken = token!
-        return token!
+           return await login()
+       }
+       
+       accessToken = token!
+       return token!
     }
+
     
         
-    private func fetch() {
+     func fetch() {
         Task {
             let token = await login()
             
@@ -340,7 +388,7 @@ struct FavouriteAds: View {
             ]
             
             ads = try! await AF.request(
-                "\(baseURL)/ads/",
+                "\(baseURL)/ads/favorites",
                 method: .get,
                 headers: headers
             ).serializingDecodable([ClientAds].self).value

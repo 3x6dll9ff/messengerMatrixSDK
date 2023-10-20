@@ -11,7 +11,6 @@
 
 import Foundation
 import ReplayKit
-
 import MatrixSDK
 
 private enum Constants {

@@ -15,6 +15,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 @available(iOS 15.0, *)
 struct SpaceSelector: View {
@@ -78,7 +79,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -120,7 +121,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -160,7 +161,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -199,7 +200,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -239,7 +240,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -279,7 +280,7 @@ struct SpaceSelector: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color("DetailBtnColor"))
+                    .background(Color("DetailBtnColors"))
                     .cornerRadius(10)
                     .padding(.horizontal, 10)
                     .opacity(showAllBtn ? 1 : 0)
@@ -318,7 +319,7 @@ struct SpaceSelector: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                .background(Color("DetailBtnColor"))
+                .background(Color("DetailBtnColors"))
                 .cornerRadius(10)
                 .padding(.horizontal, 10)
                 .opacity(showAllBtn ? 1 : 0)

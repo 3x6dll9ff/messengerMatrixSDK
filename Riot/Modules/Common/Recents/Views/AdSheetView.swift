@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import Alamofire
 
+
 enum LinkType: String, CaseIterable{
     case
 //        bigstar,
@@ -19,6 +20,8 @@ enum LinkType: String, CaseIterable{
         youtube,
         website
 }
+
+private var accessToken: String = ""
 
 @available(iOS 15.0, *)
 struct AdSheetView: View{
@@ -79,6 +82,50 @@ struct AdSheetView: View{
         let url = URL(string: urlString)!
       
         UIApplication.shared.open(url)
+    }
+    
+    private func login() async -> String{
+        
+        let params: [String: Any] = [
+            "username": userInfo.phoneNumber,
+            "password": "12345678",
+            "fingerprint": "fingerprint"
+        ]
+        
+        let token = try? await AF.request(
+            "\(baseURL)/auth/login",
+            method: .post,
+            parameters: params
+        ).serializingDecodable(LoginResponse.self).value.access_token
+        
+        if(token == nil){
+
+            return await login()
+        }
+        
+        accessToken = token!
+        return token!
+    }
+    
+        
+    private func addFavorite(adUUID: String) async {
+        do {
+            let token = await login()
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(token)"
+            ]
+            
+            let url = "\(baseURL)/ads/\(clientAd.uuid)/favorite"
+            
+            let response = try await AF.request(
+                url,
+                method: .post,
+                headers: headers
+            ).serializingDecodable(ClientAds.self).value       
+        } catch {
+            // Обработка ошибки сетевого запроса или аутентификации
+        }
     }
 
     var body: some View {
@@ -190,7 +237,11 @@ struct AdSheetView: View{
 
                                     Button(action: {
                                         isLottieAnimation.toggle()
-                                       if isLottieAnimation{   print("\(baseURL)/ads/\(clientAd.uuid)/\(link)/click")}
+                                        if isLottieAnimation {
+                                            Task {
+                                                await addFavorite(adUUID: clientAd.uuid)
+                                            }
+                                        }
                                     }) {
                                         if isLottieAnimation{
                                             LottieViewAnimationOnce(lottieFile: "heart")

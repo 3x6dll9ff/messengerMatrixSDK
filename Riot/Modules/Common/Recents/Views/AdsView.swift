@@ -178,6 +178,7 @@ private func getMyAdvertiserUuid() async -> String{
 }
 
 @available(iOS 13.0.0, *)
+
 private func login() async -> String{
     
     let params: [String: Any] = [

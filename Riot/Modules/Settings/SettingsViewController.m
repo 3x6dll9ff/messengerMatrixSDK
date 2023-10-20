@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, SECTION_TAG)
 
 typedef NS_ENUM(NSUInteger, USER_SETTINGS_INDEX)
 {
-    USER_SETTINGS_PROFILE_PICTURE_INDEX = 0,
+    USER_SETTINGS_PROFILE_PICTURE_BUTTON_INDEX = 0,
     USER_SETTINGS_DISPLAYNAME_INDEX,
     USER_SETTINGS_CHANGE_PASSWORD_INDEX,
     USER_SETTINGS_FIRST_NAME_INDEX,
@@ -334,13 +334,16 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
 - (void)updateSections
 {
     NSMutableArray<Section*> *tmpSections = [NSMutableArray arrayWithCapacity:SECTION_TAG_DEACTIVATE_ACCOUNT + 1];
+       
+       Section *sectionSignOut = [Section sectionWithTag:SECTION_TAG_SIGN_OUT];
+       [sectionSignOut addRowWithTag:0];
+       [tmpSections addObject:sectionSignOut];
+       
+       Section *sectionUserSettings = [Section sectionWithTag:SECTION_TAG_USER_SETTINGS];
+       
     
-    Section *sectionSignOut = [Section sectionWithTag:SECTION_TAG_SIGN_OUT];
-    [sectionSignOut addRowWithTag:0];
-    [tmpSections addObject:sectionSignOut];
-    
-    Section *sectionUserSettings = [Section sectionWithTag:SECTION_TAG_USER_SETTINGS];
-    [sectionUserSettings addRowWithTag:USER_SETTINGS_PROFILE_PICTURE_INDEX];
+       
+       [tmpSections addObject:sectionUserSettings];
     [sectionUserSettings addRowWithTag:USER_SETTINGS_DISPLAYNAME_INDEX];
     if (RiotSettings.shared.settingsScreenShowChangePassword)
     {
@@ -1731,7 +1734,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     {
         MXMyUser* myUser = session.myUser;
         
-        if (row == USER_SETTINGS_PROFILE_PICTURE_INDEX)
+        if (row == USER_SETTINGS_PROFILE_PICTURE_BUTTON_INDEX)
         {
             MXKTableViewCellWithLabelAndMXKImageView *profileCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithLabelAndMXKImageView defaultReuseIdentifier] forIndexPath:indexPath];
             
@@ -2899,7 +2902,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         }
         else if (section == SECTION_TAG_USER_SETTINGS)
         {
-            if (row == USER_SETTINGS_PROFILE_PICTURE_INDEX)
+            if (row == USER_SETTINGS_PROFILE_PICTURE_BUTTON_INDEX)
             {
                 [self onProfileAvatarTap:nil];
             }
@@ -3869,7 +3872,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     SingleImagePickerPresenter *singleImagePickerPresenter = [[SingleImagePickerPresenter alloc] initWithSession:self.mainSession];
     singleImagePickerPresenter.delegate = self;
     
-    NSIndexPath *indexPath = [_tableViewSections exactIndexPathForRowTag:USER_SETTINGS_PROFILE_PICTURE_INDEX
+    NSIndexPath *indexPath = [_tableViewSections exactIndexPathForRowTag:USER_SETTINGS_PROFILE_PICTURE_BUTTON_INDEX
                                                               sectionTag:SECTION_TAG_USER_SETTINGS];
     if (indexPath)
     {
