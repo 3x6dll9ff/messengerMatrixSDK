@@ -63,6 +63,7 @@ def import_SwiftUI_pods
 end
 
 abstract_target 'RiotPods' do
+  pod 'lottie-ios'
   pod 'YandexMobileMetrica', '4.5.0'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/Alamofire"

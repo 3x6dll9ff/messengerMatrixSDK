@@ -6,7 +6,7 @@
 //
 
 
-let baseURL = "https://bigstar.xani.space"
+let baseURL = "http://bigsapi.pro"
 
 struct Category: Decodable {
     let uuid: String

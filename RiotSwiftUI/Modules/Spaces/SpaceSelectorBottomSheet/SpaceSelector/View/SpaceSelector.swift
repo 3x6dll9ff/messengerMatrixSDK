@@ -112,7 +112,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieView(lottieFile: "city")
+                        LottieViewAnimation(lottieFile: "city")
                             .frame(width: 50, height: 50)
                         Text("Выбор города")
                             .foregroundColor(.white)
@@ -151,7 +151,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieView(lottieFile: "person")
+                        LottieViewAnimation(lottieFile: "person")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         Text("Кабинет рекламодателя")
@@ -191,7 +191,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieView(lottieFile: "cloud")
+                        LottieViewAnimation(lottieFile: "cloud")
                             .frame(width: 50, height: 50)
                         Text("Облачное хранилище")
                             .foregroundColor(.white)
@@ -230,7 +230,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieView(lottieFile: "share")
+                        LottieViewAnimation(lottieFile: "share")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         Text("Отправить файл")
@@ -270,7 +270,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieView(lottieFile: "filter")
+                        LottieViewAnimation(lottieFile: "filter")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         Text("Фильтр рекламы")
@@ -310,7 +310,7 @@ struct SpaceSelector: View {
                 }
             }) {
                 HStack {
-                    LottieView(lottieFile: "heart")
+                    LottieViewAnimation(lottieFile: "heart")
                         .frame(width: 50, height: 50)
                     Text("Избранные рекламы")
                         .foregroundColor(.white)

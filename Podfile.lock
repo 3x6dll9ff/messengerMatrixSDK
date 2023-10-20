@@ -895,6 +895,7 @@ PODS:
   - LoggerAPI (1.9.200):
     - Logging (~> 1.1)
   - Logging (1.4.0)
+  - lottie-ios (4.3.3)
   - MatrixSDK (0.26.12):
     - MatrixSDK/Core (= 0.26.12)
   - MatrixSDK/Core (0.26.12):
@@ -983,6 +984,7 @@ DEPENDENCIES:
   - KeychainAccess (~> 4.2.2)
   - KTCenterFlowLayout (~> 1.3.1)
   - libPhoneNumber-iOS (~> 0.9.13)
+  - lottie-ios
   - MatrixSDK (= 0.26.12)
   - MatrixSDK/JingleCallStack (= 0.26.12)
   - OLMKit
@@ -1052,6 +1054,7 @@ SPEC REPOS:
     - libPhoneNumber-iOS
     - LoggerAPI
     - Logging
+    - lottie-ios
     - MatrixSDK
     - MatrixSDKCrypto
     - nanopb
@@ -1126,6 +1129,7 @@ SPEC CHECKSUMS:
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   LoggerAPI: ad9c4a6f1e32f518fdb43a1347ac14d765ab5e3d
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
+  lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
   MatrixSDK: 0af737bc461b82d0ec9edd6fdf8f70b02771ebd3
   MatrixSDKCrypto: ac805c22c24f79f349cdbfa065855c73a4c81b51
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
@@ -1152,6 +1156,6 @@ SPEC CHECKSUMS:
   zxcvbn-ios: fef98b7c80f1512ff0eec47ac1fa399fc00f7e3c
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: 080f321c02aac8d50831b3eecce70106e1a6fea1
+PODFILE CHECKSUM: 0339a6e0fad09768e660ab2ecf64c330cc014041
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.11.3
