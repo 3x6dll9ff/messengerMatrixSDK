@@ -245,7 +245,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     
     // The current pushed view controller
     UIViewController *pushedViewController;
-
+    
     SettingsIdentityServerCoordinatorBridgePresenter *identityServerSettingsCoordinatorBridgePresenter;
 }
 

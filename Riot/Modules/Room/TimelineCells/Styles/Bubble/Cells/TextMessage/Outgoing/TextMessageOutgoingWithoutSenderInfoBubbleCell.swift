@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class TextMessageOutgoingWithoutSenderInfoBubbleCell: TextMessageBaseBubbleCell, BubbleOutgoingRoomCellProtocol {    
     

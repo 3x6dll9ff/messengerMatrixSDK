@@ -31,7 +31,7 @@ public protocol Fonts {
     
     /// The font for first-level hierarchical headings.
     var title1: FontType { get }
-        
+    
     /// `title1` with a Bold weight.
     var title1B: FontType { get }
     

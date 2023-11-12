@@ -19,9 +19,6 @@ import Lottie
 
 @available(iOS 15.0, *)
 struct SpaceSelector: View {
-    
-
-    
     // MARK: - Properties
     // MARK: Private
     
@@ -45,7 +42,6 @@ struct SpaceSelector: View {
     @State private var showCloudShareLottieView = false
     @State private var showCategoryLottieView = false
     @State private var showHeartLottieView = false
-
     
     @Environment(\.theme) private var theme: ThemeSwiftUI
     
@@ -53,9 +49,38 @@ struct SpaceSelector: View {
     
     @ObservedObject var viewModel: SpaceSelectorViewModel.Context
     
+    @State private var goWallpaperSelection: Bool = false
+    
+    let ds = DesignChatUIView()
+    
     var body: some View {
         ScrollView {
-                    
+            //Wallpaper Selection Btn
+            //NavigationLink(destination:  ws, isActive: $goWallpaperSelection) {}
+            
+            Button(action: {
+                goWallpaperSelection = true
+            }){
+                HStack {
+                    Spacer().frame(width: 50)
+                    Text("Design")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color("DetailBtnColors"))
+                .cornerRadius(10)
+                .padding(.horizontal, 10)
+                .opacity(showAllBtn ? 1 : 0)
+                .animation(.easeInOut(duration: 0.45))
+            }
+            .fullScreenCover(isPresented: $goWallpaperSelection, content: {
+                NavigationView{
+                    ds
+                }
+            })
+            
                 // Ad submission  Btn
                 Button(action: {
                     showAllBtn = false
@@ -66,8 +91,6 @@ struct SpaceSelector: View {
                         showAdsLottieView = true
            
                                   }
-                    
-                    
                 }) {
                     HStack {
                         LottieView(lottieFile: "rocket")
@@ -337,11 +360,7 @@ struct SpaceSelector: View {
                         }
                     }
                     .onAppear{showHeartLottieView = false})
-
-                
-                
-      
-         
+            
         }
         .onAppear {
             withAnimation {

@@ -4579,15 +4579,15 @@ public class VectorL10n: NSObject {
   public static var onboardingSplashLoginButtonTitle: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_login_button_title") 
   }
-  /// Message, call, video call, chat, send files of any size up to 5 GB.
+  /// Write, call, view the archive up to 5 GB
   public static var onboardingSplashPage1Message: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_1_message") 
   }
-  /// Big Star Messenger
+  /// Correspond and follow the business!
   public static var onboardingSplashPage1Title: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_1_title") 
   }
-  /// Use business tools to make yourself known to a multi-million audience. Targeted banner ads will tell a lot about your business.
+  /// Use business tools to make yourself known to an audience of millions
   public static var onboardingSplashPage2Message: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_2_message") 
   }
@@ -4595,19 +4595,19 @@ public class VectorL10n: NSObject {
   public static var onboardingSplashPage2Title: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_2_title") 
   }
-  /// Use secure and fast connection in 179 countries for free
+  /// Save your files and documents safely!
   public static var onboardingSplashPage3Message: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_3_message") 
   }
-  /// Secure messaging
+  /// Safety
   public static var onboardingSplashPage3Title: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_3_title") 
   }
-  /// Use cloud storage up to 5 GB to avoid using your phone's internal memory. It is possible to send the necessary files directly to the recipient's cloud storage with double encryption.
+  /// Save your files and documents safely!
   public static var onboardingSplashPage4Message: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_4_message") 
   }
-  /// Cloud storage
+  /// Cloud
   public static var onboardingSplashPage4TitleNoPun: String { 
     return VectorL10n.tr("Vector", "onboarding_splash_page_4_title_no_pun") 
   }

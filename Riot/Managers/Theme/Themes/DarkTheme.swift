@@ -17,13 +17,13 @@
 import Foundation
 import UIKit
 import DesignKit
+import SwiftUI
 
 /// Color constants for the dark theme
 @objcMembers
 class DarkTheme: NSObject, Theme {
-    
     var identifier: String = ThemeIdentifier.dark.rawValue
-
+    
     var backgroundColor: UIColor = UIColor(rgb: 0x15191E)
 
     var baseColor: UIColor {
@@ -98,15 +98,37 @@ class DarkTheme: NSObject, Theme {
     var messageTickColor: UIColor = .white
     
     var roomCellIncomingBubbleBackgroundColor: UIColor {
-        return self.colors.system
+        if UserDefaults.standard.integer(forKey: "storedBubble") == 1{
+            return outgoingBubbleBackgroundGradient1
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 2{
+            return outgoingBubbleBackgroundGradient2
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 3{
+            return outgoingBubbleBackgroundGradient3
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 4{
+            return outgoingBubbleBackgroundGradient4
+        }else{
+            return outgoingBubbleBackgroundGradient1
+        }
     }
     
-    var roomCellOutgoingBubbleBackgroundColor: UIColor = UIColor(rgb: 0x133A34)
+    var roomCellOutgoingBubbleBackgroundColor: UIColor {
+        if UserDefaults.standard.integer(forKey: "storedBubble") == 1{
+            return outgoingBubbleBackgroundGradient1
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 2{
+            return outgoingBubbleBackgroundGradient2
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 3{
+            return outgoingBubbleBackgroundGradient3
+        }else if UserDefaults.standard.integer(forKey: "storedBubble") == 4{
+            return outgoingBubbleBackgroundGradient4
+        }else{
+            return outgoingBubbleBackgroundGradient1
+        }
+    }
     
     var roomCellLocalisationIconStartedColor: UIColor = UIColor(rgb: 0x5C56F5)
     
     var roomCellLocalisationErrorColor: UIColor = UIColor(rgb: 0xFF5B55)
-
+    
     func applyStyle(onTabBar tabBar: UITabBar) {
         tabBar.unselectedItemTintColor = self.tabBarUnselectedItemTintColor
         tabBar.tintColor = self.tintColor
@@ -188,4 +210,76 @@ class DarkTheme: NSObject, Theme {
     
     var fonts: FontsUIKit = FontsUIKit(values: ElementFonts())
     
+    private lazy var outgoingBubbleBackgroundGradient1: UIColor = {
+        return UIColor(red: 0.525, green: 0.435, blue: 0.769, alpha: 1)
+    }()
+    
+    private lazy var outgoingBubbleBackgroundGradient2: UIColor = {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 450, height: 1)
+        gradientLayer.colors = [
+            UIColor(red: 0.718, green: 0.455, blue: 0.675, alpha: 1).cgColor,
+            UIColor(red: 0.525, green: 0.435, blue: 0.769, alpha: 1).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+        // Create a placeholder image for the initial frame
+        UIGraphicsBeginImageContextWithOptions(gradientLayer.bounds.size, gradientLayer.isOpaque, 0.0)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let placeholderImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return UIColor(patternImage: placeholderImage!)
+    }()
+    
+    private lazy var outgoingBubbleBackgroundGradient3: UIColor = {
+        let gradientLayer1 = CAGradientLayer()
+        gradientLayer1.frame = CGRect(x: 0, y: 0, width: 450, height: 1)
+        gradientLayer1.colors = [
+            UIColor(red: 0.375, green: 0.159, blue: 0.159, alpha: 1).cgColor,
+            UIColor(red: 0.232, green: 0.521, blue: 0.521, alpha: 0).cgColor
+        ]
+        gradientLayer1.startPoint = CGPoint(x: 0.25, y: 0.5)
+        gradientLayer1.endPoint = CGPoint(x: 0.75, y: 0.5)
+        
+        let gradientLayer2 = CAGradientLayer()
+        gradientLayer2.frame = CGRect(x: 0, y: 0, width: 450, height: 1)
+        gradientLayer2.colors = [
+            UIColor(red: 0.685, green: 0.372, blue: 0.692, alpha: 1).cgColor,
+            UIColor(red: 0.7, green: 0.314, blue: 0.192, alpha: 0).cgColor
+        ]
+        gradientLayer2.startPoint = CGPoint(x: 0.25, y: 0.5)
+        gradientLayer2.endPoint = CGPoint(x: 0.75, y: 0.5)
+        
+        let combinedGradientLayer = CALayer()
+        combinedGradientLayer.addSublayer(gradientLayer1)
+        combinedGradientLayer.addSublayer(gradientLayer2)
+        
+        UIGraphicsBeginImageContextWithOptions(gradientLayer1.bounds.size, gradientLayer1.isOpaque, 0.0)
+        combinedGradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let combinedGradientImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return UIColor(patternImage: combinedGradientImage!)
+    }()
+    
+    private lazy var outgoingBubbleBackgroundGradient4: UIColor = {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 450, height: 1)
+        gradientLayer.colors = [
+            UIColor(red: 0.223, green: 0.812, blue: 0.777, alpha: 1).cgColor,
+            UIColor(red: 0.706, green: 0.455, blue: 0.682, alpha: 1).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+        // Create a placeholder image for the initial frame
+        UIGraphicsBeginImageContextWithOptions(gradientLayer.bounds.size, gradientLayer.isOpaque, 0.0)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let placeholderImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return UIColor(patternImage: placeholderImage!)
+    }()
 }

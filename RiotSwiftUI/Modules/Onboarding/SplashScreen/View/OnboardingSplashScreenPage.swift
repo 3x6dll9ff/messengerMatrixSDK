@@ -20,49 +20,95 @@ struct OnboardingSplashScreenPage: View {
     // MARK: - Properties
     
     // MARK: Private
-
+    
     @Environment(\.theme) private var theme
     
     // MARK: Public
-
+    
     /// The content that this page should display.
-    let content: OnboardingSplashScreenPageContent
+    @ObservedObject var viewModel: OnboardingSplashScreenViewModel.Context
+    @State private var showButtons: Bool = false
+    @State private var currentPage = 0
+    let tabTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     // MARK: - Views
     
     var body: some View {
-        VStack {
-            Image(theme.isDark ? content.darkImage.name : content.image.name)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 310) // This value is problematic. 300 results in dropped frames
-                // on iPhone 12/13 Mini. 305 the same on iPhone 12/13. As of
-                // iOS 15, 310 seems fine on all supported screen widths 🤞.
-                .padding(20)
-                .accessibilityHidden(true)
-            
-            VStack(spacing: 8) {
-                OnboardingTintedFullStopText(content.title)
-                    .font(theme.fonts.title2B)
-                    .foregroundColor(theme.colors.primaryContent)
-                Text(content.message)
-                    .font(theme.fonts.body)
-                    .foregroundColor(theme.colors.secondaryContent)
-                    .multilineTextAlignment(.center)
+        TabView(selection: $currentPage) {
+            ForEach(viewModel.viewState.content.indices, id: \.self){index in
+                VStack {
+                    Text(viewModel.viewState.content[index].title)
+                        .font(theme.fonts.title1B)
+                        .foregroundColor(theme.colors.primaryContent)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 15)
+                        .padding(.horizontal, 25)
+                        .onAppear{
+                            if index == viewModel.viewState.content.count-1{
+                                showButtons = true
+                            }else{
+                                showButtons = false
+                            }
+                        }
+                    
+                    Text(viewModel.viewState.content[index].message)
+                        .font(theme.fonts.title3SB)
+                        .foregroundColor(theme.colors.primaryContent)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 25)
+                        .padding(.bottom, showButtons ? 20 : 200)
+                    
+                    if showButtons{
+                        buttons
+                    }
+                }
             }
-            .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.bottom)
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2-50)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        .onReceive(tabTimer) { _ in
+            withAnimation{
+                currentPage += 1
+                if currentPage == viewModel.viewState.content.count{
+                    currentPage = 0
+                }
+                if currentPage == viewModel.viewState.content.count-1{
+                    showButtons = true
+                }else{
+                    showButtons = false
+                }
+            }
+        }
+    }
+    
+    /// The main action buttons.
+    var buttons: some View {
+        VStack(spacing: 12) {
+            Button {
+                viewModel.send(viewAction: .register)
+                print("TAP: REGISTER")
+            } label: {
+                Text(VectorL10n.onboardingSplashRegisterButtonTitle)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 20)
+                    .padding(.horizontal, 90)
+                    .background(theme.isDark ? Color(red: 0.14, green: 0.15, blue: 0.2) : Color(red: 0.43, green: 0.45, blue: 0.6)
+                    )
+                    .cornerRadius(30)
+            }
+            Spacer().frame(height: 20)
+            Button {
+                viewModel.send(viewAction: .login)
+                print("TAP: LOGIN")
+            } label: {
+                Text(VectorL10n.onboardingSplashLoginButtonTitle)
+                    .font(theme.fonts.body)
+                    .foregroundColor(theme.colors.primaryContent)
+                    .padding(12)
+            }
+        }
         .padding(.horizontal, 16)
         .readableFrame()
-    }
-}
-
-struct OnboardingSplashScreenPage_Previews: PreviewProvider {
-    static let content = OnboardingSplashScreenViewState().content
-    static var previews: some View {
-        ForEach(0..<content.count, id: \.self) { index in
-            OnboardingSplashScreenPage(content: content[index])
-        }
     }
 }

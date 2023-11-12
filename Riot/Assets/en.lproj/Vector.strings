@@ -101,14 +101,14 @@
 // MARK: Onboarding
 "onboarding_splash_register_button_title" = "Create account";
 "onboarding_splash_login_button_title" = "I already have an account";
-"onboarding_splash_page_1_title" = "Big Star Messenger";
-"onboarding_splash_page_1_message" = "Message, call, video call, chat, send files of any size up to 5 GB.";
+"onboarding_splash_page_1_title" = "Correspond and follow the business!";
+"onboarding_splash_page_1_message" = "Write, call, view the archive up to 5 GB";
 "onboarding_splash_page_2_title" = "Promotion";
-"onboarding_splash_page_2_message" = "Use business tools to make yourself known to a multi-million audience. Targeted banner ads will tell a lot about your business.";
-"onboarding_splash_page_3_title" = "Secure messaging";
-"onboarding_splash_page_3_message" = "Use secure and fast connection in 179 countries for free";
-"onboarding_splash_page_4_title_no_pun" = "Cloud storage";
-"onboarding_splash_page_4_message" = "Use cloud storage up to 5 GB to avoid using your phone's internal memory. It is possible to send the necessary files directly to the recipient's cloud storage with double encryption.";
+"onboarding_splash_page_2_message" = "Use business tools to make yourself known to an audience of millions";
+"onboarding_splash_page_3_title" = "Safety";
+"onboarding_splash_page_3_message" = "Save your files and documents safely!";
+"onboarding_splash_page_4_title_no_pun" = "Cloud";
+"onboarding_splash_page_4_message" = "Save your files and documents safely!";
 
 "onboarding_use_case_title" = "Who will you chat to the most?";
 "onboarding_use_case_message" = "We’ll help you get connected";

@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Reusable
 
 final class TextMessageBubbleCellContentView: UIView, NibLoadable {

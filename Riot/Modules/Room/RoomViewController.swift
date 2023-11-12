@@ -131,7 +131,7 @@ extension RoomViewController {
         let eventModified = self.roomDataSource.event(withEventId: customizedRoomDataSource?.selectedEventId)
         self.setupRoomDataSource { roomDataSource in
             guard let roomDataSource = roomDataSource as? RoomDataSource else { return }
-
+            
             if self.inputToolbar?.sendMode == .reply, let eventModified = eventModified {
                 roomDataSource.sendReply(to: eventModified,
                                          withAttributedTextMessage: attributedTextMsg) { response in

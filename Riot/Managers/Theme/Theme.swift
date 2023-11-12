@@ -15,6 +15,7 @@
  */
 
 import UIKit
+import SwiftUI
 import DesignKit
 
 /// Provide color constant values defined by the designer

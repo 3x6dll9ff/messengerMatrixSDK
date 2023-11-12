@@ -16,6 +16,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class RoomMessageBubbleBackgroundView: UIView {
     

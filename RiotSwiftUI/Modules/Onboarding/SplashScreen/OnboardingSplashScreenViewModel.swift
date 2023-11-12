@@ -38,9 +38,9 @@ class OnboardingSplashScreenViewModel: OnboardingSplashScreenViewModelType, Onbo
     init() {
         super.init(initialViewState: OnboardingSplashScreenViewState())
     }
-
+    
     // MARK: - Public
-
+    
     override func process(viewAction: OnboardingSplashScreenViewAction) {
         switch viewAction {
         case .register:
@@ -58,7 +58,7 @@ class OnboardingSplashScreenViewModel: OnboardingSplashScreenViewModelType, Onbo
             state.bindings.pageIndex = -1
         }
     }
-
+    
     private func register() {
         completion?(.register)
     }

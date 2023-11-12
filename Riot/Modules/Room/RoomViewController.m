@@ -459,8 +459,33 @@ static CGSize kThreadListBarButtonItemImageSize;
     
     self.previewHeaderContainer.backgroundColor = ThemeService.shared.theme.headerBackgroundColor;
     
+    UIImage *backgroundImage;
+    
+    //Retrieve saved wallpaper from UserDefaults
+    NSString *savedString = [[NSUserDefaults standardUserDefaults] stringForKey:@"storedBg"];
+    NSString *stringValue = savedString ?: @"bgChatImg";
+    NSString *fromGallery = [[NSUserDefaults standardUserDefaults] stringForKey:@"gallery"];
+    
+    //Retrieve saved wallpaper from Gallery
+    NSURL *savedUrl = [[NSUserDefaults standardUserDefaults] URLForKey:@"selectedImageURL"];
+    if (savedUrl == nil){
+        NSLog(@"Wallpaper1:");
+        backgroundImage = [UIImage imageNamed:stringValue];
+    }else{
+        NSLog(@"Wallpaper2:");
+        if (fromGallery != nil){
+            NSLog(@"Wallpaper3:");
+            NSData *imageData = [NSData dataWithContentsOfURL:savedUrl];
+            backgroundImage = [UIImage imageWithData:imageData];
+        }else{
+            NSLog(@"Wallpaper4:");
+            backgroundImage = [UIImage imageNamed:stringValue];
+        }
+    }
+    
     // Check the table view style to select its bg color. ThemeService.shared.theme.backgroundColor
-    UIImage *backgroundImage = [UIImage imageNamed:@"bgChatImg"];
+    
+    
     //фон сообщений bgChatImg
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.bubblesTableView.bounds];
     backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
