@@ -84,7 +84,7 @@ struct OnboardingSplashScreenPage: View {
     
     /// The main action buttons.
     var buttons: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 1) {
             Button {
                 viewModel.send(viewAction: .register)
                 print("TAP: REGISTER")
@@ -97,7 +97,9 @@ struct OnboardingSplashScreenPage: View {
                     )
                     .cornerRadius(30)
             }
-            Spacer().frame(height: 20)
+            
+            Spacer().frame(height: 5)
+            
             Button {
                 viewModel.send(viewAction: .login)
                 print("TAP: LOGIN")
@@ -105,7 +107,7 @@ struct OnboardingSplashScreenPage: View {
                 Text(VectorL10n.onboardingSplashLoginButtonTitle)
                     .font(theme.fonts.body)
                     .foregroundColor(theme.colors.primaryContent)
-                    .padding(12)
+                    .padding(10)
             }
         }
         .padding(.horizontal, 16)
