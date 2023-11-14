@@ -6,7 +6,7 @@
 //
 
 
-let baseURL = "http://bigsapi.pro"
+let baseURL = "https://bigsapi.pro"
 
 struct Category: Decodable {
     let uuid: String
@@ -39,6 +39,7 @@ struct AdvertiserAds: Decodable {
     let description: String
     let thumbnailUuid: String
     let bannerUuid: String
+    let categoryUuid: String?
     let advertiserUuid: String
     let youtubeUrl: String?
     let instagramUrl: String?

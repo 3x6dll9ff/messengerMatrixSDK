@@ -62,10 +62,18 @@ struct SpaceSelector: View {
                 goWallpaperSelection = true
             }){
                 HStack {
-                    Spacer().frame(width: 50)
-                    Text("Design")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
+                    Spacer().frame(width: 20)
+                    Image(systemName: "sparkles")
+                    if theme.isDark {
+                        Text("Дизайн")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                    } else {
+                        Text("Дизайн")
+                            .foregroundColor(.black)
+                            .font(.system(size: 20))
+                    }
+                    
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
@@ -95,9 +103,16 @@ struct SpaceSelector: View {
                     HStack {
                         LottieView(lottieFile: "rocket")
                             .frame(width: 50, height: 50)
-                        Text("Подача рекламы")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Подача рекламы")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Подача рекламы")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                       
                         NavigationLink(destination:  AdsView(), isActive: $shouldNavigateAds) {}
                         Spacer()
                     }
@@ -137,9 +152,16 @@ struct SpaceSelector: View {
                     HStack {
                         LottieViewAnimation(lottieFile: "city")
                             .frame(width: 50, height: 50)
-                        Text("Выбор города")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Выбор города")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Выбор города")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                       
                         NavigationLink(destination: SelectCityView(), isActive: $shouldNavigateCity) {}
                         Spacer()
                     }
@@ -177,9 +199,15 @@ struct SpaceSelector: View {
                         LottieViewAnimation(lottieFile: "person")
                             .padding(5)
                             .frame(width: 50, height: 50)
-                        Text("Кабинет рекламодателя")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Кабинет рекламодателя")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Кабинет рекламодателя")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
                         NavigationLink(destination: AdvertiserPanelView(),isActive: $shouldNavigatePanel) { }
                         Spacer()
                     }
@@ -216,9 +244,16 @@ struct SpaceSelector: View {
                     HStack {
                         LottieViewAnimation(lottieFile: "cloud")
                             .frame(width: 50, height: 50)
-                        Text("Облачное хранилище")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Облачное хранилище")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Облачное хранилище")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                       
                         NavigationLink(destination: CloudListView(),isActive: $shouldNavigateCloud) {}
                         Spacer()
                     }
@@ -256,9 +291,16 @@ struct SpaceSelector: View {
                         LottieViewAnimation(lottieFile: "share")
                             .padding(5)
                             .frame(width: 50, height: 50)
-                        Text("Отправить файл")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Отправить файл")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Отправить файл")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                        
                         NavigationLink(destination: CloudShareView(),isActive: $shouldNavigateCloudShare) {}
                         Spacer()
                     }
@@ -296,9 +338,16 @@ struct SpaceSelector: View {
                         LottieViewAnimation(lottieFile: "filter")
                             .padding(5)
                             .frame(width: 50, height: 50)
-                        Text("Фильтр рекламы")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+                        if theme.isDark {
+                            Text("Фильтр рекламы")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("Фильтр рекламы")
+                                .foregroundColor(.black)
+                                .font(.system(size: 20))
+                        }
+                 
                         NavigationLink(destination: SelectCategoryView(),isActive: $shouldNavigateCategory) {}
                         Spacer()
                     }
@@ -335,9 +384,16 @@ struct SpaceSelector: View {
                 HStack {
                     LottieViewAnimation(lottieFile: "heart")
                         .frame(width: 50, height: 50)
-                    Text("Избранные рекламы")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
+                    if theme.isDark {
+                        Text("Избранные рекламы")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                    } else {
+                        Text("Избранные рекламы")
+                            .foregroundColor(.black)
+                            .font(.system(size: 20))
+                    }
+                  
                     NavigationLink(destination: FavouriteAds(), isActive: $shouldNavigateFavouriteAds) {}
                     Spacer()
                 }
