@@ -31,6 +31,9 @@ struct OnboardingSplashScreenPage: View {
     @State private var currentPage = 0
     let tabTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
+    let w = UIScreen.main.bounds.width
+    let h = UIScreen.main.bounds.height
+    
     // MARK: - Views
     
     var body: some View {
@@ -91,8 +94,7 @@ struct OnboardingSplashScreenPage: View {
             } label: {
                 Text(VectorL10n.onboardingSplashRegisterButtonTitle)
                     .foregroundColor(.white)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 90)
+                    .frame(width: w*0.8, height: w*0.15)
                     .background(theme.isDark ? Color(red: 0.14, green: 0.15, blue: 0.2) : Color(red: 0.43, green: 0.45, blue: 0.6)
                     )
                     .cornerRadius(30)

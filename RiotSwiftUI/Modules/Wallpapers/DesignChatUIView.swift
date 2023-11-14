@@ -18,6 +18,7 @@ import SwiftUI
 
 struct DesignChatUIView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.theme) private var theme
     let w = UIScreen.main.bounds.width
     let h = UIScreen.main.bounds.height
     @State private var bubbleStates = [
@@ -28,8 +29,6 @@ struct DesignChatUIView: View {
     
     var body: some View {
         VStack{
-            NavigationLink("", destination: WallpaperSelection(), isActive: $goWS)
-            
             heading
             Spacer()
             
@@ -43,6 +42,8 @@ struct DesignChatUIView: View {
             Spacer()
             createChatChooseWallpaper
             
+            NavigationLink("", destination: WallpaperSelection(), isActive: $goWS)
+            
             Spacer()
         }
         .onAppear{
@@ -50,6 +51,8 @@ struct DesignChatUIView: View {
                 updateBubbleStates(savedBubble-1)
             }
         }
+        .ignoresSafeArea()
+        .frame(width: w, height: h)
         .background(Color(red: 0.12, green: 0.13, blue: 0.14))
     }
     
@@ -65,6 +68,7 @@ struct DesignChatUIView: View {
             }
             Spacer()
             Text("Design")
+                .foregroundColor(.white)
             Spacer()
             Image(systemName: "chevron.right")
                 .padding(.horizontal)
@@ -72,7 +76,7 @@ struct DesignChatUIView: View {
             Text("Next")
                 .foregroundColor(Color(red: 0.12, green: 0.12, blue: 0.12))
         }
-        .padding(.vertical)
+        .frame(height: h*0.13)
         .background(Color(red: 0.12, green: 0.12, blue: 0.12))
     }
     

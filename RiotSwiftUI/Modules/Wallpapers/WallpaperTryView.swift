@@ -98,6 +98,7 @@ struct WallpaperTryView: View {
                     
                     Spacer()
                     Text("BigStar")
+                        .foregroundColor(.white)
                     Spacer()
                     
                     Circle()
@@ -114,13 +115,16 @@ struct WallpaperTryView: View {
                 HStack{
                     Spacer()
                     Image(systemName: "plus.circle")
+                        .foregroundColor(.white)
                     Spacer()
                     
                     HStack{
                         Text("Message")
+                            .foregroundColor(.white)
                             .padding(.horizontal)
                         Spacer()
                         Image(systemName: "face.smiling")
+                            .foregroundColor(.white)
                             .padding(.horizontal)
                     }
                     .frame(width: w*0.6, height: 30)
@@ -129,6 +133,7 @@ struct WallpaperTryView: View {
                     
                     Spacer()
                     Image(systemName: "mic")
+                        .foregroundColor(.white)
                     Spacer()
                 }
                 .padding(.vertical)
@@ -146,7 +151,9 @@ struct WallpaperTryView: View {
                 )
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
+        .frame(width: w, height: h)
     }
     
     func loadData() -> UIImage{

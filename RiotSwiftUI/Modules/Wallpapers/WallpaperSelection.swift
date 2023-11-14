@@ -27,6 +27,7 @@ struct WallpaperSelection: View {
     
     var body: some View {
         VStack{
+            heading
             Spacer()
                 .frame(height: h/20)
             
@@ -68,9 +69,34 @@ struct WallpaperSelection: View {
         .onAppear{
             print("Saved String: \(sw ?? "DEFAULT")")
         }
-        .navigationTitle("Wallpapers")
-        .frame(width: w)
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
+        .frame(width: w, height: h)
         .background(Color(red: 0.12, green: 0.13, blue: 0.14))
+    }
+    
+    //Heading
+    var heading: some View{
+        HStack{
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }){
+                Image(systemName: "chevron.left")
+                    .padding(.horizontal)
+                Text("Back")
+            }
+            Spacer()
+            Text("Wallpapers")
+                .foregroundColor(.white)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .padding(.horizontal)
+                .foregroundColor(Color(red: 0.12, green: 0.12, blue: 0.12))
+            Text("Next")
+                .foregroundColor(Color(red: 0.12, green: 0.12, blue: 0.12))
+        }
+        .frame(height: h*0.13)
+        .background(Color(red: 0.12, green: 0.12, blue: 0.12))
     }
     
     //Select Image as wallpaper from gallery

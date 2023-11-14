@@ -55,7 +55,15 @@ struct OnboardingSplashScreen: View {
                 OnboardingSplashScreenPage(viewModel: viewModel)
             }
             .background(
-                Image("bg3")
+                theme.isDark
+                ?
+                Image("bg_3_dark")
+                    .resizable()
+                    .frame(width: w/1.115, height: h*0.72)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                    .shadow(color: .black.opacity(0.5), radius: 5, x: 10, y: 10)
+                :
+                Image("bg_3_light")
                     .resizable()
                     .frame(width: w/1.115, height: h*0.72)
                     .clipShape(RoundedRectangle(cornerRadius: 30))
