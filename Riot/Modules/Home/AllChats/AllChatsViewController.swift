@@ -538,12 +538,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         return UserDefaults.standard.string(forKey: "categoryUuid")
     }
     
-    private func staticCityUuid() {
-        return UserDefaults.standard.set("2c53b916-234d-4b24-9271-70e30dbdfca7", forKey: "cityUuid")
-    }
+ 
     
     private func fetchAds(){
-        staticCityUuid()
+    
         
         let cityUuid = getStoredCityUuid()
         let categoryUuid = getStoredCategoryUuid()
@@ -594,33 +592,31 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         )
         
         let adSheetViewController = UIHostingController(rootView: adSheetView)
-   
-        
+
         if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
             if #available(iOS 16.0, *) {
                 presentationController.detents = [
                     .custom { _ in
-                        var myDefaultHeight: CGFloat = 452
-                        let deviceType = UIDevice().type.rawValue
-                        print(deviceType)
-                        if (deviceType == "iPhone 14 Pro Max") {
-                            myDefaultHeight = 530
-                        } else if (deviceType == "iPhone 13 Pro Max") {
-                            myDefaultHeight = 530
-                        } else if (deviceType == "iPhone 12 Pro Max") {
-                            myDefaultHeight = 530
-                        }
-                        return myDefaultHeight
+                        var myDefaultHeight: CGFloat = 550
+                            let deviceType = UIDevice().type.rawValue
+                            print(deviceType)
+                            if (deviceType == "iPhone 14 Pro Max") {
+                                myDefaultHeight = 530
+                            } else if (deviceType == "iPhone 13 Pro Max") {
+                                myDefaultHeight = 530
+                            } else if (deviceType == "iPhone 12 Pro Max") {
+                                myDefaultHeight = 530
+                            }
+                            return myDefaultHeight
                     }
                 ]
             } else {
                 // Fallback on earlier versions
             }
         }
-   
+
         present(adSheetViewController, animated: true)
-            
-        }
+    }
     
     override func startActivityIndicator() {
         super.startActivityIndicator()

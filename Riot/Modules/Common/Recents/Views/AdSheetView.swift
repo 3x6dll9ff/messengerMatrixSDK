@@ -4,6 +4,7 @@
 //  UiKitQa
 //
 //  Created by Boris on 20.08.2022.
+//  Reworked by Patched on 16.Nov.23
 //
 
 import Foundation
@@ -23,6 +24,7 @@ enum LinkType: String, CaseIterable{
 
 private var accessToken: String = ""
 
+
 @available(iOS 15.0, *)
 struct AdSheetView: View{
     
@@ -35,37 +37,37 @@ struct AdSheetView: View{
     
     func getLinkByLinkType(linkType: LinkType) -> String {
         switch linkType {
-//            case .bigstar:
-//            return clientAd.bigstarUrl ?? ""
-            case .youtube:
+            //            case .bigstar:
+            //            return clientAd.bigstarUrl ?? ""
+        case .youtube:
             return clientAd.youtubeUrl ?? ""
-            case .instagram:
+        case .instagram:
             return clientAd.instagramUrl ?? ""
-            case .website:
+        case .website:
             return clientAd.websiteUrl ?? ""
-            case .phoneNumber:
+        case .phoneNumber:
             return "tel:\(clientAd.phoneNumber ?? "")"
-            case .whatsApp:
+        case .whatsApp:
             return "https://api.whatsapp.com/send?phone=\(clientAd.phoneNumber ?? "")&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9F%D0%B8%D1%88%D1%83%20%D0%B2%D0%B0%D0%BC%20%D0%B8%D0%B7%20BigStar%20Messenger%20https://bigstar.netlify.app/"
         }
     }
-
+    
     
     func clickUrl(linkType: LinkType) async {
         var link = ""
         switch linkType {
-//            case .bigstar:
-//                link = "bigstar"
-            case .youtube:
-                link = "youtube"
-            case .instagram:
-                link = "instagram"
-            case .website:
-                link = "website"
-            case .phoneNumber:
-                link = ""
-            case .whatsApp:
-                link = ""
+            //            case .bigstar:
+            //                link = "bigstar"
+        case .youtube:
+            link = "youtube"
+        case .instagram:
+            link = "instagram"
+        case .website:
+            link = "website"
+        case .phoneNumber:
+            link = ""
+        case .whatsApp:
+            link = ""
             
         }
         print("\(baseURL)/ads/\(clientAd.uuid)/\(link)/click")
@@ -76,11 +78,11 @@ struct AdSheetView: View{
             ).serializingDecodable(ClientAds.self).value.uuid
             print(asd)
         }
-       
+        
     }
     func openUrl(urlString: String) {
         let url = URL(string: urlString)!
-      
+        
         UIApplication.shared.open(url)
     }
     
@@ -99,7 +101,7 @@ struct AdSheetView: View{
         ).serializingDecodable(LoginResponse.self).value.access_token
         
         if(token == nil){
-
+            
             return await login()
         }
         
@@ -107,7 +109,7 @@ struct AdSheetView: View{
         return token!
     }
     
-        
+    
     private func addFavorite(adUUID: String) async {
         do {
             let token = await login()
@@ -122,222 +124,211 @@ struct AdSheetView: View{
                 url,
                 method: .post,
                 headers: headers
-            ).serializingDecodable(ClientAds.self).value       
+            ).serializingDecodable(ClientAds.self).value
         } catch {
             // Обработка ошибки сетевого запроса или аутентификации
         }
     }
-
+    
     var body: some View {
-        ZStack{
-        ScrollView {
-            VStack(alignment: .leading){
-                              Text("\n\(clientAd.description)")
-                                  .font(.system(size: 16))
-                                  .fontWeight(.semibold)
-                                  .foregroundColor(.white)
-                                  .opacity(showText ? 1 : 0)
-                                  .animation(.easeIn(duration: 0.5))
-                                  .onAppear {
-                                      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                          withAnimation {
-                                                 showText = true
-                                                                       }
-                                                    }
-
-                       }
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 130)
-            .padding(.bottom, 112)
-            .padding(.horizontal, 16)
-          
-        }
-        .padding(.top, 170)
-        
         VStack{
-            VStack{
-                HStack(alignment: .center){
-                    Spacer()
-                    Text(clientAd.title)
-                        .font(.system(size: 22))
-                        .fontWeight(.bold)
-                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-        
-            }
-            VStack(alignment: .trailing) {
-                ZStack {
-                  
-                    GeometryReader { proxy in
-              
-                        let maskWidth = proxy.size.width
-                        let maskHeight = proxy.size.height
-
-                       
-                        let mask = Image("bannerMask")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: maskWidth, height: maskHeight)
-
-                     
-                        AsyncImage(
-                            url: URL(string: "\(baseURL)/files/\(clientAd.bannerUuid)")
-                        ) { phase in
-                            switch phase {
-                            case .success(let image):
-                                image
-                                    .resizable(resizingMode: .stretch)
-                                    .frame(width: maskWidth, height: maskHeight)
-                                    .mask(mask)
-                                    .shadow(color: Color.black.opacity(0.25), radius: 30, x: 0, y: 4)
-                                    .offset(x: isImageVisible ? 0 : -UIScreen.main.bounds.width)
-                                    .animation(.easeInOut(duration: 1.0))
-                            case .failure(_):
-                                Text("Произошла ошибка")
-                                    .foregroundColor(.purple)
-                                    .frame(maxHeight: maskHeight)
-                                    .frame(maxWidth: maskWidth)
-
-                            case .empty:
-                                Text("Загрузка")
-                                    .foregroundColor(.purple)
-                                    .frame(maxHeight: maskHeight)
-                                    .frame(maxWidth: maskWidth)
-
-                            @unknown default:
-                                Text("Произошла ошибка")
-                                    .foregroundColor(.purple)
-                                    .frame(maxHeight: maskHeight)
-                                    .frame(maxWidth: maskWidth)
-                            }
-                        }
-                       
-                    }
-                    
-                    HStack{
-                        Spacer()
-                        
-                        Circle()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                            .shadow(
-                                color: Color.black.opacity(0.3),
-                                radius: 4,
-                                x: 0,
-                                y: 0
-                            )
-                            .padding(-10)
-                            .padding(.top, -20)
-                            .overlay(
-                                ZStack {
-                                   
-
-                                    Button(action: {
-                                        isLottieAnimation.toggle()
-                                        if isLottieAnimation {
-                                            Task {
-                                                await addFavorite(adUUID: clientAd.uuid)
-                                            }
-                                        }
-                                    }) {
-                                        if isLottieAnimation{
-                                            LottieViewAnimationOnce(lottieFile: "heart")
-                                                .frame(width: 60, height: 60)
-                                            
-                                        }
-                                        else{
-                                            LottieView(lottieFile: "heart")
-                                                .frame(width: 60, height: 60)
-                                        }
-                                        
-                              
-                                    }
-                                    .frame(width: 60, height: 60)
-                                    .offset(y: -10)
-                                }
-                            )
-                    }
-                }
-
+            
+            //Title ad
+            HStack(alignment: .center){
+                Spacer()
+                Text(clientAd.title)
+                    .font(.system(size: 22))
+                    .fontWeight(.bold)
+                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
+                    .foregroundColor(.white)
                 Spacer()
             }
-            .padding(.top,-100)
-            .offset(y: -14)
             .onAppear {
                 withAnimation {
                     isImageVisible = true
                 }
             }
-
-            Spacer()
-        }
-        .offset(y: -8)
-       
-        VStack{
-            Spacer()
-
-            ZStack {
-                Image("adSheetFooter")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity)
-                
-                HStack(spacing: 16) {
-                    ForEach(LinkType.allCases, id: \.rawValue) { linkType in
-                        Button(action: {
-                            let link = getLinkByLinkType(linkType: linkType)
+            
+            VStack(spacing: 0) {
+                // Image with banner
+                ZStack(alignment: .top) {
+                    ZStack {
+                        GeometryReader { proxy in
+                            let maskWidth = proxy.size.width
+                            let maskHeight = proxy.size.height
+                            let maskHeightforMask: CGFloat = 240
                             
-                            if(link.count > 0){
-                                openUrl(urlString: link)
-                                Task {
-                                    await clickUrl(linkType: linkType)
+                            let mask = Image("bannerMask")
+                                .resizable()
+                                .frame(maxWidth: maskWidth, maxHeight: maskHeightforMask)
+                            
+                            AsyncImage(
+                                url: URL(string: "\(baseURL)/files/\(clientAd.bannerUuid)")
+                            ) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(maxWidth: .infinity, maxHeight: maskHeightforMask)
+                                        .mask(mask)
+                                        .shadow(color: Color.black.opacity(0.25), radius: 30, x: 0, y: 4)
+                                        .offset(x: isImageVisible ? 0 : -UIScreen.main.bounds.width)
+                                        .animation(.easeInOut(duration: 1.0))
+                                    
+                                case .failure(_):
+                                    Text("Произошла ошибка")
+                                        .foregroundColor(.purple)
+                                        .frame(maxHeight: maskHeight)
+                                        .frame(maxWidth: .infinity)
+                                    
+                                case .empty:
+                                    Text("Загрузка")
+                                        .foregroundColor(.purple)
+                                        .frame(maxHeight: maskHeight)
+                                        .frame(maxWidth: .infinity)
+                                    
+                                @unknown default:
+                                    Text("Произошла ошибка")
+                                        .foregroundColor(.purple)
+                                        .frame(maxHeight: maskHeight)
+                                        .frame(maxWidth: .infinity)
                                 }
                             }
-                        }) {
-                            Image(uiImage: UIImage(named: "\(linkType.rawValue).png")!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 45, height: 45)
-                                .opacity(showText ? 1 : 0)
-                                .animation(.easeIn(duration: 0.5))
-                                
+                        }
+
+                        HStack {
+                            Spacer()
+
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .foregroundColor(.white)
+                                .shadow(
+                                    color: Color.black.opacity(0.3),
+                                    radius: 4,
+                                    x: 0,
+                                    y: 0
+                                )
+                                .padding(-10)
+                                .padding(.top, -20)
+                                .overlay(
+                                    ZStack {
+                                        Button(action: {
+                                            isLottieAnimation.toggle()
+                                            if isLottieAnimation {
+                                                Task {
+                                                    await addFavorite(adUUID: clientAd.uuid)
+                                                }
+                                            }
+                                        }) {
+                                            if isLottieAnimation {
+                                                LottieViewAnimationOnce(lottieFile: "heart")
+                                                    .frame(width: 60, height: 60)
+                                            } else {
+                                                LottieView(lottieFile: "heart")
+                                                    .frame(width: 60, height: 60)
+                                            }
+                                        }
+                                        .frame(width: 60, height: 60)
+                                        .offset(y: -10)
+                                    }
+                                )
                         }
                     }
+                    .offset(y: -10) // Смещение по вертикали, чтобы текст скрывался под нижней частью маски
+                     
+                    Spacer()
                 }
-                .padding(.top, 28)
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .allowsHitTesting(true)
-        .offset(y: 4)
-            
+                .padding(.top, 10)
+                .onAppear {
+                    withAnimation {
+                        isImageVisible = true
+                    }
+                }
 
+                // ScrollView Description
+                VStack(alignment: .leading) {
+                    ScrollView(showsIndicators: false) {
+                        Text("\n\(clientAd.description)")
+                            .font(.system(size: 16))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .opacity(showText ? 1 : 0)
+                            .animation(.easeIn(duration: 0.5))
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    withAnimation {
+                                        showText = true
+                                    }
+                                }
+                            }
+
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 5)
+                    .padding(.horizontal, 10)
+                }
+                
+            //BottomSheetFooter
+                VStack(){
+                            ZStack {
+                                Image("adSheetFooter")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxWidth: .infinity)
+                                
+                                HStack(spacing: 16) {
+                                    ForEach(LinkType.allCases, id: \.rawValue) { linkType in
+                                        Button(action: {
+                                            let link = getLinkByLinkType(linkType: linkType)
+                                            
+                                            if(link.count > 0){
+                                                openUrl(urlString: link)
+                                                Task {
+                                                    await clickUrl(linkType: linkType)
+                                                }
+                                            }
+                                        }) {
+                                            Image(uiImage: UIImage(named: "\(linkType.rawValue).png")!)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 45, height: 45)
+                                                .opacity(showText ? 1 : 0)
+                                                .animation(.easeIn(duration: 0.5))
+                                                
+                                        }
+                                    }
+                                }
+                                .padding(.top, 10)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        .allowsHitTesting(true)
+                        .offset(y: 4)
+            }
         }
         .padding(.top, 16)
-        .background(
-            LinearGradient(
-                gradient: Gradient(
-                    colors: [
-                        Color(UIColor(red: 156/255, green: 58/255, blue: 218/255, alpha: 1.0)),
-                        Color(UIColor(red: 135/255, green: 43/255, blue: 184/255, alpha: 0.6))
-                    ]
-                ),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .edgesIgnoringSafeArea(.all)
-        )
-        .edgesIgnoringSafeArea(.all)
-        .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                isAnimatedLottie = false
-     
-                          }
-        }
-
+               .background(
+                   LinearGradient(
+                       gradient: Gradient(
+                           colors: [
+                               Color(UIColor(red: 156/255, green: 58/255, blue: 218/255, alpha: 1.0)),
+                               Color(UIColor(red: 135/255, green: 43/255, blue: 184/255, alpha: 0.6))
+                           ]
+                       ),
+                       startPoint: .top,
+                       endPoint: .bottom
+                   )
+                   .edgesIgnoringSafeArea(.all)
+               )
+               .edgesIgnoringSafeArea(.all)
+               .onAppear{
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                       isAnimatedLottie = false
+            
+                                 }
+               }
     }
 }
 
