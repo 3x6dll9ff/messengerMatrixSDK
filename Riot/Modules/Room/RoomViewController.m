@@ -353,6 +353,8 @@ static CGSize kThreadListBarButtonItemImageSize;
 {
     [super viewDidLoad];
     
+    [RevenueCatUtils checkVipStatusOnVipStatusChecked:^(BOOL isVip) {}];
+    
     // Register first customized cell view classes used to render bubbles
     [[RoomTimelineConfiguration shared].currentStyle.cellProvider registerCellsForTableView:self.bubblesTableView];
     

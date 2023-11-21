@@ -135,6 +135,8 @@ class VoiceMessagePlaybackView: UIView, NibLoadable, Themable {
         playButton.tintColor = theme.colors.secondaryContent
         transcriptionButton.tintColor = theme.colors.secondaryContent
         
+        transcriptionButton.isHidden = !RevenueCatUtils.isVip
+        
         let backgroundViewColor = self.customBackgroundViewColor ?? theme.colors.quinaryContent
         
         backgroundView.backgroundColor = backgroundViewColor

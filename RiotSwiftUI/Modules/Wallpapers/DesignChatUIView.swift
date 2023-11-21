@@ -15,6 +15,7 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 struct DesignChatUIView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -26,6 +27,7 @@ struct DesignChatUIView: View {
     ]
     @State private var goWS: Bool = false
     @State private var savedBubble = UserDefaults.standard.integer(forKey: "storedBubble")
+    @State private var showingSubscriptionView = false
     
     var body: some View {
         VStack{
@@ -98,13 +100,14 @@ struct DesignChatUIView: View {
               .frame(width: 293, alignment: .top)
         }
     }
-    
+
     //Subscription
     var subscriptionBtn: some View{
         VStack{
             Button(action: {
-                
-            }){
+                showingSubscriptionView = true
+            })
+            {
                 HStack{
                     Image("logo_mini")
                         .resizable()
@@ -123,10 +126,12 @@ struct DesignChatUIView: View {
                 .frame(width: w*0.92, height: 45)
                 .background(Color(red: 0.06, green: 0.06, blue: 0.06))
                 .cornerRadius(10, corners: [.topLeft, .topRight])
+            }.sheet(isPresented: $showingSubscriptionView) {
+                SubscriptionView()
             }
             
             Button(action: {
-                
+                restorePurchases()
             }){
                 HStack{
                     Text("Restore purchase")
@@ -319,6 +324,18 @@ struct DesignChatUIView: View {
                 .frame(width: w*0.92, height: 45)
                 .background(Color(red: 0.06, green: 0.06, blue: 0.06))
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            }
+        }
+    }
+    
+    func restorePurchases() {
+        Purchases.shared.restorePurchases { (customerInfo, error) in
+            if let error = error {
+                print("Ошибка при восстановлении покупок: \(error.localizedDescription)")
+            } else if let customerInfo = customerInfo {
+                RevenueCatUtils.checkVipStatus { isVip in
+                    print("Покупки восстановлены, isVip: \(isVip)")
+                }
             }
         }
     }
