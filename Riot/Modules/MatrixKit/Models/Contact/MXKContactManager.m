@@ -541,11 +541,11 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)refreshLocalContacts
 {
-    MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Started");
+//    MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Started");
     
     if (!self.allowLocalContactsAccess)
     {
-        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Finished because local contacts access not allowed.");
+//        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Finished because local contacts access not allowed.");
         return;
     }
     
@@ -569,8 +569,8 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kMXKContactManagerDidUpdateLocalContactsNotification object:nil userInfo:nil];
         
-        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Complete");
-        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Local contacts access denied");
+//        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Complete");
+//        MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Local contacts access denied");
     }
     else
     {
@@ -717,8 +717,8 @@ NSString *const MXKContactManagerDataType = @"org.matrix.kit.MXKContactManagerDa
                     [self updateMatrixIDsForAllLocalContacts];
 //                }
                 
-                MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Complete");
-                MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Refresh %tu local contacts in %.0fms", self->localContactByContactID.count, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
+//                MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Complete");
+//                MXLogDebug(@"[MXKContactManager] refreshLocalContacts : Refresh %tu local contacts in %.0fms", self->localContactByContactID.count, [[NSDate date] timeIntervalSinceDate:startDate] * 1000);
             });
         });
     }
