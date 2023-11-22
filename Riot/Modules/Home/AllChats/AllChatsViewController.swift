@@ -530,6 +530,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         }
     }
     
+    private func getNoAdsToggleState() -> Bool {
+        return UserDefaults.standard.bool(forKey: "noAdsToggle")
+    }
+    
     private func getStoredCityUuid() -> String?{
         return UserDefaults.standard.string(forKey: "cityUuid")
     }
@@ -842,9 +846,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         let currentSpace = self.dataSource?.currentSpace
         self.title = currentSpace?.summary?.displayName ?? VectorL10n.allChatsTitle
         
-        slideshow?.isHidden = RevenueCatUtils.isVip
+        let isHidingAds = RevenueCatUtils.isVip && getNoAdsToggleState()
+        slideshow?.isHidden = isHidingAds
         if let tableView = recentsTableView {
-            if RevenueCatUtils.isVip {
+            if isHidingAds {
                 tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
             } else {
                 tableView.topAnchor.constraint(equalTo: slideshow.bottomAnchor).isActive = true
@@ -1044,6 +1049,7 @@ extension AllChatsViewController: SpaceSelectorBottomSheetCoordinatorBridgePrese
             self.spaceSelectorBridgePresenter = nil
         }
         fetchAds()
+        updateUI()
     }
     
     func spaceSelectorBottomSheetCoordinatorBridgePresenterDidSelectHome(_ coordinatorBridgePresenter: SpaceSelectorBottomSheetCoordinatorBridgePresenter) {

@@ -38,6 +38,7 @@ struct DesignChatUIView: View {
             Spacer()
             subscriptionBtn
             Spacer()
+            noAdsBtn
             nightModeBtn
             Spacer()
             bubbleSelector
@@ -52,6 +53,8 @@ struct DesignChatUIView: View {
             if savedBubble != nil{
                 updateBubbleStates(savedBubble-1)
             }
+            
+            noAdsToggle = getNoAdsToggleState()
         }
         .ignoresSafeArea()
         .frame(width: w, height: h)
@@ -149,6 +152,34 @@ struct DesignChatUIView: View {
                 .background(Color(red: 0.06, green: 0.06, blue: 0.06))
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             }
+        }
+    }
+    
+    @State private var noAdsToggle = false
+    var noAdsBtn: some View{
+        Button(action: {
+            
+        }){
+            HStack{
+                Text("No ads")
+                  .font(
+                    Font.custom("Inter", size: 13)
+                      .weight(.medium)
+                  )
+                  .padding(.horizontal)
+                
+                Spacer()
+                Toggle("", isOn: $noAdsToggle)
+                    .disabled(!RevenueCatUtils.isVip)
+                    .padding(.horizontal)
+                    .onChange (of: noAdsToggle) { _ in
+                        noAdsToggled()
+                    }
+            }
+            .frame(width: w*0.92, height: 45)
+            .background(Color(red: 0.06, green: 0.06, blue: 0.06))
+            .cornerRadius(10)
+            .padding(.vertical)
         }
     }
     
@@ -338,6 +369,15 @@ struct DesignChatUIView: View {
                 }
             }
         }
+    }
+    
+    private func getNoAdsToggleState() -> Bool {
+        return UserDefaults.standard.bool(forKey: "noAdsToggle")
+    }
+    
+    func noAdsToggled() {
+        print("set noAdsToggle \(noAdsToggle)")
+        UserDefaults.standard.set(noAdsToggle, forKey: "noAdsToggle")
     }
     
     func updateBubbleStates(_ selectedBubbleIndex: Int) {
