@@ -1,5 +1,7 @@
 //swiftlint:disable all
 
+//Developed by Patched && Boris
+
 import Foundation
 import SwiftUI
 import Alamofire
@@ -9,6 +11,7 @@ import MatrixSDK
 
 
 private var accessToken: String = ""
+private var showIcon = false
 
 struct AvatarResponse: Decodable {
     let uuid: String
@@ -41,7 +44,7 @@ private func login() async -> String {
 }
 
 @available(iOS 13.0.0, *)
-private func uploadFile(fileUuid: String, matrixId: String) async -> String {
+private func uploadFile(fileUuid: String, matrixId: String) async {
     let headers: HTTPHeaders = [
         "Authorization": "Bearer \(accessToken)"
     ]
@@ -52,31 +55,31 @@ private func uploadFile(fileUuid: String, matrixId: String) async -> String {
     ]
     
     do {
-        let response = try await AF.request(
+        let response = AF.request(
             "\(baseURL)/avatars",
             method: .post,
             parameters: parameters,
             encoding: JSONEncoding.default,
             headers: headers
-        ).responseDecodable(of: AvatarResponse.self)
-
-        return try await withCheckedThrowingContinuation { continuation in
+        ).response { response in
             switch response.result {
             case .success(let avatarResponse):
-                let uuid = avatarResponse.uuid
-                print("Avatar UUID: " + uuid)
-                continuation.resume(returning: uuid)
-
+                showIcon = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                              showIcon = false
+                          }
+                print("Avatar response: \(response.data?.jsonString)")
+            
+    
             case .failure(let error):
                 print("Error uploading avatar: \(error)")
-                continuation.resume(returning: "Unknown UUID")
+                showIcon = false
             }
         }
         
     } catch {
         print("Error uploading avatar: \(error)")
-        // Handle the error as needed (e.g., show an error message to the user)
-        return "Unknown UUID"
+        showIcon = false
     }
 }
 
@@ -117,6 +120,13 @@ struct UploadAvatarView: View{
             .bold()
             .padding(.top, 16)
         Spacer()
+        
+        LottieViewAnimation(lottieFile: "UploadComplete")
+                      .frame(width: 150, height: 150)
+                      .padding()
+                      .opacity(showIcon ? 1.0 : 0.0)
+        
+        
         VStack (alignment: .center){
             Text("Отправить:")
                 .font(.subheadline)
@@ -138,17 +148,17 @@ struct UploadAvatarView: View{
                         }
                         .onChange(of: selectedImage) { newImage in
                             if newImage != nil {
-                                // Call the uploadFile function with the selected image
+                          
                                 Task {
                                     let imageData = newImage.jpegData(compressionQuality: 0.8)
                                     let base64String = imageData?.base64EncodedString() ?? ""
                                     
                                     let fileUuid = UUID().uuidString
-                                    let matrixId = userInfo.userId  // or use the appropriate user identifier
+                                    let matrixId = userInfo.userId 
 
                                     let uploadedAvatarUUID = await uploadFile(fileUuid: fileUuid, matrixId: matrixId)
                                     
-                                    // Handle the uploadedAvatarUUID as needed
+                              
                                 }
                             }
                         }
@@ -167,6 +177,7 @@ struct UploadAvatarView: View{
                 DocumentPicker(selectedURL: $selectedURL)
             }
         }
+        .opacity(showIcon ? 0.0 : 1.0)
         Spacer()
     }
     }
