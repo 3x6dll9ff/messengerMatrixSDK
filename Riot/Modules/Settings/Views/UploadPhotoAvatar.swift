@@ -14,10 +14,8 @@ private var accessToken: String = ""
 private var showIcon = false
 
 struct AvatarResponse: Decodable {
-    let uuid: String
     let fileUuid: String
     let matrixId: String
-    
 }
 
 @available(iOS 13.0.0, *)
@@ -66,8 +64,8 @@ private func uploadFile(fileUuid: String, matrixId: String) async {
             case .success(let avatarResponse):
                 showIcon = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                              showIcon = false
-                          }
+                                       showIcon = false
+                                   }
                 print("Avatar response: \(response.data?.jsonString)")
             
     
