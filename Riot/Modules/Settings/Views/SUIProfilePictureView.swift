@@ -27,6 +27,10 @@ import MatrixSDKCrypto
 import MatrixSDK
 import SwiftUI
 
+struct AvatarResponse: Decodable {
+    let fileUuid: String
+    let matrixId: String
+}
 
 //MARK: Backend logic
 
@@ -57,6 +61,13 @@ private func login() async -> String {
 
 @available(iOS 13.0.0, *)
 private func getAvatars(matrixId: String) async -> [AvatarResponse] {
+    
+    let mainAccount = MXKAccountManager.shared().accounts.first
+    
+    guard let userId = mainAccount?.mxSession.myUser.userId else {
+        return []
+    }
+
     let url = "\(baseURL)/avatars?matrixId=\(userId)"
 
     do {
@@ -68,7 +79,7 @@ private func getAvatars(matrixId: String) async -> [AvatarResponse] {
             case .success(let avatars):
                 print("Avatars: \(avatars)")
             case .failure(let error):
-                print("Error fetching avatars: \(error)")
+                print("Error fetching avatars: \(userId)")
             }
         }
         return []

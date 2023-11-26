@@ -13,11 +13,6 @@ import MatrixSDK
 private var accessToken: String = ""
 private var showIcon = false
 
-struct AvatarResponse: Decodable {
-    let fileUuid: String
-    let matrixId: String
-}
-
 @available(iOS 13.0.0, *)
 private func login() async -> String {
     
