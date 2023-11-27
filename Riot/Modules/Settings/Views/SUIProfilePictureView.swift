@@ -90,36 +90,29 @@ private func getAvatars(matrixId: String) async -> [AvatarResponse] {
 @available(iOS 15.0, *)
 struct SUIProfilePictureView: View {
     @State private var selectedIndex: Int? = 0
-    @State private var yOffset: CGFloat = 0
-    @State private var isHandTapped: Bool = false
     // переменные для открытия View
     @State private var shouldNavigateAds = false
     @State private var avatars: [AvatarResponseElement] = []
     
     var shipName = "User Settings"
     
-
-    
     var body: some View {
+     
         NavigationView {
             VStack {
                 VStack {
                     Text("Swipe down to hide")
-                        .foregroundColor(.gray)
-                        .padding(.top, 15)
-                    
-                    Image(systemName: "hand.tap.fill")
-                        .foregroundColor(.white)
-                        .offset(y: yOffset)
-                        .rotationEffect(Angle(degrees: isHandTapped ? -2 : 2), anchor: .center)
-                        .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true))
-                        .padding(.top, 35)
+                     .foregroundColor(.gray)
+                     .padding(.top, 15)
+
+             
                 }
                 
                 VStack {
                     Text(shipName)
                         .foregroundColor(.white)
                         .font(.system(size: 20))
+                        .padding(.top, 30)
                     Divider()
                     
                     
@@ -175,20 +168,18 @@ struct SUIProfilePictureView: View {
                                print("Error fetching avatars: \(error)")
                            }
                        }
-                    
-                    let screenHeight = UIScreen.main.bounds.height / 5
-                    yOffset = -screenHeight / 8
-                    
-                    withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                        isHandTapped.toggle()
-                    }
+
                 }
             }
         }
+       
     }
 }
 
 
+
+
+//View For Avatars
 @available(iOS 15.0, *)
 struct AvatarTileView: View {
     let avatar: AvatarResponseElement
