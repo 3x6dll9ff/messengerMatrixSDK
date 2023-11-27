@@ -29,13 +29,13 @@ import SwiftUI
 
 
 //MARK: Model for Avatars
-struct AvatarResponseElement: Codable {
+struct AvatarResponseElement: Codable, Hashable, Equatable {
     let uuid: String
     let file: File
     let createdAt: String
 }
 
-struct File: Codable {
+struct File: Codable, Hashable, Equatable {
     let id: Int
     let uuid, fieldname, originalname, filename: String
     let mimetype, path, destination, encoding: String
@@ -92,18 +92,18 @@ struct SUIProfilePictureView: View {
     @State private var selectedIndex: Int? = 0
     @State private var yOffset: CGFloat = 0
     @State private var isHandTapped: Bool = false
-    //variables for open  View
+    // переменные для открытия View
     @State private var shouldNavigateAds = false
-    @State private var avatars: [AvatarResponse] = []
+    @State private var avatars: [AvatarResponseElement] = []
     
     var shipName = "User Settings"
+    
 
+    
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
-                
                 VStack {
-                    
                     Text("Swipe down to hide")
                         .foregroundColor(.gray)
                         .padding(.top, 15)
@@ -111,18 +111,18 @@ struct SUIProfilePictureView: View {
                     Image(systemName: "hand.tap.fill")
                         .foregroundColor(.white)
                         .offset(y: yOffset)
-                        .rotationEffect(Angle(degrees: isHandTapped ? -5 : 5))
+                        .rotationEffect(Angle(degrees: isHandTapped ? -2 : 2), anchor: .center)
                         .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true))
                         .padding(.top, 35)
-                    
                 }
-          
+                
                 VStack {
-                     Text(shipName)
-                         .foregroundColor(.white)
-                         .font(.system(size: 20))
-                     Divider()
-
+                    Text(shipName)
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                    Divider()
+                    
+                    
                     ScrollViewReader { proxy in
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 5) {
@@ -139,62 +139,91 @@ struct SUIProfilePictureView: View {
                             .padding()
                         }
                     }
-                 }
-                 .padding(.top, 15)
+                    .padding(.top, 15)
+                    
+                    Divider()
+                    
+                    Button(action: {
+                        shouldNavigateAds = true
+                    }) {
+                        Text("Upload Picture")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 20, weight: .bold))
+                            .frame(width: 254, height: 54)
+                            .background(
+                                Color("BtnUploadPicture")
+                                    .blur(radius: 10)
+                            )
+                            .cornerRadius(30)
+                            .padding(.top, 30)
+                    }
+                    
+                    NavigationLink(destination: UploadAvatarView(), isActive: $shouldNavigateAds) {
+                        EmptyView()
+                    }
+                    
+                    Spacer()
+                }
+                .onAppear {
+                    Task {
+                           do {
+                               let fetchedAvatars = try await getAvatars(matrixId: userId)
+                               if let firstAvatar = fetchedAvatars.first {
+                                   avatars = firstAvatar
+                               }
+                           } catch {
+                               print("Error fetching avatars: \(error)")
+                           }
+                       }
+                    
+                    let screenHeight = UIScreen.main.bounds.height / 5
+                    yOffset = -screenHeight / 8
+                    
+                    withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                        isHandTapped.toggle()
+                    }
+                }
+            }
+        }
+    }
+}
 
-                 Divider()
 
-                 Button(action: {
-                     shouldNavigateAds = true
-                 }) {
-                     Text("Upload Picture")
-                         .foregroundColor(.white)
-                         .font(Font.system(size: 20, weight: .bold))
-                         .frame(width: 254, height: 54)
-                         .background(
-                             Color("BtnUploadPicture")
-                                 .blur(radius: 10)
-                         )
-                         .cornerRadius(30)
-                         .padding(.top, 30)
-                 }
-
-                 NavigationLink(destination: UploadAvatarView(), isActive: $shouldNavigateAds) {
-                     EmptyView()
-                 }
-
-                 Spacer()
-             }
-             .onAppear {
-                 Task {
-                     avatars = await getAvatars(matrixId: (userId))
-                 }
-
-                 let screenHeight = UIScreen.main.bounds.height / 5
-                 yOffset = -screenHeight / 5
-
-                 withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                     isHandTapped.toggle()
-                 }
-             }
-         }
-     }
- }
-
+@available(iOS 15.0, *)
 struct AvatarTileView: View {
-    let avatar: AvatarResponse
+    let avatar: AvatarResponseElement
     let isSelected: Bool
 
     var body: some View {
-        Rectangle()
-            .frame(width: 200, height: 300)
-            .foregroundColor(isSelected ? .white : .white)
-            .cornerRadius(8)
-            .scaleEffect(isSelected ? 1.0 : 0.8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(isSelected ? Color("BtnUploadPicture") : Color.clear, lineWidth: isSelected ? 4 : 0)
-                    .animation(.easeInOut(duration: 0.1))
-            )
+        AsyncImage(url: URL(string: "\(baseURL)/files/\(avatar.file.uuid)")) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(8)
+                    .scaleEffect(isSelected ? 1.0 : 0.8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(isSelected ? Color("BtnUploadPicture") : Color.clear, lineWidth: isSelected ? 4 : 0)
+                            .animation(.easeInOut(duration: 0.1))
+                    )
+            case .failure:
+                Image(systemName: "person.fill")
+                    .resizable()
+                    .frame(width: 200, height: 300)
+                    .cornerRadius(8)
+                    .scaleEffect(isSelected ? 1.0 : 0.8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(isSelected ? Color("BtnUploadPicture") : Color.clear, lineWidth: isSelected ? 4 : 0)
+                            .animation(.easeInOut(duration: 0.1))
+                    )
+            @unknown default:
+                EmptyView()
+            }
+        }
     }
 }
