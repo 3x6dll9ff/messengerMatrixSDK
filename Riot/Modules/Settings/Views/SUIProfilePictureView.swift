@@ -28,8 +28,10 @@ import MatrixSDK
 import SwiftUI
 
 struct AvatarResponse: Decodable {
-    let fileUuid: String
-    let matrixId: String
+    var uuid: String
+    var fileUuid: String
+    var matrixId: String?
+    var createdAt: Date
 }
 
 //MARK: Backend logic
