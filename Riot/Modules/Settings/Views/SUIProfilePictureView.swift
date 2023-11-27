@@ -27,56 +27,44 @@ import MatrixSDKCrypto
 import MatrixSDK
 import SwiftUI
 
-struct AvatarResponse: Decodable {
-    var uuid: String
-    var fileUuid: String
-    var matrixId: String?
-    var createdAt: Date
+
+//MARK: Model for Avatars
+struct AvatarResponseElement: Codable {
+    let uuid: String
+    let file: File
+    let createdAt: String
 }
+
+struct File: Codable {
+    let id: Int
+    let uuid, fieldname, originalname, filename: String
+    let mimetype, path, destination, encoding: String
+    let size: Int
+    let createdAt, updatedAt: String
+}
+
+typealias AvatarResponse = [AvatarResponseElement]
 
 //MARK: Backend logic
 
-private var accessToken: String = ""
-
-@available(iOS 13.0.0, *)
-private func login() async -> String {
-    
-    let params: [String: Any] = [
-        "username": userInfo.phoneNumber,
-        "password": "12345678",
-        "fingerprint": "fingerprint"
-    ]
-    
-    let token = try? await AF.request(
-        "\(baseURL)/auth/login",
-        method: .post,
-        parameters: params
-    ).serializingDecodable(LoginResponse.self).value.access_token
-    
-    if(token == nil){
-        return await login()
-    }
-    
-    accessToken = token!
-    return token!
-}
 
 @available(iOS 13.0.0, *)
 private func getAvatars(matrixId: String) async -> [AvatarResponse] {
     let mainAccount = MXKAccountManager.shared().accounts.first
     
-    guard let userId = mainAccount?.mxSession.myUser.userId else {
+    guard let userID = mainAccount?.mxSession.myUser.userId else {
         return []
     }
 
-    let url = "\(baseURL)/avatars?matrixId=\(userId)"
+    let url = "\(baseURL)/avatars?matrixId=\(userID)"
 
     do {
-        let avatars: [AvatarResponse] = try await withCheckedThrowingContinuation { continuation in
+    
+        let avatars: [AvatarResponseElement] = try await withCheckedThrowingContinuation { continuation in
             AF.request(
                 url,
                 method: .get
-            ).responseDecodable(of: [AvatarResponse].self) { response in
+            ).responseDecodable(of: [AvatarResponseElement].self) { response in
                 switch response.result {
                 case .success(let avatars):
                     continuation.resume(returning: avatars)
@@ -86,8 +74,10 @@ private func getAvatars(matrixId: String) async -> [AvatarResponse] {
                 }
             }
         }
+        
         print("Avatars: \(avatars)")
-        return avatars
+
+        return [avatars]
     } catch {
         print("Error fetching avatars: \(error)")
         return []
