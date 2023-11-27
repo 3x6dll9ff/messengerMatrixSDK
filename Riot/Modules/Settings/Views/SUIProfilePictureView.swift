@@ -63,7 +63,6 @@ private func login() async -> String {
 
 @available(iOS 13.0.0, *)
 private func getAvatars(matrixId: String) async -> [AvatarResponse] {
-    
     let mainAccount = MXKAccountManager.shared().accounts.first
     
     guard let userId = mainAccount?.mxSession.myUser.userId else {
@@ -73,18 +72,22 @@ private func getAvatars(matrixId: String) async -> [AvatarResponse] {
     let url = "\(baseURL)/avatars?matrixId=\(userId)"
 
     do {
-        let dataResponse = try await AF.request(
-            url,
-            method: .get
-        ).responseDecodable(of: [AvatarResponse].self) { response in
-            switch response.result {
-            case .success(let avatars):
-                print("Avatars: \(avatars)")
-            case .failure(let error):
-                print("Error fetching avatars: \(userId)")
+        let avatars: [AvatarResponse] = try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                url,
+                method: .get
+            ).responseDecodable(of: [AvatarResponse].self) { response in
+                switch response.result {
+                case .success(let avatars):
+                    continuation.resume(returning: avatars)
+                case .failure(let error):
+                    print("Error fetching avatars: \(error)")
+                    continuation.resume(returning: [])
+                }
             }
         }
-        return []
+        print("Avatars: \(avatars)")
+        return avatars
     } catch {
         print("Error fetching avatars: \(error)")
         return []
