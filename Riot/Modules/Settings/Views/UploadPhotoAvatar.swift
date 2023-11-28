@@ -9,9 +9,9 @@ import PassKit
 import MatrixSDKCrypto
 import MatrixSDK
 
-
 private var accessToken: String = ""
 private var showIcon = false
+
 
 @available(iOS 13.0.0, *)
 private func login() async -> String {
@@ -37,7 +37,29 @@ private func login() async -> String {
 }
 
 @available(iOS 13.0.0, *)
-private func uploadFile(fileUuid: String, matrixId: String) async {
+private func uploadFile(fileData: Data) async -> String {
+    print(fileData)
+    
+    let headers:HTTPHeaders = [
+        "Authorization": "Bearer \(accessToken)"
+    ]
+    
+    let uuid = try! await AF.upload(
+        multipartFormData: { multipart in
+            multipart.append(fileData, withName: "file", fileName: "test", mimeType: "")
+        },
+        to: "\(baseURL)/files/upload",
+        method: .post,
+        headers: headers
+    ).serializingDecodable(FileResponse.self).value.uuid
+    
+    print("File UUID: " + uuid)
+    
+    return uuid
+}
+
+@available(iOS 13.0.0, *)
+private func uploadFileAvatar(fileUuid: String, matrixId: String) async {
     let headers: HTTPHeaders = [
         "Authorization": "Bearer \(accessToken)"
     ]
@@ -48,6 +70,8 @@ private func uploadFile(fileUuid: String, matrixId: String) async {
     ]
     
     do {
+        
+        
         let response = AF.request(
             "\(baseURL)/avatars",
             method: .post,
@@ -62,6 +86,11 @@ private func uploadFile(fileUuid: String, matrixId: String) async {
                                        showIcon = false
                                    }
                 print("Avatar response: \(response.data?.jsonString)")
+                print("Request URL: \(response.request?.url?.absoluteString ?? "")")
+                print("Request Headers: \(response.request?.allHTTPHeaderFields ?? [:])")
+                print("Response Status Code: \(response.response?.statusCode ?? -1)")
+                print("Response Data: \(String(data: response.data ?? Data(), encoding: .utf8) ?? "")")
+
             
     
             case .failure(let error):
@@ -141,22 +170,26 @@ struct UploadAvatarView: View{
                         }
                         .onChange(of: selectedImage) { newImage in
                             if newImage != nil {
-                          
                                 Task {
-                                    let imageData = newImage.jpegData(compressionQuality: 0.8)
-                                    let base64String = imageData?.base64EncodedString() ?? ""
+                                    _ = await login()
                                     
-                                    let fileUuid = UUID().uuidString
-                                    let matrixId = userInfo.userId 
+                                    let mainAccount = MXKAccountManager.shared().accounts.first
+                                    
+                                    guard let userID = mainAccount?.mxSession.myUser.userId else {
+                                        return
+                                    }
+                                    
+                                    let matrixId = userInfo.userId
+                                    
+                                    if let imageData = newImage.jpegData(compressionQuality: 0.8) {
+                                        let fileUuid = await uploadFile(fileData: imageData)
+                                        let uploadedAvatarUUID = await uploadFileAvatar(fileUuid: fileUuid, matrixId: userID)
+                                    } else {
 
-                                    let uploadedAvatarUUID = await uploadFile(fileUuid: fileUuid, matrixId: matrixId)
-                                    
-                              
+                                    }
                                 }
                             }
                         }
-
-            
             Button(action: {
                 showDocumentPicker = true
             }){
