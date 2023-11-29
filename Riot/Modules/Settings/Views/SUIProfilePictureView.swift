@@ -27,6 +27,7 @@ import MatrixSDKCrypto
 import MatrixSDK
 import SwiftUI
 
+private var accessToken: String = ""
 
 //MARK: Model for Avatars
 struct AvatarResponseElement: Codable, Hashable, Equatable {
@@ -47,6 +48,28 @@ typealias AvatarResponse = [AvatarResponseElement]
 
 //MARK: Backend logic
 
+@available(iOS 13.0.0, *)
+private func login() async -> String {
+    
+    let params: [String: Any] = [
+        "username": userInfo.phoneNumber,
+        "password": "12345678",
+        "fingerprint": "fingerprint"
+    ]
+    
+    let token = try? await AF.request(
+        "\(baseURL)/auth/login",
+        method: .post,
+        parameters: params
+    ).serializingDecodable(LoginResponse.self).value.access_token
+    
+    if(token == nil){
+        return await login()
+    }
+    
+    accessToken = token!
+    return token!
+}
 
 @available(iOS 13.0.0, *)
 private func getAvatars(matrixId: String) async -> [AvatarResponse] {
@@ -85,6 +108,33 @@ private func getAvatars(matrixId: String) async -> [AvatarResponse] {
 }
 
 
+@available(iOS 13.0.0, *)
+private func deleteFileAvatar(Uuid: String) {
+    let headers: HTTPHeaders = [
+        "Authorization": "Bearer \(accessToken)"
+    ]
+    
+    do {
+        AF.request(
+            "\(baseURL)/avatars/\(Uuid)",
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: headers
+        ).response { response in
+            switch response.result {
+            case .success(let avatarResponse):
+                print("uiid rn : \(Uuid)")
+                print("Avatar response: \(response.data?.jsonString)")
+                
+            case .failure(let error):
+                print("Error uploading avatar: \(error)")
+            }
+        }
+    }
+    catch{
+        print("baaad block")
+    }
+}
 
 //MARK: Front
 @available(iOS 15.0, *)
@@ -127,12 +177,32 @@ struct SUIProfilePictureView: View {
                                                 proxy.scrollTo(index, anchor: .center)
                                             }
                                         }
+                                        .contextMenu {
+                                            Button(action: {
+                                                Task {
+                                                    do {
+                                                        await login()
+                                                        deleteFileAvatar(Uuid: avatars[index].uuid)
+                                                        let fetchedAvatars = try await getAvatars(matrixId: userId)
+                                                        if let firstAvatar = fetchedAvatars.first {
+                                                            avatars = firstAvatar
+                                                        }
+                                                    } catch {
+                                                        print("Error: \(error)")
+                                                    }
+                                                }
+                                            }) {
+                                                Label("Удалить", systemImage: "xmark.circle.fill")
+                                            }
+                                        }
                                 }
                             }
                             .padding()
+                          
                         }
                     }
                     .padding(.top, 15)
+
                     
                     Divider()
                     

@@ -40,22 +40,45 @@ private func login() async -> String {
 private func uploadFile(fileData: Data) async -> String {
     print(fileData)
     
-    let headers:HTTPHeaders = [
+    let headers: HTTPHeaders = [
         "Authorization": "Bearer \(accessToken)"
     ]
     
-    let uuid = try! await AF.upload(
-        multipartFormData: { multipart in
-            multipart.append(fileData, withName: "file", fileName: "test", mimeType: "")
-        },
-        to: "\(baseURL)/files/upload",
-        method: .post,
-        headers: headers
-    ).serializingDecodable(FileResponse.self).value.uuid
-    
-    print("File UUID: " + uuid)
-    
-    return uuid
+    do {
+        let (data, response) = try await withCheckedThrowingContinuation { continuation in
+            AF.upload(
+                multipartFormData: { multipart in
+                    multipart.append(fileData, withName: "file", fileName: "test")
+                },
+                to: "\(baseURL)/files/upload",
+                method: .post,
+                headers: headers
+            ).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    continuation.resume(returning: (data, response.response))
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+        
+        // Обработка статуса ответа
+        print("Status Code: \(response?.statusCode ?? -1)")
+        
+        // Обработка JSON-ответа
+        if let jsonString = String(data: data ?? Data(), encoding: .utf8) {
+            print("JSON Response: \(jsonString)")
+        }
+        
+        // Возвращаем UUID из ответа (предположим, что у вас есть структура FileResponse с свойством uuid)
+        let decodedResponse = try JSONDecoder().decode(FileResponse.self, from: data ?? Data())
+        return decodedResponse.uuid
+    } catch {
+        // Обработка ошибок
+        print("Error: \(error)")
+        return ""
+    }
 }
 
 @available(iOS 13.0.0, *)
@@ -104,7 +127,6 @@ private func uploadFileAvatar(fileUuid: String, matrixId: String) async {
         showIcon = false
     }
 }
-
 
 @available(iOS 15.0, *)
 struct UploadAvatarView: View{
