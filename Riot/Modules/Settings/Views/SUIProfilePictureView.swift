@@ -26,9 +26,9 @@ import PassKit
 import MatrixSDKCrypto
 import MatrixSDK
 import SwiftUI
+import DesignKit
 
 private var accessToken: String = ""
-
 //MARK: Model for Avatars
 struct AvatarResponseElement: Codable, Hashable, Equatable {
     let uuid: String
@@ -143,7 +143,8 @@ struct SUIProfilePictureView: View {
     // переменные для открытия View
     @State private var shouldNavigateAds = false
     @State private var avatars: [AvatarResponseElement] = []
-    
+    var colors: ColorsUIKit = DarkColors.uiKit
+
     var shipName = "User Settings"
     
     var body: some View {
@@ -185,8 +186,10 @@ struct SUIProfilePictureView: View {
                                                         deleteFileAvatar(Uuid: avatars[index].uuid)
                                                         let fetchedAvatars = try await getAvatars(matrixId: userId)
                                                         if let firstAvatar = fetchedAvatars.first {
-                                                            avatars = firstAvatar
-                                                        }
+                                                                                               withAnimation {
+                                                                                                   avatars = firstAvatar
+                                                                                               }
+                                                                                           }
                                                     } catch {
                                                         print("Error: \(error)")
                                                     }
@@ -196,6 +199,12 @@ struct SUIProfilePictureView: View {
                                             }
                                         }
                                 }
+                                .onDelete { indexSet in
+                                               withAnimation {
+                                                  
+                                                   avatars.remove(atOffsets: indexSet)
+                                               }
+                                           }
                             }
                             .padding()
                           
@@ -214,8 +223,8 @@ struct SUIProfilePictureView: View {
                             .font(Font.system(size: 20, weight: .bold))
                             .frame(width: 254, height: 54)
                             .background(
-                                Color("BtnUploadPicture")
-                                    .blur(radius: 10)
+                                Color(colors.accent)
+                                    .blur(radius: 5)
                             )
                             .cornerRadius(30)
                             .padding(.top, 30)
@@ -254,7 +263,8 @@ struct SUIProfilePictureView: View {
 struct AvatarTileView: View {
     let avatar: AvatarResponseElement
     let isSelected: Bool
-
+    var colors: ColorsUIKit = DarkColors.uiKit
+    
     var body: some View {
         AsyncImage(url: URL(string: "\(baseURL)/files/\(avatar.file.uuid)")) { phase in
             switch phase {
@@ -268,7 +278,7 @@ struct AvatarTileView: View {
                     .scaleEffect(isSelected ? 1.0 : 0.8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(isSelected ? Color("BtnUploadPicture") : Color.clear, lineWidth: isSelected ? 4 : 0)
+                            .stroke(isSelected ? Color(colors.accent) : Color.clear, lineWidth: isSelected ? 4 : 0)
                             .animation(.easeInOut(duration: 0.1))
                     )
             case .failure:
@@ -279,7 +289,7 @@ struct AvatarTileView: View {
                     .scaleEffect(isSelected ? 1.0 : 0.8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(isSelected ? Color("BtnUploadPicture") : Color.clear, lineWidth: isSelected ? 4 : 0)
+                            .stroke(isSelected ? Color(colors.accent) : Color.clear, lineWidth: isSelected ? 4 : 0)
                             .animation(.easeInOut(duration: 0.1))
                     )
             @unknown default:

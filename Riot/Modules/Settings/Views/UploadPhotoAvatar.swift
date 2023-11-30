@@ -8,6 +8,8 @@ import Alamofire
 import PassKit
 import MatrixSDKCrypto
 import MatrixSDK
+import DesignKit
+import MobileCoreServices
 
 private var accessToken: String = ""
 private var showIcon = false
@@ -37,7 +39,7 @@ private func login() async -> String {
 }
 
 @available(iOS 13.0.0, *)
-private func uploadFile(fileData: Data) async -> String {
+private func uploadFile(fileData: Data, mimeType: String) async -> String {
     print(fileData)
     
     let headers: HTTPHeaders = [
@@ -48,7 +50,7 @@ private func uploadFile(fileData: Data) async -> String {
         let (data, response) = try await withCheckedThrowingContinuation { continuation in
             AF.upload(
                 multipartFormData: { multipart in
-                    multipart.append(fileData, withName: "file", fileName: "test")
+                    multipart.append(fileData, withName: "file", fileName: "test", mimeType: mimeType )
                 },
                 to: "\(baseURL)/files/upload",
                 method: .post,
@@ -138,7 +140,7 @@ struct UploadAvatarView: View{
     @State private var selectedURL: URL?
     @State private var uploadProgress: Double = 0.0
     @Environment(\.colorScheme) var colorScheme
-    
+    var colors: ColorsUIKit = DarkColors.uiKit
     
     let periods = [30]
     
@@ -159,7 +161,7 @@ struct UploadAvatarView: View{
     }
     
     var body: some View{
-        Text("Отправка файла в облако")
+        Text("Загрузка аватара")
             .font(.title)
             .bold()
             .padding(.top, 16)
@@ -183,7 +185,9 @@ struct UploadAvatarView: View{
                         }) {
                             HStack {
                                 Image(systemName: "photo.on.rectangle.angled")
+                                    .foregroundColor(Color(colors.accent))
                                 Text("Из галереи")
+                                    .foregroundColor(Color(colors.accent))
                             }
                         }
                         .padding(.vertical, 6)
@@ -191,33 +195,44 @@ struct UploadAvatarView: View{
                             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
                         }
                         .onChange(of: selectedImage) { newImage in
-                            if newImage != nil {
                                 Task {
-                                    _ = await login()
-                                    
-                                    let mainAccount = MXKAccountManager.shared().accounts.first
-                                    
-                                    guard let userID = mainAccount?.mxSession.myUser.userId else {
-                                        return
-                                    }
-                                    
-                                    let matrixId = userInfo.userId
-                                    
-                                    if let imageData = newImage.jpegData(compressionQuality: 0.8) {
-                                        let fileUuid = await uploadFile(fileData: imageData)
-                                        let uploadedAvatarUUID = await uploadFileAvatar(fileUuid: fileUuid, matrixId: userID)
-                                    } else {
+                                    do {
+                                        _ = try await login()
 
+                                        let mainAccount = MXKAccountManager.shared().accounts.first
+
+                                        guard let userID = mainAccount?.mxSession.myUser.userId else {
+                                            return
+                                        }
+
+                                        let matrixId = userInfo.userId
+                                      
+                                        
+                                        if let imageData = newImage.jpegData(compressionQuality: 0.8) {
+                                            if let mimeType = getMimeType(from: imageData) {
+                                                print("MIME Type: \(mimeType)")
+                                                let fileUuid = try await uploadFile(fileData: imageData, mimeType: "\(mimeType)")
+                                                let uploadedAvatarUUID = try await uploadFileAvatar(fileUuid: fileUuid, matrixId: userID)
+                                            } else {
+                                                print("Failed to determine MIME Type.")
+                                            }
+                                        } else {
+                                            print("Failed to create JPEG data.")
+                                        }
+                                    } catch {
+                                        print("Error: \(error)")
                                     }
                                 }
-                            }
+                            
                         }
             Button(action: {
                 showDocumentPicker = true
             }){
                 HStack {
                     Image(systemName: "arrow.up.doc")
+                        .foregroundColor(Color(colors.accent))
                     Text("Из файлов")
+                        .foregroundColor(Color(colors.accent))
                 }
             }
             .padding(.vertical, 6)
@@ -231,3 +246,18 @@ struct UploadAvatarView: View{
     }
     
     
+func getMimeType(from data: Data) -> String? {
+    var result: String?
+    let uti = UTTypeCreatePreferredIdentifierForTag(
+        kUTTagClassFilenameExtension,
+        "jpeg" as CFString,
+        nil
+    )?.takeRetainedValue()
+
+    if let uti = uti {
+        let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue()
+        result = mimeType as String?
+    }
+
+    return result
+}
