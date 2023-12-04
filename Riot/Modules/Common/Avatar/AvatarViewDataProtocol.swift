@@ -36,7 +36,7 @@ protocol AvatarViewDataProtocol: AvatarProtocol {
     var displayName: String? { get }
     
     /// Matrix item avatar URL (user or room avatar url)
-    var avatarUrl: String? { get }            
+    var avatarUrl: String? { get }
         
     /// Matrix media handler
     var mediaManager: MXMediaManager? { get }
@@ -62,3 +62,5 @@ extension AvatarViewDataProtocol {
             }
     }
 }
+
+

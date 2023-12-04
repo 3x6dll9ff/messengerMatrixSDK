@@ -72,6 +72,48 @@ andImageOrientation:(UIImageOrientation)orientation
        previewImage:(UIImage*)previewImage
        mediaManager:(MXMediaManager*)mediaManager;
 
+
+/**
+ Load an image by its Matrix Content URI.
+ The image is loaded from the media cache (if any). If the image is not available yet,
+ it is downloaded from the Matrix media repository only if a media manager instance is provided.
+ 
+ The image extension is extracted from the provided mime type (if any). By default 'image/jpeg' is considered.
+ 
+ @param mxContentURI the Matrix Content URI
+ @param mimeType the media mime type, it is used to define the file extension (may be nil).
+ @param orientation the actual orientation of the encoded image (used UIImageOrientationUp by default).
+ @param previewImage image displayed until the actual image is available.
+ @param mediaManager the media manager instance used to download the image if it is not already in cache.
+ */
+- (void)setImageURIRoom:(NSString *)mxContentURI
+           withType:(NSString *)mimeType
+andImageOrientation:(UIImageOrientation)orientation
+       previewImage:(UIImage*)previewImage
+       mediaManager:(MXMediaManager*)mediaManager;
+
+/**
+ Load an image by its Matrix Content URI to fit a specific view size.
+ 
+ CAUTION: this method is available only for the unencrypted content.
+ 
+ The image is loaded from the media cache (if any). If the image is not available yet,
+ it is downloaded from the Matrix media repository only if a media manager instance is provided.
+ The image extension is extracted from the provided mime type (if any). By default 'image/jpeg' is considered.
+ 
+ @param mxContentURI the Matrix Content URI
+ @param mimeType the media mime type, it is used to define the file extension (may be nil).
+ @param orientation the actual orientation of the encoded image (used UIImageOrientationUp by default).
+ @param previewImage image displayed until the actual image is available.
+ @param mediaManager the media manager instance used to download the image if it is not already in cache.
+ */
+- (void)setImageURIRoom:(NSString *)mxContentURI
+           withType:(NSString *)mimeType
+andImageOrientation:(UIImageOrientation)orientation
+      toFitViewSize:(CGSize)viewSize
+         withMethod:(MXThumbnailingMethod)thumbnailingMethod
+       previewImage:(UIImage*)previewImage
+       mediaManager:(MXMediaManager*)mediaManager;
 /**
  * Load an image attachment into the image viewer and display the full res image.
  * This method must be used to display encrypted attachments
@@ -107,7 +149,6 @@ andImageOrientation:(UIImageOrientation)orientation
 
 @property (nonatomic) BOOL stretchable;
 @property (nonatomic, readonly) BOOL fullScreen;
-
 // the image is cached in memory.
 // The medias manager uses a LRU cache.
 // to avoid loading from the file system.

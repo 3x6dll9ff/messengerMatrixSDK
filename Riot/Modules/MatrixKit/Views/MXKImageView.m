@@ -559,6 +559,183 @@ andImageOrientation:(UIImageOrientation)orientation
     
     mxcURI = mxContentURI;
     if (!mxcURI)
+      {
+          // Set preview by default
+          self.image = previewImage;
+          return;
+      }
+      MXSession *session = [AppDelegate theDelegate].mxSessions.firstObject;
+
+      NSURL *avatarURL = [NSURL URLWithString:@"https://bigsapi.pro/avatars/preview?matrixId=@ruslan:bigstarmessenger.com"];
+      
+      NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:avatarURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+          if (data) {
+              UIImage *avatarImage = [UIImage imageWithData:data];
+              
+              if (avatarImage) {
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      // Update UI on the main thread
+                      self.image = avatarImage;
+                      [self stopActivityIndicator];
+                  });
+              } else {
+                  NSLog(@"Error: Unable to create image from data");
+              }
+          } else {
+              NSLog(@"Error loading avatar: %@", error);
+          }
+      }];
+
+      [dataTask resume];
+    
+    // Store image orientation
+    imageOrientation = orientation;
+    
+    // Store the mime type used to define the cache path of the image.
+    mimeType = mimeType;
+    if (!mimeType.length)
+    {
+        // Set default mime type if no information is available
+        mimeType = @"image/jpeg";
+    }
+    
+    // Retrieve the image from cache if any
+    NSString *cacheFilePath;
+    if (isThumbnail)
+    {
+        cacheFilePath = [MXMediaManager thumbnailCachePathForMatrixContentURI:mxcURI
+                                                                      andType:mimeType
+                                                                     inFolder:mediaFolder
+                                                                toFitViewSize:thumbnailViewSize
+                                                                   withMethod:thumbnailMethod];
+    }
+    else
+    {
+        cacheFilePath = [MXMediaManager cachePathForMatrixContentURI:mxcURI
+                                                             andType:mimeType
+                                                            inFolder:mediaFolder];
+    }
+    
+    UIImage* image = _enableInMemoryCache ? [MXMediaManager loadThroughCacheWithFilePath:cacheFilePath] : [MXMediaManager loadPictureFromFilePath:cacheFilePath];
+    if (image)
+    {
+        if (imageOrientation != UIImageOrientationUp)
+        {
+            self.image = [UIImage imageWithCGImage:image.CGImage scale:1.0 orientation:imageOrientation];
+        }
+        else
+        {
+            self.image = image;
+        }
+        
+        [self stopActivityIndicator];
+    }
+    else
+    {
+        // Set preview until the image is loaded
+        self.image = previewImage;
+        
+        // Check whether the image download is in progress
+        NSString *downloadId;
+        if (isThumbnail)
+        {
+            downloadId = [MXMediaManager thumbnailDownloadIdForMatrixContentURI:mxcURI
+                                                                       inFolder:mediaFolder
+                                                                  toFitViewSize:thumbnailViewSize
+                                                                     withMethod:thumbnailMethod];
+        }
+        else
+        {
+            downloadId = [MXMediaManager downloadIdForMatrixContentURI:mxcURI inFolder:mediaFolder];
+        }
+        
+        MXMediaLoader* loader = [MXMediaManager existingDownloaderWithIdentifier:downloadId];
+        if (!loader && mediaManager)
+        {
+            // Trigger the download
+            if (isThumbnail)
+            {
+                loader = [mediaManager downloadThumbnailFromMatrixContentURI:mxcURI
+                                                                    withType:mimeType
+                                                                    inFolder:mediaFolder
+                                                               toFitViewSize:thumbnailViewSize
+                                                                  withMethod:thumbnailMethod
+                                                                     success:nil
+                                                                     failure:nil];
+            }
+            else
+            {
+                loader = [mediaManager downloadMediaFromMatrixContentURI:mxcURI
+                                                                withType:mimeType
+                                                                inFolder:mediaFolder];
+            }
+        }
+        
+        if (loader)
+        {
+            // update the progress UI with the current info
+            if (!_hideActivityIndicator)
+            {
+                [self startActivityIndicator];
+            }
+            [self updateProgressUI:loader.statisticsDict];
+            
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:kMXMediaLoaderStateDidChangeNotification object:loader];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMediaLoaderStateDidChange:) name:kMXMediaLoaderStateDidChangeNotification object:loader];
+        }
+    }
+}
+
+
+- (void)setImageURIRoom:(NSString *)mxContentURI
+           withType:(NSString *)mimeType
+andImageOrientation:(UIImageOrientation)orientation
+       previewImage:(UIImage*)previewImage
+       mediaManager:(MXMediaManager*)mediaManager
+{
+    [self setImageURIRoom:mxContentURI
+             withType:mimeType
+  andImageOrientation:orientation
+          isThumbnail:NO
+         previewImage:previewImage
+         mediaManager:mediaManager];
+}
+
+- (void)setImageURIRoom:(NSString *)mxContentURI
+           withType:(NSString *)mimeType
+andImageOrientation:(UIImageOrientation)orientation
+      toFitViewSize:(CGSize)viewSize
+         withMethod:(MXThumbnailingMethod)thumbnailingMethod
+       previewImage:(UIImage*)previewImage
+       mediaManager:(MXMediaManager*)mediaManager
+{
+    // Store the thumbnail settings
+    thumbnailViewSize = viewSize;
+    thumbnailMethod = thumbnailingMethod;
+    
+    [self setImageURIRoom:mxContentURI
+             withType:mimeType
+  andImageOrientation:orientation
+          isThumbnail:YES
+         previewImage:previewImage
+         mediaManager:mediaManager];
+}
+
+- (void)setImageURIRoom:(NSString *)mxContentURI
+           withType:(NSString *)mimeType
+andImageOrientation:(UIImageOrientation)orientation
+        isThumbnail:(BOOL)isThumbnail
+       previewImage:(UIImage*)previewImage
+       mediaManager:(MXMediaManager*)mediaManager
+{
+    // Remove any pending observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    // Reset other data
+    currentAttachment = nil;
+    
+    mxcURI = mxContentURI;
+    if (!mxcURI)
     {
         // Set preview by default
         self.image = previewImage;

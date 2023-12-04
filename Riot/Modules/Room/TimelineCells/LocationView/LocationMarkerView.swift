@@ -18,6 +18,7 @@ import UIKit
 import Reusable
 import Mapbox
 
+//тут
 class LocationMarkerView: MGLAnnotationView, NibLoadable {
     
     @IBOutlet private var backgroundImageView: UIImageView!

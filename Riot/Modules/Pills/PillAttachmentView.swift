@@ -76,7 +76,7 @@ class PillAttachmentView: UIView {
 
             case .avatar(let url, let alt, let matrixId):
                 let avatarView = UserAvatarView(frame: CGRect(origin: .zero, size: CGSize(width: sizes.avatarSideLength, height: sizes.avatarSideLength)))
-
+//тут
                 avatarView.fill(with: AvatarViewData(matrixItemId: matrixId,
                                                      displayName: alt,
                                                      avatarUrl: url,

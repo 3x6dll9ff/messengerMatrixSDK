@@ -23,7 +23,7 @@ extension MXKImageView {
 
         if let avatarUrl = url {
             self.enableInMemoryCache = true
-            self.setImageURI(avatarUrl, withType: nil, andImageOrientation: .up, toFitViewSize: self.frame.size, with: MXThumbnailingMethodCrop, previewImage: avatarImage, mediaManager: mediaManager)
+            self.setImageURIRoom(avatarUrl, withType: nil, andImageOrientation: .up, toFitViewSize: self.frame.size, with: MXThumbnailingMethodCrop, previewImage: avatarImage, mediaManager: mediaManager)
         } else {
             self.image = avatarImage
         }
