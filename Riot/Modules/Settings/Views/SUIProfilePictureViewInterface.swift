@@ -1,6 +1,8 @@
 //
 //  SUIProfilePictureViewInterface.swift
 //
+//Developed by Patched
+
 import Foundation
 import SwiftUI
 

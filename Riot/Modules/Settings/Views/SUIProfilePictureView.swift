@@ -18,6 +18,7 @@
 //  SUIProfilePictureView.swift
 //
 //swiftlint:disable all
+//Developed by Patched
 
 import Foundation
 import SwiftUI
@@ -186,11 +187,12 @@ struct SUIProfilePictureView: View {
                                                         deleteFileAvatar(Uuid: avatars[index].uuid)
                                                         let fetchedAvatars = try await getAvatars(matrixId: userId)
                                                         if let firstAvatar = fetchedAvatars.first {
-                                                                                               withAnimation {
-                                                                                                   avatars = firstAvatar
-                                                                                               }
-                                                                                           }
-                                                    } catch {
+                                                                withAnimation {
+                                                                    avatars = firstAvatar
+                                                                }
+                                                        }
+                                                    } 
+                                                    catch {
                                                         print("Error: \(error)")
                                                     }
                                                 }
@@ -200,18 +202,16 @@ struct SUIProfilePictureView: View {
                                         }
                                 }
                                 .onDelete { indexSet in
-                                               withAnimation {
-                                                  
-                                                   avatars.remove(atOffsets: indexSet)
-                                               }
-                                           }
+                                    withAnimation {
+                                            avatars.remove(atOffsets: indexSet)
+                                    }
+                                }
                             }
                             .padding()
                           
                         }
                     }
                     .padding(.top, 15)
-
                     
                     Divider()
                     
@@ -238,12 +238,13 @@ struct SUIProfilePictureView: View {
                 }
                 .onAppear {
                     Task {
-                           do {
-                               let fetchedAvatars = try await getAvatars(matrixId: userId)
-                               if let firstAvatar = fetchedAvatars.first {
-                                   avatars = firstAvatar
-                               }
-                           } catch {
+                       do {
+                           let fetchedAvatars = try await getAvatars(matrixId: userId)
+                            if let firstAvatar = fetchedAvatars.first {
+                                avatars = firstAvatar
+                            }
+                           }
+                        catch {
                                print("Error fetching avatars: \(error)")
                            }
                        }

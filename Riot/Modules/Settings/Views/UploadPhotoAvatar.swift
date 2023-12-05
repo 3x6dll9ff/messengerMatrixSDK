@@ -1,5 +1,4 @@
 //swiftlint:disable all
-
 //Developed by Patched && Boris
 
 import Foundation
@@ -64,20 +63,14 @@ private func uploadFile(fileData: Data, mimeType: String) async -> String {
                 }
             }
         }
-        
-        // Обработка статуса ответа
         print("Status Code: \(response?.statusCode ?? -1)")
-        
-        // Обработка JSON-ответа
         if let jsonString = String(data: data ?? Data(), encoding: .utf8) {
             print("JSON Response: \(jsonString)")
         }
-        
-        // Возвращаем UUID из ответа (предположим, что у вас есть структура FileResponse с свойством uuid)
         let decodedResponse = try JSONDecoder().decode(FileResponse.self, from: data ?? Data())
         return decodedResponse.uuid
     } catch {
-        // Обработка ошибок
+   
         print("Error: \(error)")
         return ""
     }
@@ -88,15 +81,13 @@ private func uploadFileAvatar(fileUuid: String, matrixId: String) async {
     let headers: HTTPHeaders = [
         "Authorization": "Bearer \(accessToken)"
     ]
-    
+
     let parameters: Parameters = [
         "fileUuid": fileUuid,
         "matrixId": matrixId
     ]
     
     do {
-        
-        
         let response = AF.request(
             "\(baseURL)/avatars",
             method: .post,
@@ -111,13 +102,11 @@ private func uploadFileAvatar(fileUuid: String, matrixId: String) async {
                                        showIcon = false
                                    }
                 print("Avatar response: \(response.data?.jsonString)")
-                print("Request URL: \(response.request?.url?.absoluteString ?? "")")
-                print("Request Headers: \(response.request?.allHTTPHeaderFields ?? [:])")
-                print("Response Status Code: \(response.response?.statusCode ?? -1)")
-                print("Response Data: \(String(data: response.data ?? Data(), encoding: .utf8) ?? "")")
+//                print("Request URL: \(response.request?.url?.absoluteString ?? "")")
+//                print("Request Headers: \(response.request?.allHTTPHeaderFields ?? [:])")
+//                print("Response Status Code: \(response.response?.statusCode ?? -1)")
+//                print("Response Data: \(String(data: response.data ?? Data(), encoding: .utf8) ?? "")")
 
-            
-    
             case .failure(let error):
                 print("Error uploading avatar: \(error)")
                 showIcon = false
@@ -150,12 +139,6 @@ struct UploadAvatarView: View{
         
         if let userId = mainAccount?.mxSession.myUser.userId {
             userInfo.userId = userId
-        }
-        if let email = mainAccount?.linkedEmails.first {
-            userInfo.email = email
-        }
-        if let phoneNumber = mainAccount?.linkedPhoneNumbers.first {
-            userInfo.phoneNumber = phoneNumber
         }
         
     }
@@ -198,16 +181,11 @@ struct UploadAvatarView: View{
                                 Task {
                                     do {
                                         _ = try await login()
-
                                         let mainAccount = MXKAccountManager.shared().accounts.first
-
                                         guard let userID = mainAccount?.mxSession.myUser.userId else {
                                             return
                                         }
-
                                         let matrixId = userInfo.userId
-                                      
-                                        
                                         if let imageData = newImage.jpegData(compressionQuality: 0.8) {
                                             if let mimeType = getMimeType(from: imageData) {
                                                 print("MIME Type: \(mimeType)")
