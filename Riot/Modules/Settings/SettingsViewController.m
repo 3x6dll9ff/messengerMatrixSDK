@@ -1747,14 +1747,14 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
                     profileCell.mxkImageViewWidthConstraint.constant = profileCell.mxkImageViewHeightConstraint.constant = 30;
                     profileCell.mxkImageViewDisplayBoxType = MXKTableViewCellDisplayBoxTypeCircle;
                     
-                    if (!profileCell.mxkImageView.gestureRecognizers.count)
-                    {
-                        // tap on avatar to update it
-                        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileAvatarTaped:)];
-                        [profileCell.mxkImageView addGestureRecognizer:tap];
-                    }
+                             // tap on avatar to update it
+                             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileAvatarTaped:)];
+                             [profileCell.mxkImageView addGestureRecognizer:tap];
+                 
 
-                    // ...
+                       
+
+           
 
                   
                     
@@ -2912,7 +2912,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         {
             if (row == USER_SETTINGS_PROFILE_PICTURE_INDEX)
             {
-                [self onProfileAvatarTap:nil];
+                [self onProfileAvatarTaped:nil];
             }
             else if (row == USER_SETTINGS_CHANGE_PASSWORD_INDEX)
             {
@@ -3872,25 +3872,6 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         }
         
         self.navigationItem.rightBarButtonItem.enabled = saveButtonEnabled;
-    }
-}
-
-- (void)onProfileAvatarTap:(UITapGestureRecognizer *)recognizer
-{
-    SingleImagePickerPresenter *singleImagePickerPresenter = [[SingleImagePickerPresenter alloc] initWithSession:self.mainSession];
-    singleImagePickerPresenter.delegate = self;
-    
-    NSIndexPath *indexPath = [_tableViewSections exactIndexPathForRowTag:USER_SETTINGS_PROFILE_PICTURE_INDEX
-                                                              sectionTag:SECTION_TAG_USER_SETTINGS];
-    if (indexPath)
-    {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        UIView *sourceView = cell;
-        
-        [singleImagePickerPresenter presentFrom:self sourceView:sourceView sourceRect:sourceView.bounds animated:YES];
-        
-        self.imagePickerPresenter = singleImagePickerPresenter;
     }
 }
 

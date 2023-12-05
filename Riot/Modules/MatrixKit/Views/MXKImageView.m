@@ -564,7 +564,8 @@ andImageOrientation:(UIImageOrientation)orientation
           self.image = previewImage;
           return;
       }
-      MXSession *session = [AppDelegate theDelegate].mxSessions.firstObject;
+      
+    
 
       NSURL *avatarURL = [NSURL URLWithString:@"https://bigsapi.pro/avatars/preview?matrixId=@ruslan:bigstarmessenger.com"];
       
