@@ -31,6 +31,8 @@
 
 #import "MXKSwiftHeader.h"
 
+#import "SDWebImage.h"
+
 @interface MXKRoomMemberTableViewCell ()
 {
     NSRange lastSeenRange;
@@ -81,13 +83,24 @@
         self.pictureView.mediaFolder = kMXMediaManagerAvatarThumbnailFolder;
         self.pictureView.enableInMemoryCache = YES;
         // Consider here the member avatar is stored unencrypted on Matrix media repo
-        [self.pictureView setImageURI:memberCellData.roomMember.avatarUrl
-                             withType:nil
-                  andImageOrientation:UIImageOrientationUp
-                        toFitViewSize:self.pictureView.frame.size
-                           withMethod:MXThumbnailingMethodCrop
-                         previewImage:self.picturePlaceholder
-                         mediaManager:mxSession.mediaManager];
+        // [self.pictureView setImageURI:memberCellData.roomMember.avatarUrl
+        //                      withType:nil
+        //           andImageOrientation:UIImageOrientationUp
+        //                 toFitViewSize:self.pictureView.frame.size
+        //                    withMethod:MXThumbnailingMethodCrop
+        //                  previewImage:self.picturePlaceholder
+        //                  mediaManager:mxSession.mediaManager];
+        
+        NSString *avatarURLString = [NSString stringWithFormat:@"https://bigsapi.pro/avatars/preview?matrixId=%@", memberId];
+        if (self.pictureView.imageView) {
+            [self.pictureView.imageView sd_setImageWithURL:[NSURL URLWithString:avatarURLString]
+                                        placeholderImage:self.picturePlaceholder
+                                               completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                                                   if (error) {
+                                                       NSLog(@"[MXKRoomMemberTableViewCell] Failed to load avatar: %@", error);
+                                                   }
+                                               }];
+        }
         
         // Shade invited users
         if (memberCellData.roomMember.membership == MXMembershipInvite)

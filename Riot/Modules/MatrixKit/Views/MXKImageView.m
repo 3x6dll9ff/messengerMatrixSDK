@@ -22,6 +22,11 @@
 
 #import "MXKTools.h"
 
+#import "SDWebImage.h"
+
+#import "MXKAccount.h"
+#import "MXKAccountManager.h"
+
 @interface MXKImageView ()
 {
     NSString *mxcURI;
@@ -566,28 +571,33 @@ andImageOrientation:(UIImageOrientation)orientation
       }
       
     
-
-      NSURL *avatarURL = [NSURL URLWithString:@"https://bigsapi.pro/avatars/preview?matrixId=@ruslan:bigstarmessenger.com"];
-      
-      NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:avatarURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-          if (data) {
-              UIImage *avatarImage = [UIImage imageWithData:data];
-              
-              if (avatarImage) {
-                  dispatch_async(dispatch_get_main_queue(), ^{
-                      // Update UI on the main thread
-                      self.image = avatarImage;
-                      [self stopActivityIndicator];
-                  });
-              } else {
-                  NSLog(@"Error: Unable to create image from data");
-              }
-          } else {
-              NSLog(@"Error loading avatar: %@", error);
-          }
-      }];
-
-      [dataTask resume];
+//      MXKAccountManager* accountManager = [MXKAccountManager sharedManager];
+//      MXKAccount *account = accountManager.activeAccounts.firstObject;
+//      MXSession *session = account.mxSession;
+//      NSString *userId = session.myUser.userId;
+//
+//      NSString *avatarURLString = [NSString stringWithFormat:@"https://bigsapi.pro/avatars/preview?matrixId=%@", userId];
+//      NSURL *avatarURL = [NSURL URLWithString:avatarURLString];
+//      
+//      NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:avatarURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//          if (data) {
+//              UIImage *avatarImage = [UIImage imageWithData:data];
+//              
+//              if (avatarImage) {
+//                  dispatch_async(dispatch_get_main_queue(), ^{
+//                      // Update UI on the main thread
+//                      self.image = avatarImage;
+//                      [self stopActivityIndicator];
+//                  });
+//              } else {
+//                  NSLog(@"Error: Unable to create image from data");
+//              }
+//          } else {
+//              NSLog(@"Error loading avatar: %@", error);
+//          }
+//      }];
+//
+//      [dataTask resume];
     
     // Store image orientation
     imageOrientation = orientation;
