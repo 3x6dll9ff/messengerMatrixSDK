@@ -64,6 +64,7 @@ struct SpaceSelector: View {
                 HStack {
                     Spacer().frame(width: 20)
                     Image(systemName: "sparkles")
+                        .frame(width: 50, height: 50)
                     if theme.isDark {
                         Text("Дизайн")
                             .foregroundColor(.white)
@@ -150,7 +151,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieViewAnimation(lottieFile: "city")
+                        LottieView(lottieFile: "city")
                             .frame(width: 50, height: 50)
                         if theme.isDark {
                             Text("Выбор города")
@@ -196,7 +197,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieViewAnimation(lottieFile: "person")
+                        LottieView(lottieFile: "person")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         if theme.isDark {
@@ -242,7 +243,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieViewAnimation(lottieFile: "cloud")
+                        LottieView(lottieFile: "cloud")
                             .frame(width: 50, height: 50)
                         if theme.isDark {
                             Text("Облачное хранилище")
@@ -288,7 +289,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieViewAnimation(lottieFile: "share")
+                        LottieView(lottieFile: "share")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         if theme.isDark {
@@ -335,7 +336,7 @@ struct SpaceSelector: View {
                                   }
                 }) {
                     HStack {
-                        LottieViewAnimation(lottieFile: "filter")
+                        LottieView(lottieFile: "filter")
                             .padding(5)
                             .frame(width: 50, height: 50)
                         if theme.isDark {
@@ -382,7 +383,7 @@ struct SpaceSelector: View {
                 }
             }) {
                 HStack {
-                    LottieViewAnimation(lottieFile: "heart")
+                    LottieView(lottieFile: "heart")
                         .frame(width: 50, height: 50)
                     if theme.isDark {
                         Text("Избранные рекламы")

@@ -245,7 +245,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     
     // The current pushed view controller
     UIViewController *pushedViewController;
-    
+
     SettingsIdentityServerCoordinatorBridgePresenter *identityServerSettingsCoordinatorBridgePresenter;
 }
 
@@ -508,10 +508,10 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     
 //    Section *sectionUserInterface = [Section sectionWithTag:SECTION_TAG_USER_INTERFACE];
 //    sectionUserInterface.headerTitle = [VectorL10n settingsUserInterface];
-//    
+//
 //    [sectionUserInterface addRowWithTag:USER_INTERFACE_LANGUAGE_INDEX];
 //    [sectionUserInterface addRowWithTag:USER_INTERFACE_THEME_INDEX];
-//        
+//
 //    [tmpSections addObject:sectionUserInterface];
 //
 //    Section *sectionTimeline = [Section sectionWithTag:SECTION_TAG_TIMELINE];
@@ -525,7 +525,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
 //    [sectionTimeline addRowWithTag:TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX];
 //
 //    [tmpSections addObject:sectionTimeline];
-//    
+//
 //    if(BuildSettings.settingsScreenPresenceAllowConfiguration)
 //    {
 //        Section *sectionPresence = [Section sectionWithTag:SECTION_TAG_PRESENCE];
@@ -578,7 +578,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
 //    sectionAbout.headerTitle = VectorL10n.settingsAbout;
 
     if (BuildSettings.settingsScreenShowAdvancedSettings)
-    {        
+    {
         sectionAbout.footerTitle = [self buildAboutSectionFooterTitleWithAccount:account];
     }
     
@@ -951,7 +951,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
                 [self.tableView reloadRowsAtIndexPaths:@[addEmailIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
             
-            [self.tableView endUpdates];            
+            [self.tableView endUpdates];
         });
     }
 }
@@ -1428,7 +1428,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
 }
 
 - (NSString*)buildAboutSectionFooterTitleWithAccount:(MXKAccount*)account
-{    
+{
     NSMutableString *footerText = [NSMutableString new];
     
     AppInfo *appInfo = AppInfo.current;
@@ -1441,7 +1441,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
  
     NSString *loggedUserInfo = [VectorL10n settingsConfigUserId:account.mxCredentials.userId];
     
-    NSString *homeserverInfo = [VectorL10n settingsConfigHomeServer:account.mxCredentials.homeServer];       
+    NSString *homeserverInfo = [VectorL10n settingsConfigHomeServer:account.mxCredentials.homeServer];
     
     NSString *sdkVersionInfo = [NSString stringWithFormat:@"Matrix SDK %@", MatrixSDKVersion];
     
@@ -1569,7 +1569,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
             animationCompletion();
             [[AppDelegate theDelegate] showErrorAsAlert:error];
         }
-    }];            
+    }];
 }
 
 #pragma mark - Segues
@@ -1679,6 +1679,12 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     
     return textViewCell;
 }
+- (void)onProfileAvatarTaped:(UITapGestureRecognizer *)gestureRecognizer {
+    SUIProfilePictureViewInterface *profileInterface = [SUIProfilePictureViewInterface new];
+    UIViewController *detailsViewController = [profileInterface makeShipDetailsUI:@"Change Picture View "];
+    
+    [self presentViewController:detailsViewController animated:YES completion:nil];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1732,55 +1738,60 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         MXMyUser* myUser = session.myUser;
         
         if (row == USER_SETTINGS_PROFILE_PICTURE_INDEX)
-        {
-            MXKTableViewCellWithLabelAndMXKImageView *profileCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithLabelAndMXKImageView defaultReuseIdentifier] forIndexPath:indexPath];
-            
-            profileCell.mxkLabelLeadingConstraint.constant = tableView.vc_separatorInset.left;
-            profileCell.mxkImageViewTrailingConstraint.constant = 10;
-            
-            profileCell.mxkImageViewWidthConstraint.constant = profileCell.mxkImageViewHeightConstraint.constant = 30;
-            profileCell.mxkImageViewDisplayBoxType = MXKTableViewCellDisplayBoxTypeCircle;
-            
-            if (!profileCell.mxkImageView.gestureRecognizers.count)
-            {
-                // tap on avatar to update it
-                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileAvatarTap:)];
-                [profileCell.mxkImageView addGestureRecognizer:tap];
-            }
-            
-            profileCell.mxkLabel.text = [VectorL10n settingsProfilePicture];
-            profileCell.accessibilityIdentifier=@"SettingsVCProfilPictureStaticText";
-            profileCell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
-            
-            // if the user defines a new avatar
-            if (newAvatarImage)
-            {
-                profileCell.mxkImageView.image = newAvatarImage;
-            }
-            else
-            {
-                UIImage* avatarImage = [AvatarGenerator generateAvatarForMatrixItem:myUser.userId withDisplayName:myUser.displayname];
-                
-                if (myUser.avatarUrl)
                 {
-                    profileCell.mxkImageView.enableInMemoryCache = YES;
+                    MXKTableViewCellWithLabelAndMXKImageView *profileCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithLabelAndMXKImageView defaultReuseIdentifier] forIndexPath:indexPath];
                     
-                    [profileCell.mxkImageView setImageURI:myUser.avatarUrl
-                                                 withType:nil
-                                      andImageOrientation:UIImageOrientationUp
-                                            toFitViewSize:profileCell.mxkImageView.frame.size
-                                               withMethod:MXThumbnailingMethodCrop
-                                             previewImage:avatarImage
-                                             mediaManager:session.mediaManager];
+                    profileCell.mxkLabelLeadingConstraint.constant = tableView.vc_separatorInset.left;
+                    profileCell.mxkImageViewTrailingConstraint.constant = 10;
+                    
+                    profileCell.mxkImageViewWidthConstraint.constant = profileCell.mxkImageViewHeightConstraint.constant = 30;
+                    profileCell.mxkImageViewDisplayBoxType = MXKTableViewCellDisplayBoxTypeCircle;
+                    
+                             // tap on avatar to update it
+                             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileAvatarTaped:)];
+                             [profileCell.mxkImageView addGestureRecognizer:tap];
+                 
+
+                       
+
+           
+
+                  
+                    
+                    profileCell.mxkLabel.text = [VectorL10n settingsProfilePicture];
+                    profileCell.accessibilityIdentifier=@"SettingsVCProfilPictureStaticText";
+                    profileCell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+                    
+                    // if the user defines a new avatar
+                    if (newAvatarImage)
+                    {
+                        profileCell.mxkImageView.image = newAvatarImage;
+                    }
+                    else
+                    {
+                        UIImage* avatarImage = [AvatarGenerator generateAvatarForMatrixItem:myUser.userId withDisplayName:myUser.displayname];
+                        
+                        if (myUser.avatarUrl)
+                        {
+                            profileCell.mxkImageView.enableInMemoryCache = YES;
+                            
+                            [profileCell.mxkImageView setImageURI:myUser.avatarUrl
+                                                         withType:nil
+                                              andImageOrientation:UIImageOrientationUp
+                                                    toFitViewSize:profileCell.mxkImageView.frame.size
+                                                       withMethod:MXThumbnailingMethodCrop
+                                                     previewImage:avatarImage
+                                                     mediaManager:session.mediaManager];
+                        }
+                        else
+                        {
+                            profileCell.mxkImageView.image = avatarImage;
+                        }
+                    }
+                    
+                    cell = profileCell;
                 }
-                else
-                {
-                    profileCell.mxkImageView.image = avatarImage;
-                }
-            }
-            
-            cell = profileCell;
-        }
+        
         else if (row == USER_SETTINGS_DISPLAYNAME_INDEX)
         {
             MXKTableViewCellWithLabelAndTextField *displaynameCell = [self getLabelAndTextFieldCell:tableView forIndexPath:indexPath];
@@ -2492,11 +2503,11 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
 //        else if (row == ABOUT_THIRD_PARTY_INDEX)
 //        {
 //            MXKTableViewCell *thirdPartyCell = [self getDefaultTableViewCell:tableView];
-//            
+//
 //            thirdPartyCell.textLabel.text = [VectorL10n settingsThirdPartyNotices];
-//            
+//
 //            [thirdPartyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//            
+//
 //            cell = thirdPartyCell;
 //        }
     }
@@ -2700,7 +2711,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
     cell.backgroundColor = ThemeService.shared.theme.backgroundColor;
     
     if (cell.selectionStyle != UITableViewCellSelectionStyleNone)
-    {        
+    {
         // Update the selected background view
         if (ThemeService.shared.theme.selectedBackgroundColor)
         {
@@ -2901,7 +2912,7 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         {
             if (row == USER_SETTINGS_PROFILE_PICTURE_INDEX)
             {
-                [self onProfileAvatarTap:nil];
+                [self onProfileAvatarTaped:nil];
             }
             else if (row == USER_SETTINGS_CHANGE_PASSWORD_INDEX)
             {
@@ -3861,25 +3872,6 @@ ChangePasswordCoordinatorBridgePresenterDelegate>
         }
         
         self.navigationItem.rightBarButtonItem.enabled = saveButtonEnabled;
-    }
-}
-
-- (void)onProfileAvatarTap:(UITapGestureRecognizer *)recognizer
-{
-    SingleImagePickerPresenter *singleImagePickerPresenter = [[SingleImagePickerPresenter alloc] initWithSession:self.mainSession];
-    singleImagePickerPresenter.delegate = self;
-    
-    NSIndexPath *indexPath = [_tableViewSections exactIndexPathForRowTag:USER_SETTINGS_PROFILE_PICTURE_INDEX
-                                                              sectionTag:SECTION_TAG_USER_SETTINGS];
-    if (indexPath)
-    {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        UIView *sourceView = cell;
-        
-        [singleImagePickerPresenter presentFrom:self sourceView:sourceView sourceRect:sourceView.bounds animated:YES];
-        
-        self.imagePickerPresenter = singleImagePickerPresenter;
     }
 }
 

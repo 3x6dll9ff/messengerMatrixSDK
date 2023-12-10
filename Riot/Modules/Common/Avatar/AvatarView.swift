@@ -102,35 +102,36 @@ class AvatarView: UIView, Themable {
     }
     
     func updateAvatarImageView(with viewData: AvatarViewDataProtocol) {
-        guard let avatarImageView = self.avatarImageView else {
-            MXLog.warning("[AvatarView] avatar not updated because avatarImageView is nil.")
-            return
-        }
-        
-        let (defaultAvatarImage, defaultAvatarImageContentMode) = viewData.fallbackImageParameters() ?? (nil, .scaleAspectFill)
-        updateAvatarImageView(image: defaultAvatarImage, contentMode: defaultAvatarImageContentMode)
-        
-        if defaultAvatarImage == nil {
-            MXLog.warning("[AvatarView] defaultAvatarImage is nil")
-        }
+          guard let avatarImageView = self.avatarImageView else {
+              MXLog.warning("[AvatarView] avatar not updated because avatarImageView is nil.")
+              return
+          }
+          
+          let (defaultAvatarImage, defaultAvatarImageContentMode) = viewData.fallbackImageParameters() ?? (nil, .scaleAspectFill)
+          updateAvatarImageView(image: defaultAvatarImage, contentMode: defaultAvatarImageContentMode)
+          
+          if defaultAvatarImage == nil {
+              MXLog.warning("[AvatarView] defaultAvatarImage is nil")
+          }
 
-        if let avatarUrl = viewData.avatarUrl {
-            avatarImageView.setImageURI(avatarUrl,
-                                        withType: nil,
-                                        andImageOrientation: .up,
-                                        toFitViewSize: avatarImageView.frame.size,
-                                        with: MXThumbnailingMethodScale,
-                                        previewImage: defaultAvatarImage,
-                                        mediaManager: viewData.mediaManager)
-            updateAvatarContentMode(contentMode: .scaleAspectFill)
-            
-            if avatarImageView.frame.size.width < 8 || avatarImageView.frame.size.height < 8 {
-                MXLog.warning("[AvatarView] small avatarImageView frame: \(avatarImageView.frame)")
-            }
-        } else {
-            updateAvatarImageView(image: defaultAvatarImage, contentMode: defaultAvatarImageContentMode)
-        }
-    }
+          if let avatarUrl = viewData.avatarUrl {
+              avatarImageView.setImageURI(avatarUrl,
+                                          withType: nil,
+                                          andImageOrientation: .up,
+                                          toFitViewSize: avatarImageView.frame.size,
+                                          with: MXThumbnailingMethodScale,
+                                          previewImage: defaultAvatarImage,
+                                          mediaManager: viewData.mediaManager)
+              updateAvatarContentMode(contentMode: .scaleAspectFill)
+              
+              if avatarImageView.frame.size.width < 8 || avatarImageView.frame.size.height < 8 {
+                  MXLog.warning("[AvatarView] small avatarImageView frame: \(avatarImageView.frame)")
+              }
+          } else {
+              updateAvatarImageView(image: defaultAvatarImage, contentMode: defaultAvatarImageContentMode)
+          }
+      }
+
     
     func updateView() {
         // Override in subclass if needed

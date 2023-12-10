@@ -1,32 +1,33 @@
-// 
-// Copyright 2021 New Vector Ltd
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
+// swiftlint:disable all
 
 import Foundation
+import SDWebImage
+import MatrixSDK
 
 extension MXKImageView {
+    @objc func vc_setRoomApiAvatarImage(directUserId: String) {
+        let avatarUrl = "https://bigsapi.pro/avatars/preview?matrixId=\(directUserId)"
+        if let imageUrl = URL(string: avatarUrl) {
+            self.imageView?.sd_setImage(with: imageUrl, placeholderImage: AvatarGenerator.generateAvatar(forMatrixItem: directUserId, withDisplayName: directUserId), options: .allowInvalidSSLCertificates, completed: nil)
+        }
+    }
+
     @objc func vc_setRoomAvatarImage(with url: String?, roomId: String, displayName: String, mediaManager: MXMediaManager) {
         // Use the display name to prepare the default avatar image.
         let avatarImage = AvatarGenerator.generateAvatar(forMatrixItem: roomId, withDisplayName: displayName)
 
         if let avatarUrl = url {
             self.enableInMemoryCache = true
-            self.setImageURI(avatarUrl, withType: nil, andImageOrientation: .up, toFitViewSize: self.frame.size, with: MXThumbnailingMethodCrop, previewImage: avatarImage, mediaManager: mediaManager)
+            self.setImageURIRoom(avatarUrl, withType: nil, andImageOrientation: .up, toFitViewSize: self.frame.size, with: MXThumbnailingMethodCrop, previewImage: avatarImage, mediaManager: mediaManager)
         } else {
             self.image = avatarImage
         }
         self.contentMode = .scaleAspectFill
+
+        if let session = MXKAccountManager.shared()?.activeAccounts.first?.mxSession,
+           let room = session.room(withRoomId: roomId),
+           let directUserId = room.directUserId {
+            self.vc_setRoomApiAvatarImage(directUserId: directUserId)
+        }
     }
 }

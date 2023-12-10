@@ -64,7 +64,7 @@ end
 
 abstract_target 'RiotPods' do
   pod 'lottie-ios'
-  pod 'RevenueCat'
+  pod 'SDWebImage'
   pod 'YandexMobileMetrica', '4.5.0'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/Alamofire"
