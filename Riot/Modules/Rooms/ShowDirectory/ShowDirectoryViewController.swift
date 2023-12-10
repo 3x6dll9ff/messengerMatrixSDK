@@ -92,6 +92,10 @@ final class ShowDirectoryViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        RevenueCatUtils.addObserver { isVip in
+            self.createRoomButton.isHidden = !isVip
+        }
+        
         self.setupViews()
         self.keyboardAvoider = KeyboardAvoider(scrollViewContainerView: self.view, scrollView: self.mainTableView)
         self.activityPresenter = ActivityIndicatorPresenter()

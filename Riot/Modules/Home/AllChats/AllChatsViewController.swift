@@ -26,6 +26,7 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseStorage
 import QuickLook
+import RevenueCat
 
 struct AdSlide {
     let clientAd: ClientAds
@@ -74,6 +75,7 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     var previewItemTitle: String?
     var previewItemFileExtension: String?
     var documents: [QueryDocumentSnapshot]? = []
+    private var isPurchasesConfigured = false
     
     // MARK: - Properties
     
@@ -154,6 +156,11 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         MXKContactManager.shared().refreshLocalContacts()
         MXKContactManager.shared().updateMatrixIDsForAllLocalContacts()
         
+        RevenueCatUtils.addObserver { isVip in
+            MXLog.debug("isVip: \(isVip)")
+            self.updateUI()
+        }
+        
         editActionProvider.delegate = self
         spaceActionProvider.delegate = self
         
@@ -188,6 +195,25 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
         
         recentsTableView.reloadData()
+    }
+    
+    func configurePurchases() {
+        guard let mainSession = self.mainSession, !self.isPurchasesConfigured else {
+            print("rev: no session")
+            return
+        }
+
+        let userID = mainSession.myUser?.userId ?? ""
+
+        if !userID.isEmpty {
+            print("rev: \(userID)")
+            Purchases.logLevel = .debug
+            Purchases.configure(withAPIKey: RevenueCatUtils.publicKey, appUserID: userID)
+            RevenueCatUtils.checkVipStatus(onVipStatusChecked: {_ in })
+            self.isPurchasesConfigured = true
+        } else {
+            print("rev: no userID")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -504,6 +530,10 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         }
     }
     
+    private func getNoAdsToggleState() -> Bool {
+        return UserDefaults.standard.bool(forKey: "noAdsToggle")
+    }
+    
     private func getStoredCityUuid() -> String?{
         return UserDefaults.standard.string(forKey: "cityUuid")
     }
@@ -561,43 +591,36 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
     @objc func didTapAd(){
         let clientAd = self.ads[slideshow.currentPage].clientAd
             
-        if #available(iOS 15.0, *) {
-            let adSheetView = AdSheetView(
-                clientAd: clientAd
-            )
-            
-            let adSheetViewController = UIHostingController(rootView: adSheetView)
-            
-       
-            
-            if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
-                if #available(iOS 16.0, *) {
-                    presentationController.detents = [
-                        .custom { _ in
-                            var myDefaultHeight: CGFloat = 550
-                                                     let deviceType = UIDevice().type.rawValue
-                                                     print(deviceType)
-                                                     if (deviceType == "iPhone 14 Pro Max") {
-                                                         myDefaultHeight = 530
-                                                     } else if (deviceType == "iPhone 13 Pro Max") {
-                                                         myDefaultHeight = 530
-                                                     } else if (deviceType == "iPhone 12 Pro Max") {
-                                                         myDefaultHeight = 530
-                                                     }
-                                                     return myDefaultHeight
-                        }
-                    ]
-                } else {
-                    // Fallback on earlier versions
-                }
+        let adSheetView = AdSheetView(
+            clientAd: clientAd
+        )
+        
+        let adSheetViewController = UIHostingController(rootView: adSheetView)
+
+        if let presentationController = adSheetViewController.presentationController as? UISheetPresentationController {
+            if #available(iOS 16.0, *) {
+                presentationController.detents = [
+                    .custom { _ in
+                        var myDefaultHeight: CGFloat = 550
+                            let deviceType = UIDevice().type.rawValue
+                            print(deviceType)
+                            if (deviceType == "iPhone 14 Pro Max") {
+                                myDefaultHeight = 530
+                            } else if (deviceType == "iPhone 13 Pro Max") {
+                                myDefaultHeight = 530
+                            } else if (deviceType == "iPhone 12 Pro Max") {
+                                myDefaultHeight = 530
+                            }
+                            return myDefaultHeight
+                    }
+                ]
+            } else {
+                // Fallback on earlier versions
             }
-       
-            present(adSheetViewController, animated: true)
-        } else {
-            // Fallback on earlier versions
         }
-            
-        }
+
+        present(adSheetViewController, animated: true)
+    }
     
     override func startActivityIndicator() {
         super.startActivityIndicator()
@@ -732,6 +755,8 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
             return
         }
         
+        configurePurchases()
+        
         let title: String
         let informationText: String
         if let currentSpace = self.dataSource?.currentSpace {
@@ -821,6 +846,16 @@ class AllChatsViewController: HomeViewController, ImageSlideshowDelegate, UIGest
         let currentSpace = self.dataSource?.currentSpace
         self.title = currentSpace?.summary?.displayName ?? VectorL10n.allChatsTitle
         
+        let isHidingAds = RevenueCatUtils.isVip && getNoAdsToggleState()
+        slideshow?.isHidden = isHidingAds
+        if let tableView = recentsTableView {
+            if isHidingAds {
+                tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            } else {
+                tableView.topAnchor.constraint(equalTo: slideshow.bottomAnchor).isActive = true
+            }
+        }
+
         setupEditOptions()
         updateToolbar(with: editActionProvider.updateMenu(with: mainSession, parentSpace: currentSpace, completion: { [weak self] menu in
             self?.updateToolbar(with: menu)
@@ -1014,6 +1049,7 @@ extension AllChatsViewController: SpaceSelectorBottomSheetCoordinatorBridgePrese
             self.spaceSelectorBridgePresenter = nil
         }
         fetchAds()
+        updateUI()
     }
     
     func spaceSelectorBottomSheetCoordinatorBridgePresenterDidSelectHome(_ coordinatorBridgePresenter: SpaceSelectorBottomSheetCoordinatorBridgePresenter) {

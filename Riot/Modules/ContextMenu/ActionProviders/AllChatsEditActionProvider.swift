@@ -51,13 +51,16 @@ class AllChatsEditActionProvider {
     
     var menu: UIMenu {
         guard parentSpace != nil else {
-            var createActions = [
-                self.createRoomAction,
-                self.startChatAction
-            ]
+            var createActions = [self.startChatAction]
+            
             if rootSpaceCount > 0 {
                 createActions.insert(self.createSpaceAction, at: 0)
             }
+            
+            if RevenueCatUtils.isVip {
+                createActions.insert(self.createRoomAction, at: 0)
+            }
+            
             return UIMenu(title: "", children: [
                 self.exploreRoomsAction,
                 UIMenu(title: "", options: .displayInline, children: createActions)
