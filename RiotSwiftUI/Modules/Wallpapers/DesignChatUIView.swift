@@ -31,21 +31,24 @@ struct DesignChatUIView: View {
     
     var body: some View {
         VStack{
+
             heading
             Spacer()
             
-            logoCircle
-            Spacer()
-            subscriptionBtn
-            Spacer()
-            noAdsBtn
-            nightModeBtn
-            Spacer()
-            bubbleSelector
-            Spacer()
-            createChatChooseWallpaper
-            
-            NavigationLink("", destination: WallpaperSelection(), isActive: $goWS)
+            ScrollView(.vertical){
+                logoCircle
+                Spacer()
+                subscriptionBtn
+                Spacer()
+                noAdsBtn
+                nightModeBtn
+                Spacer()
+                bubbleSelector
+                Spacer()
+                createChatChooseWallpaper
+                
+                NavigationLink("", destination: WallpaperSelection(), isActive: $goWS)
+            }
             
             Spacer()
         }
