@@ -62,15 +62,16 @@ struct SpaceSelector: View {
                 goWallpaperSelection = true
             }){
                 HStack {
-                    Spacer().frame(width: 20)
-                    Image(systemName: "sparkles")
+                    Image("BigstarPlus")
+                        .resizable()
+                        .padding(10)
                         .frame(width: 50, height: 50)
                     if theme.isDark {
-                        Text("Дизайн")
+                        Text("BigStar +")
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                     } else {
-                        Text("Дизайн")
+                        Text("BigStar +")
                             .foregroundColor(.black)
                             .font(.system(size: 20))
                     }
@@ -84,6 +85,7 @@ struct SpaceSelector: View {
                 .opacity(showAllBtn ? 1 : 0)
                 .animation(.easeInOut(duration: 0.45))
             }
+            
             .fullScreenCover(isPresented: $goWallpaperSelection, content: {
                 NavigationView{
                     ds

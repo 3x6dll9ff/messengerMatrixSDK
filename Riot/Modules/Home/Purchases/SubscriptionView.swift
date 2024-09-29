@@ -36,7 +36,7 @@ struct SubscriptionView: View {
             Text("Bigstar +")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            Text("More features, no advertising and only benefits for your business!")
+            Text("Больше возможностей, никакой рекламы и только преимущества для вашего бизнеса!")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.bottom)
@@ -52,7 +52,7 @@ struct SubscriptionView: View {
                     }
                 }
             } else {
-                Text("Loading plans...")
+                Text("Загрузка планов...")
             }
         }
         .padding()
@@ -73,11 +73,11 @@ struct SubscriptionView: View {
 
     var benefitsView: some View {
         VStack(spacing: 16) {
-            FeatureView(assetName: "vip_no_ads", featureName: "No advertising")
-            FeatureView(assetName: "vip_calls", featureName: "Calls from any city")
-            FeatureView(assetName: "vip_design", featureName: "New chat design")
-            FeatureView(assetName: "vip_voice", featureName: "Voice recognition")
-            FeatureView(assetName: "vip_emoji", featureName: "New emoji")
+            FeatureView(assetName: "vip_no_ads", featureName: "Никакой рекламы")
+            FeatureView(assetName: "vip_calls", featureName: "Звонки из любого города")
+            FeatureView(assetName: "vip_design", featureName: "Новый дизайн чата")
+            FeatureView(assetName: "vip_voice", featureName: "Распознавание голоса")
+            FeatureView(assetName: "vip_emoji", featureName: "Новые эмодзи")
         }
         .padding()
         .background(Color.black)
@@ -89,7 +89,7 @@ struct SubscriptionView: View {
         if let package = selectedPackage {
             return "Connect for \(package.localizedPriceString)"
         } else {
-            return "Select an offer"
+            return "Выбрать предложение"
         }
     }
 

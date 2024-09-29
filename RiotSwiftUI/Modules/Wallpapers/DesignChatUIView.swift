@@ -33,7 +33,6 @@ struct DesignChatUIView: View {
         VStack{
 
             heading
-            Spacer()
             
             ScrollView(.vertical){
                 logoCircle
@@ -73,9 +72,10 @@ struct DesignChatUIView: View {
                 Image(systemName: "chevron.left")
                     .padding(.horizontal)
                 Text("Back")
+
             }
             Spacer()
-            Text("Design")
+            Text("BigStar +")
                 .foregroundColor(.white)
             Spacer()
             Image(systemName: "chevron.right")
@@ -95,7 +95,7 @@ struct DesignChatUIView: View {
                 .resizable()
                 .frame(width: w/2, height: w/2)
             Spacer().frame(height: 20)
-            Text("Buy a subscription and change the design as you wish!")
+            Text("Купите подписку и меняйте дизайн по своему усмотрению!")
               .font(
                 Font.custom("Roboto", size: 15)
                   .weight(.semibold)
@@ -119,7 +119,7 @@ struct DesignChatUIView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .padding(.horizontal)
-                    Text("Buy subscription")
+                    Text("Купить подписку")
                       .font(
                         Font.custom("Inter", size: 13)
                           .weight(.medium)
@@ -140,7 +140,7 @@ struct DesignChatUIView: View {
                 restorePurchases()
             }){
                 HStack{
-                    Text("Restore purchase")
+                    Text("Восстановить покупку")
                       .font(
                         Font.custom("Inter", size: 13)
                           .weight(.medium)
@@ -164,7 +164,7 @@ struct DesignChatUIView: View {
             
         }){
             HStack{
-                Text("No ads")
+                Text("Без Рекламы")
                   .font(
                     Font.custom("Inter", size: 13)
                       .weight(.medium)
@@ -193,7 +193,7 @@ struct DesignChatUIView: View {
             
         }){
             HStack{
-                Text("Night mode")
+                Text("Ночной режим")
                   .font(
                     Font.custom("Inter", size: 13)
                       .weight(.medium)
@@ -324,7 +324,7 @@ struct DesignChatUIView: View {
                 
             }){
                 HStack{
-                    Text("Create new chat")
+                    Text("Создать новый чат")
                       .font(
                         Font.custom("Inter", size: 13)
                           .weight(.medium)
@@ -337,14 +337,14 @@ struct DesignChatUIView: View {
                 }
                 .frame(width: w*0.92, height: 45)
                 .background(Color(red: 0.06, green: 0.06, blue: 0.06))
-                .cornerRadius(10, corners: [.topLeft, .topRight])
+                .cornerRadius(13, corners: [.topLeft, .topRight])
             }
             
             Button(action: {
                 goWS = true
             }){
                 HStack{
-                    Text("Wallpaper for chat")
+                    Text("Обои для чата")
                       .font(
                         Font.custom("Inter", size: 13)
                           .weight(.medium)
@@ -357,7 +357,7 @@ struct DesignChatUIView: View {
                 }
                 .frame(width: w*0.92, height: 45)
                 .background(Color(red: 0.06, green: 0.06, blue: 0.06))
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .cornerRadius(13, corners: [.bottomLeft, .bottomRight])
             }
         }
     }

@@ -941,6 +941,7 @@ PODS:
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
+  - RevenueCat (4.31.4)
   - SDWebImage (5.18.5):
     - SDWebImage/Core (= 5.18.5)
   - SDWebImage/Core (5.18.5)
@@ -1001,6 +1002,7 @@ DEPENDENCIES:
   - PostHog (~> 2.0.0)
   - ReadMoreTextView (~> 3.0.1)
   - Reusable (~> 4.1)
+  - RevenueCat
   - SDWebImage
   - Sentry (~> 7.15.0)
   - SideMenu (~> 6.5)
@@ -1079,6 +1081,7 @@ SPEC REPOS:
     - Realm
     - RecaptchaInterop
     - Reusable
+    - RevenueCat
     - SDWebImage
     - Sentry
     - SideMenu
@@ -1157,6 +1160,7 @@ SPEC CHECKSUMS:
   Realm: 9ca328bd7e700cc19703799785e37f77d1a130f2
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
+  RevenueCat: e64c9c57debd5ae4e6f5d4ed66bcb2a26bfde932
   SDWebImage: 7ac2b7ddc5e8484c79aa90fc4e30b149d6a2c88f
   Sentry: 63ca44f5e0c8cea0ee5a07686b02e56104f41ef7
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
@@ -1173,6 +1177,6 @@ SPEC CHECKSUMS:
   zxcvbn-ios: fef98b7c80f1512ff0eec47ac1fa399fc00f7e3c
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: 82308f01b3889bc9863f580320cf96b33d67bbe8
+PODFILE CHECKSUM: 13bd5c3cd91f3097d19ac174699954e978cb0759
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.13.0
